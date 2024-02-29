@@ -12,7 +12,6 @@
   "repository": "github:lgc-LLDev/LeviSatori",
   "license": "MIT",
   "funding": "https://afdian.net/a/lgc2333",
-  "dependencies": {},
   "devDependencies": {
     "@rollup/plugin-commonjs": "^25.0.7",
     "@rollup/plugin-json": "^6.1.0",

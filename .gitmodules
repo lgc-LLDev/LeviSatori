@@ -4,3 +4,6 @@
 [submodule "packages/cordis"]
 	path = packages/cordis
 	url = https://github.com/cordiverse/cordis
+[submodule "HelperLib"]
+	path = HelperLib
+	url = https://github.com/LiteLDev/HelperLib

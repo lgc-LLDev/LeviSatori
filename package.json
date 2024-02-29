@@ -6,5 +6,14 @@
   "license": "MIT",
   "workspaces": [
     "packages/*"
-  ]
+  ],
+  "scripts": {
+    "build": "yarn workspaces foreach -W run build",
+    "dep": "yarn yakumo upgrade"
+  },
+  "devDependencies": {
+    "yakumo": "^1.0.0-beta.8",
+    "yakumo-esbuild": "^1.0.0-beta.4",
+    "yakumo-tsc": "^1.0.0-beta.3"
+  }
 }
