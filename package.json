@@ -1,0 +1,10 @@
+{
+  "name": "@root/levi-satori",
+  "version": "0.0.0",
+  "packageManager": "yarn@4.1.0",
+  "private": true,
+  "license": "MIT",
+  "workspaces": [
+    "packages/*"
+  ]
+}

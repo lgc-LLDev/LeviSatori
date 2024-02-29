@@ -1,0 +1,6 @@
+[submodule "packages/satori"]
+	path = packages/satori
+	url = https://github.com/satorijs/satori
+[submodule "packages/cordis"]
+	path = packages/cordis
+	url = https://github.com/cordiverse/cordis
