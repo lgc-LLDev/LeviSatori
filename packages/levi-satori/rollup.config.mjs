@@ -1,8 +1,8 @@
 import commonjs from "@rollup/plugin-commonjs";
 import json from "@rollup/plugin-json";
 import { nodeResolve } from "@rollup/plugin-node-resolve";
-// import terser from '@rollup/plugin-terser';
 import typescript from "@rollup/plugin-typescript";
+import { dts } from "rollup-plugin-dts";
 
 export default [
   {
@@ -14,12 +14,11 @@ export default [
         format: "iife",
       },
     ],
-    plugins: [
-      json(),
-      nodeResolve(),
-      commonjs(),
-      typescript(),
-      /* terser(), */
-    ],
+    plugins: [json(), nodeResolve(), commonjs(), typescript()],
+  },
+  {
+    input: "./src/bundle.ts",
+    output: [{ file: "./dist/index.d.ts", format: "es" }],
+    plugins: [json(), nodeResolve(), commonjs(), dts()],
   },
 ];
