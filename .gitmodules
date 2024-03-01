@@ -7,3 +7,6 @@
 [submodule "HelperLib"]
 	path = HelperLib
 	url = https://github.com/LiteLDev/HelperLib
+[submodule "packages/undios"]
+	path = packages/undios
+	url = https://github.com/cordiverse/undios
