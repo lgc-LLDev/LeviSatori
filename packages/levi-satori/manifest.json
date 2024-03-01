@@ -1,6 +1,6 @@
 {
-  "entry": "NBSPlayer.js",
-  "name": "NBSPlayer",
+  "entry": "LeviSatori.js",
+  "name": "LeviSatori",
   "type": "lse-quickjs",
   "dependencies": [
     {

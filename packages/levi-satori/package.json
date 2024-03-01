@@ -2,9 +2,10 @@
   "name": "levi-satori",
   "version": "0.1.0",
   "description": "",
-  "main": "dist/index.js",
+  "main": "dist/LeviSatori.js",
+  "types": "dist/LeviSatori.d.ts",
   "scripts": {
-    "build": "rollup -c && copy ./index.bundle.d.ts ./dist/index.d.ts",
+    "build": "rollup -c && node -e \"require('fs').copyFileSync('./src/index.bundle.d.ts','./dist/LeviSatori.d.ts')\"",
     "clean": "rimraf ./dist"
   },
   "keywords": [],
@@ -23,6 +24,7 @@
     "typescript": "^5.3.2"
   },
   "dependencies": {
-    "@levi-satorijs/satori": "workspace:^"
+    "@levi-satorijs/satori": "workspace:^",
+    "event-target-polyfill": "^0.0.4"
   }
 }

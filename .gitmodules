@@ -10,3 +10,6 @@
 [submodule "packages/undios"]
 	path = packages/undios
 	url = https://github.com/cordiverse/undios
+[submodule "packages/reggol"]
+	path = packages/reggol
+	url = https://github.com/shigma/reggol
