@@ -1,11 +1,66 @@
 (function (global, factory) {
-  typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports) :
-  typeof define === 'function' && define.amd ? define(['exports'], factory) :
-  (global = typeof globalThis !== 'undefined' ? globalThis : global || self, factory(global.LeviSatori = {}));
-})(this, (function (exports) { 'use strict';
+  if (typeof define === "function" && define.amd) {
+    define("LeviSatori", ["exports"], factory);
+  } else if (typeof exports !== "undefined") {
+    factory(exports);
+  } else {
+    var mod = {
+      exports: {}
+    };
+    factory(mod.exports);
+    global.LeviSatori = mod.exports;
+  }
+})(typeof globalThis !== "undefined" ? globalThis : typeof self !== "undefined" ? self : this, function (_exports) {
+  "use strict";
 
-  let _Symbol$for, _symbols$trace, _symbols$filter, _symbols$setup, _symbols$extend, _Symbol$hasInstance, _Service$invoke, _Service$setup, _Service2$1$provide, _Service2$1$immediate, _Service2$1$invoke, _Service2$1$setup;
-  var _Class, _CordisError2, _Class2, _Class3, _Class4, _Class5, _Context2, _Service2, _Class6, _Loader, _LoggerService2, _Class7, _Class8, _Service3, _Class10, _Class11, _HTTP2, _Session2, _Class12, _Class13, _Class14, _Class15, _Class16, _Class17;
+  Object.defineProperty(_exports, "__esModule", {
+    value: true
+  });
+  _exports.Universal = _exports.TimerService = _exports.Time = _exports.Session = _exports.Service = _exports.ScopeStatus = _exports.Schema = _exports.Registry = _exports.Modulator = _exports.Messenger = _exports.MessageEncoder = _exports.MainScope = _exports.Logger = _exports.Lifecycle = _exports.ForkScope = _exports.Element = _exports.EffectScope = _exports.CordisError = _exports.Context = _exports.Bot = _exports.Adapter = void 0;
+  _exports.applyTraceable = applyTraceable;
+  _exports.arrayBufferToBase64 = arrayBufferToBase64;
+  _exports.base64ToArrayBuffer = base64ToArrayBuffer;
+  _exports.camelCase = camelCase;
+  _exports.camelize = void 0;
+  _exports.capitalize = capitalize;
+  _exports.clone = clone;
+  _exports.contain = contain;
+  _exports.createCallable = createCallable;
+  _exports.createTraceable = createTraceable;
+  _exports.deduplicate = deduplicate;
+  _exports.deepEqual = deepEqual;
+  _exports.defineAccessor = defineAccessor;
+  _exports.defineProperty = defineProperty;
+  _exports.difference = difference;
+  _exports.filterKeys = filterKeys;
+  _exports.hyphenate = _exports.h = void 0;
+  _exports.intersection = intersection;
+  _exports.is = is;
+  _exports.isApplicable = isApplicable;
+  _exports.isBailed = isBailed;
+  _exports.isConstructor = isConstructor;
+  _exports.isNullable = isNullable;
+  _exports.isPlainObject = isPlainObject;
+  _exports.isUnproxyable = isUnproxyable;
+  _exports.joinPrototype = joinPrototype;
+  _exports.makeArray = makeArray;
+  _exports.valueMap = _exports.mapValues = mapValues;
+  _exports.noop = noop;
+  _exports.omit = omit;
+  _exports.paramCase = paramCase;
+  _exports.pick = pick;
+  _exports.remove = remove;
+  _exports.resolveConfig = resolveConfig;
+  _exports.sanitize = sanitize;
+  _exports.segment = void 0;
+  _exports.snakeCase = snakeCase;
+  _exports.symbols = void 0;
+  _exports.trimSlash = trimSlash;
+  _exports.uncapitalize = uncapitalize;
+  _exports.union = union;
+  _exports.z = void 0;
+  let _Symbol$for, _symbols$1$origin, _symbols$1$filter, _symbols$1$setup, _symbols$1$extend, _Symbol$hasInstance, _import_core$1$Servic, _import_core$1$Servic2, _import_levi_cordis$S, _import_levi_cordis$S2, _import_levi_cordis$S3, _Symbol$for2, _symbols$origin, _symbols$filter, _symbols$setup, _symbols$extend, _Symbol$hasInstance2, _Service$provide, _Service$invoke, _Service$setup, _Service2$1$provide, _Service2$1$immediate, _Service2$1$invoke, _Service2$1$setup;
+  var _Lifecycle, _CordisError2, _EffectScope, _ForkScope, _MainScope, _Registry, _Context2, _Service2, _LoggerService2, _TimerService, _Class3, _WebSocket, _HTTPError, _HTTP2, _Class10, _Class11, _Class12, _CordisError3, _Class13, _Class14, _Class15, _Class16, _Context3, _Service3, _Class17, _Loader, _LoggerService3, _Class18, _Class19, _Service4, _Class21, _Class22, _HTTP3, _Session3, _Class23, _Class24, _Class25, _Class26, _Class27, _Class28;
   function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
   function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == typeof i ? i : String(i); }
   function _toPrimitive(t, r) { if ("object" != typeof t || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != typeof i) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
@@ -144,36 +199,36 @@
       return EventTarget;
     }();
   }
-  var __defProp$a = Object.defineProperty;
-  var __name$9 = (target, value) => __defProp$a(target, "name", {
+  var __defProp$i = Object.defineProperty;
+  var __name$h = (target, value) => __defProp$i(target, "name", {
     value,
     configurable: true
   });
 
   // packages/cosmokit/src/misc.ts
   function noop() {}
-  __name$9(noop, "noop");
+  __name$h(noop, "noop");
   function isNullable(value) {
     return value === null || value === void 0;
   }
-  __name$9(isNullable, "isNullable");
+  __name$h(isNullable, "isNullable");
   function isPlainObject(data) {
     return data && typeof data === "object" && !Array.isArray(data);
   }
-  __name$9(isPlainObject, "isPlainObject");
+  __name$h(isPlainObject, "isPlainObject");
   function filterKeys(object, filter) {
     return Object.fromEntries(Object.entries(object).filter(([key, value]) => filter(key, value)));
   }
-  __name$9(filterKeys, "filterKeys");
+  __name$h(filterKeys, "filterKeys");
   function mapValues(object, transform) {
     return Object.fromEntries(Object.entries(object).map(([key, value]) => [key, transform(value, key)]));
   }
-  __name$9(mapValues, "mapValues");
+  __name$h(mapValues, "mapValues");
   function is(type, value) {
     if (arguments.length === 1) return value2 => is(type, value2);
     return type in globalThis && value instanceof globalThis[type] || Object.prototype.toString.call(value).slice(8, -1) === type;
   }
-  __name$9(is, "is");
+  __name$h(is, "is");
   function clone(source) {
     if (!source || typeof source !== "object") return source;
     if (Array.isArray(source)) return source.map(clone);
@@ -181,7 +236,7 @@
     if (is("RegExp", source)) return new RegExp(source.source, source.flags);
     return mapValues(source, clone);
   }
-  __name$9(clone, "clone");
+  __name$h(clone, "clone");
   function deepEqual(a, b, strict) {
     if (a === b) return true;
     if (!strict && isNullable(a) && isNullable(b)) return true;
@@ -191,13 +246,13 @@
     function check(test, then) {
       return test(a) ? test(b) ? then(a, b) : false : test(b) ? false : void 0;
     }
-    __name$9(check, "check");
+    __name$h(check, "check");
     return check(Array.isArray, (a2, b2) => a2.length === b2.length && a2.every((item, index) => deepEqual(item, b2[index]))) ?? check(is("Date"), (a2, b2) => a2.valueOf() === b2.valueOf()) ?? check(is("RegExp"), (a2, b2) => a2.source === b2.source && a2.flags === b2.flags) ?? Object.keys({
       ...a,
       ...b
     }).every(key => deepEqual(a[key], b[key], strict));
   }
-  __name$9(deepEqual, "deepEqual");
+  __name$h(deepEqual, "deepEqual");
   function pick(source, keys, forced) {
     if (!keys) return {
       ...source
@@ -208,7 +263,7 @@
     }
     return result;
   }
-  __name$9(pick, "pick");
+  __name$h(pick, "pick");
   function omit(source, keys) {
     if (!keys) return {
       ...source
@@ -221,7 +276,7 @@
     }
     return result;
   }
-  __name$9(omit, "omit");
+  __name$h(omit, "omit");
   function defineProperty(object, key, value) {
     return Object.defineProperty(object, key, {
       writable: true,
@@ -229,29 +284,29 @@
       enumerable: false
     });
   }
-  __name$9(defineProperty, "defineProperty");
+  __name$h(defineProperty, "defineProperty");
 
   // packages/cosmokit/src/array.ts
   function contain(array1, array2) {
     return array2.every(item => array1.includes(item));
   }
-  __name$9(contain, "contain");
+  __name$h(contain, "contain");
   function intersection(array1, array2) {
     return array1.filter(item => array2.includes(item));
   }
-  __name$9(intersection, "intersection");
+  __name$h(intersection, "intersection");
   function difference(array1, array2) {
     return array1.filter(item => !array2.includes(item));
   }
-  __name$9(difference, "difference");
+  __name$h(difference, "difference");
   function union(array1, array2) {
     return Array.from( /* @__PURE__ */new Set([...array1, ...array2]));
   }
-  __name$9(union, "union");
+  __name$h(union, "union");
   function deduplicate(array) {
     return [...new Set(array)];
   }
-  __name$9(deduplicate, "deduplicate");
+  __name$h(deduplicate, "deduplicate");
   function remove(list, item) {
     const index = list.indexOf(item);
     if (index >= 0) {
@@ -261,11 +316,11 @@
       return false;
     }
   }
-  __name$9(remove, "remove");
+  __name$h(remove, "remove");
   function makeArray(source) {
     return Array.isArray(source) ? source : isNullable(source) ? [] : [source];
   }
-  __name$9(makeArray, "makeArray");
+  __name$h(makeArray, "makeArray");
 
   // packages/cosmokit/src/binary.ts
   function arrayBufferToBase64(buffer) {
@@ -279,7 +334,7 @@
     }
     return btoa(binary);
   }
-  __name$9(arrayBufferToBase64, "arrayBufferToBase64");
+  __name$h(arrayBufferToBase64, "arrayBufferToBase64");
   function base64ToArrayBuffer(base64) {
     if (typeof Buffer !== "undefined") {
       const buf = Buffer.from(base64, "base64");
@@ -292,43 +347,43 @@
     }
     return buffer;
   }
-  __name$9(base64ToArrayBuffer, "base64ToArrayBuffer");
+  __name$h(base64ToArrayBuffer, "base64ToArrayBuffer");
 
   // packages/cosmokit/src/string.ts
   function capitalize(source) {
     return source.charAt(0).toUpperCase() + source.slice(1);
   }
-  __name$9(capitalize, "capitalize");
+  __name$h(capitalize, "capitalize");
   function uncapitalize(source) {
     return source.charAt(0).toLowerCase() + source.slice(1);
   }
-  __name$9(uncapitalize, "uncapitalize");
+  __name$h(uncapitalize, "uncapitalize");
   function camelCase(source) {
     return source.replace(/[_-][a-z]/g, str => str.slice(1).toUpperCase());
   }
-  __name$9(camelCase, "camelCase");
+  __name$h(camelCase, "camelCase");
   function paramCase(source) {
     return uncapitalize(source).replace(/_/g, "-").replace(/.[A-Z]+/g, str => str[0] + "-" + str.slice(1).toLowerCase());
   }
-  __name$9(paramCase, "paramCase");
+  __name$h(paramCase, "paramCase");
   function snakeCase(source) {
     return uncapitalize(source).replace(/-/g, "_").replace(/.[A-Z]+/g, str => str[0] + "_" + str.slice(1).toLowerCase());
   }
-  __name$9(snakeCase, "snakeCase");
-  var camelize = camelCase;
-  var hyphenate = paramCase;
+  __name$h(snakeCase, "snakeCase");
+  var camelize = _exports.camelize = camelCase;
+  var hyphenate = _exports.hyphenate = paramCase;
   function trimSlash(source) {
     return source.replace(/\/$/, "");
   }
-  __name$9(trimSlash, "trimSlash");
+  __name$h(trimSlash, "trimSlash");
   function sanitize(source) {
     if (!source.startsWith("/")) source = "/" + source;
     return trimSlash(source);
   }
-  __name$9(sanitize, "sanitize");
+  __name$h(sanitize, "sanitize");
 
   // packages/cosmokit/src/time.ts
-  exports.Time = void 0;
+  var Time;
   (Time2 => {
     Time2.millisecond = 1;
     Time2.second = 1e3;
@@ -341,26 +396,26 @@
       timezoneOffset = offset;
     }
     Time2.setTimezoneOffset = setTimezoneOffset;
-    __name$9(setTimezoneOffset, "setTimezoneOffset");
+    __name$h(setTimezoneOffset, "setTimezoneOffset");
     function getTimezoneOffset() {
       return timezoneOffset;
     }
     Time2.getTimezoneOffset = getTimezoneOffset;
-    __name$9(getTimezoneOffset, "getTimezoneOffset");
+    __name$h(getTimezoneOffset, "getTimezoneOffset");
     function getDateNumber(date = /* @__PURE__ */new Date(), offset) {
       if (typeof date === "number") date = new Date(date);
       if (offset === void 0) offset = timezoneOffset;
       return Math.floor((date.valueOf() / Time2.minute - offset) / 1440);
     }
     Time2.getDateNumber = getDateNumber;
-    __name$9(getDateNumber, "getDateNumber");
+    __name$h(getDateNumber, "getDateNumber");
     function fromDateNumber(value, offset) {
       const date = new Date(value * Time2.day);
       if (offset === void 0) offset = timezoneOffset;
       return new Date(+date + offset * Time2.minute);
     }
     Time2.fromDateNumber = fromDateNumber;
-    __name$9(fromDateNumber, "fromDateNumber");
+    __name$h(fromDateNumber, "fromDateNumber");
     const numeric = /\d+(?:\.\d+)?/.source;
     const timeRegExp = new RegExp(`^${["w(?:eek(?:s)?)?", "d(?:ay(?:s)?)?", "h(?:our(?:s)?)?", "m(?:in(?:ute)?(?:s)?)?", "s(?:ec(?:ond)?(?:s)?)?"].map(unit => `(${numeric}${unit})?`).join("")}$`);
     function parseTime(source) {
@@ -369,7 +424,7 @@
       return (parseFloat(capture[1]) * Time2.week || 0) + (parseFloat(capture[2]) * Time2.day || 0) + (parseFloat(capture[3]) * Time2.hour || 0) + (parseFloat(capture[4]) * Time2.minute || 0) + (parseFloat(capture[5]) * Time2.second || 0);
     }
     Time2.parseTime = parseTime;
-    __name$9(parseTime, "parseTime");
+    __name$h(parseTime, "parseTime");
     function parseDate(date) {
       const parsed = parseTime(date);
       if (parsed) {
@@ -382,7 +437,7 @@
       return date ? new Date(date) : /* @__PURE__ */new Date();
     }
     Time2.parseDate = parseDate;
-    __name$9(parseDate, "parseDate");
+    __name$h(parseDate, "parseDate");
     function format(ms) {
       const abs = Math.abs(ms);
       if (abs >= Time2.day - Time2.hour / 2) {
@@ -397,22 +452,22 @@
       return ms + "ms";
     }
     Time2.format = format;
-    __name$9(format, "format");
+    __name$h(format, "format");
     function toDigits(source, length = 2) {
       return source.toString().padStart(length, "0");
     }
     Time2.toDigits = toDigits;
-    __name$9(toDigits, "toDigits");
+    __name$h(toDigits, "toDigits");
     function template(template2, time = /* @__PURE__ */new Date()) {
       return template2.replace("yyyy", time.getFullYear().toString()).replace("yy", time.getFullYear().toString().slice(2)).replace("MM", toDigits(time.getMonth() + 1)).replace("dd", toDigits(time.getDate())).replace("hh", toDigits(time.getHours())).replace("mm", toDigits(time.getMinutes())).replace("ss", toDigits(time.getSeconds())).replace("SSS", toDigits(time.getMilliseconds(), 3));
     }
     Time2.template = template;
-    __name$9(template, "template");
-  })(exports.Time || (exports.Time = {}));
-  var lib$1 = /*#__PURE__*/Object.freeze({
+    __name$h(template, "template");
+  })(Time || (_exports.Time = Time = {}));
+  var lib$c = /*#__PURE__*/Object.freeze({
     __proto__: null,
     get Time() {
-      return exports.Time;
+      return Time;
     },
     arrayBufferToBase64: arrayBufferToBase64,
     base64ToArrayBuffer: base64ToArrayBuffer,
@@ -445,42 +500,42 @@
     union: union,
     valueMap: mapValues
   });
-  var require$$0 = /*@__PURE__*/getAugmentedNamespace(lib$1);
-  var __create = Object.create;
-  var __defProp$9 = Object.defineProperty;
-  var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
-  var __getOwnPropNames$2 = Object.getOwnPropertyNames;
-  var __getProtoOf = Object.getPrototypeOf;
-  var __hasOwnProp = Object.prototype.hasOwnProperty;
-  var __defNormalProp = (obj, key, value) => key in obj ? __defProp$9(obj, key, {
+  var require$$1 = /*@__PURE__*/getAugmentedNamespace(lib$c);
+  var __create$1 = Object.create;
+  var __defProp$h = Object.defineProperty;
+  var __getOwnPropDesc$6 = Object.getOwnPropertyDescriptor;
+  var __getOwnPropNames$8 = Object.getOwnPropertyNames;
+  var __getProtoOf$1 = Object.getPrototypeOf;
+  var __hasOwnProp$6 = Object.prototype.hasOwnProperty;
+  var __defNormalProp = (obj, key, value) => key in obj ? __defProp$h(obj, key, {
     enumerable: true,
     configurable: true,
     writable: true,
     value
   }) : obj[key] = value;
   var __esm = (fn, res) => function __init() {
-    return fn && (res = (0, fn[__getOwnPropNames$2(fn)[0]])(fn = 0)), res;
+    return fn && (res = (0, fn[__getOwnPropNames$8(fn)[0]])(fn = 0)), res;
   };
   var __commonJS$2 = (cb, mod) => function __require() {
-    return mod || (0, cb[__getOwnPropNames$2(cb)[0]])((mod = {
+    return mod || (0, cb[__getOwnPropNames$8(cb)[0]])((mod = {
       exports: {}
     }).exports, mod), mod.exports;
   };
-  var __copyProps = (to, from, except, desc) => {
+  var __copyProps$6 = (to, from, except, desc) => {
     if (from && typeof from === "object" || typeof from === "function") {
-      for (let key of __getOwnPropNames$2(from)) if (!__hasOwnProp.call(to, key) && key !== except) __defProp$9(to, key, {
+      for (let key of __getOwnPropNames$8(from)) if (!__hasOwnProp$6.call(to, key) && key !== except) __defProp$h(to, key, {
         get: () => from[key],
-        enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable
+        enumerable: !(desc = __getOwnPropDesc$6(from, key)) || desc.enumerable
       });
     }
     return to;
   };
-  var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(
+  var __toESM$1 = (mod, isNodeMode, target) => (target = mod != null ? __create$1(__getProtoOf$1(mod)) : {}, __copyProps$6(
   // If the importer is in node compatibility mode or this is not an ESM
   // file that has been converted to a CommonJS file using a Babel-
   // compatible transform (i.e. "__esModule" has not been set), then set
   // "default" to the CommonJS "module.exports" for node compatibility.
-  isNodeMode || !mod || !mod.__esModule ? __defProp$9(target, "default", {
+  isNodeMode || !mod || !mod.__esModule ? __defProp$h(target, "default", {
     value: mod,
     enumerable: true
   }) : target, mod));
@@ -785,7 +840,7 @@
   // src/shared.ts
   var require_shared = __commonJS$2({
     "src/shared.ts"(exports2, module2) {
-      var import_cosmokit = require$$0;
+      var import_cosmokit = require$$1;
       var c16 = [6, 2, 3, 4, 5, 1];
       var c256 = [20, 21, 26, 27, 32, 33, 38, 39, 40, 41, 42, 43, 44, 45, 56, 57, 62, 63, 68, 69, 74, 75, 76, 77, 78, 79, 80, 81, 92, 93, 98, 99, 112, 113, 129, 134, 135, 148, 149, 160, 161, 162, 163, 164, 165, 166, 167, 168, 169, 170, 171, 172, 173, 178, 179, 184, 185, 196, 197, 198, 199, 200, 201, 202, 203, 204, 205, 206, 207, 208, 209, 214, 215, 220, 221];
       function isAggregateError(error) {
@@ -982,7 +1037,7 @@
   var require_node = __commonJS$2({
     "src/node.ts"(exports2, module2) {
       init_util();
-      var import_shared = __toESM(require_shared());
+      var import_shared = __toESM$1(require_shared());
       import_shared.default.format("o", (value, target) => {
         return inspect(value, {
           colors: !!target.colors,
@@ -994,9 +1049,3734 @@
   });
 
   // src/index.ts
-  var import_node = __toESM(require_node());
-  var lib = import_node.default;
-  var Logger$1 = /*@__PURE__*/getDefaultExportFromCjs(lib);
+  var import_node = __toESM$1(require_node());
+  var lib$b = import_node.default;
+  var Logger$1 = _exports.Logger = /*@__PURE__*/getDefaultExportFromCjs(lib$b);
+  var lib$a = {
+    exports: {}
+  };
+  var lib$9 = {
+    exports: {}
+  };
+  var lib$8 = {
+    exports: {}
+  };
+  var __defProp$g = Object.defineProperty;
+  var __getOwnPropDesc$5 = Object.getOwnPropertyDescriptor;
+  var __getOwnPropNames$7 = Object.getOwnPropertyNames;
+  var __hasOwnProp$5 = Object.prototype.hasOwnProperty;
+  var __name$g = (target, value) => __defProp$g(target, "name", {
+    value,
+    configurable: true
+  });
+  var __export$5 = (target, all) => {
+    for (var name in all) __defProp$g(target, name, {
+      get: all[name],
+      enumerable: true
+    });
+  };
+  var __copyProps$5 = (to, from, except, desc) => {
+    if (from && typeof from === "object" || typeof from === "function") {
+      for (let key of __getOwnPropNames$7(from)) if (!__hasOwnProp$5.call(to, key) && key !== except) __defProp$g(to, key, {
+        get: () => from[key],
+        enumerable: !(desc = __getOwnPropDesc$5(from, key)) || desc.enumerable
+      });
+    }
+    return to;
+  };
+  var __toCommonJS$5 = mod => __copyProps$5(__defProp$g({}, "__esModule", {
+    value: true
+  }), mod);
+
+  // src/index.ts
+  var src_exports$5 = {};
+  __export$5(src_exports$5, {
+    Context: () => Context$2,
+    CordisError: () => CordisError$1,
+    EffectScope: () => EffectScope$1,
+    ForkScope: () => ForkScope$1,
+    Lifecycle: () => Lifecycle$1,
+    MainScope: () => MainScope$1,
+    Registry: () => Registry$1,
+    ScopeStatus: () => ScopeStatus$1,
+    Service: () => Service$1,
+    applyTraceable: () => applyTraceable$1,
+    createCallable: () => createCallable$1,
+    createTraceable: () => createTraceable$1,
+    isApplicable: () => isApplicable$1,
+    isBailed: () => isBailed$1,
+    isConstructor: () => isConstructor$1,
+    isUnproxyable: () => isUnproxyable$1,
+    joinPrototype: () => joinPrototype$1,
+    resolveConfig: () => resolveConfig$1,
+    symbols: () => symbols$1
+  });
+  var lib$7 = __toCommonJS$5(src_exports$5);
+
+  // src/context.ts
+  var import_cosmokit5 = require$$1;
+
+  // src/events.ts
+  var import_cosmokit$3 = require$$1;
+  function isBailed$1(value) {
+    return value !== null && value !== false && value !== void 0;
+  }
+  __name$g(isBailed$1, "isBailed");
+  var Lifecycle$1 = (_Lifecycle = class Lifecycle {
+    constructor(root) {
+      _defineProperty(this, "isActive", false);
+      _defineProperty(this, "_tasks", /* @__PURE__ */new Set());
+      _defineProperty(this, "_hooks", {});
+      this.root = root;
+      (0, import_cosmokit$3.defineProperty)(this, Context$2.origin, root);
+      (0, import_cosmokit$3.defineProperty)(this.on("internal/listener", function (name, listener, prepend) {
+        const method = prepend ? "unshift" : "push";
+        if (name === "ready") {
+          if (!this.lifecycle.isActive) return;
+          this.scope.ensure(async () => listener());
+          return () => false;
+        } else if (name === "dispose") {
+          this.scope.disposables[method](listener);
+          (0, import_cosmokit$3.defineProperty)(listener, "name", "event <dispose>");
+          return () => (0, import_cosmokit$3.remove)(this.scope.disposables, listener);
+        } else if (name === "fork") {
+          this.scope.runtime.forkables[method](listener);
+          return this.scope.collect("event <fork>", () => (0, import_cosmokit$3.remove)(this.scope.runtime.forkables, listener));
+        }
+      }), Context$2.static, root.scope);
+      for (const level of ["info", "error", "warning"]) {
+        (0, import_cosmokit$3.defineProperty)(this.on(`internal/${level}`, (format, ...param) => {
+          if (this._hooks[`internal/${level}`].length > 1) return;
+          console.info(format, ...param);
+        }), Context$2.static, root.scope);
+      }
+    }
+    async flush() {
+      while (this._tasks.size) {
+        await Promise.all(Array.from(this._tasks));
+      }
+    }
+    getHooks(name, thisArg) {
+      const hooks = this._hooks[name] || [];
+      return hooks.slice().filter(([context]) => {
+        const filter = thisArg?.[Context$2.filter];
+        return !filter || filter.call(thisArg, context);
+      }).map(([, callback]) => callback);
+    }
+    prepareEvent(type, args) {
+      const thisArg = typeof args[0] === "object" ? args.shift() : null;
+      const name = args.shift();
+      if (name !== "internal/event") {
+        this.emit("internal/event", type, name, args, thisArg);
+      }
+      return [this.getHooks(name, thisArg), thisArg ?? this[Context$2.origin]];
+    }
+    async parallel(...args) {
+      const [hooks, thisArg] = this.prepareEvent("parallel", args);
+      await Promise.all(hooks.map(async callback => {
+        await callback.apply(thisArg, args);
+      }));
+    }
+    emit(...args) {
+      const [hooks, thisArg] = this.prepareEvent("emit", args);
+      for (const callback of hooks) {
+        callback.apply(thisArg, args);
+      }
+    }
+    async serial(...args) {
+      const [hooks, thisArg] = this.prepareEvent("serial", args);
+      for (const callback of hooks) {
+        const result = await callback.apply(thisArg, args);
+        if (isBailed$1(result)) return result;
+      }
+    }
+    bail(...args) {
+      const [hooks, thisArg] = this.prepareEvent("bail", args);
+      for (const callback of hooks) {
+        const result = callback.apply(thisArg, args);
+        if (isBailed$1(result)) return result;
+      }
+    }
+    register(label, hooks, listener, prepend) {
+      const caller = this[Context$2.origin];
+      const method = prepend ? "unshift" : "push";
+      hooks[method]([caller, listener]);
+      return caller.state.collect(label, () => this.unregister(hooks, listener));
+    }
+    unregister(hooks, listener) {
+      const index = hooks.findIndex(([context, callback]) => callback === listener);
+      if (index >= 0) {
+        hooks.splice(index, 1);
+        return true;
+      }
+    }
+    on(name, listener, prepend = false) {
+      const caller = this[Context$2.origin];
+      caller.scope.assertActive();
+      const result = this.bail(caller, "internal/listener", name, listener, prepend);
+      if (result) return result;
+      const hooks = this._hooks[name] ||= [];
+      const label = typeof name === "string" ? `event <${name}>` : "event (Symbol)";
+      return this.register(label, hooks, listener, prepend);
+    }
+    once(name, listener, prepend = false) {
+      const dispose = this.on(name, function (...args) {
+        dispose();
+        return listener.apply(this, args);
+      }, prepend);
+      return dispose;
+    }
+    off(name, listener) {
+      return this.unregister(this._hooks[name] || [], listener);
+    }
+    async start() {
+      this.isActive = true;
+      const hooks = this._hooks.ready || [];
+      while (hooks.length) {
+        const [context, callback] = hooks.shift();
+        context.scope.ensure(async () => callback());
+      }
+      await this.flush();
+    }
+    async stop() {
+      this.isActive = false;
+      this.root.scope.reset();
+    }
+  }, __name$g(_Lifecycle, "Lifecycle"), _Lifecycle);
+
+  // src/registry.ts
+  var import_cosmokit4 = require$$1;
+
+  // src/scope.ts
+  var import_cosmokit3 = require$$1;
+
+  // src/utils.ts
+  var import_cosmokit2 = require$$1;
+  var symbols$1 = {
+    // context symbols
+    origin: Symbol.for("cordis.origin"),
+    events: Symbol.for("cordis.events"),
+    static: Symbol.for("cordis.static"),
+    filter: Symbol.for("cordis.filter"),
+    expose: Symbol.for("cordis.expose"),
+    isolate: Symbol.for("cordis.isolate"),
+    internal: Symbol.for("cordis.internal"),
+    intercept: Symbol.for("cordis.intercept"),
+    // service symbols
+    setup: Symbol.for("cordis.setup"),
+    invoke: Symbol.for("cordis.invoke"),
+    extend: Symbol.for("cordis.extend"),
+    provide: Symbol.for("cordis.provide"),
+    immediate: Symbol.for("cordis.immediate")
+  };
+  function isConstructor$1(func) {
+    if (!func.prototype) return false;
+    if (func.prototype.constructor !== func) return false;
+    return true;
+  }
+  __name$g(isConstructor$1, "isConstructor");
+  function resolveConfig$1(plugin, config) {
+    const schema = plugin["Config"] || plugin["schema"];
+    if (schema && plugin["schema"] !== false) config = schema(config);
+    return config ?? {};
+  }
+  __name$g(resolveConfig$1, "resolveConfig");
+  function isUnproxyable$1(value) {
+    return [Map, Set, Date, Promise].some(constructor => value instanceof constructor);
+  }
+  __name$g(isUnproxyable$1, "isUnproxyable");
+  function joinPrototype$1(proto1, proto2) {
+    if (proto1 === Object.prototype) return proto2;
+    const result = Object.create(joinPrototype$1(Object.getPrototypeOf(proto1), proto2));
+    for (const key of Reflect.ownKeys(proto1)) {
+      Object.defineProperty(result, key, Object.getOwnPropertyDescriptor(proto1, key));
+    }
+    return result;
+  }
+  __name$g(joinPrototype$1, "joinPrototype");
+  function createTraceable$1(ctx, value) {
+    const proxy = new Proxy(value, {
+      get: (target, name, receiver) => {
+        if (name === symbols$1.origin || name === "caller") return ctx;
+        return Reflect.get(target, name, receiver);
+      },
+      apply: (target, thisArg, args) => {
+        return applyTraceable$1(proxy, target, thisArg, args);
+      }
+    });
+    return proxy;
+  }
+  __name$g(createTraceable$1, "createTraceable");
+  function applyTraceable$1(proxy, value, thisArg, args) {
+    if (!value[symbols$1.invoke]) return Reflect.apply(value, thisArg, args);
+    return value[symbols$1.invoke].apply(proxy, args);
+  }
+  __name$g(applyTraceable$1, "applyTraceable");
+  function createCallable$1(name, proto) {
+    const self = /* @__PURE__ */__name$g(function (...args) {
+      const proxy = createTraceable$1(self[symbols$1.origin], self);
+      return applyTraceable$1(proxy, self, this, args);
+    }, "self");
+    (0, import_cosmokit2.defineProperty)(self, "name", name);
+    return Object.setPrototypeOf(self, proto);
+  }
+  __name$g(createCallable$1, "createCallable");
+
+  // src/scope.ts
+  var ScopeStatus$1 = /* @__PURE__ */(ScopeStatus2 => {
+    ScopeStatus2[ScopeStatus2["PENDING"] = 0] = "PENDING";
+    ScopeStatus2[ScopeStatus2["LOADING"] = 1] = "LOADING";
+    ScopeStatus2[ScopeStatus2["ACTIVE"] = 2] = "ACTIVE";
+    ScopeStatus2[ScopeStatus2["FAILED"] = 3] = "FAILED";
+    ScopeStatus2[ScopeStatus2["DISPOSED"] = 4] = "DISPOSED";
+    return ScopeStatus2;
+  })(ScopeStatus$1 || {});
+  var CordisError$1 = (_CordisError2 = class _CordisError extends Error {
+    constructor(code, message) {
+      super(message ?? _CordisError.Code[code]);
+      this.code = code;
+    }
+  }, __name$g(_CordisError2, "CordisError"), _CordisError2);
+  (CordisError2 => {
+    CordisError2.Code = {
+      INACTIVE_EFFECT: "cannot create effect on inactive context"
+    };
+  })(CordisError$1 || (CordisError$1 = {}));
+  var EffectScope$1 = (_EffectScope = class EffectScope {
+    constructor(parent, config) {
+      _defineProperty(this, "uid", void 0);
+      _defineProperty(this, "ctx", void 0);
+      _defineProperty(this, "disposables", []);
+      _defineProperty(this, "error", void 0);
+      _defineProperty(this, "status", 0 /* PENDING */);
+      _defineProperty(this, "isActive", false);
+      // Same as `this.ctx`, but with a more specific type.
+      _defineProperty(this, "context", void 0);
+      _defineProperty(this, "proxy", void 0);
+      _defineProperty(this, "acceptors", []);
+      _defineProperty(this, "tasks", /* @__PURE__ */new Set());
+      _defineProperty(this, "hasError", false);
+      this.parent = parent;
+      this.config = config;
+      this.uid = parent.registry ? parent.registry.counter : 0;
+      this.ctx = this.context = parent.extend({
+        scope: this
+      });
+      this.proxy = new Proxy({}, {
+        get: (target, key) => Reflect.get(this.config, key)
+      });
+    }
+    get _config() {
+      return this.runtime.isReactive ? this.proxy : this.config;
+    }
+    assertActive() {
+      if (this.uid !== null || this.isActive) return;
+      throw new CordisError$1("INACTIVE_EFFECT");
+    }
+    effect(callback, config) {
+      this.assertActive();
+      const result = isConstructor$1(callback) ? new callback(this.ctx, config) : callback(this.ctx, config);
+      let disposed = false;
+      const original = typeof result === "function" ? result : result.dispose.bind(result);
+      const wrapped = /* @__PURE__ */__name$g(() => {
+        if (disposed) return;
+        disposed = true;
+        (0, import_cosmokit3.remove)(this.disposables, wrapped);
+        return original();
+      }, "wrapped");
+      this.disposables.push(wrapped);
+      if (typeof result === "function") return wrapped;
+      result.dispose = wrapped;
+      return result;
+    }
+    collect(label, callback) {
+      const dispose = (0, import_cosmokit3.defineProperty)(() => {
+        (0, import_cosmokit3.remove)(this.disposables, dispose);
+        return callback();
+      }, "name", label);
+      this.disposables.push(dispose);
+      return dispose;
+    }
+    restart() {
+      this.reset();
+      this.error = null;
+      this.hasError = false;
+      this.status = 0 /* PENDING */;
+      this.start();
+    }
+    _getStatus() {
+      if (this.uid === null) return 4 /* DISPOSED */;
+      if (this.hasError) return 3 /* FAILED */;
+      if (this.tasks.size) return 1 /* LOADING */;
+      if (this.ready) return 2 /* ACTIVE */;
+      return 0 /* PENDING */;
+    }
+    _updateStatus(callback) {
+      const oldValue = this.status;
+      callback?.();
+      this.status = this._getStatus();
+      if (oldValue !== this.status) {
+        this.context.emit("internal/status", this, oldValue);
+      }
+    }
+    ensure(callback) {
+      const task = callback().catch(reason => {
+        this.context.emit("internal/error", reason);
+        this.cancel(reason);
+      }).finally(() => {
+        this._updateStatus(() => this.tasks.delete(task));
+        this.context.events._tasks.delete(task);
+      });
+      this._updateStatus(() => this.tasks.add(task));
+      this.context.events._tasks.add(task);
+    }
+    cancel(reason) {
+      this.error = reason;
+      this._updateStatus(() => this.hasError = true);
+      this.reset();
+    }
+    setupInject() {
+      if (!this.runtime.using.length) return;
+      (0, import_cosmokit3.defineProperty)(this.context.on("internal/before-service", name => {
+        if (!this.runtime.using.includes(name)) return;
+        this._updateStatus();
+        this.reset();
+      }), Context$2.static, this);
+      (0, import_cosmokit3.defineProperty)(this.context.on("internal/service", name => {
+        if (!this.runtime.using.includes(name)) return;
+        this.start();
+      }), Context$2.static, this);
+    }
+    get ready() {
+      return this.runtime.using.every(name => !(0, import_cosmokit3.isNullable)(this.ctx[name]));
+    }
+    reset() {
+      this.isActive = false;
+      this.disposables = this.disposables.splice(0).filter(dispose => {
+        if (this.uid !== null && dispose[Context$2.static] === this) return true;
+        (async () => dispose())().catch(reason => {
+          this.context.emit("internal/error", reason);
+        });
+      });
+    }
+    init(error) {
+      if (!this.config) {
+        this.cancel(error);
+      } else {
+        this.start();
+      }
+    }
+    start() {
+      if (!this.ready || this.isActive || this.uid === null) return true;
+      this.isActive = true;
+      this._updateStatus(() => this.hasError = false);
+    }
+    accept(...args) {
+      const keys = Array.isArray(args[0]) ? args.shift() : null;
+      const acceptor = {
+        keys,
+        callback: args[0],
+        ...args[1]
+      };
+      return this.effect(() => {
+        this.acceptors.push(acceptor);
+        if (acceptor.immediate) acceptor.callback?.(this.config);
+        return () => (0, import_cosmokit3.remove)(this.acceptors, acceptor);
+      });
+    }
+    decline(keys) {
+      return this.accept(keys, () => true);
+    }
+    checkUpdate(resolved, forced) {
+      if (forced || !this.config) return [true, true];
+      if (forced === false) return [false, false];
+      const modified = /* @__PURE__ */Object.create(null);
+      const checkPropertyUpdate = /* @__PURE__ */__name$g(key => {
+        const result = modified[key] ??= !(0, import_cosmokit3.deepEqual)(this.config[key], resolved[key]);
+        hasUpdate ||= result;
+        return result;
+      }, "checkPropertyUpdate");
+      const ignored = /* @__PURE__ */new Set();
+      let hasUpdate = false,
+        shouldRestart = false;
+      let fallback = this.runtime.isReactive || null;
+      for (const {
+        keys,
+        callback,
+        passive
+      } of this.acceptors) {
+        if (!keys) {
+          fallback ||= !passive;
+        } else if (passive) {
+          keys?.forEach(key => ignored.add(key));
+        } else {
+          let hasUpdate2 = false;
+          for (const key of keys) {
+            hasUpdate2 ||= checkPropertyUpdate(key);
+          }
+          if (!hasUpdate2) continue;
+        }
+        const result = callback?.(resolved);
+        if (result) shouldRestart = true;
+      }
+      for (const key in {
+        ...this.config,
+        ...resolved
+      }) {
+        if (fallback === false) continue;
+        if (!(key in modified) && !ignored.has(key)) {
+          const hasUpdate2 = checkPropertyUpdate(key);
+          if (fallback === null) shouldRestart ||= hasUpdate2;
+        }
+      }
+      return [hasUpdate, shouldRestart];
+    }
+  }, __name$g(_EffectScope, "EffectScope"), _EffectScope);
+  var ForkScope$1 = (_ForkScope = class ForkScope extends EffectScope$1 {
+    constructor(parent, runtime, config, error) {
+      super(parent, config);
+      _defineProperty(this, "dispose", void 0);
+      this.runtime = runtime;
+      this.dispose = (0, import_cosmokit3.defineProperty)(parent.scope.collect(`fork <${parent.runtime.name}>`, () => {
+        this.uid = null;
+        this.reset();
+        this.context.emit("internal/fork", this);
+        const result = (0, import_cosmokit3.remove)(runtime.disposables, this.dispose);
+        if ((0, import_cosmokit3.remove)(runtime.children, this) && !runtime.children.length) {
+          parent.registry.delete(runtime.plugin);
+        }
+        return result;
+      }), Context$2.static, runtime);
+      runtime.children.push(this);
+      runtime.disposables.push(this.dispose);
+      this.context.emit("internal/fork", this);
+      if (runtime.isReusable) {
+        this.setupInject();
+      }
+      this.init(error);
+    }
+    start() {
+      if (super.start()) return true;
+      for (const fork of this.runtime.forkables) {
+        this.ensure(async () => fork(this.context, this._config));
+      }
+    }
+    update(config, forced) {
+      const oldConfig = this.config;
+      const state = this.runtime.isForkable ? this : this.runtime;
+      if (state.config !== oldConfig) return;
+      const resolved = resolveConfig$1(this.runtime.plugin, config);
+      const [hasUpdate, shouldRestart] = state.checkUpdate(resolved, forced);
+      this.context.emit("internal/before-update", this, config);
+      this.config = resolved;
+      state.config = resolved;
+      if (hasUpdate) {
+        this.context.emit("internal/update", this, oldConfig);
+      }
+      if (shouldRestart) state.restart();
+    }
+  }, __name$g(_ForkScope, "ForkScope"), _ForkScope);
+  var MainScope$1 = (_MainScope = class MainScope extends EffectScope$1 {
+    constructor(registry, plugin, _config, error) {
+      super(registry[Context$2.origin], _config);
+      _defineProperty(this, "value", void 0);
+      _defineProperty(this, "runtime", this);
+      _defineProperty(this, "schema", void 0);
+      _defineProperty(this, "name", void 0);
+      _defineProperty(this, "using", []);
+      _defineProperty(this, "inject", /* @__PURE__ */new Set());
+      _defineProperty(this, "forkables", []);
+      _defineProperty(this, "children", []);
+      _defineProperty(this, "isReusable", false);
+      _defineProperty(this, "isReactive", false);
+      _defineProperty(this, "apply", (context, config) => {
+        if (typeof this.plugin !== "function") {
+          return this.plugin.apply(context, config);
+        } else if (isConstructor$1(this.plugin)) {
+          const instance = new this.plugin(context, config);
+          const name = instance[Context$2.expose];
+          if (name) {
+            context[name] = instance;
+          }
+          if (instance["fork"]) {
+            this.forkables.push(instance["fork"].bind(instance));
+          }
+          return instance;
+        } else {
+          return this.plugin(context, config);
+        }
+      });
+      this.plugin = plugin;
+      registry.set(plugin, this);
+      if (!plugin) {
+        this.name = "root";
+        this.isActive = true;
+      } else {
+        this.setup();
+        this.init(error);
+      }
+    }
+    get isForkable() {
+      return this.forkables.length > 0;
+    }
+    fork(parent, config, error) {
+      return new ForkScope$1(parent, this, config, error);
+    }
+    dispose() {
+      this.uid = null;
+      this.reset();
+      this.context.emit("internal/runtime", this);
+      return true;
+    }
+    setup() {
+      const {
+        name
+      } = this.plugin;
+      if (name && name !== "apply") this.name = name;
+      this.schema = this.plugin["Config"] || this.plugin["schema"];
+      const inject = this.plugin["using"] || this.plugin["inject"] || [];
+      if (Array.isArray(inject)) {
+        this.using = inject;
+        this.inject = new Set(inject);
+      } else {
+        this.using = inject.required || [];
+        this.inject = /* @__PURE__ */new Set([...this.using, ...(inject.optional || [])]);
+      }
+      this.isReusable = this.plugin["reusable"];
+      this.isReactive = this.plugin["reactive"];
+      this.context.emit("internal/runtime", this);
+      if (this.isReusable) {
+        this.forkables.push(this.apply);
+      } else {
+        super.setupInject();
+      }
+    }
+    reset() {
+      super.reset();
+      for (const fork of this.children) {
+        fork.reset();
+      }
+    }
+    start() {
+      if (super.start()) return true;
+      if (!this.isReusable && this.plugin) {
+        this.ensure(async () => this.value = this.apply(this.ctx, this._config));
+      }
+      for (const fork of this.children) {
+        fork.start();
+      }
+    }
+    update(config, forced) {
+      if (this.isForkable) {
+        this.context.emit("internal/warning", new Error(`attempting to update forkable plugin "${this.plugin.name}", which may lead to unexpected behavior`));
+      }
+      const oldConfig = this.config;
+      const resolved = resolveConfig$1(this.runtime.plugin || this.context.constructor, config);
+      const [hasUpdate, shouldRestart] = this.checkUpdate(resolved, forced);
+      const state = this.children.find(fork => fork.config === oldConfig);
+      this.config = resolved;
+      if (state) {
+        this.context.emit("internal/before-update", state, config);
+        state.config = resolved;
+        if (hasUpdate) {
+          this.context.emit("internal/update", state, oldConfig);
+        }
+      }
+      if (shouldRestart) this.restart();
+    }
+  }, __name$g(_MainScope, "MainScope"), _MainScope);
+
+  // src/registry.ts
+  function isApplicable$1(object) {
+    return object && typeof object === "object" && typeof object.apply === "function";
+  }
+  __name$g(isApplicable$1, "isApplicable");
+  var Registry$1 = (_Registry = class Registry {
+    constructor(root, config) {
+      _defineProperty(this, "_counter", 0);
+      _defineProperty(this, "_internal", /* @__PURE__ */new Map());
+      this.root = root;
+      (0, import_cosmokit4.defineProperty)(this, Context$2.origin, root);
+      root.scope = new MainScope$1(this, null, config);
+      root.scope.runtime.isReactive = true;
+    }
+    get counter() {
+      return ++this._counter;
+    }
+    get size() {
+      return this._internal.size;
+    }
+    resolve(plugin) {
+      if (plugin === null) return plugin;
+      if (typeof plugin === "function") return plugin;
+      if (isApplicable$1(plugin)) return plugin.apply;
+      throw new Error('invalid plugin, expect function or object with an "apply" method, received ' + typeof plugin);
+    }
+    get(plugin) {
+      return this._internal.get(this.resolve(plugin));
+    }
+    has(plugin) {
+      return this._internal.has(this.resolve(plugin));
+    }
+    set(plugin, state) {
+      const oldValue = this._internal.get(this.resolve(plugin));
+      this._internal.set(this.resolve(plugin), state);
+      return oldValue;
+    }
+    delete(plugin) {
+      plugin = this.resolve(plugin);
+      const runtime = this.get(plugin);
+      if (!runtime) return;
+      this._internal.delete(plugin);
+      runtime.dispose();
+      return runtime;
+    }
+    keys() {
+      return this._internal.keys();
+    }
+    values() {
+      return this._internal.values();
+    }
+    entries() {
+      return this._internal.entries();
+    }
+    forEach(callback) {
+      return this._internal.forEach(callback);
+    }
+    using(inject, callback) {
+      return this.inject(inject, callback);
+    }
+    inject(inject, callback) {
+      return this.plugin({
+        inject,
+        apply: callback,
+        name: callback.name
+      });
+    }
+    plugin(plugin, config) {
+      this.resolve(plugin);
+      const context = this[Context$2.origin];
+      context.scope.assertActive();
+      let error;
+      try {
+        config = resolveConfig$1(plugin, config);
+      } catch (reason) {
+        context.emit("internal/error", reason);
+        error = reason;
+        config = null;
+      }
+      let runtime = this.get(plugin);
+      if (runtime) {
+        if (!runtime.isForkable) {
+          context.emit("internal/warning", new Error(`duplicate plugin detected: ${plugin.name}`));
+        }
+        return runtime.fork(context, config, error);
+      }
+      runtime = new MainScope$1(this, plugin, config, error);
+      return runtime.fork(context, config, error);
+    }
+  }, __name$g(_Registry, "Registry"), _Registry);
+
+  // src/context.ts
+  var Context$2 = (_Symbol$for = Symbol.for("nodejs.util.inspect.custom"), (_Context2 = class _Context {
+    static is(value) {
+      return !!value?.[_Context.is];
+    }
+    static ensureInternal() {
+      const ctx = this.prototype || this;
+      if (Object.prototype.hasOwnProperty.call(ctx, symbols$1.internal)) {
+        return ctx[symbols$1.internal];
+      }
+      const parent = _Context.ensureInternal.call(Object.getPrototypeOf(this));
+      return ctx[symbols$1.internal] = Object.create(parent);
+    }
+    static resolveInject(ctx, name) {
+      let internal = ctx[symbols$1.internal][name];
+      while (internal?.type === "alias") {
+        name = internal.name;
+        internal = ctx[symbols$1.internal][name];
+      }
+      return [name, internal];
+    }
+    static associate(object, name) {
+      return new Proxy(object, {
+        get(target, key, receiver) {
+          if (typeof key === "symbol" || key in target) return Reflect.get(target, key, receiver);
+          const caller = receiver[symbols$1.origin];
+          if (!caller?.[symbols$1.internal][`${name}.${key}`]) return Reflect.get(target, key, receiver);
+          return caller.get(`${name}.${key}`);
+        },
+        set(target, key, value, receiver) {
+          if (typeof key === "symbol" || key in target) return Reflect.set(target, key, value, receiver);
+          const caller = receiver[symbols$1.origin];
+          if (!caller?.[symbols$1.internal][`${name}.${key}`]) return Reflect.set(target, key, value, receiver);
+          caller[`${name}.${key}`] = value;
+          return true;
+        }
+      });
+    }
+    constructor(config) {
+      const self = new Proxy(this, _Context.handler);
+      config = resolveConfig$1(this.constructor, config);
+      self[symbols$1.isolate] = /* @__PURE__ */Object.create(null);
+      self[symbols$1.intercept] = /* @__PURE__ */Object.create(null);
+      self.root = self;
+      self.mixin("scope", ["config", "runtime", "effect", "collect", "accept", "decline"]);
+      self.mixin("registry", ["using", "inject", "plugin", "dispose"]);
+      self.mixin("lifecycle", ["on", "once", "off", "after", "parallel", "emit", "serial", "bail", "start", "stop"]);
+      self.provide("registry", new Registry$1(self, config), true);
+      self.provide("lifecycle", new Lifecycle$1(self), true);
+      const attach = /* @__PURE__ */__name$g(internal => {
+        if (!internal) return;
+        attach(Object.getPrototypeOf(internal));
+        for (const key of Object.getOwnPropertyNames(internal)) {
+          const constructor = internal[key]["prototype"]?.constructor;
+          if (!constructor) continue;
+          self[internal[key]["key"]] = new constructor(self, config);
+          (0, import_cosmokit5.defineProperty)(self[internal[key]["key"]], symbols$1.origin, self);
+        }
+      }, "attach");
+      attach(this[symbols$1.internal]);
+      return self;
+    }
+    [_Symbol$for]() {
+      return `Context <${this.name}>`;
+    }
+    get name() {
+      let runtime = this.runtime;
+      while (runtime && !runtime.name) {
+        runtime = runtime.parent.runtime;
+      }
+      return runtime?.name;
+    }
+    get events() {
+      return this.lifecycle;
+    }
+    /** @deprecated */
+    get state() {
+      return this.scope;
+    }
+    get(name) {
+      const internal = this[symbols$1.internal][name];
+      if (internal?.type !== "service") return;
+      const value = this.root[this[symbols$1.isolate][name]];
+      if (!value || typeof value !== "object" && typeof value !== "function") return value;
+      if (isUnproxyable$1(value)) {
+        (0, import_cosmokit5.defineProperty)(value, symbols$1.origin, this);
+        return value;
+      }
+      return createTraceable$1(this, value);
+    }
+    provide(name, value, builtin) {
+      const internal = _Context.ensureInternal.call(this.root);
+      if (name in internal) return;
+      const key = Symbol(name);
+      internal[name] = {
+        type: "service",
+        builtin
+      };
+      this.root[key] = value;
+      this.root[_Context.isolate][name] = key;
+    }
+    accessor(name, options) {
+      const internal = _Context.ensureInternal.call(this.root);
+      internal[name] ||= {
+        type: "accessor",
+        ...options
+      };
+    }
+    alias(name, aliases) {
+      const internal = _Context.ensureInternal.call(this.root);
+      for (const key of aliases) {
+        internal[key] ||= {
+          type: "alias",
+          name
+        };
+      }
+    }
+    mixin(name, mixins) {
+      for (const key of mixins) {
+        this.accessor(key, {
+          get() {
+            const service = this[name];
+            if ((0, import_cosmokit5.isNullable)(service)) return service;
+            const value = Reflect.get(service, key);
+            if (typeof value !== "function") return value;
+            return value.bind(service);
+          },
+          set(value) {
+            return Reflect.set(this[name], key, value);
+          }
+        });
+      }
+    }
+    extend(meta = {}) {
+      return Object.assign(Object.create(this), meta);
+    }
+    isolate(name, label) {
+      const shadow = Object.create(this[symbols$1.isolate]);
+      shadow[name] = label ?? Symbol(name);
+      return this.extend({
+        [symbols$1.isolate]: shadow
+      });
+    }
+    intercept(name, config) {
+      const intercept = Object.create(this[symbols$1.intercept]);
+      intercept[name] = config;
+      return this.extend({
+        [symbols$1.intercept]: intercept
+      });
+    }
+  }, __name$g(_Context2, "Context"), _defineProperty(_Context2, "origin", symbols$1.origin), _defineProperty(_Context2, "events", symbols$1.events), _defineProperty(_Context2, "static", symbols$1.static), _defineProperty(_Context2, "filter", symbols$1.filter), _defineProperty(_Context2, "expose", symbols$1.expose), _defineProperty(_Context2, "isolate", symbols$1.isolate), _defineProperty(_Context2, "internal", symbols$1.internal), _defineProperty(_Context2, "intercept", symbols$1.intercept), _defineProperty(_Context2, "current", _Context2.origin), (() => {
+    _Context2.is[Symbol.toPrimitive] = () => Symbol.for("cordis.is");
+    _Context2.prototype[_Context2.is] = true;
+  })(), _defineProperty(_Context2, "handler", {
+    get(target, prop, ctx) {
+      if (typeof prop !== "string") return Reflect.get(target, prop, ctx);
+      const checkInject = /* @__PURE__ */__name$g(name2 => {
+        if (Reflect.has(target, name2)) return;
+        if (["prototype", "then", "registry", "lifecycle"].includes(name2)) return;
+        if (name2[0] === "$" || name2[0] === "_") return;
+        if (!ctx.runtime.plugin) return;
+        let parent = ctx;
+        while (parent.runtime.plugin) {
+          for (const key of parent.runtime.inject) {
+            if (name2 === _Context2.resolveInject(parent, key)[0]) return;
+          }
+          parent = parent.scope.parent;
+        }
+        ctx.emit("internal/warning", new Error(`property ${name2} is not registered, declare it as \`inject\` to suppress this warning`));
+      }, "checkInject");
+      const [name, internal] = _Context2.resolveInject(ctx, prop);
+      if (!internal) {
+        checkInject(name);
+        return Reflect.get(target, name, ctx);
+      }
+      if (internal.type === "accessor") {
+        return internal.get.call(ctx);
+      } else if (internal.type === "service") {
+        if (!internal.builtin) checkInject(name);
+        return ctx.get(name);
+      }
+    },
+    set(target, prop, value, ctx) {
+      if (typeof prop !== "string") return Reflect.set(target, prop, value, ctx);
+      const [name, internal] = _Context2.resolveInject(ctx, prop);
+      if (!internal) return Reflect.set(target, name, value, ctx);
+      if (internal.type === "accessor") {
+        if (!internal.set) return false;
+        return internal.set.call(ctx, value);
+      }
+      const key = ctx[symbols$1.isolate][name];
+      const oldValue = ctx.root[key];
+      if (oldValue === value) return true;
+      if (value && oldValue) {
+        throw new Error(`service ${name} has been registered`);
+      }
+      if (value) {
+        ctx.on("dispose", () => ctx[name] = void 0);
+      }
+      if (isUnproxyable$1(value)) {
+        ctx.emit("internal/warning", new Error(`service ${name} is an unproxyable object, which may lead to unexpected behavior`));
+      }
+      const self = /* @__PURE__ */Object.create(null);
+      self[symbols$1.filter] = ctx2 => {
+        return ctx[symbols$1.isolate][name] === ctx2[symbols$1.isolate][name];
+      };
+      ctx.root.emit(self, "internal/before-service", name, value);
+      ctx.root[key] = value;
+      if (value instanceof Object) {
+        (0, import_cosmokit5.defineProperty)(value, symbols$1.origin, ctx);
+      }
+      ctx.root.emit(self, "internal/service", name, oldValue);
+      return true;
+    }
+  }), _Context2));
+  Context$2.prototype[Context$2.internal] = /* @__PURE__ */Object.create(null);
+
+  // src/service.ts
+  var import_cosmokit6 = require$$1;
+  var Service$1 = (_symbols$1$origin = symbols$1.origin, _symbols$1$filter = symbols$1.filter, _symbols$1$setup = symbols$1.setup, _symbols$1$extend = symbols$1.extend, _Symbol$hasInstance = Symbol.hasInstance, (_Service2 = class _Service {
+    start() {}
+    stop() {}
+    constructor(...args) {
+      _defineProperty(this, "ctx", void 0);
+      _defineProperty(this, _symbols$1$origin, void 0);
+      _defineProperty(this, "name", void 0);
+      _defineProperty(this, "config", void 0);
+      let _ctx, name, immediate, config;
+      if (Context$2.is(args[0])) {
+        _ctx = args[0];
+        if (typeof args[1] === "string") {
+          name = args[1];
+          immediate = args[2];
+        } else {
+          config = args[1];
+        }
+      } else {
+        config = args[0];
+      }
+      name ??= this.constructor[symbols$1.provide];
+      immediate ??= this.constructor[symbols$1.immediate];
+      let self = this;
+      if (self[symbols$1.invoke]) {
+        self = createCallable$1(name, joinPrototype$1(Object.getPrototypeOf(this), Function.prototype));
+      }
+      if (_ctx) {
+        self.ctx = _ctx;
+      } else {
+        self[symbols$1.setup]();
+      }
+      self.name = name;
+      self.config = config;
+      (0, import_cosmokit6.defineProperty)(self, symbols$1.origin, self.ctx);
+      self.ctx.provide(name);
+      self.ctx.runtime.name = name;
+      if (immediate) {
+        if (_ctx) self[symbols$1.expose] = name;else self.ctx[name] = self;
+      }
+      self.ctx.on("ready", async () => {
+        await Promise.resolve();
+        await self.start();
+        if (!immediate) self.ctx[name] = self;
+      });
+      self.ctx.on("dispose", () => self.stop());
+      return Context$2.associate(self, name);
+    }
+    [_symbols$1$filter](ctx) {
+      return ctx[symbols$1.isolate][this.name] === this.ctx[symbols$1.isolate][this.name];
+    }
+    [_symbols$1$setup]() {
+      this.ctx = new Context$2();
+    }
+    [_symbols$1$extend](props) {
+      const caller = this[symbols$1.origin];
+      let self;
+      if (this[_Service.invoke]) {
+        self = createCallable$1(this.name, this);
+      } else {
+        self = Object.create(this);
+      }
+      (0, import_cosmokit6.defineProperty)(self, symbols$1.origin, caller);
+      return Context$2.associate(Object.assign(self, props), this.name);
+    }
+    static [_Symbol$hasInstance](instance) {
+      let constructor = instance.constructor;
+      while (constructor) {
+        if (constructor === this) return true;
+        constructor = Object.getPrototypeOf(constructor);
+      }
+      return false;
+    }
+  }, __name$g(_Service2, "Service"), _defineProperty(_Service2, "setup", symbols$1.setup), _defineProperty(_Service2, "invoke", symbols$1.invoke), _defineProperty(_Service2, "extend", symbols$1.extend), _defineProperty(_Service2, "provide", symbols$1.provide), _defineProperty(_Service2, "immediate", symbols$1.immediate), _Service2));
+  var __create = Object.create;
+  var __defProp$f = Object.defineProperty;
+  var __getOwnPropDesc$4 = Object.getOwnPropertyDescriptor;
+  var __getOwnPropNames$6 = Object.getOwnPropertyNames;
+  var __getProtoOf = Object.getPrototypeOf;
+  var __hasOwnProp$4 = Object.prototype.hasOwnProperty;
+  var __name$f = (target, value) => __defProp$f(target, "name", {
+    value,
+    configurable: true
+  });
+  var __export$4 = (target, all) => {
+    for (var name in all) __defProp$f(target, name, {
+      get: all[name],
+      enumerable: true
+    });
+  };
+  var __copyProps$4 = (to, from, except, desc) => {
+    if (from && typeof from === "object" || typeof from === "function") {
+      for (let key of __getOwnPropNames$6(from)) if (!__hasOwnProp$4.call(to, key) && key !== except) __defProp$f(to, key, {
+        get: () => from[key],
+        enumerable: !(desc = __getOwnPropDesc$4(from, key)) || desc.enumerable
+      });
+    }
+    return to;
+  };
+  var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps$4(
+  // If the importer is in node compatibility mode or this is not an ESM
+  // file that has been converted to a CommonJS file using a Babel-
+  // compatible transform (i.e. "__esModule" has not been set), then set
+  // "default" to the CommonJS "module.exports" for node compatibility.
+  isNodeMode || !mod || !mod.__esModule ? __defProp$f(target, "default", {
+    value: mod,
+    enumerable: true
+  }) : target, mod));
+  var __toCommonJS$4 = mod => __copyProps$4(__defProp$f({}, "__esModule", {
+    value: true
+  }), mod);
+
+  // src/index.ts
+  var src_exports$4 = {};
+  __export$4(src_exports$4, {
+    Logger: () => import_levi_reggol.default,
+    LoggerService: () => LoggerService$1,
+    default: () => src_default$4
+  });
+  var lib$6 = __toCommonJS$4(src_exports$4);
+  var import_core$1 = lib$7;
+  var import_levi_reggol = __toESM(lib$b, 1);
+  var LoggerService$1 = (_import_core$1$Servic = import_core$1.Service.provide, _import_core$1$Servic2 = import_core$1.Service.invoke, (_LoggerService2 = class _LoggerService extends import_core$1.Service {
+    constructor(ctx) {
+      super(ctx, "logger", true);
+      ctx.on("internal/info", function (format, ...args) {
+        this.logger("app").info(format, ...args);
+      });
+      ctx.on("internal/error", function (format, ...args) {
+        this.logger("app").error(format, ...args);
+      });
+      ctx.on("internal/warning", function (format, ...args) {
+        this.logger("app").warn(format, ...args);
+      });
+    }
+    [_import_core$1$Servic2](name) {
+      return new import_levi_reggol.default(name, {
+        [import_core$1.Context.origin]: this
+      });
+    }
+  }, __name$f(_LoggerService2, "LoggerService"), _defineProperty(_LoggerService2, _import_core$1$Servic, "logger"), (() => {
+    for (const type of ["success", "error", "info", "warn", "debug", "extend"]) {
+      _LoggerService2.prototype[type] = function (...args) {
+        const caller = this[import_core$1.Context.origin];
+        return this(caller.name)[type](...args);
+      };
+    }
+  })(), _LoggerService2));
+  var src_default$4 = LoggerService$1;
+  var __defProp$e = Object.defineProperty;
+  var __getOwnPropDesc$3 = Object.getOwnPropertyDescriptor;
+  var __getOwnPropNames$5 = Object.getOwnPropertyNames;
+  var __hasOwnProp$3 = Object.prototype.hasOwnProperty;
+  var __name$e = (target, value) => __defProp$e(target, "name", {
+    value,
+    configurable: true
+  });
+  var __export$3 = (target, all) => {
+    for (var name in all) __defProp$e(target, name, {
+      get: all[name],
+      enumerable: true
+    });
+  };
+  var __copyProps$3 = (to, from, except, desc) => {
+    if (from && typeof from === "object" || typeof from === "function") {
+      for (let key of __getOwnPropNames$5(from)) if (!__hasOwnProp$3.call(to, key) && key !== except) __defProp$e(to, key, {
+        get: () => from[key],
+        enumerable: !(desc = __getOwnPropDesc$3(from, key)) || desc.enumerable
+      });
+    }
+    return to;
+  };
+  var __toCommonJS$3 = mod => __copyProps$3(__defProp$e({}, "__esModule", {
+    value: true
+  }), mod);
+
+  // src/index.ts
+  var src_exports$3 = {};
+  __export$3(src_exports$3, {
+    TimerService: () => TimerService$1,
+    default: () => src_default$3
+  });
+  var lib$5 = __toCommonJS$3(src_exports$3);
+  var import_core = lib$7;
+  var import_cosmokit$2 = require$$1;
+  var TimerService$1 = (_TimerService = class TimerService extends import_core.Service {
+    constructor(ctx) {
+      super(ctx, "timer", true);
+      ctx.mixin("timer", ["setTimeout", "setInterval", "sleep", "throttle", "debounce"]);
+    }
+    setTimeout(callback, delay) {
+      const dispose = this[import_core.Context.origin].effect(() => {
+        const timer = setTimeout(() => {
+          dispose();
+          callback();
+        }, delay);
+        return () => clearTimeout(timer);
+      });
+      return dispose;
+    }
+    setInterval(callback, delay) {
+      return this[import_core.Context.origin].effect(() => {
+        const timer = setInterval(callback, delay);
+        return () => clearInterval(timer);
+      });
+    }
+    sleep(delay) {
+      const caller = this[import_core.Context.origin];
+      return new Promise((resolve, reject) => {
+        const dispose1 = this.setTimeout(() => {
+          dispose1();
+          dispose2();
+          resolve();
+        }, delay);
+        const dispose2 = caller.on("dispose", () => {
+          dispose1();
+          dispose2();
+          reject(new Error("Context has been disposed"));
+        });
+      });
+    }
+    createWrapper(callback, isDisposed = false) {
+      const caller = this[import_core.Context.origin];
+      caller.scope.assertActive();
+      let timer;
+      const dispose = /* @__PURE__ */__name$e(() => {
+        isDisposed = true;
+        (0, import_cosmokit$2.remove)(caller.scope.disposables, dispose);
+        clearTimeout(timer);
+      }, "dispose");
+      const wrapper = /* @__PURE__ */__name$e((...args) => {
+        clearTimeout(timer);
+        timer = callback(args, () => !isDisposed && caller.scope.isActive);
+      }, "wrapper");
+      wrapper.dispose = dispose;
+      caller.scope.disposables.push(dispose);
+      return wrapper;
+    }
+    throttle(callback, delay, noTrailing) {
+      let lastCall = -Infinity;
+      const execute = /* @__PURE__ */__name$e((...args) => {
+        lastCall = Date.now();
+        callback(...args);
+      }, "execute");
+      return this.createWrapper((args, isActive) => {
+        const now = Date.now();
+        const remaining = delay - (now - lastCall);
+        if (remaining <= 0) {
+          execute(...args);
+        } else if (isActive()) {
+          return setTimeout(execute, remaining, ...args);
+        }
+      }, noTrailing);
+    }
+    debounce(callback, delay) {
+      return this.createWrapper((args, isActive) => {
+        if (!isActive()) return;
+        return setTimeout(callback, delay, ...args);
+      });
+    }
+  }, __name$e(_TimerService, "TimerService"), _TimerService);
+  var src_default$3 = TimerService$1;
+  var __defProp$d = Object.defineProperty;
+  var __getOwnPropNames$4 = Object.getOwnPropertyNames;
+  var __name$d = (target, value) => __defProp$d(target, "name", {
+    value,
+    configurable: true
+  });
+  var __commonJS$1 = (cb, mod) => function __require() {
+    return mod || (0, cb[__getOwnPropNames$4(cb)[0]])((mod = {
+      exports: {}
+    }).exports, mod), mod.exports;
+  };
+  var require_src$1 = __commonJS$1({
+    "packages/schemastery/packages/core/src/index.ts"(exports, module) {
+      var kSchema = Symbol.for("schemastery");
+      globalThis.__schemastery_index__ ??= 0;
+      var Schema = /* @__PURE__ */__name$d(function (options) {
+        const schema = /* @__PURE__ */__name$d(function (data, options2) {
+          return Schema.resolve(data, schema, options2)[0];
+        }, "schema");
+        if (options.refs) {
+          const refs2 = mapValues(options.refs, options2 => new Schema(options2));
+          const getRef = /* @__PURE__ */__name$d(uid => refs2[uid], "getRef");
+          for (const key in refs2) {
+            const options2 = refs2[key];
+            options2.sKey = getRef(options2.sKey);
+            options2.inner = getRef(options2.inner);
+            options2.list = options2.list && options2.list.map(getRef);
+            options2.dict = options2.dict && mapValues(options2.dict, getRef);
+          }
+          return refs2[options.uid];
+        }
+        Object.assign(schema, options);
+        if (typeof schema.callback === "string") {
+          try {
+            schema.callback = new Function("return " + schema.callback)();
+          } catch {}
+        }
+        Object.defineProperty(schema, "uid", {
+          value: globalThis.__schemastery_index__++
+        });
+        Object.setPrototypeOf(schema, Schema.prototype);
+        schema.meta ||= {};
+        schema.toString = schema.toString.bind(schema);
+        return schema;
+      }, "Schema");
+      Schema.prototype = Object.create(Function.prototype);
+      Schema.prototype[kSchema] = true;
+      var refs;
+      Schema.prototype.toJSON = /* @__PURE__ */__name$d(function toJSON() {
+        if (refs) {
+          refs[this.uid] ??= JSON.parse(JSON.stringify({
+            ...this
+          }));
+          return this.uid;
+        }
+        refs = {
+          [this.uid]: {
+            ...this
+          }
+        };
+        refs[this.uid] = JSON.parse(JSON.stringify({
+          ...this
+        }));
+        const result = {
+          uid: this.uid,
+          refs
+        };
+        refs = void 0;
+        return result;
+      }, "toJSON");
+      Schema.prototype.set = /* @__PURE__ */__name$d(function set(key, value) {
+        this.dict[key] = value;
+        return this;
+      }, "set");
+      Schema.prototype.push = /* @__PURE__ */__name$d(function push(value) {
+        this.list.push(value);
+        return this;
+      }, "push");
+      function mergeDesc(original, messages) {
+        const result = typeof original === "string" ? {
+          "": original
+        } : {
+          ...original
+        };
+        for (const locale in messages) {
+          const value = messages[locale];
+          if (value?.$description || value?.$desc) {
+            result[locale] = value.$description || value.$desc;
+          } else if (typeof value === "string") {
+            result[locale] = value;
+          }
+        }
+        return result;
+      }
+      __name$d(mergeDesc, "mergeDesc");
+      function getInner(value) {
+        return value?.$value ?? value?.$inner;
+      }
+      __name$d(getInner, "getInner");
+      function extractKeys(data) {
+        return Object.fromEntries(Object.entries(data ?? {}).filter(([key]) => !key.startsWith("$")));
+      }
+      __name$d(extractKeys, "extractKeys");
+      Schema.prototype.i18n = /* @__PURE__ */__name$d(function i18n(messages) {
+        const schema = Schema(this);
+        schema.meta.description = mergeDesc(schema.meta.description, messages);
+        if (schema.dict) {
+          schema.dict = mapValues(schema.dict, (inner, key) => {
+            return inner.i18n(mapValues(messages, data => getInner(data)?.[key] ?? data?.[key]));
+          });
+        }
+        if (schema.list) {
+          schema.list = schema.list.map((inner, index) => {
+            return inner.i18n(mapValues(messages, (data = {}) => {
+              if (Array.isArray(getInner(data))) return getInner(data)[index];
+              if (Array.isArray(data)) return data[index];
+              return extractKeys(data);
+            }));
+          });
+        }
+        if (schema.inner) {
+          schema.inner = schema.inner.i18n(mapValues(messages, data => {
+            if (getInner(data)) return getInner(data);
+            return extractKeys(data);
+          }));
+        }
+        if (schema.sKey) {
+          schema.sKey = schema.sKey.i18n(mapValues(messages, data => data?.$key));
+        }
+        return schema;
+      }, "i18n");
+      Schema.prototype.extra = /* @__PURE__ */__name$d(function extra(key, value) {
+        const schema = Schema(this);
+        schema.meta = {
+          ...schema.meta,
+          [key]: value
+        };
+        return schema;
+      }, "extra");
+      for (const key of ["required", "disabled", "collapse", "hidden", "loose"]) {
+        Object.assign(Schema.prototype, {
+          [key](value = true) {
+            const schema = Schema(this);
+            schema.meta = {
+              ...schema.meta,
+              [key]: value
+            };
+            return schema;
+          }
+        });
+      }
+      Schema.prototype.deprecated = /* @__PURE__ */__name$d(function deprecated() {
+        const schema = Schema(this);
+        schema.meta.badges ||= [];
+        schema.meta.badges.push({
+          text: "deprecated",
+          type: "danger"
+        });
+        return schema;
+      }, "deprecated");
+      Schema.prototype.experimental = /* @__PURE__ */__name$d(function experimental() {
+        const schema = Schema(this);
+        schema.meta.badges ||= [];
+        schema.meta.badges.push({
+          text: "experimental",
+          type: "warning"
+        });
+        return schema;
+      }, "experimental");
+      Schema.prototype.pattern = /* @__PURE__ */__name$d(function pattern(regexp) {
+        const schema = Schema(this);
+        const pattern2 = pick(regexp, ["source", "flags"]);
+        schema.meta = {
+          ...schema.meta,
+          pattern: pattern2
+        };
+        return schema;
+      }, "pattern");
+      Schema.prototype.simplify = /* @__PURE__ */__name$d(function simplify(value) {
+        if (deepEqual(value, this.meta.default)) return null;
+        if (isNullable(value)) return value;
+        if (this.type === "object" || this.type === "dict") {
+          const result = {};
+          for (const key in value) {
+            const schema = this.type === "object" ? this.dict[key] : this.inner;
+            const item = schema?.simplify(value[key]);
+            if (!isNullable(item)) result[key] = item;
+          }
+          return result;
+        } else if (this.type === "array" || this.type === "tuple") {
+          const result = [];
+          value.forEach((value2, index) => {
+            const schema = this.type === "array" ? this.inner : this.list[index];
+            const item = schema ? schema.simplify(value2) : value2;
+            result.push(item);
+          });
+          return result;
+        } else if (this.type === "intersect") {
+          const result = {};
+          for (const item of this.list) {
+            Object.assign(result, item.simplify(value));
+          }
+          return result;
+        } else if (this.type === "union") {
+          for (const schema of this.list) {
+            try {
+              Schema.resolve(value, schema);
+              return schema.simplify(value);
+            } catch {}
+          }
+        }
+        return value;
+      }, "simplify");
+      Schema.prototype.toString = /* @__PURE__ */__name$d(function toString(inline) {
+        return formatters[this.type]?.(this, inline) ?? `Schema<${this.type}>`;
+      }, "toString");
+      Schema.prototype.role = /* @__PURE__ */__name$d(function role(role, extra) {
+        const schema = Schema(this);
+        schema.meta = {
+          ...schema.meta,
+          role,
+          extra
+        };
+        return schema;
+      }, "role");
+      for (const key of ["default", "link", "comment", "description", "max", "min", "step"]) {
+        Object.assign(Schema.prototype, {
+          [key](value) {
+            const schema = Schema(this);
+            schema.meta = {
+              ...schema.meta,
+              [key]: value
+            };
+            return schema;
+          }
+        });
+      }
+      var resolvers = {};
+      Schema.extend = /* @__PURE__ */__name$d(function extend(type, resolve) {
+        resolvers[type] = resolve;
+      }, "extend");
+      Schema.resolve = /* @__PURE__ */__name$d(function resolve(data, schema, options = {}, strict = false) {
+        if (!schema) return [data];
+        if (isNullable(data)) {
+          if (schema.meta.required) throw new TypeError(`missing required value`);
+          let current = schema;
+          let fallback = schema.meta.default;
+          while (current?.type === "intersect" && isNullable(fallback)) {
+            current = current.list[0];
+            fallback = current?.meta.default;
+          }
+          if (isNullable(fallback)) return [data];
+          data = clone(fallback);
+        }
+        const callback = resolvers[schema.type];
+        if (!callback) throw new TypeError(`unsupported type "${schema.type}"`);
+        try {
+          return callback(data, schema, options, strict);
+        } catch (error) {
+          if (!schema.meta.loose) throw error;
+          return [schema.meta.default];
+        }
+      }, "resolve");
+      Schema.from = /* @__PURE__ */__name$d(function from(source) {
+        if (isNullable(source)) {
+          return Schema.any();
+        } else if (["string", "number", "boolean"].includes(typeof source)) {
+          return Schema.const(source).required();
+        } else if (source[kSchema]) {
+          return source;
+        } else if (typeof source === "function") {
+          switch (source) {
+            case String:
+              return Schema.string().required();
+            case Number:
+              return Schema.number().required();
+            case Boolean:
+              return Schema.boolean().required();
+            case Function:
+              return Schema.function().required();
+            default:
+              return Schema.is(source).required();
+          }
+        } else {
+          throw new TypeError(`cannot infer schema from ${source}`);
+        }
+      }, "from");
+      Schema.natural = /* @__PURE__ */__name$d(function natural() {
+        return Schema.number().step(1).min(0);
+      }, "natural");
+      Schema.percent = /* @__PURE__ */__name$d(function percent() {
+        return Schema.number().step(0.01).min(0).max(1).role("slider");
+      }, "percent");
+      Schema.date = /* @__PURE__ */__name$d(function date() {
+        return Schema.union([Schema.is(Date), Schema.transform(Schema.string().role("datetime"), value => {
+          const date2 = new Date(value);
+          if (isNaN(+date2)) throw new TypeError(`invalid date "${value}"`);
+          return date2;
+        }, true)]);
+      }, "date");
+      Schema.extend("any", data => {
+        return [data];
+      });
+      Schema.extend("never", data => {
+        throw new TypeError(`expected nullable but got ${data}`);
+      });
+      Schema.extend("const", (data, {
+        value
+      }) => {
+        if (data === value) return [value];
+        throw new TypeError(`expected ${value} but got ${data}`);
+      });
+      function checkWithinRange(data, meta, description) {
+        const {
+          max = Infinity,
+          min = -Infinity
+        } = meta;
+        if (data > max) throw new TypeError(`expected ${description} <= ${max} but got ${data}`);
+        if (data < min) throw new TypeError(`expected ${description} >= ${min} but got ${data}`);
+      }
+      __name$d(checkWithinRange, "checkWithinRange");
+      Schema.extend("string", (data, {
+        meta
+      }) => {
+        if (typeof data !== "string") throw new TypeError(`expected string but got ${data}`);
+        if (meta.pattern) {
+          const regexp = new RegExp(meta.pattern.source, meta.pattern.flags);
+          if (!regexp.test(data)) throw new TypeError(`expect string to match regexp ${regexp}`);
+        }
+        checkWithinRange(data.length, meta, "string length");
+        return [data];
+      });
+      function decimalShift(data, digits) {
+        const str = data.toString();
+        if (str.includes("e")) return data * Math.pow(10, digits);
+        const index = str.indexOf(".");
+        if (index === -1) return data * Math.pow(10, digits);
+        const frac = str.slice(index + 1);
+        const integer = str.slice(0, index);
+        if (frac.length <= digits) return +(integer + frac.padEnd(digits, "0"));
+        return +(integer + frac.slice(0, digits) + "." + frac.slice(digits));
+      }
+      __name$d(decimalShift, "decimalShift");
+      function isMultipleOf(data, min, step) {
+        step = Math.abs(step);
+        if (!/^\d+\.\d+$/.test(step.toString())) {
+          return (data - min) % step === 0;
+        }
+        const index = step.toString().indexOf(".");
+        const digits = step.toString().slice(index + 1).length;
+        return Math.abs(decimalShift(data, digits) - decimalShift(min, digits)) % decimalShift(step, digits) === 0;
+      }
+      __name$d(isMultipleOf, "isMultipleOf");
+      Schema.extend("number", (data, {
+        meta
+      }) => {
+        if (typeof data !== "number") throw new TypeError(`expected number but got ${data}`);
+        checkWithinRange(data, meta, "number");
+        const {
+          step
+        } = meta;
+        if (step && !isMultipleOf(data, meta.min ?? 0, step)) {
+          throw new TypeError(`expected number multiple of ${step} but got ${data}`);
+        }
+        return [data];
+      });
+      Schema.extend("boolean", data => {
+        if (typeof data === "boolean") return [data];
+        throw new TypeError(`expected boolean but got ${data}`);
+      });
+      Schema.extend("bitset", (data, {
+        bits,
+        meta
+      }) => {
+        let value = 0,
+          keys = [];
+        if (typeof data === "number") {
+          value = data;
+          for (const key in bits) {
+            if (data & bits[key]) {
+              keys.push(key);
+            }
+          }
+        } else if (Array.isArray(data)) {
+          keys = data;
+          for (const key of keys) {
+            if (typeof key !== "string") throw new TypeError(`expected string but got ${key}`);
+            if (key in bits) value |= bits[key];
+          }
+        } else {
+          throw new TypeError(`expected number or array but got ${data}`);
+        }
+        if (value === meta.default) return [value];
+        return [value, keys];
+      });
+      Schema.extend("function", data => {
+        if (typeof data === "function") return [data];
+        throw new TypeError(`expected function but got ${data}`);
+      });
+      Schema.extend("is", (data, {
+        callback
+      }) => {
+        if (data instanceof callback) return [data];
+        throw new TypeError(`expected ${callback.name} but got ${data}`);
+      });
+      function property(data, key, schema, options) {
+        try {
+          const [value, adapted] = Schema.resolve(data[key], schema, options);
+          if (adapted !== void 0) data[key] = adapted;
+          return value;
+        } catch (e) {
+          if (!options?.autofix) throw e;
+          delete data[key];
+          return schema.meta.default;
+        }
+      }
+      __name$d(property, "property");
+      Schema.extend("array", (data, {
+        inner,
+        meta
+      }, options) => {
+        if (!Array.isArray(data)) throw new TypeError(`expected array but got ${data}`);
+        checkWithinRange(data.length, meta, "array length");
+        return [data.map((_, index) => property(data, index, inner, options))];
+      });
+      Schema.extend("dict", (data, {
+        inner,
+        sKey
+      }, options, strict) => {
+        if (!isPlainObject(data)) throw new TypeError(`expected object but got ${data}`);
+        const result = {};
+        for (const key in data) {
+          let rKey;
+          try {
+            rKey = Schema.resolve(key, sKey)[0];
+          } catch (error) {
+            if (strict) continue;
+            throw error;
+          }
+          result[rKey] = property(data, key, inner, options);
+          data[rKey] = data[key];
+          if (key !== rKey) delete data[key];
+        }
+        return [result];
+      });
+      Schema.extend("tuple", (data, {
+        list
+      }, options, strict) => {
+        if (!Array.isArray(data)) throw new TypeError(`expected array but got ${data}`);
+        const result = list.map((inner, index) => property(data, index, inner, options));
+        if (strict) return [result];
+        result.push(...data.slice(list.length));
+        return [result];
+      });
+      function merge(result, data) {
+        for (const key in data) {
+          if (key in result) continue;
+          result[key] = data[key];
+        }
+      }
+      __name$d(merge, "merge");
+      Schema.extend("object", (data, {
+        dict
+      }, options, strict) => {
+        if (!isPlainObject(data)) throw new TypeError(`expected object but got ${data}`);
+        const result = {};
+        for (const key in dict) {
+          const value = property(data, key, dict[key], options);
+          if (!isNullable(value) || key in data) {
+            result[key] = value;
+          }
+        }
+        if (!strict) merge(result, data);
+        return [result];
+      });
+      Schema.extend("union", (data, {
+        list,
+        toString
+      }, options, strict) => {
+        for (const inner of list) {
+          try {
+            return Schema.resolve(data, inner, options, strict);
+          } catch (error) {}
+        }
+        throw new TypeError(`expected ${toString()} but got ${JSON.stringify(data)}`);
+      });
+      Schema.extend("intersect", (data, {
+        list,
+        toString
+      }, options, strict) => {
+        let result;
+        for (const inner of list) {
+          const value = Schema.resolve(data, inner, options, true)[0];
+          if (isNullable(value)) continue;
+          if (isNullable(result)) {
+            result = value;
+          } else if (typeof result !== typeof value) {
+            throw new TypeError(`expected ${toString()} but got ${JSON.stringify(data)}`);
+          } else if (typeof value === "object") {
+            merge(result ??= {}, value);
+          } else if (result !== value) {
+            throw new TypeError(`expected ${toString()} but got ${JSON.stringify(data)}`);
+          }
+        }
+        if (!strict && isPlainObject(data)) merge(result, data);
+        return [result];
+      });
+      Schema.extend("transform", (data, {
+        inner,
+        callback,
+        preserve
+      }, options) => {
+        const [result, adapted = data] = Schema.resolve(data, inner, options, true);
+        if (preserve) {
+          return [callback(result)];
+        } else {
+          return [callback(result), callback(adapted)];
+        }
+      });
+      var formatters = {};
+      function defineMethod(name, keys, format) {
+        formatters[name] = format;
+        Object.assign(Schema, {
+          [name](...args) {
+            const schema = new Schema({
+              type: name
+            });
+            keys.forEach((key, index) => {
+              switch (key) {
+                case "sKey":
+                  schema.sKey = args[index] ?? Schema.string();
+                  break;
+                case "inner":
+                  schema.inner = Schema.from(args[index]);
+                  break;
+                case "list":
+                  schema.list = args[index].map(Schema.from);
+                  break;
+                case "dict":
+                  schema.dict = mapValues(args[index], Schema.from);
+                  break;
+                case "bits":
+                  {
+                    schema.bits = {};
+                    for (const key2 in args[index]) {
+                      if (typeof args[index][key2] !== "number") continue;
+                      schema.bits[key2] = args[index][key2];
+                    }
+                    break;
+                  }
+                case "callback":
+                  {
+                    schema.callback = args[index];
+                    schema.callback["toJSON"] ||= () => schema.callback.toString();
+                    break;
+                  }
+                default:
+                  schema[key] = args[index];
+              }
+            });
+            if (name === "object" || name === "dict") {
+              schema.meta.default = {};
+            } else if (name === "array" || name === "tuple") {
+              schema.meta.default = [];
+            } else if (name === "bitset") {
+              schema.meta.default = 0;
+            }
+            return schema;
+          }
+        });
+      }
+      __name$d(defineMethod, "defineMethod");
+      defineMethod("is", ["callback"], ({
+        callback
+      }) => callback.name);
+      defineMethod("any", [], () => "any");
+      defineMethod("never", [], () => "never");
+      defineMethod("const", ["value"], ({
+        value
+      }) => typeof value === "string" ? JSON.stringify(value) : value);
+      defineMethod("string", [], () => "string");
+      defineMethod("number", [], () => "number");
+      defineMethod("boolean", [], () => "boolean");
+      defineMethod("bitset", ["bits"], () => "bitset");
+      defineMethod("function", [], () => "function");
+      defineMethod("array", ["inner"], ({
+        inner
+      }) => `${inner.toString(true)}[]`);
+      defineMethod("dict", ["inner", "sKey"], ({
+        inner,
+        sKey
+      }) => `{ [key: ${sKey.toString()}]: ${inner.toString()} }`);
+      defineMethod("tuple", ["list"], ({
+        list
+      }) => `[${list.map(inner => inner.toString()).join(", ")}]`);
+      defineMethod("object", ["dict"], ({
+        dict
+      }) => {
+        if (Object.keys(dict).length === 0) return "{}";
+        return `{ ${Object.entries(dict).map(([key, inner]) => {
+          return `${key}${inner.meta.required ? "" : "?"}: ${inner.toString()}`;
+        }).join(", ")} }`;
+      });
+      defineMethod("union", ["list"], ({
+        list
+      }, inline) => {
+        const result = list.map(({
+          toString: format
+        }) => format()).join(" | ");
+        return inline ? `(${result})` : result;
+      });
+      defineMethod("intersect", ["list"], ({
+        list
+      }) => {
+        return `${list.map(inner => inner.toString(true)).join(" & ")}`;
+      });
+      defineMethod("transform", ["inner", "callback", "preserve"], ({
+        inner
+      }, isInner) => inner.toString(isInner));
+      module.exports = Schema;
+    }
+  });
+  var z2 = _exports.z = _exports.Schema = require_src$1();
+  var lib$4 = /*#__PURE__*/Object.freeze({
+    __proto__: null,
+    default: z2
+  });
+  var require$$3 = /*@__PURE__*/getAugmentedNamespace(lib$4);
+  (function (module, _Class, _core$Service$setup, _Class2) {
+    var __create = Object.create;
+    var __defProp = Object.defineProperty;
+    var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+    var __getOwnPropNames = Object.getOwnPropertyNames;
+    var __getProtoOf = Object.getPrototypeOf;
+    var __hasOwnProp = Object.prototype.hasOwnProperty;
+    var __name = (target, value) => __defProp(target, "name", {
+      value,
+      configurable: true
+    });
+    var __export = (target, all) => {
+      for (var name in all) __defProp(target, name, {
+        get: all[name],
+        enumerable: true
+      });
+    };
+    var __copyProps = (to, from, except, desc) => {
+      if (from && typeof from === "object" || typeof from === "function") {
+        for (let key of __getOwnPropNames(from)) if (!__hasOwnProp.call(to, key) && key !== except) __defProp(to, key, {
+          get: () => from[key],
+          enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable
+        });
+      }
+      return to;
+    };
+    var __reExport = (target, mod, secondTarget) => (__copyProps(target, mod, "default"), secondTarget && __copyProps(secondTarget, mod, "default"));
+    var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(
+    // If the importer is in node compatibility mode or this is not an ESM
+    // file that has been converted to a CommonJS file using a Babel-
+    // compatible transform (i.e. "__esModule" has not been set), then set
+    // "default" to the CommonJS "module.exports" for node compatibility.
+    isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", {
+      value: mod,
+      enumerable: true
+    }) : target, mod));
+    var __toCommonJS = mod => __copyProps(__defProp({}, "__esModule", {
+      value: true
+    }), mod);
+
+    // src/index.ts
+    var src_exports = {};
+    __export(src_exports, {
+      Context: () => Context2,
+      Logger: () => import_logger2.Logger,
+      Schema: () => import_schemastery.default,
+      Service: () => Service2,
+      TimerService: () => import_timer2.TimerService,
+      default: () => src_default,
+      z: () => import_schemastery.default
+    });
+    module.exports = __toCommonJS(src_exports);
+    __reExport(src_exports, lib$7, module.exports);
+    var import_logger2 = lib$6;
+    var import_timer2 = lib$5;
+    var import_schemastery = __toESM(require$$3, 1);
+
+    // src/base.ts
+    var core = __toESM(lib$7, 1);
+    var import_logger = lib$6;
+    var import_timer = lib$5;
+    var Context2 = (_Class = class Context2 extends core.Context {
+      constructor(config) {
+        super(config);
+        _defineProperty(this, "baseDir", void 0);
+        this.baseDir = globalThis.process?.cwd() || "";
+        this.provide("logger", void 0, true);
+        this.provide("timer", void 0, true);
+        this.plugin(import_logger.LoggerService);
+        this.plugin(import_timer.TimerService);
+      }
+    }, __name(_Class, "Context"), _Class);
+    var Service2 = (_core$Service$setup = core.Service.setup, (_Class2 = class Service2 extends core.Service {
+      constructor(...args) {
+        super(...args);
+        /** @deprecated use `this.ctx.logger` instead */
+        _defineProperty(this, "logger", void 0);
+        this.logger = this.ctx.logger(this.name);
+      }
+      [_core$Service$setup]() {
+        this.ctx = new Context2();
+      }
+    }, __name(_Class2, "Service"), _Class2));
+
+    // src/index.ts
+    function src_default() {}
+    __name(src_default, "default");
+  })(lib$8);
+  var libExports$2 = lib$8.exports;
+  var __defProp$c = Object.defineProperty;
+  var __getOwnPropDesc$2 = Object.getOwnPropertyDescriptor;
+  var __getOwnPropNames$3 = Object.getOwnPropertyNames;
+  var __hasOwnProp$2 = Object.prototype.hasOwnProperty;
+  var __name$c = (target, value) => __defProp$c(target, "name", {
+    value,
+    configurable: true
+  });
+  var __export$2 = (target, all) => {
+    for (var name in all) __defProp$c(target, name, {
+      get: all[name],
+      enumerable: true
+    });
+  };
+  var __copyProps$2 = (to, from, except, desc) => {
+    if (from && typeof from === "object" || typeof from === "function") {
+      for (let key of __getOwnPropNames$3(from)) if (!__hasOwnProp$2.call(to, key) && key !== except) __defProp$c(to, key, {
+        get: () => from[key],
+        enumerable: !(desc = __getOwnPropDesc$2(from, key)) || desc.enumerable
+      });
+    }
+    return to;
+  };
+  var __toCommonJS$2 = mod => __copyProps$2(__defProp$c({}, "__esModule", {
+    value: true
+  }), mod);
+
+  // src/index.ts
+  var src_exports$2 = {};
+  __export$2(src_exports$2, {
+    Channel: () => Channel$1,
+    Methods: () => Methods$1,
+    Opcode: () => Opcode$1,
+    Status: () => Status$1,
+    WebSocket: () => WebSocket$3
+  });
+  var lib$3 = __toCommonJS$2(src_exports$2);
+  function Field$1(name) {
+    return {
+      name
+    };
+  }
+  __name$c(Field$1, "Field");
+  function Method$1(name, fields) {
+    return {
+      name,
+      fields: fields.map(Field$1)
+    };
+  }
+  __name$c(Method$1, "Method");
+  var Methods$1 = {
+    "channel.get": Method$1("getChannel", ["channel_id", "guild_id"]),
+    "channel.list": Method$1("getChannelList", ["guild_id", "next"]),
+    "channel.create": Method$1("createChannel", ["guild_id", "data"]),
+    "channel.update": Method$1("updateChannel", ["channel_id", "data"]),
+    "channel.delete": Method$1("deleteChannel", ["channel_id"]),
+    "channel.mute": Method$1("muteChannel", ["channel_id", "guild_id", "enable"]),
+    "message.create": Method$1("createMessage", ["channel_id", "content"]),
+    "message.update": Method$1("editMessage", ["channel_id", "message_id", "content"]),
+    "message.delete": Method$1("deleteMessage", ["channel_id", "message_id"]),
+    "message.get": Method$1("getMessage", ["channel_id", "message_id"]),
+    "message.list": Method$1("getMessageList", ["channel_id", "next"]),
+    "reaction.create": Method$1("createReaction", ["channel_id", "message_id", "emoji"]),
+    "reaction.delete": Method$1("deleteReaction", ["channel_id", "message_id", "emoji", "user_id"]),
+    "reaction.clear": Method$1("clearReaction", ["channel_id", "message_id", "emoji"]),
+    "reaction.list": Method$1("getReactionList", ["channel_id", "message_id", "emoji", "next"]),
+    "guild.get": Method$1("getGuild", ["guild_id"]),
+    "guild.list": Method$1("getGuildList", ["next"]),
+    "guild.member.get": Method$1("getGuildMember", ["guild_id", "user_id"]),
+    "guild.member.list": Method$1("getGuildMemberList", ["guild_id", "next"]),
+    "guild.member.kick": Method$1("kickGuildMember", ["guild_id", "user_id", "permanent"]),
+    "guild.member.mute": Method$1("muteGuildMember", ["guild_id", "user_id", "duration", "reason"]),
+    "guild.member.role.set": Method$1("setGuildMemberRole", ["guild_id", "user_id", "role_id"]),
+    "guild.member.role.unset": Method$1("unsetGuildMemberRole", ["guild_id", "user_id", "role_id"]),
+    "guild.role.list": Method$1("getGuildRoleList", ["guild_id", "next"]),
+    "guild.role.create": Method$1("createGuildRole", ["guild_id", "data"]),
+    "guild.role.update": Method$1("updateGuildRole", ["guild_id", "role_id", "data"]),
+    "guild.role.delete": Method$1("deleteGuildRole", ["guild_id", "role_id"]),
+    "login.get": Method$1("getLogin", []),
+    "user.get": Method$1("getUser", ["user_id"]),
+    "user.channel.create": Method$1("createDirectChannel", ["user_id", "guild_id"]),
+    "friend.list": Method$1("getFriendList", ["next"]),
+    "friend.delete": Method$1("deleteFriend", ["user_id"]),
+    "friend.approve": Method$1("handleFriendRequest", ["message_id", "approve", "comment"]),
+    "guild.approve": Method$1("handleGuildRequest", ["message_id", "approve", "comment"]),
+    "guild.member.approve": Method$1("handleGuildMemberRequest", ["message_id", "approve", "comment"])
+  };
+  var Channel$1;
+  (Channel2 => {
+    (Type2 => {
+      Type2[Type2["TEXT"] = 0] = "TEXT";
+      Type2[Type2["DIRECT"] = 1] = "DIRECT";
+      Type2[Type2["VOICE"] = 2] = "VOICE";
+      Type2[Type2["CATEGORY"] = 3] = "CATEGORY";
+    })(Channel2.Type || (Channel2.Type = {}));
+  })(Channel$1 || (Channel$1 = {}));
+  var Status$1 = /* @__PURE__ */(Status2 => {
+    Status2[Status2["OFFLINE"] = 0] = "OFFLINE";
+    Status2[Status2["ONLINE"] = 1] = "ONLINE";
+    Status2[Status2["CONNECT"] = 2] = "CONNECT";
+    Status2[Status2["DISCONNECT"] = 3] = "DISCONNECT";
+    Status2[Status2["RECONNECT"] = 4] = "RECONNECT";
+    return Status2;
+  })(Status$1 || {});
+  var Opcode$1 = /* @__PURE__ */(Opcode2 => {
+    Opcode2[Opcode2["EVENT"] = 0] = "EVENT";
+    Opcode2[Opcode2["PING"] = 1] = "PING";
+    Opcode2[Opcode2["PONG"] = 2] = "PONG";
+    Opcode2[Opcode2["IDENTIFY"] = 3] = "IDENTIFY";
+    Opcode2[Opcode2["READY"] = 4] = "READY";
+    return Opcode2;
+  })(Opcode$1 || {});
+  var WebSocket$3;
+  (WebSocket2 => {
+    WebSocket2.CONNECTING = 0;
+    WebSocket2.OPEN = 1;
+    WebSocket2.CLOSING = 2;
+    WebSocket2.CLOSED = 3;
+  })(WebSocket$3 || (WebSocket$3 = {}));
+  var __defProp$b = Object.defineProperty;
+  var __name$b = (target, value) => __defProp$b(target, "name", {
+    value,
+    configurable: true
+  });
+
+  // src/index.ts
+  var import_cosmokit$1 = require$$1;
+  var kElement = Symbol.for("satori.element");
+  var ElementConstructor = (_Class3 = class ElementConstructor {
+    get data() {
+      return this.attrs;
+    }
+    getTagName() {
+      if (this.type === "component") {
+        return this.attrs.is?.name ?? "component";
+      } else {
+        return this.type;
+      }
+    }
+    toAttrString() {
+      return Object.entries(this.attrs).map(([key, value]) => {
+        if ((0, import_cosmokit$1.isNullable)(value)) return "";
+        key = (0, import_cosmokit$1.hyphenate)(key);
+        if (value === true) return ` ${key}`;
+        if (value === false) return ` no-${key}`;
+        return ` ${key}="${Element.escape("" + value, true)}"`;
+      }).join("");
+    }
+    toString(strip = false) {
+      if (this.type === "text" && "content" in this.attrs) {
+        return strip ? this.attrs.content : Element.escape(this.attrs.content);
+      }
+      const inner = this.children.map(child => child.toString(strip)).join("");
+      if (strip) return inner;
+      const attrs = this.toAttrString();
+      const tag = this.getTagName();
+      if (!this.children.length) return `<${tag}${attrs}/>`;
+      return `<${tag}${attrs}>${inner}</${tag}>`;
+    }
+  }, __name$b(_Class3, "ElementConstructor"), _Class3);
+  (0, import_cosmokit$1.defineProperty)(ElementConstructor, "name", "Element");
+  (0, import_cosmokit$1.defineProperty)(ElementConstructor.prototype, kElement, true);
+  function Element(type, ...args) {
+    const el = Object.create(ElementConstructor.prototype);
+    const attrs = {},
+      children = [];
+    if (args[0] && typeof args[0] === "object" && !Element.isElement(args[0]) && !Array.isArray(args[0])) {
+      const props = args.shift();
+      for (const [key, value] of Object.entries(props)) {
+        if ((0, import_cosmokit$1.isNullable)(value)) continue;
+        if (key === "children") {
+          args.push(...(0, import_cosmokit$1.makeArray)(value));
+        } else {
+          attrs[(0, import_cosmokit$1.camelize)(key)] = value;
+        }
+      }
+    }
+    for (const child of args) {
+      children.push(...Element.toElementArray(child));
+    }
+    if (typeof type === "function") {
+      attrs.is = type;
+      type = "component";
+    }
+    return Object.assign(el, {
+      type,
+      attrs,
+      children
+    });
+  }
+  __name$b(Element, "Element");
+  var evaluate$1 = new Function("expr", "context", `
+  try {
+    with (context) {
+      return eval(expr)
+    }
+  } catch {}
+`);
+  (Element2 => {
+    Element2.jsx = Element2;
+    Element2.jsxs = Element2;
+    Element2.jsxDEV = Element2;
+    Element2.Fragment = "template";
+    function isElement(source) {
+      return source && typeof source === "object" && source[kElement];
+    }
+    Element2.isElement = isElement;
+    __name$b(isElement, "isElement");
+    function toElement(content) {
+      if (typeof content === "string" || typeof content === "number" || typeof content === "boolean") {
+        content = "" + content;
+        if (content) return Element2("text", {
+          content
+        });
+      } else if (isElement(content)) {
+        return content;
+      } else if (!(0, import_cosmokit$1.isNullable)(content)) {
+        throw new TypeError(`Invalid content: ${content}`);
+      }
+    }
+    Element2.toElement = toElement;
+    __name$b(toElement, "toElement");
+    function toElementArray(content) {
+      if (Array.isArray(content)) {
+        return content.map(toElement).filter(x => x);
+      } else {
+        return [toElement(content)].filter(x => x);
+      }
+    }
+    Element2.toElementArray = toElementArray;
+    __name$b(toElementArray, "toElementArray");
+    function normalize(source, context) {
+      return typeof source === "string" ? parse(source, context) : toElementArray(source);
+    }
+    Element2.normalize = normalize;
+    __name$b(normalize, "normalize");
+    function escape(source, inline = false) {
+      const result = source.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+      return inline ? result.replace(/"/g, "&quot;") : result;
+    }
+    Element2.escape = escape;
+    __name$b(escape, "escape");
+    function unescape(source) {
+      return source.replace(/&lt;/g, "<").replace(/&gt;/g, ">").replace(/&quot;/g, '"').replace(/&#(\d+);/g, (_, code) => code === "38" ? _ : String.fromCharCode(+code)).replace(/&#x([0-9a-f]+);/gi, (_, code) => code === "26" ? _ : String.fromCharCode(parseInt(code, 16))).replace(/&(amp|#38|#x26);/g, "&");
+    }
+    Element2.unescape = unescape;
+    __name$b(unescape, "unescape");
+    function from(source, options = {}) {
+      const elements = parse(source);
+      if (options.caret) {
+        if (options.type && elements[0]?.type !== options.type) return;
+        return elements[0];
+      }
+      return select(elements, options.type || "*")[0];
+    }
+    Element2.from = from;
+    __name$b(from, "from");
+    const combRegExp = / *([ >+~]) */g;
+    function parseSelector(input) {
+      return input.split(",").map(query => {
+        const selectors = [];
+        query = query.trim();
+        let combCap,
+          combinator = " ";
+        while (combCap = combRegExp.exec(query)) {
+          selectors.push({
+            type: query.slice(0, combCap.index),
+            combinator
+          });
+          combinator = combCap[1];
+          query = query.slice(combCap.index + combCap[0].length);
+        }
+        selectors.push({
+          type: query,
+          combinator
+        });
+        return selectors;
+      });
+    }
+    Element2.parseSelector = parseSelector;
+    __name$b(parseSelector, "parseSelector");
+    function select(source, query) {
+      if (!source || !query) return [];
+      if (typeof source === "string") source = parse(source);
+      if (typeof query === "string") query = parseSelector(query);
+      if (!query.length) return [];
+      let adjacent = [];
+      const results = [];
+      for (const [index, element] of source.entries()) {
+        const inner = [];
+        const local = [...query, ...adjacent];
+        adjacent = [];
+        let matched = false;
+        for (const group of local) {
+          const {
+            type,
+            combinator
+          } = group[0];
+          if (type === element.type || type === "*") {
+            if (group.length === 1) {
+              matched = true;
+            } else if ([" ", ">"].includes(group[1].combinator)) {
+              inner.push(group.slice(1));
+            } else if (group[1].combinator === "+") {
+              adjacent.push(group.slice(1));
+            } else {
+              query.push(group.slice(1));
+            }
+          }
+          if (combinator === " ") {
+            inner.push(group);
+          }
+        }
+        if (matched) results.push(source[index]);
+        results.push(...select(element.children, inner));
+      }
+      return results;
+    }
+    Element2.select = select;
+    __name$b(select, "select");
+    function interpolate(expr, context) {
+      expr = expr.trim();
+      if (!/^[\w.]+$/.test(expr)) {
+        return evaluate$1(expr, context) ?? "";
+      }
+      let value = context;
+      for (const part of expr.split(".")) {
+        value = value[part];
+        if ((0, import_cosmokit$1.isNullable)(value)) return "";
+      }
+      return value ?? "";
+    }
+    Element2.interpolate = interpolate;
+    __name$b(interpolate, "interpolate");
+    const tagRegExp1 = /(?<comment><!--[\s\S]*?-->)|(?<tag><(\/?)([^!\s>/]*)([^>]*?)\s*(\/?)>)/;
+    const tagRegExp2 = /(?<comment><!--[\s\S]*?-->)|(?<tag><(\/?)([^!\s>/]*)([^>]*?)\s*(\/?)>)|(?<curly>\{(?<derivative>[@:/#][^\s}]*)?[\s\S]*?\})/;
+    const attrRegExp1 = /([^\s=]+)(?:="(?<value1>[^"]*)"|='(?<value2>[^']*)')?/g;
+    const attrRegExp2 = /([^\s=]+)(?:="(?<value1>[^"]*)"|='(?<value2>[^']*)'|=(?<curly>\{([^}]+)\}))?/g;
+    let Position;
+    (Position2 => {
+      Position2[Position2["OPEN"] = 0] = "OPEN";
+      Position2[Position2["CLOSE"] = 1] = "CLOSE";
+      Position2[Position2["EMPTY"] = 2] = "EMPTY";
+      Position2[Position2["CONTINUE"] = 3] = "CONTINUE";
+    })(Position || (Position = {}));
+    function parse(source, context) {
+      const tokens = [];
+      function pushText(content) {
+        if (content) tokens.push(content);
+      }
+      __name$b(pushText, "pushText");
+      const tagRegExp = context ? tagRegExp2 : tagRegExp1;
+      let tagCap;
+      let trimStart = true;
+      while (tagCap = tagRegExp.exec(source)) {
+        const trimEnd = !tagCap.groups.curly;
+        parseContent(source.slice(0, tagCap.index), trimStart, trimEnd);
+        trimStart = trimEnd;
+        source = source.slice(tagCap.index + tagCap[0].length);
+        const [_,,, close, type, extra, empty] = tagCap;
+        if (tagCap.groups.comment) continue;
+        if (tagCap.groups.curly) {
+          let name = "",
+            position = 2 /* EMPTY */;
+          if (tagCap.groups.derivative) {
+            name = tagCap.groups.derivative.slice(1);
+            position = {
+              "@": 2 /* EMPTY */,
+              "#": 0 /* OPEN */,
+              "/": 1 /* CLOSE */,
+              ":": 3 /* CONTINUE */
+            }[tagCap.groups.derivative[0]];
+          }
+          tokens.push({
+            type: "curly",
+            name,
+            position,
+            source: tagCap.groups.curly,
+            extra: tagCap.groups.curly.slice(1 + (tagCap.groups.derivative ?? "").length, -1)
+          });
+          continue;
+        }
+        tokens.push({
+          type: "angle",
+          source: _,
+          name: type || Element2.Fragment,
+          position: close ? 1 /* CLOSE */ : empty ? 2 /* EMPTY */ : 0 /* OPEN */,
+          extra
+        });
+      }
+      parseContent(source, trimStart, true);
+      function parseContent(source2, trimStart2, trimEnd) {
+        source2 = unescape(source2);
+        if (trimStart2) source2 = source2.replace(/^\s*\n\s*/, "");
+        if (trimEnd) source2 = source2.replace(/\s*\n\s*$/, "");
+        pushText(source2);
+      }
+      __name$b(parseContent, "parseContent");
+      return parseTokens(foldTokens(tokens), context);
+    }
+    Element2.parse = parse;
+    __name$b(parse, "parse");
+    function foldTokens(tokens) {
+      const stack = [[{
+        type: "angle",
+        name: Element2.Fragment,
+        position: 0 /* OPEN */,
+        source: "",
+        extra: "",
+        children: {
+          default: []
+        }
+      }, "default"]];
+      function pushToken(...tokens2) {
+        const [token, slot] = stack[0];
+        token.children[slot].push(...tokens2);
+      }
+      __name$b(pushToken, "pushToken");
+      for (const token of tokens) {
+        if (typeof token === "string") {
+          pushToken(token);
+          continue;
+        }
+        const {
+          name,
+          position
+        } = token;
+        if (position === 1 /* CLOSE */) {
+          if (stack[0][0].name === name) {
+            stack.shift();
+          }
+        } else if (position === 3 /* CONTINUE */) {
+          stack[0][0].children[name] = [];
+          stack[0][1] = name;
+        } else if (position === 0 /* OPEN */) {
+          pushToken(token);
+          token.children = {
+            default: []
+          };
+          stack.unshift([token, "default"]);
+        } else {
+          pushToken(token);
+        }
+      }
+      return stack[stack.length - 1][0].children.default;
+    }
+    __name$b(foldTokens, "foldTokens");
+    function parseTokens(tokens, context) {
+      const result = [];
+      for (const token of tokens) {
+        if (typeof token === "string") {
+          result.push(Element2("text", {
+            content: token
+          }));
+        } else if (token.type === "angle") {
+          const attrs = {};
+          const attrRegExp = context ? attrRegExp2 : attrRegExp1;
+          let attrCap;
+          while (attrCap = attrRegExp.exec(token.extra)) {
+            const [, key, v1, v2 = v1, v3] = attrCap;
+            if (v3) {
+              attrs[key] = interpolate(v3, context);
+            } else if (!(0, import_cosmokit$1.isNullable)(v2)) {
+              attrs[key] = unescape(v2);
+            } else if (key.startsWith("no-")) {
+              attrs[key.slice(3)] = false;
+            } else {
+              attrs[key] = true;
+            }
+          }
+          result.push(Element2(token.name, attrs, token.children && parseTokens(token.children.default, context)));
+        } else if (!token.name) {
+          result.push(...toElementArray(interpolate(token.extra, context)));
+        } else if (token.name === "if") {
+          if (evaluate$1(token.extra, context)) {
+            result.push(...parseTokens(token.children.default, context));
+          } else {
+            result.push(...parseTokens(token.children.else || [], context));
+          }
+        } else if (token.name === "each") {
+          const [expr, ident] = token.extra.split(/\s+as\s+/);
+          const items = interpolate(expr, context);
+          if (!items || !items[Symbol.iterator]) continue;
+          for (const item of items) {
+            result.push(...parseTokens(token.children.default, {
+              ...context,
+              [ident]: item
+            }));
+          }
+        }
+      }
+      return result;
+    }
+    __name$b(parseTokens, "parseTokens");
+    function visit(element, rules, session) {
+      const {
+        type,
+        attrs,
+        children
+      } = element;
+      if (typeof rules === "function") {
+        return rules(element, session);
+      } else {
+        let result = rules[typeof type === "string" ? type : ""] ?? rules.default ?? true;
+        if (typeof result === "function") {
+          result = result(attrs, children, session);
+        }
+        return result;
+      }
+    }
+    __name$b(visit, "visit");
+    function transform(source, rules, session) {
+      const elements = typeof source === "string" ? parse(source) : source;
+      const output = [];
+      elements.forEach(element => {
+        const {
+          type,
+          attrs,
+          children
+        } = element;
+        const result = visit(element, rules, session);
+        if (result === true) {
+          output.push(Element2(type, attrs, transform(children, rules, session)));
+        } else if (result !== false) {
+          output.push(...toElementArray(result));
+        }
+      });
+      return typeof source === "string" ? output.join("") : output;
+    }
+    Element2.transform = transform;
+    __name$b(transform, "transform");
+    async function transformAsync(source, rules, session) {
+      const elements = typeof source === "string" ? parse(source) : source;
+      const children = (await Promise.all(elements.map(async element => {
+        const {
+          type,
+          attrs,
+          children: children2
+        } = element;
+        const result = await visit(element, rules, session);
+        if (result === true) {
+          return [Element2(type, attrs, await transformAsync(children2, rules, session))];
+        } else if (result !== false) {
+          return toElementArray(result);
+        } else {
+          return [];
+        }
+      }))).flat(1);
+      return typeof source === "string" ? children.join("") : children;
+    }
+    Element2.transformAsync = transformAsync;
+    __name$b(transformAsync, "transformAsync");
+    function createFactory(type, ...keys) {
+      return (...args) => {
+        const element = Element2(type);
+        keys.forEach((key, index) => {
+          if (!(0, import_cosmokit$1.isNullable)(args[index])) {
+            element.attrs[key] = args[index];
+          }
+        });
+        if (args[keys.length]) {
+          Object.assign(element.attrs, args[keys.length]);
+        }
+        return element;
+      };
+    }
+    __name$b(createFactory, "createFactory");
+    Element2.warn = /* @__PURE__ */__name$b(() => {}, "warn");
+    function createAssetFactory(type) {
+      return (src, ...args) => {
+        let prefix = "base64://";
+        if (typeof args[0] === "string") {
+          prefix = `data:${args.shift()};base64,`;
+        }
+        if ((0, import_cosmokit$1.is)("ArrayBuffer", src)) {
+          src = prefix + (0, import_cosmokit$1.arrayBufferToBase64)(src);
+        } else if (ArrayBuffer.isView(src)) {
+          src = prefix + (0, import_cosmokit$1.arrayBufferToBase64)(src.buffer);
+        }
+        if (src.startsWith("base64://")) {
+          (0, Element2.warn)(`protocol "base64:" is deprecated and will be removed in the future, please use "data:" instead`);
+        }
+        return Element2(type, {
+          ...args[0],
+          src
+        });
+      };
+    }
+    __name$b(createAssetFactory, "createAssetFactory");
+    Element2.text = createFactory("text", "content");
+    Element2.at = createFactory("at", "id");
+    Element2.sharp = createFactory("sharp", "id");
+    Element2.quote = createFactory("quote", "id");
+    Element2.image = createAssetFactory("img");
+    Element2.img = createAssetFactory("img");
+    Element2.video = createAssetFactory("video");
+    Element2.audio = createAssetFactory("audio");
+    Element2.file = createAssetFactory("file");
+    function i18n(path, children) {
+      return Element2("i18n", typeof path === "string" ? {
+        path
+      } : path, children);
+    }
+    Element2.i18n = i18n;
+    __name$b(i18n, "i18n");
+  })(Element || (Element = {}));
+  var lib$2 = Element;
+  var __defProp$a = Object.defineProperty;
+  var __getOwnPropDesc$1 = Object.getOwnPropertyDescriptor;
+  var __getOwnPropNames$2 = Object.getOwnPropertyNames;
+  var __hasOwnProp$1 = Object.prototype.hasOwnProperty;
+  var __name$a = (target, value) => __defProp$a(target, "name", {
+    value,
+    configurable: true
+  });
+  var __export$1 = (target, all) => {
+    for (var name in all) __defProp$a(target, name, {
+      get: all[name],
+      enumerable: true
+    });
+  };
+  var __copyProps$1 = (to, from, except, desc) => {
+    if (from && typeof from === "object" || typeof from === "function") {
+      for (let key of __getOwnPropNames$2(from)) if (!__hasOwnProp$1.call(to, key) && key !== except) __defProp$a(to, key, {
+        get: () => from[key],
+        enumerable: !(desc = __getOwnPropDesc$1(from, key)) || desc.enumerable
+      });
+    }
+    return to;
+  };
+  var __toCommonJS$1 = mod => __copyProps$1(__defProp$a({}, "__esModule", {
+    value: true
+  }), mod);
+
+  // src/index.ts
+  var src_exports$1 = {};
+  __export$1(src_exports$1, {
+    HTTP: () => HTTP$1,
+    WebSocket: () => WebSocket$2,
+    default: () => src_default$2
+  });
+  var lib$1 = __toCommonJS$1(src_exports$1);
+  var import_levi_cordis = libExports$2;
+  var import_cosmokit = require$$1;
+
+  // src/ws.ts
+  function sleep$1(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+  }
+  __name$a(sleep$1, "sleep");
+  var WebSocket$2 = (_WebSocket = class WebSocket extends EventTarget {
+    constructor(url, config) {
+      super();
+      _defineProperty(this, "ws", void 0);
+      _defineProperty(this, "_connected", false);
+      _defineProperty(this, "_closed", true);
+      _defineProperty(this, "timeout", void 0);
+      this.url = url;
+      this.timeout = config?.timeout ?? 3e3;
+    }
+    get protocol() {
+      return this.url.split("://")[0];
+    }
+    get readyState() {
+      if (this._closed) return this._connected ? 2 /* CLOSING */ : 3 /* CLOSED */;
+      return this._connected ? 1 /* OPEN */ : 0 /* CONNECTING */;
+    }
+    dispatchEvent(event) {
+      return super.dispatchEvent(event);
+    }
+    // @ts-ignore
+    addEventListener(type, listener) {
+      super.addEventListener(type, listener);
+    }
+    // @ts-ignore
+    removeEventListener(type, listener) {
+      super.removeEventListener(type, listener);
+    }
+    async connect() {
+      if (this.ws) {
+        this.ws.shutdown();
+        this.ws.close();
+      }
+      this._closed = false;
+      this.ws = new WSClient();
+      try {
+        await new Promise((resolve, reject) => {
+          const fail = /* @__PURE__ */__name$a(() => reject(new Error("Failed to connect")), "fail");
+          const okPre = this.ws.connectAsync(this.url, ok => {
+            if (ok) resolve(ok);else fail();
+          });
+          if (!okPre) fail();
+        });
+      } finally {
+        this._closed = true;
+      }
+      this._connected = true;
+      this.dispatchEvent(new Event("open"));
+      this.ws.listen("onTextReceived", data => {
+        const ev = new Event("message");
+        ev.data = data;
+        this.dispatchEvent(ev);
+      });
+      this.ws.listen("onBinaryReceived", () => {
+        const ev = new Event("error");
+        ev.message = `Unexpected binary data received from ${this.url}`;
+        this.dispatchEvent(ev);
+      });
+      this.ws.listen("onError", msg => {
+        const ev = new Event("error");
+        ev.message = msg;
+        this.dispatchEvent(ev);
+      });
+      this.ws.listen("onLostConnection", code => {
+        this.ws = void 0;
+        this._closed = true;
+        this._connected = false;
+        const ev = new Event("close");
+        ev.code = code;
+        ev.reason = "";
+        this.dispatchEvent(ev);
+      });
+      (async () => {
+        for (;;) {
+          if (this._closed) break;
+          await sleep$1(1);
+        }
+        const {
+          ws
+        } = this;
+        if (!ws) return;
+        this.ws = void 0;
+        this._connected = false;
+        ws?.shutdown();
+        ws?.close();
+      })();
+    }
+    close(code, reason) {
+      this._closed = true;
+    }
+    send(data) {
+      if (!this.ws) throw new Error("Connection Closed");
+      this.ws.send(data);
+    }
+  }, __name$a(_WebSocket, "WebSocket"), _WebSocket);
+
+  // src/index.ts
+  var kHTTPError$1 = Symbol.for("undios.error");
+  var HTTPError$1 = (_HTTPError = class HTTPError extends Error {
+    constructor(...args) {
+      super(...args);
+      _defineProperty(this, kHTTPError$1, true);
+      _defineProperty(this, "response", void 0);
+    }
+    static fromResp(response) {
+      const error = new this(`Request failed with status code ${response.status}`);
+      error.response = response;
+      return error;
+    }
+    static is(error) {
+      return !!error?.[kHTTPError$1];
+    }
+  }, __name$a(_HTTPError, "HTTPError"), _HTTPError);
+  var HTTP$1 = (_import_levi_cordis$S = import_levi_cordis.Service.provide, _import_levi_cordis$S2 = import_levi_cordis.Service.immediate, _import_levi_cordis$S3 = import_levi_cordis.Service.invoke, (_HTTP2 = class _HTTP extends import_levi_cordis.Service {
+    constructor(...args) {
+      super(args[0], args[1]);
+      _defineProperty(this, "_decoders", /* @__PURE__ */Object.create(null));
+      this.decoder("json", raw => JSON.parse(raw));
+      this.decoder("text", raw => raw);
+    }
+    decoder(type, decoder) {
+      return this[import_levi_cordis.Context.current].effect(() => {
+        this._decoders[type] = decoder;
+        return () => delete this._decoders[type];
+      });
+    }
+    extend(config = {}) {
+      return this[import_levi_cordis.Service.extend]({
+        config: _HTTP.mergeConfig(this.config, config)
+      });
+    }
+    resolveConfig(init) {
+      const caller = this[import_levi_cordis.Context.current];
+      let result = {
+        headers: {},
+        ...this.config
+      };
+      caller.emit("http/config", result);
+      let intercept = caller[import_levi_cordis.Context.intercept];
+      while (intercept) {
+        result = _HTTP.mergeConfig(result, intercept.http);
+        intercept = Object.getPrototypeOf(intercept);
+      }
+      result = _HTTP.mergeConfig(result, init);
+      return result;
+    }
+    resolveURL(url, config) {
+      if (config.baseURL) {
+        url = `${(0, import_cosmokit.trimSlash)(config.baseURL)}/${url}`;
+      }
+      if (config.params) {
+        const params = Object.entries(config.params).map(([key, value]) => `${encodeURIComponent(key)}=${encodeURIComponent(value)}`).join("&");
+        url = `${url}${url.includes("?") ? "&" : "?"}${params}`;
+      }
+      return url;
+    }
+    async [_import_levi_cordis$S3](...args) {
+      const caller = this[import_levi_cordis.Context.current];
+      let method;
+      if (typeof args[1] === "string") {
+        method = args.shift();
+      }
+      const config = this.resolveConfig(args[1]);
+      const url = this.resolveURL(args[0], config);
+      method ??= config.method ?? "GET";
+      const controller = new AbortController();
+      let timer;
+      const dispose = caller.on("dispose", () => {
+        clearTimeout(timer);
+        controller.abort(new Error("context disposed"));
+      });
+      if (config.timeout) {
+        timer = setTimeout(() => {
+          controller.abort(new Error("timeout"));
+        }, config.timeout);
+      }
+      try {
+        const init = {
+          method,
+          url,
+          headers: config.headers ?? {},
+          data: config.data
+        };
+        if (config.data && typeof config.data === "object") {
+          ;
+          init.data = JSON.stringify(config.data);
+        }
+        caller.emit("http/fetch-init", init.url, init, config);
+        const rawResp = await this.fetch(init);
+        const validateStatus = config.validateStatus ?? (status => Math.floor(status / 100) === 2);
+        if (!validateStatus(rawResp.status)) {
+          const error = _HTTP.Error.fromResp(rawResp);
+          throw error;
+        }
+        if (config.responseType) {
+          if (!(config.responseType in this._decoders)) {
+            throw new TypeError(`Unknown responseType: ${config.responseType}`);
+          }
+          const decoder = this._decoders[config.responseType];
+          const response = {
+            url,
+            status: rawResp.status,
+            data: await decoder(rawResp.data)
+          };
+          return response;
+        }
+        return rawResp;
+      } finally {
+        dispose();
+      }
+    }
+    fetch(init) {
+      switch (init.method) {
+        case "get":
+        case "GET":
+          {
+            return new Promise(resolve => {
+              network.httpGet(init.url, init.headers, (status, result) => {
+                resolve({
+                  url: init.url,
+                  status,
+                  data: result
+                });
+              });
+            });
+          }
+        case "post":
+        case "POST":
+          {
+            return new Promise(resolve => {
+              network.httpPost(init.url, init.headers, init.data, init.headers["Content-Type"] ?? "text/plain", (status, result) => {
+                resolve({
+                  url: init.url,
+                  status,
+                  data: result
+                });
+              });
+            });
+          }
+      }
+    }
+    ws(url, init) {
+      if (init?.headers) this.ctx.logger.warn("headers is not supported in ws");
+      const caller = this[import_levi_cordis.Context.current];
+      const config = this.resolveConfig(init);
+      url = this.resolveURL(url, config);
+      init = {
+        timeout: config.timeout
+      };
+      caller.emit("http/websocket-init", url, init, config);
+      const socket = new WebSocket$2(url, init);
+      const dispose = caller.on("dispose", () => {
+        socket.close(1001, "context disposed");
+      });
+      socket.addEventListener("close", () => {
+        dispose();
+      });
+      return socket;
+    }
+  }, __name$a(_HTTP2, "HTTP"), _defineProperty(_HTTP2, "Error", HTTPError$1), _defineProperty(_HTTP2, _import_levi_cordis$S, "http"), _defineProperty(_HTTP2, _import_levi_cordis$S2, true), (() => {
+    for (const method of ["get"]) {
+      (0, import_cosmokit.defineProperty)(_HTTP2.prototype, method, async function (url, config) {
+        const response = await this(url, {
+          method,
+          ...config
+        });
+        return response.data;
+      });
+    }
+    for (const method of ["post"]) {
+      (0, import_cosmokit.defineProperty)(_HTTP2.prototype, method, async function (url, data, config) {
+        const response = await this(url, {
+          method,
+          data,
+          ...config
+        });
+        return response.data;
+      });
+    }
+  })(), _defineProperty(_HTTP2, "mergeConfig", (target, source) => ({
+    ...target,
+    ...source,
+    headers: {
+      ...target?.headers,
+      ...source?.headers
+    }
+  })), _HTTP2));
+  var src_default$2 = HTTP$1;
+  (function (module, _Session2, _Class4, _Class5, _Class6, _Class7, _Class8, _cordis$Service$setup, _Class9) {
+    var __create = Object.create;
+    var __defProp = Object.defineProperty;
+    var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+    var __getOwnPropNames = Object.getOwnPropertyNames;
+    var __getProtoOf = Object.getPrototypeOf;
+    var __hasOwnProp = Object.prototype.hasOwnProperty;
+    var __name = (target, value) => __defProp(target, "name", {
+      value,
+      configurable: true
+    });
+    var __export = (target, all) => {
+      for (var name in all) __defProp(target, name, {
+        get: all[name],
+        enumerable: true
+      });
+    };
+    var __copyProps = (to, from, except, desc) => {
+      if (from && typeof from === "object" || typeof from === "function") {
+        for (let key of __getOwnPropNames(from)) if (!__hasOwnProp.call(to, key) && key !== except) __defProp(to, key, {
+          get: () => from[key],
+          enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable
+        });
+      }
+      return to;
+    };
+    var __reExport = (target, mod, secondTarget) => (__copyProps(target, mod, "default"), secondTarget && __copyProps(secondTarget, mod, "default"));
+    var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(
+    // If the importer is in node compatibility mode or this is not an ESM
+    // file that has been converted to a CommonJS file using a Babel-
+    // compatible transform (i.e. "__esModule" has not been set), then set
+    // "default" to the CommonJS "module.exports" for node compatibility.
+    isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", {
+      value: mod,
+      enumerable: true
+    }) : target, mod));
+    var __toCommonJS = mod => __copyProps(__defProp({}, "__esModule", {
+      value: true
+    }), mod);
+
+    // src/index.ts
+    var src_exports = {};
+    __export(src_exports, {
+      Adapter: () => Adapter,
+      Bot: () => Bot,
+      Context: () => Context,
+      Element: () => import_element3.default,
+      MessageEncoder: () => MessageEncoder,
+      Messenger: () => MessageEncoder,
+      Modulator: () => MessageEncoder,
+      Service: () => Service2,
+      Session: () => Session,
+      Universal: () => Universal,
+      defineAccessor: () => defineAccessor,
+      h: () => import_element3.default,
+      segment: () => import_element3.default
+    });
+    module.exports = __toCommonJS(src_exports);
+    var cordis = __toESM(libExports$2, 1);
+    var import_cosmokit4 = require$$1;
+
+    // src/session.ts
+    var import_cosmokit = require$$1;
+    var import_protocol = lib$3;
+    var import_element = __toESM(lib$2, 1);
+    var Session = (_Session2 = class _Session {
+      constructor(bot, event) {
+        _defineProperty(this, "id", void 0);
+        _defineProperty(this, "bot", void 0);
+        _defineProperty(this, "app", void 0);
+        _defineProperty(this, "event", void 0);
+        _defineProperty(this, "locales", []);
+        event.selfId ??= bot.selfId;
+        event.platform ??= bot.platform;
+        event.timestamp ??= Date.now();
+        this.event = event;
+        this.id = ++_Session.counter;
+        (0, import_cosmokit.defineProperty)(this, "bot", bot);
+        (0, import_cosmokit.defineProperty)(this, "app", bot.ctx.root);
+        (0, import_cosmokit.defineProperty)(this, Context.current, bot.ctx);
+        return Context.associate(this, "session");
+      }
+      /** @deprecated */
+      get data() {
+        return this.event;
+      }
+      get isDirect() {
+        return this.event.channel.type === import_protocol.Channel.Type.DIRECT;
+      }
+      set isDirect(value) {
+        (this.event.channel ??= {}).type = value ? import_protocol.Channel.Type.DIRECT : import_protocol.Channel.Type.TEXT;
+      }
+      get author() {
+        return {
+          ...this.event.user,
+          ...this.event.member,
+          userId: this.event.user?.id,
+          username: this.event.user?.name,
+          nickname: this.event.member?.name
+        };
+      }
+      get uid() {
+        return `${this.platform}:${this.userId}`;
+      }
+      get gid() {
+        return `${this.platform}:${this.guildId}`;
+      }
+      get cid() {
+        return `${this.platform}:${this.channelId}`;
+      }
+      get fid() {
+        return `${this.platform}:${this.channelId}:${this.userId}`;
+      }
+      get sid() {
+        return `${this.platform}:${this.selfId}`;
+      }
+      get elements() {
+        return this.event.message?.elements;
+      }
+      set elements(value) {
+        this.event.message ??= {};
+        this.event.message.elements = value;
+      }
+      get content() {
+        return this.event.message?.elements?.join("");
+      }
+      set content(value) {
+        (this.event.message ??= {}).elements = (0, import_cosmokit.isNullable)(value) ? value : import_element.default.parse(value);
+      }
+      setInternal(type, data) {
+        this.event._type = type;
+        this.event._data = data;
+        const internal = Object.create(this.bot.internal);
+        (0, import_cosmokit.defineProperty)(this, type, Object.assign(internal, data));
+      }
+      async transform(elements) {
+        return await import_element.default.transformAsync(elements, ({
+          type,
+          attrs,
+          children
+        }, session) => {
+          const render = type === "component" ? attrs.is : this.app.get("component:" + type);
+          return render?.(attrs, children, session) ?? true;
+        }, this);
+      }
+      toJSON() {
+        return {
+          ...this.event,
+          id: this.id
+        };
+      }
+    }, __name(_Session2, "Session"), _defineProperty(_Session2, "counter", 0), _Session2);
+    function defineAccessor(prototype, name, keys) {
+      Object.defineProperty(prototype, name, {
+        get() {
+          return keys.reduce((data, key) => data?.[key], this);
+        },
+        set(value) {
+          if (value === void 0) return;
+          const _keys = keys.slice();
+          const last = _keys.pop();
+          const data = _keys.reduce((data2, key) => data2[key] ??= {}, this);
+          data[last] = value;
+        }
+      });
+    }
+    __name(defineAccessor, "defineAccessor");
+    defineAccessor(Session.prototype, "type", ["event", "type"]);
+    defineAccessor(Session.prototype, "subtype", ["event", "subtype"]);
+    defineAccessor(Session.prototype, "subsubtype", ["event", "subsubtype"]);
+    defineAccessor(Session.prototype, "selfId", ["event", "selfId"]);
+    defineAccessor(Session.prototype, "platform", ["event", "platform"]);
+    defineAccessor(Session.prototype, "timestamp", ["event", "timestamp"]);
+    defineAccessor(Session.prototype, "userId", ["event", "user", "id"]);
+    defineAccessor(Session.prototype, "channelId", ["event", "channel", "id"]);
+    defineAccessor(Session.prototype, "channelName", ["event", "channel", "name"]);
+    defineAccessor(Session.prototype, "guildId", ["event", "guild", "id"]);
+    defineAccessor(Session.prototype, "guildName", ["event", "guild", "name"]);
+    defineAccessor(Session.prototype, "messageId", ["event", "message", "id"]);
+    defineAccessor(Session.prototype, "operatorId", ["event", "operator", "id"]);
+    defineAccessor(Session.prototype, "roleId", ["event", "role", "id"]);
+    defineAccessor(Session.prototype, "quote", ["event", "message", "quote"]);
+
+    // src/index.ts
+    var import_levi_cordis2 = libExports$2;
+    var import_levi_undios = lib$1;
+    var import_element3 = __toESM(lib$2, 1);
+    __reExport(src_exports, libExports$2, module.exports);
+    var Universal = __toESM(lib$3, 1);
+
+    // src/bot.ts
+    var import_cosmokit2 = require$$1;
+    var import_protocol2 = lib$3;
+    var eventAliases = [["message-created", "message"]];
+    var Bot = (_Class4 = class Bot {
+      constructor(ctx, config, platform) {
+        _defineProperty(this, "user", {});
+        _defineProperty(this, "isBot", true);
+        _defineProperty(this, "hidden", false);
+        _defineProperty(this, "platform", void 0);
+        _defineProperty(this, "adapter", void 0);
+        _defineProperty(this, "error", void 0);
+        _defineProperty(this, "callbacks", {});
+        _defineProperty(this, "logger", void 0);
+        // Same as `this.ctx`, but with a more specific type.
+        _defineProperty(this, "context", void 0);
+        _defineProperty(this, "_status", import_protocol2.Status.OFFLINE);
+        this.ctx = ctx;
+        this.config = config;
+        this.internal = null;
+        this.context = ctx;
+        ctx.bots.push(this);
+        this.context.emit("bot-added", this);
+        if (platform) {
+          this.logger = ctx.logger(platform);
+          this.platform = platform;
+        }
+        ctx.on("ready", async () => {
+          await Promise.resolve();
+          this.dispatchLoginEvent("login-added");
+          return this.start();
+        });
+        ctx.on("dispose", () => this.dispose());
+        ctx.on("interaction/button", session => {
+          const cb = this.callbacks[session.event.button.id];
+          if (cb) cb(session);
+        });
+      }
+      update(login) {
+        const {
+          status,
+          ...rest
+        } = login;
+        Object.assign(this, rest);
+        this.status = status;
+      }
+      dispose() {
+        (0, import_cosmokit2.remove)(this.ctx.bots, this);
+        this.context.emit("bot-removed", this);
+        this.dispatchLoginEvent("login-removed");
+        return this.stop();
+      }
+      dispatchLoginEvent(type) {
+        const session = this.session();
+        session.type = type;
+        session.event.login = this.toJSON();
+        this.dispatch(session);
+      }
+      get status() {
+        return this._status;
+      }
+      set status(value) {
+        if (value === this._status) return;
+        this._status = value;
+        if (this.ctx.bots.includes(this)) {
+          this.context.emit("bot-status-updated", this);
+          this.dispatchLoginEvent("login-updated");
+        }
+      }
+      get isActive() {
+        return this._status !== import_protocol2.Status.OFFLINE && this._status !== import_protocol2.Status.DISCONNECT;
+      }
+      online() {
+        this.status = import_protocol2.Status.ONLINE;
+        this.error = null;
+      }
+      offline(error) {
+        this.status = import_protocol2.Status.OFFLINE;
+        this.error = error;
+      }
+      async start() {
+        if (this.isActive) return;
+        this.status = import_protocol2.Status.CONNECT;
+        try {
+          await this.context.parallel("bot-connect", this);
+          await this.adapter?.connect(this);
+        } catch (error) {
+          this.offline(error);
+        }
+      }
+      async stop() {
+        if (!this.isActive) return;
+        this.status = import_protocol2.Status.DISCONNECT;
+        try {
+          await this.context.parallel("bot-disconnect", this);
+          await this.adapter?.disconnect(this);
+        } catch (error) {
+          this.context.emit("internal/error", error);
+        } finally {
+          this.offline();
+        }
+      }
+      get sid() {
+        return `${this.platform}:${this.selfId}`;
+      }
+      session(event = {}) {
+        const {
+          Session: Session2
+        } = this.ctx.constructor;
+        return new Session2(this, event);
+      }
+      dispatch(session) {
+        if (!this.ctx.lifecycle.isActive) return;
+        let events = [session.type];
+        for (const aliases of eventAliases) {
+          if (aliases.includes(session.type)) {
+            events = aliases;
+            session.type = aliases[0];
+            break;
+          }
+        }
+        this.context.emit("internal/session", session);
+        if (session.type === "internal") {
+          this.context.emit(session.event._type, session.event._data, session.bot);
+          return;
+        }
+        for (const event of events) {
+          this.context.emit(session, event, session);
+        }
+      }
+      async createMessage(channelId, content, guildId, options) {
+        const {
+          MessageEncoder: MessageEncoder2
+        } = this.constructor;
+        return new MessageEncoder2(this, channelId, guildId, options).send(content);
+      }
+      async sendMessage(channelId, content, guildId, options) {
+        const messages = await this.createMessage(channelId, content, guildId, options);
+        return messages.map(message => message.id);
+      }
+      async sendPrivateMessage(userId, content, guildId, options) {
+        const {
+          id
+        } = await this.createDirectChannel(userId, guildId ?? options?.session?.guildId);
+        return this.sendMessage(id, content, null, options);
+      }
+      async supports(name, session = {}) {
+        return !!this[import_protocol2.Methods[name]?.name];
+      }
+      async checkPermission(name, session) {
+        if (name.startsWith("bot.")) {
+          return this.supports(name.slice(4), session);
+        }
+      }
+      toJSON() {
+        return (0, import_cosmokit2.clone)((0, import_cosmokit2.pick)(this, ["platform", "selfId", "status", "user", "hidden"]));
+      }
+      async getLogin() {
+        return this.toJSON();
+      }
+      /** @deprecated use `bot.getLogin()` instead */
+      async getSelf() {
+        const {
+          user
+        } = await this.getLogin();
+        return user;
+      }
+    }, __name(_Class4, "Bot"), _defineProperty(_Class4, "reusable", true), _defineProperty(_Class4, "MessageEncoder", void 0), _Class4);
+    var iterableMethods = ["getMessage", "getReaction", "getFriend", "getGuild", "getGuildMember", "getGuildRole", "getChannel"];
+    for (const name of iterableMethods) {
+      Bot.prototype[name + "Iter"] = function (...args) {
+        let list;
+        if (!this[name + "List"]) throw new Error(`not implemented: ${name}List`);
+        const getList = /* @__PURE__ */__name(async () => {
+          list = await this[name + "List"](...args, list?.next);
+        }, "getList");
+        return {
+          async next() {
+            if (list?.data.length) return {
+              done: false,
+              value: list.data.shift()
+            };
+            if (list && !list?.next) return {
+              done: true,
+              value: void 0
+            };
+            await getList();
+            return this.next();
+          },
+          [Symbol.asyncIterator]() {
+            return this;
+          }
+        };
+      };
+    }
+    defineAccessor(Bot.prototype, "selfId", ["user", "id"]);
+    defineAccessor(Bot.prototype, "userId", ["user", "id"]);
+
+    // src/adapter.ts
+    var import_cosmokit3 = require$$1;
+    var import_protocol3 = lib$3;
+    var import_levi_cordis = libExports$2;
+    var Adapter = (_Class5 = class Adapter {
+      constructor(ctx) {
+        _defineProperty(this, "bots", []);
+        this.ctx = ctx;
+      }
+      async connect(bot) {}
+      async disconnect(bot) {}
+      fork(ctx, bot) {
+        bot.adapter = this;
+        this.bots.push(bot);
+        ctx.on("dispose", () => {
+          (0, import_cosmokit3.remove)(this.bots, bot);
+        });
+      }
+    }, __name(_Class5, "Adapter"), _defineProperty(_Class5, "schema", false), _Class5);
+    ((Adapter2, _WsClientBase, _WsClient) => {
+      Adapter2.WsClientConfig = import_levi_cordis.z.object({
+        retryTimes: import_levi_cordis.z.natural().description("初次连接时的最大重试次数。").default(6),
+        retryInterval: import_levi_cordis.z.natural().role("ms").description("初次连接时的重试时间间隔。").default(5 * import_cosmokit3.Time.second),
+        retryLazy: import_levi_cordis.z.natural().role("ms").description("连接关闭后的重试时间间隔。").default(import_cosmokit3.Time.minute)
+      }).description("连接设置");
+      class WsClientBase extends Adapter2 {
+        constructor(ctx, config) {
+          super(ctx);
+          _defineProperty(this, "socket", void 0);
+          this.config = config;
+        }
+        async start() {
+          let _retryCount = 0;
+          const logger = this.ctx.logger("adapter");
+          const {
+            retryTimes,
+            retryInterval,
+            retryLazy
+          } = this.config;
+          const reconnect = /* @__PURE__ */__name(async (initial = false) => {
+            logger.debug("websocket client opening");
+            const socket = await this.prepare();
+            const url = socket.url.replace(/\?.+/, "");
+            socket.addEventListener("error", event => {
+              if (event.message) logger.warn(event.message);
+            });
+            socket.addEventListener("close", ({
+              code,
+              reason
+            }) => {
+              this.socket = null;
+              logger.debug(`websocket closed with ${code}`);
+              if (!this.getActive()) return;
+              const message = reason.toString() || `failed to connect to ${url}, code: ${code}`;
+              let timeout = retryInterval;
+              if (_retryCount >= retryTimes) {
+                if (initial) {
+                  return this.setStatus(import_protocol3.Status.OFFLINE, new Error(message));
+                } else {
+                  timeout = retryLazy;
+                }
+              }
+              _retryCount++;
+              this.setStatus(import_protocol3.Status.RECONNECT);
+              logger.warn(`${message}, will retry in ${import_cosmokit3.Time.format(timeout)}...`);
+              setTimeout(() => {
+                if (this.getActive()) reconnect();
+              }, timeout);
+            });
+            socket.addEventListener("open", () => {
+              _retryCount = 0;
+              this.socket = socket;
+              logger.info("connect to server: %c", url);
+              this.accept(socket);
+            });
+          }, "reconnect");
+          reconnect(true);
+        }
+        async stop() {
+          this.socket?.close();
+        }
+      }
+      _WsClientBase = WsClientBase;
+      __name(_WsClientBase, "WsClientBase");
+      Adapter2.WsClientBase = WsClientBase;
+      class WsClient extends WsClientBase {
+        constructor(ctx, bot) {
+          super(ctx, bot.config);
+          this.bot = bot;
+          bot.adapter = this;
+        }
+        getActive() {
+          return this.bot.isActive;
+        }
+        setStatus(status, error = null) {
+          this.bot.status = status;
+          this.bot.error = error;
+        }
+        async connect(bot) {
+          this.start();
+        }
+        async disconnect(bot) {
+          this.stop();
+        }
+      }
+      _WsClient = WsClient;
+      __name(_WsClient, "WsClient");
+      _defineProperty(WsClient, "reusable", true);
+      Adapter2.WsClient = WsClient;
+    })(Adapter || (Adapter = {}));
+
+    // src/message.ts
+    var import_element2 = __toESM(lib$2, 1);
+    var AggregateError = (_Class6 = class AggregateError extends Error {
+      constructor(errors, message = "") {
+        super(message);
+        this.errors = errors;
+      }
+    }, __name(_Class6, "AggregateError"), _Class6);
+    var MessageEncoder = (_Class7 = class MessageEncoder {
+      constructor(bot, channelId, guildId, options = {}) {
+        _defineProperty(this, "errors", []);
+        _defineProperty(this, "results", []);
+        _defineProperty(this, "session", void 0);
+        this.bot = bot;
+        this.channelId = channelId;
+        this.guildId = guildId;
+        this.options = options;
+      }
+      async prepare() {}
+      async render(elements, flush) {
+        for (const element of elements) {
+          await this.visit(element);
+        }
+        if (flush) {
+          await this.flush();
+        }
+      }
+      async send(content) {
+        this.session = this.bot.session({
+          type: "send",
+          channel: {
+            id: this.channelId,
+            ...this.options.session?.event.channel
+          },
+          guild: this.options.session?.event.guild
+        });
+        for (const key in this.options.session || {}) {
+          if (key === "id" || key === "event") continue;
+          this.session[key] = this.options.session[key];
+        }
+        await this.prepare();
+        const session = this.options.session ?? this.session;
+        this.session.elements = await session.transform(import_element2.default.normalize(content));
+        const btns = import_element2.default.select(this.session.elements, "button").filter(v => v.attrs.type !== "link" && !v.attrs.id);
+        for (const btn of btns) {
+          const r = Math.random().toString(36).slice(2);
+          btn.attrs.id ||= r;
+          if (typeof btn.attrs.action === "function") this.bot.callbacks[btn.attrs.id] = btn.attrs.action;
+        }
+        if (await this.session.app.serial(this.session, "before-send", this.session, this.options)) return;
+        await this.render(this.session.elements);
+        await this.flush();
+        if (this.errors.length) {
+          throw new AggregateError(this.errors);
+        } else {
+          return this.results;
+        }
+      }
+    }, __name(_Class7, "MessageEncoder"), _Class7);
+
+    // src/index.ts
+    import_element3.default.warn = new cordis.Logger("element").warn;
+    (0, import_cosmokit4.defineProperty)(import_levi_undios.HTTP, "Config", import_levi_cordis2.z.object({
+      timeout: import_levi_cordis2.z.natural().role("ms").description("等待连接建立的最长时间。")
+    }).description("请求设置"));
+    import_levi_undios.HTTP.createConfig = /* @__PURE__ */__name(function createConfig(endpoint) {
+      return import_levi_cordis2.z.object({
+        baseURL: import_levi_cordis2.z.string().role("link").description("要连接的服务器地址。").default(typeof endpoint === "string" ? endpoint : null).required(typeof endpoint === "boolean" ? endpoint : false),
+        headers: import_levi_cordis2.z.dict(String).role("table").description("要附加的额外请求头。"),
+        ...this.Config.dict
+      }).description("请求设置");
+    }, "createConfig");
+    var Context = (_Class8 = class Context extends cordis.Context {
+      constructor(config = {}) {
+        super(config);
+        _defineProperty(this, "bots", new Proxy([], {
+          get(target, prop) {
+            if (prop in target || typeof prop === "symbol") {
+              return Reflect.get(target, prop);
+            }
+            return target.find(bot => bot.sid === prop);
+          },
+          deleteProperty(target, prop) {
+            if (prop in target || typeof prop === "symbol") {
+              return Reflect.deleteProperty(target, prop);
+            }
+            const bot = target.findIndex(bot2 => bot2.sid === prop);
+            if (bot < 0) return true;
+            target.splice(bot, 1);
+            return true;
+          }
+        }));
+        this.provide("http", void 0, true);
+        this.plugin(import_levi_undios.HTTP, config.request);
+      }
+      component(name, component, options = {}) {
+        const render = /* @__PURE__ */__name(async (attrs, children, session) => {
+          if (options.session && session.type === "send") {
+            throw new Error("interactive components is not available outside sessions");
+          }
+          const result = await component(attrs, children, session);
+          return session.transform(import_element3.default.normalize(result));
+        }, "render");
+        const service = "component:" + name;
+        this.provide(service);
+        return this.effect(() => {
+          this[service] = render;
+          return () => this[service] = null;
+        });
+      }
+    }, __name(_Class8, "Context"), _defineProperty(_Class8, "session", Symbol("session")), _defineProperty(_Class8, "Session", Session), _Class8);
+    (Context3 => {
+      Context3.Config = import_levi_cordis2.z.intersect([import_levi_cordis2.z.object({})]);
+    })(Context || (Context = {}));
+    var Service2 = (_cordis$Service$setup = cordis.Service.setup, (_Class9 = class Service2 extends cordis.Service {
+      [_cordis$Service$setup]() {
+        this.ctx = new Context();
+      }
+    }, __name(_Class9, "Service"), _Class9));
+  })(lib$9);
+  var libExports$1 = lib$9.exports;
+  (function (module) {
+    var __defProp = Object.defineProperty;
+    var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+    var __getOwnPropNames = Object.getOwnPropertyNames;
+    var __hasOwnProp = Object.prototype.hasOwnProperty;
+    var __copyProps = (to, from, except, desc) => {
+      if (from && typeof from === "object" || typeof from === "function") {
+        for (let key of __getOwnPropNames(from)) if (!__hasOwnProp.call(to, key) && key !== except) __defProp(to, key, {
+          get: () => from[key],
+          enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable
+        });
+      }
+      return to;
+    };
+    var __reExport = (target, mod, secondTarget) => (__copyProps(target, mod, "default"), secondTarget && __copyProps(secondTarget, mod, "default"));
+    var __toCommonJS = mod => __copyProps(__defProp({}, "__esModule", {
+      value: true
+    }), mod);
+
+    // src/index.ts
+    var src_exports = {};
+    module.exports = __toCommonJS(src_exports);
+    __reExport(src_exports, libExports$1, module.exports);
+    __reExport(src_exports, require$$1, module.exports);
+  })(lib$a);
+  var libExports = lib$a.exports;
+  var __defProp$9 = Object.defineProperty;
+  var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+  var __getOwnPropNames$1 = Object.getOwnPropertyNames;
+  var __hasOwnProp = Object.prototype.hasOwnProperty;
+  var __name$9 = (target, value) => __defProp$9(target, "name", {
+    value,
+    configurable: true
+  });
+  var __export = (target, all) => {
+    for (var name in all) __defProp$9(target, name, {
+      get: all[name],
+      enumerable: true
+    });
+  };
+  var __copyProps = (to, from, except, desc) => {
+    if (from && typeof from === "object" || typeof from === "function") {
+      for (let key of __getOwnPropNames$1(from)) if (!__hasOwnProp.call(to, key) && key !== except) __defProp$9(to, key, {
+        get: () => from[key],
+        enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable
+      });
+    }
+    return to;
+  };
+  var __toCommonJS = mod => __copyProps(__defProp$9({}, "__esModule", {
+    value: true
+  }), mod);
+
+  // src/index.ts
+  var src_exports = {};
+  __export(src_exports, {
+    SatoriAdapter: () => SatoriAdapter,
+    SatoriBot: () => SatoriBot,
+    default: () => src_default$1,
+    transformKey: () => transformKey
+  });
+  var lib = __toCommonJS(src_exports);
+
+  // src/ws.ts
+  var import_satori2 = libExports;
+
+  // src/bot.ts
+  var import_satori = libExports;
+  function transformKey(source, callback) {
+    if (!source || typeof source !== "object") return source;
+    if (Array.isArray(source)) return source.map(value => transformKey(value, callback));
+    return Object.fromEntries(Object.entries(source).map(([key, value]) => {
+      if (key.startsWith("_")) return [key, value];
+      return [callback(key), transformKey(value, callback)];
+    }));
+  }
+  __name$9(transformKey, "transformKey");
+  function createInternal(bot, prefix = "") {
+    return new Proxy(() => {}, {
+      apply(target, thisArg, args) {
+        return bot.http.post("/internal/" + (0, import_satori.snakeCase)(prefix.slice(1)), args);
+      },
+      get(target, key, receiver) {
+        if (typeof key === "symbol" || key in target) {
+          return Reflect.get(target, key, receiver);
+        }
+        return createInternal(bot, prefix + "." + key);
+      }
+    });
+  }
+  __name$9(createInternal, "createInternal");
+  var SatoriBot = (_Class10 = class SatoriBot extends import_satori.Bot {
+    constructor(ctx, config) {
+      super(ctx, config, "satori");
+      _defineProperty(this, "http", void 0);
+      _defineProperty(this, "internal", createInternal(this));
+      Object.assign(this, config);
+    }
+  }, __name$9(_Class10, "SatoriBot"), _Class10);
+  for (const [key, method] of Object.entries(import_satori.Universal.Methods)) {
+    SatoriBot.prototype[method.name] = function (...args) {
+      const payload = {};
+      for (const {
+        name
+      } of method.fields) {
+        if (name === "content") {
+          payload[name] = import_satori.h.normalize(args.shift()).join("");
+        } else {
+          payload[name] = transformKey(args.shift(), import_satori.snakeCase);
+        }
+      }
+      this.logger.debug("[request]", key, payload);
+      return this.http.post("/v1/" + key, payload);
+    };
+  }
+
+  // src/ws.ts
+  var SatoriAdapter = (_Class11 = class SatoriAdapter extends import_satori2.Adapter.WsClientBase {
+    // NodeJS.Timeout
+    constructor(ctx, config) {
+      super(ctx, config);
+      _defineProperty(this, "http", void 0);
+      _defineProperty(this, "logger", void 0);
+      _defineProperty(this, "_status", import_satori2.Universal.Status.OFFLINE);
+      _defineProperty(this, "sequence", void 0);
+      _defineProperty(this, "timeout", void 0);
+      this.ctx = ctx;
+      this.config = config;
+      this.logger = ctx.logger("satori");
+      this.http = ctx.http.extend({
+        baseURL: config.endpoint,
+        headers: {
+          "Authorization": `Bearer ${config.token}`
+        }
+      });
+      ctx.on("ready", () => this.start());
+      ctx.on("dispose", () => this.stop());
+    }
+    getActive() {
+      return this._status !== import_satori2.Universal.Status.OFFLINE && this._status !== import_satori2.Universal.Status.DISCONNECT;
+    }
+    setStatus(status, error) {
+      this._status = status;
+      if (status === import_satori2.Universal.Status.ONLINE) return;
+      for (const bot of this.bots) {
+        bot.status = status;
+        bot.error = error;
+      }
+    }
+    async prepare() {
+      return this.http.ws("/v1/events");
+    }
+    getBot(platform, selfId, login) {
+      let bot = this.bots.find(bot2 => bot2.selfId === selfId && bot2.platform === platform);
+      if (bot) {
+        bot.update(login);
+        return this.bots.includes(bot) ? bot : void 0;
+      }
+      if (!login) {
+        this.logger.error("cannot find bot for", platform, selfId);
+        return;
+      }
+      bot = new SatoriBot(this.ctx, login);
+      bot.adapter = this;
+      bot.http = this.http;
+      this.bots.push(bot);
+    }
+    accept() {
+      this.socket.send(JSON.stringify({
+        op: import_satori2.Universal.Opcode.IDENTIFY,
+        body: {
+          token: this.config.token,
+          sequence: this.sequence
+        }
+      }));
+      this.timeout = setInterval(() => {
+        this.socket.send(JSON.stringify({
+          op: import_satori2.Universal.Opcode.PING,
+          body: {}
+        }));
+      }, import_satori2.Time.second * 10);
+      this.socket.addEventListener("message", async ({
+        data
+      }) => {
+        let parsed;
+        data = data.toString();
+        try {
+          parsed = transformKey(JSON.parse(data), import_satori2.camelize);
+        } catch (error) {
+          return this.logger.warn("cannot parse message", data);
+        }
+        if (parsed.op === import_satori2.Universal.Opcode.READY) {
+          this.logger.debug("ready");
+          for (const login of parsed.body.logins) {
+            this.getBot(login.platform, login.selfId, login);
+          }
+        }
+        if (parsed.op === import_satori2.Universal.Opcode.EVENT) {
+          const {
+            id,
+            type,
+            selfId,
+            platform,
+            login
+          } = parsed.body;
+          this.sequence = id;
+          const bot = this.getBot(platform, selfId, type === "login-added" && login);
+          if (!bot) return;
+          if (type === "login-updated") {
+            return bot.update(login);
+          } else if (type === "login-removed") {
+            return bot.dispose();
+          }
+          const session = bot.session(parsed.body);
+          if (parsed.body.message?.content) {
+            session.content = parsed.body.message.content;
+          }
+          if (parsed.body._type && parsed.body.type !== "internal") {
+            session.setInternal(parsed.body._type, parsed.body._data);
+          }
+          bot.dispatch(session);
+        }
+      });
+      this.socket.addEventListener("close", () => {
+        clearInterval(this.timeout);
+      });
+    }
+    async start() {
+      this.setStatus(import_satori2.Universal.Status.CONNECT);
+      await super.start();
+    }
+    async stop() {
+      this.setStatus(import_satori2.Universal.Status.DISCONNECT);
+      await super.stop();
+    }
+  }, __name$9(_Class11, "SatoriAdapter"), _defineProperty(_Class11, "schema", true), _defineProperty(_Class11, "reusable", true), _defineProperty(_Class11, "inject", ["http"]), _Class11);
+  (SatoriAdapter2 => {
+    SatoriAdapter2.Config = import_satori2.Schema.intersect([import_satori2.Schema.object({
+      endpoint: import_satori2.Schema.string().description("API 终结点。").required(),
+      token: import_satori2.Schema.string().description("API 访问令牌。")
+    }), import_satori2.Adapter.WsClientConfig]);
+  })(SatoriAdapter || (SatoriAdapter = {}));
+
+  // src/index.ts
+  var src_default$1 = SatoriAdapter;
   var __defProp$8 = Object.defineProperty;
   var __name$8 = (target, value) => __defProp$8(target, "name", {
     value,
@@ -1006,13 +4786,13 @@
     return value !== null && value !== false && value !== void 0;
   }
   __name$8(isBailed, "isBailed");
-  var Lifecycle = (_Class = class Lifecycle {
+  var Lifecycle = _exports.Lifecycle = (_Class12 = class Lifecycle {
     constructor(root) {
       _defineProperty(this, "isActive", false);
       _defineProperty(this, "_tasks", /* @__PURE__ */new Set());
       _defineProperty(this, "_hooks", {});
       this.root = root;
-      defineProperty(this, Context$1.trace, root);
+      defineProperty(this, Context$1.origin, root);
       defineProperty(this.on("internal/listener", function (name, listener, prepend) {
         const method = prepend ? "unshift" : "push";
         if (name === "ready") {
@@ -1053,7 +4833,7 @@
       if (name !== "internal/event") {
         this.emit("internal/event", type, name, args, thisArg);
       }
-      return [this.getHooks(name, thisArg), thisArg ?? this[Context$1.trace]];
+      return [this.getHooks(name, thisArg), thisArg ?? this[Context$1.origin]];
     }
     async parallel(...args) {
       const [hooks, thisArg] = this.prepareEvent("parallel", args);
@@ -1082,7 +4862,7 @@
       }
     }
     register(label, hooks, listener, prepend) {
-      const caller = this[Context$1.trace];
+      const caller = this[Context$1.origin];
       const method = prepend ? "unshift" : "push";
       hooks[method]([caller, listener]);
       return caller.state.collect(label, () => this.unregister(hooks, listener));
@@ -1095,7 +4875,7 @@
       }
     }
     on(name, listener, prepend = false) {
-      const caller = this[Context$1.trace];
+      const caller = this[Context$1.origin];
       caller.scope.assertActive();
       const result = this.bail(caller, "internal/listener", name, listener, prepend);
       if (result) return result;
@@ -1126,10 +4906,10 @@
       this.isActive = false;
       this.root.scope.reset();
     }
-  }, __name$8(_Class, "Lifecycle"), _Class);
-  var symbols = {
+  }, __name$8(_Class12, "Lifecycle"), _Class12);
+  var symbols = _exports.symbols = {
     // context symbols
-    trace: Symbol.for("cordis.trace"),
+    origin: Symbol.for("cordis.origin"),
     events: Symbol.for("cordis.events"),
     static: Symbol.for("cordis.static"),
     filter: Symbol.for("cordis.filter"),
@@ -1172,7 +4952,7 @@
   function createTraceable(ctx, value) {
     const proxy = new Proxy(value, {
       get: (target, name, receiver) => {
-        if (name === symbols.trace || name === "caller") return ctx;
+        if (name === symbols.origin || name === "caller") return ctx;
         return Reflect.get(target, name, receiver);
       },
       apply: (target, thisArg, args) => {
@@ -1189,7 +4969,7 @@
   __name$8(applyTraceable, "applyTraceable");
   function createCallable(name, proto) {
     const self = /* @__PURE__ */__name$8(function (...args) {
-      const proxy = createTraceable(self[symbols.trace], self);
+      const proxy = createTraceable(self[symbols.origin], self);
       return applyTraceable(proxy, self, this, args);
     }, "self");
     defineProperty(self, "name", name);
@@ -1198,7 +4978,7 @@
   __name$8(createCallable, "createCallable");
 
   // src/scope.ts
-  var ScopeStatus = /* @__PURE__ */(ScopeStatus2 => {
+  var ScopeStatus = _exports.ScopeStatus = /* @__PURE__ */(ScopeStatus2 => {
     ScopeStatus2[ScopeStatus2["PENDING"] = 0] = "PENDING";
     ScopeStatus2[ScopeStatus2["LOADING"] = 1] = "LOADING";
     ScopeStatus2[ScopeStatus2["ACTIVE"] = 2] = "ACTIVE";
@@ -1206,18 +4986,18 @@
     ScopeStatus2[ScopeStatus2["DISPOSED"] = 4] = "DISPOSED";
     return ScopeStatus2;
   })(ScopeStatus || {});
-  exports.CordisError = (_CordisError2 = class _CordisError extends Error {
+  var CordisError = _exports.CordisError = (_CordisError3 = class _CordisError extends Error {
     constructor(code, message) {
       super(message ?? _CordisError.Code[code]);
       this.code = code;
     }
-  }, __name$8(_CordisError2, "CordisError"), _CordisError2);
+  }, __name$8(_CordisError3, "CordisError"), _CordisError3);
   (CordisError2 => {
     CordisError2.Code = {
       INACTIVE_EFFECT: "cannot create effect on inactive context"
     };
-  })(exports.CordisError || (exports.CordisError = {}));
-  var EffectScope = (_Class2 = class EffectScope {
+  })(CordisError || (_exports.CordisError = CordisError = {}));
+  var EffectScope = _exports.EffectScope = (_Class13 = class EffectScope {
     constructor(parent, config) {
       _defineProperty(this, "uid", void 0);
       _defineProperty(this, "ctx", void 0);
@@ -1246,7 +5026,7 @@
     }
     assertActive() {
       if (this.uid !== null || this.isActive) return;
-      throw new exports.CordisError("INACTIVE_EFFECT");
+      throw new CordisError("INACTIVE_EFFECT");
     }
     effect(callback, config) {
       this.assertActive();
@@ -1406,8 +5186,8 @@
       }
       return [hasUpdate, shouldRestart];
     }
-  }, __name$8(_Class2, "EffectScope"), _Class2);
-  var ForkScope = (_Class3 = class ForkScope extends EffectScope {
+  }, __name$8(_Class13, "EffectScope"), _Class13);
+  var ForkScope = _exports.ForkScope = (_Class14 = class ForkScope extends EffectScope {
     constructor(parent, runtime, config, error) {
       super(parent, config);
       _defineProperty(this, "dispose", void 0);
@@ -1450,10 +5230,10 @@
       }
       if (shouldRestart) state.restart();
     }
-  }, __name$8(_Class3, "ForkScope"), _Class3);
-  var MainScope = (_Class4 = class MainScope extends EffectScope {
-    constructor(registry, plugin, _config, error) {
-      super(registry[Context$1.trace], _config);
+  }, __name$8(_Class14, "ForkScope"), _Class14);
+  var MainScope = _exports.MainScope = (_Class15 = class MainScope extends EffectScope {
+    constructor(registry, plugin, _config2, error) {
+      super(registry[Context$1.origin], _config2);
       _defineProperty(this, "value", void 0);
       _defineProperty(this, "runtime", this);
       _defineProperty(this, "schema", void 0);
@@ -1559,19 +5339,19 @@
       }
       if (shouldRestart) this.restart();
     }
-  }, __name$8(_Class4, "MainScope"), _Class4);
+  }, __name$8(_Class15, "MainScope"), _Class15);
 
   // src/registry.ts
   function isApplicable(object) {
     return object && typeof object === "object" && typeof object.apply === "function";
   }
   __name$8(isApplicable, "isApplicable");
-  var Registry = (_Class5 = class Registry {
+  var Registry = _exports.Registry = (_Class16 = class Registry {
     constructor(root, config) {
       _defineProperty(this, "_counter", 0);
       _defineProperty(this, "_internal", /* @__PURE__ */new Map());
       this.root = root;
-      defineProperty(this, Context$1.trace, root);
+      defineProperty(this, Context$1.origin, root);
       root.scope = new MainScope(this, null, config);
       root.scope.runtime.isReactive = true;
     }
@@ -1630,7 +5410,7 @@
     }
     plugin(plugin, config) {
       this.resolve(plugin);
-      const context = this[Context$1.trace];
+      const context = this[Context$1.origin];
       context.scope.assertActive();
       let error;
       try {
@@ -1650,10 +5430,10 @@
       runtime = new MainScope(this, plugin, config, error);
       return runtime.fork(context, config, error);
     }
-  }, __name$8(_Class5, "Registry"), _Class5);
+  }, __name$8(_Class16, "Registry"), _Class16);
 
   // src/context.ts
-  var Context$1 = (_Symbol$for = Symbol.for("nodejs.util.inspect.custom"), (_Context2 = class _Context {
+  var Context$1 = (_Symbol$for2 = Symbol.for("nodejs.util.inspect.custom"), (_Context3 = class _Context {
     static is(value) {
       return !!value?.[_Context.is];
     }
@@ -1677,13 +5457,13 @@
       return new Proxy(object, {
         get(target, key, receiver) {
           if (typeof key === "symbol" || key in target) return Reflect.get(target, key, receiver);
-          const caller = receiver[symbols.trace];
+          const caller = receiver[symbols.origin];
           if (!caller?.[symbols.internal][`${name}.${key}`]) return Reflect.get(target, key, receiver);
           return caller.get(`${name}.${key}`);
         },
         set(target, key, value, receiver) {
           if (typeof key === "symbol" || key in target) return Reflect.set(target, key, value, receiver);
-          const caller = receiver[symbols.trace];
+          const caller = receiver[symbols.origin];
           if (!caller?.[symbols.internal][`${name}.${key}`]) return Reflect.set(target, key, value, receiver);
           caller[`${name}.${key}`] = value;
           return true;
@@ -1708,13 +5488,13 @@
           const constructor = internal[key]["prototype"]?.constructor;
           if (!constructor) continue;
           self[internal[key]["key"]] = new constructor(self, config);
-          defineProperty(self[internal[key]["key"]], symbols.trace, self);
+          defineProperty(self[internal[key]["key"]], symbols.origin, self);
         }
       }, "attach");
       attach(this[symbols.internal]);
       return self;
     }
-    [_Symbol$for]() {
+    [_Symbol$for2]() {
       return `Context <${this.name}>`;
     }
     get name() {
@@ -1737,7 +5517,7 @@
       const value = this.root[this[symbols.isolate][name]];
       if (!value || typeof value !== "object" && typeof value !== "function") return value;
       if (isUnproxyable(value)) {
-        defineProperty(value, symbols.trace, this);
+        defineProperty(value, symbols.origin, this);
         return value;
       }
       return createTraceable(this, value);
@@ -1802,10 +5582,10 @@
         [symbols.intercept]: intercept
       });
     }
-  }, __name$8(_Context2, "Context"), _defineProperty(_Context2, "trace", symbols.trace), _defineProperty(_Context2, "events", symbols.events), _defineProperty(_Context2, "static", symbols.static), _defineProperty(_Context2, "filter", symbols.filter), _defineProperty(_Context2, "expose", symbols.expose), _defineProperty(_Context2, "isolate", symbols.isolate), _defineProperty(_Context2, "internal", symbols.internal), _defineProperty(_Context2, "intercept", symbols.intercept), _defineProperty(_Context2, "current", _Context2.trace), (() => {
-    _Context2.is[Symbol.toPrimitive] = () => Symbol.for("cordis.is");
-    _Context2.prototype[_Context2.is] = true;
-  })(), _defineProperty(_Context2, "handler", {
+  }, __name$8(_Context3, "Context"), _defineProperty(_Context3, "origin", symbols.origin), _defineProperty(_Context3, "events", symbols.events), _defineProperty(_Context3, "static", symbols.static), _defineProperty(_Context3, "filter", symbols.filter), _defineProperty(_Context3, "expose", symbols.expose), _defineProperty(_Context3, "isolate", symbols.isolate), _defineProperty(_Context3, "internal", symbols.internal), _defineProperty(_Context3, "intercept", symbols.intercept), _defineProperty(_Context3, "current", _Context3.origin), (() => {
+    _Context3.is[Symbol.toPrimitive] = () => Symbol.for("cordis.is");
+    _Context3.prototype[_Context3.is] = true;
+  })(), _defineProperty(_Context3, "handler", {
     get(target, prop, ctx) {
       if (typeof prop !== "string") return Reflect.get(target, prop, ctx);
       const checkInject = /* @__PURE__ */__name$8(name2 => {
@@ -1816,13 +5596,13 @@
         let parent = ctx;
         while (parent.runtime.plugin) {
           for (const key of parent.runtime.inject) {
-            if (name2 === _Context2.resolveInject(parent, key)[0]) return;
+            if (name2 === _Context3.resolveInject(parent, key)[0]) return;
           }
           parent = parent.scope.parent;
         }
         ctx.emit("internal/warning", new Error(`property ${name2} is not registered, declare it as \`inject\` to suppress this warning`));
       }, "checkInject");
-      const [name, internal] = _Context2.resolveInject(ctx, prop);
+      const [name, internal] = _Context3.resolveInject(ctx, prop);
       if (!internal) {
         checkInject(name);
         return Reflect.get(target, name, ctx);
@@ -1836,7 +5616,7 @@
     },
     set(target, prop, value, ctx) {
       if (typeof prop !== "string") return Reflect.set(target, prop, value, ctx);
-      const [name, internal] = _Context2.resolveInject(ctx, prop);
+      const [name, internal] = _Context3.resolveInject(ctx, prop);
       if (!internal) return Reflect.set(target, name, value, ctx);
       if (internal.type === "accessor") {
         if (!internal.set) return false;
@@ -1861,19 +5641,19 @@
       ctx.root.emit(self, "internal/before-service", name, value);
       ctx.root[key] = value;
       if (value instanceof Object) {
-        defineProperty(value, symbols.trace, ctx);
+        defineProperty(value, symbols.origin, ctx);
       }
       ctx.root.emit(self, "internal/service", name, oldValue);
       return true;
     }
-  }), _Context2));
+  }), _Context3));
   Context$1.prototype[Context$1.internal] = /* @__PURE__ */Object.create(null);
-  var Service = (_symbols$trace = symbols.trace, _symbols$filter = symbols.filter, _symbols$setup = symbols.setup, _symbols$extend = symbols.extend, _Symbol$hasInstance = Symbol.hasInstance, (_Service2 = class _Service {
+  var Service = (_symbols$origin = symbols.origin, _symbols$filter = symbols.filter, _symbols$setup = symbols.setup, _symbols$extend = symbols.extend, _Symbol$hasInstance2 = Symbol.hasInstance, (_Service3 = class _Service {
     start() {}
     stop() {}
     constructor(...args) {
       _defineProperty(this, "ctx", void 0);
-      _defineProperty(this, _symbols$trace, void 0);
+      _defineProperty(this, _symbols$origin, void 0);
       _defineProperty(this, "name", void 0);
       _defineProperty(this, "config", void 0);
       let _ctx, name, immediate, config;
@@ -1901,7 +5681,7 @@
       }
       self.name = name;
       self.config = config;
-      defineProperty(self, symbols.trace, self.ctx);
+      defineProperty(self, symbols.origin, self.ctx);
       self.ctx.provide(name);
       self.ctx.runtime.name = name;
       if (immediate) {
@@ -1922,17 +5702,17 @@
       this.ctx = new Context$1();
     }
     [_symbols$extend](props) {
-      const caller = this[symbols.trace];
+      const caller = this[symbols.origin];
       let self;
       if (this[_Service.invoke]) {
         self = createCallable(this.name, this);
       } else {
         self = Object.create(this);
       }
-      defineProperty(self, symbols.trace, caller);
+      defineProperty(self, symbols.origin, caller);
       return Context$1.associate(Object.assign(self, props), this.name);
     }
-    static [_Symbol$hasInstance](instance) {
+    static [_Symbol$hasInstance2](instance) {
       let constructor = instance.constructor;
       while (constructor) {
         if (constructor === this) return true;
@@ -1940,7 +5720,7 @@
       }
       return false;
     }
-  }, __name$8(_Service2, "Service"), _defineProperty(_Service2, "setup", symbols.setup), _defineProperty(_Service2, "invoke", symbols.invoke), _defineProperty(_Service2, "extend", symbols.extend), _defineProperty(_Service2, "provide", symbols.provide), _defineProperty(_Service2, "immediate", symbols.immediate), _Service2));
+  }, __name$8(_Service3, "Service"), _defineProperty(_Service3, "setup", symbols.setup), _defineProperty(_Service3, "invoke", symbols.invoke), _defineProperty(_Service3, "extend", symbols.extend), _defineProperty(_Service3, "provide", symbols.provide), _defineProperty(_Service3, "immediate", symbols.immediate), _Service3));
 
   /*! js-yaml 4.1.0 https://github.com/nodeca/js-yaml @license MIT */
   function isNothing(subject) {
@@ -5042,7 +8822,7 @@
     return Math.random().toString(36).slice(2, 8);
   }
   __name$7(randomID, "randomID");
-  var Entry = (_Class6 = class Entry {
+  var Entry = (_Class17 = class Entry {
     constructor(loader, parent, options) {
       _defineProperty(this, "fork", null);
       _defineProperty(this, "isUpdate", false);
@@ -5117,7 +8897,7 @@
       this.fork.dispose();
       this.fork = null;
     }
-  }, __name$7(_Class6, "Entry"), _Class6);
+  }, __name$7(_Class17, "Entry"), _Class17);
   function mapEntry(pluginsConf) {
     if (!pluginsConf) return [];
     return Object.entries(pluginsConf).map(([name, config]) => {
@@ -5344,9 +9124,12 @@
   __name$7(group, "group");
   defineProperty(group, "inject", ["loader"]);
   defineProperty(group, "reusable", true);
-
-  // src/index.ts
-  var LoggerService = (_Service$invoke = Service.invoke, (_LoggerService2 = class _LoggerService extends Service {
+  var __defProp$6 = Object.defineProperty;
+  var __name$6 = (target, value) => __defProp$6(target, "name", {
+    value,
+    configurable: true
+  });
+  var LoggerService = (_Service$provide = Service.provide, _Service$invoke = Service.invoke, (_LoggerService3 = class _LoggerService extends Service {
     constructor(ctx) {
       super(ctx, "logger", true);
       ctx.on("internal/info", function (format, ...args) {
@@ -5361,29 +9144,29 @@
     }
     [_Service$invoke](name) {
       return new Logger$1(name, {
-        [Context$1.trace]: this
+        [Context$1.origin]: this
       });
     }
-  }, _defineProperty(_LoggerService2, "name", "logger"), (() => {
+  }, __name$6(_LoggerService3, "LoggerService"), _defineProperty(_LoggerService3, _Service$provide, "logger"), (() => {
     for (const type of ["success", "error", "info", "warn", "debug", "extend"]) {
-      _LoggerService2.prototype[type] = function (...args) {
-        const caller = this[Context$1.trace];
+      _LoggerService3.prototype[type] = function (...args) {
+        const caller = this[Context$1.origin];
         return this(caller.name)[type](...args);
       };
     }
-  })(), _LoggerService2));
-  var __defProp$6 = Object.defineProperty;
-  var __name$6 = (target, value) => __defProp$6(target, "name", {
+  })(), _LoggerService3));
+  var __defProp$5 = Object.defineProperty;
+  var __name$5 = (target, value) => __defProp$5(target, "name", {
     value,
     configurable: true
   });
-  var TimerService = (_Class7 = class TimerService extends Service {
+  var TimerService = _exports.TimerService = (_Class18 = class TimerService extends Service {
     constructor(ctx) {
       super(ctx, "timer", true);
       ctx.mixin("timer", ["setTimeout", "setInterval", "sleep", "throttle", "debounce"]);
     }
     setTimeout(callback, delay) {
-      const dispose = this[Context$1.trace].effect(() => {
+      const dispose = this[Context$1.origin].effect(() => {
         const timer = setTimeout(() => {
           dispose();
           callback();
@@ -5393,13 +9176,13 @@
       return dispose;
     }
     setInterval(callback, delay) {
-      return this[Context$1.trace].effect(() => {
+      return this[Context$1.origin].effect(() => {
         const timer = setInterval(callback, delay);
         return () => clearInterval(timer);
       });
     }
     sleep(delay) {
-      const caller = this[Context$1.trace];
+      const caller = this[Context$1.origin];
       return new Promise((resolve, reject) => {
         const dispose1 = this.setTimeout(() => {
           dispose1();
@@ -5414,15 +9197,15 @@
       });
     }
     createWrapper(callback, isDisposed = false) {
-      const caller = this[Context$1.trace];
+      const caller = this[Context$1.origin];
       caller.scope.assertActive();
       let timer;
-      const dispose = /* @__PURE__ */__name$6(() => {
+      const dispose = /* @__PURE__ */__name$5(() => {
         isDisposed = true;
         remove(caller.scope.disposables, dispose);
         clearTimeout(timer);
       }, "dispose");
-      const wrapper = /* @__PURE__ */__name$6((...args) => {
+      const wrapper = /* @__PURE__ */__name$5((...args) => {
         clearTimeout(timer);
         timer = callback(args, () => !isDisposed && caller.scope.isActive);
       }, "wrapper");
@@ -5432,7 +9215,7 @@
     }
     throttle(callback, delay, noTrailing) {
       let lastCall = -Infinity;
-      const execute = /* @__PURE__ */__name$6((...args) => {
+      const execute = /* @__PURE__ */__name$5((...args) => {
         lastCall = Date.now();
         callback(...args);
       }, "execute");
@@ -5452,636 +9235,13 @@
         return setTimeout(callback, delay, ...args);
       });
     }
-  }, __name$6(_Class7, "TimerService"), _Class7);
-  var __defProp$5 = Object.defineProperty;
-  var __getOwnPropNames$1 = Object.getOwnPropertyNames;
-  var __name$5 = (target, value) => __defProp$5(target, "name", {
-    value,
-    configurable: true
-  });
-  var __commonJS$1 = (cb, mod) => function __require() {
-    return mod || (0, cb[__getOwnPropNames$1(cb)[0]])((mod = {
-      exports: {}
-    }).exports, mod), mod.exports;
-  };
-  var require_src$1 = __commonJS$1({
-    "packages/schemastery/packages/core/src/index.ts"(exports, module) {
-      var kSchema = Symbol.for("schemastery");
-      globalThis.__schemastery_index__ ??= 0;
-      var Schema = /* @__PURE__ */__name$5(function (options) {
-        const schema = /* @__PURE__ */__name$5(function (data, options2) {
-          return Schema.resolve(data, schema, options2)[0];
-        }, "schema");
-        if (options.refs) {
-          const refs2 = mapValues(options.refs, options2 => new Schema(options2));
-          const getRef = /* @__PURE__ */__name$5(uid => refs2[uid], "getRef");
-          for (const key in refs2) {
-            const options2 = refs2[key];
-            options2.sKey = getRef(options2.sKey);
-            options2.inner = getRef(options2.inner);
-            options2.list = options2.list && options2.list.map(getRef);
-            options2.dict = options2.dict && mapValues(options2.dict, getRef);
-          }
-          return refs2[options.uid];
-        }
-        Object.assign(schema, options);
-        if (typeof schema.callback === "string") {
-          try {
-            schema.callback = new Function("return " + schema.callback)();
-          } catch {}
-        }
-        Object.defineProperty(schema, "uid", {
-          value: globalThis.__schemastery_index__++
-        });
-        Object.setPrototypeOf(schema, Schema.prototype);
-        schema.meta ||= {};
-        schema.toString = schema.toString.bind(schema);
-        return schema;
-      }, "Schema");
-      Schema.prototype = Object.create(Function.prototype);
-      Schema.prototype[kSchema] = true;
-      var refs;
-      Schema.prototype.toJSON = /* @__PURE__ */__name$5(function toJSON() {
-        if (refs) {
-          refs[this.uid] ??= JSON.parse(JSON.stringify({
-            ...this
-          }));
-          return this.uid;
-        }
-        refs = {
-          [this.uid]: {
-            ...this
-          }
-        };
-        refs[this.uid] = JSON.parse(JSON.stringify({
-          ...this
-        }));
-        const result = {
-          uid: this.uid,
-          refs
-        };
-        refs = void 0;
-        return result;
-      }, "toJSON");
-      Schema.prototype.set = /* @__PURE__ */__name$5(function set(key, value) {
-        this.dict[key] = value;
-        return this;
-      }, "set");
-      Schema.prototype.push = /* @__PURE__ */__name$5(function push(value) {
-        this.list.push(value);
-        return this;
-      }, "push");
-      function mergeDesc(original, messages) {
-        const result = typeof original === "string" ? {
-          "": original
-        } : {
-          ...original
-        };
-        for (const locale in messages) {
-          const value = messages[locale];
-          if (value?.$description || value?.$desc) {
-            result[locale] = value.$description || value.$desc;
-          } else if (typeof value === "string") {
-            result[locale] = value;
-          }
-        }
-        return result;
-      }
-      __name$5(mergeDesc, "mergeDesc");
-      function getInner(value) {
-        return value?.$value ?? value?.$inner;
-      }
-      __name$5(getInner, "getInner");
-      function extractKeys(data) {
-        return Object.fromEntries(Object.entries(data ?? {}).filter(([key]) => !key.startsWith("$")));
-      }
-      __name$5(extractKeys, "extractKeys");
-      Schema.prototype.i18n = /* @__PURE__ */__name$5(function i18n(messages) {
-        const schema = Schema(this);
-        schema.meta.description = mergeDesc(schema.meta.description, messages);
-        if (schema.dict) {
-          schema.dict = mapValues(schema.dict, (inner, key) => {
-            return inner.i18n(mapValues(messages, data => getInner(data)?.[key] ?? data?.[key]));
-          });
-        }
-        if (schema.list) {
-          schema.list = schema.list.map((inner, index) => {
-            return inner.i18n(mapValues(messages, (data = {}) => {
-              if (Array.isArray(getInner(data))) return getInner(data)[index];
-              if (Array.isArray(data)) return data[index];
-              return extractKeys(data);
-            }));
-          });
-        }
-        if (schema.inner) {
-          schema.inner = schema.inner.i18n(mapValues(messages, data => {
-            if (getInner(data)) return getInner(data);
-            return extractKeys(data);
-          }));
-        }
-        if (schema.sKey) {
-          schema.sKey = schema.sKey.i18n(mapValues(messages, data => data?.$key));
-        }
-        return schema;
-      }, "i18n");
-      Schema.prototype.extra = /* @__PURE__ */__name$5(function extra(key, value) {
-        const schema = Schema(this);
-        schema.meta = {
-          ...schema.meta,
-          [key]: value
-        };
-        return schema;
-      }, "extra");
-      for (const key of ["required", "disabled", "collapse", "hidden", "loose"]) {
-        Object.assign(Schema.prototype, {
-          [key](value = true) {
-            const schema = Schema(this);
-            schema.meta = {
-              ...schema.meta,
-              [key]: value
-            };
-            return schema;
-          }
-        });
-      }
-      Schema.prototype.deprecated = /* @__PURE__ */__name$5(function deprecated() {
-        const schema = Schema(this);
-        schema.meta.badges ||= [];
-        schema.meta.badges.push({
-          text: "deprecated",
-          type: "danger"
-        });
-        return schema;
-      }, "deprecated");
-      Schema.prototype.experimental = /* @__PURE__ */__name$5(function experimental() {
-        const schema = Schema(this);
-        schema.meta.badges ||= [];
-        schema.meta.badges.push({
-          text: "experimental",
-          type: "warning"
-        });
-        return schema;
-      }, "experimental");
-      Schema.prototype.pattern = /* @__PURE__ */__name$5(function pattern(regexp) {
-        const schema = Schema(this);
-        const pattern2 = pick(regexp, ["source", "flags"]);
-        schema.meta = {
-          ...schema.meta,
-          pattern: pattern2
-        };
-        return schema;
-      }, "pattern");
-      Schema.prototype.simplify = /* @__PURE__ */__name$5(function simplify(value) {
-        if (deepEqual(value, this.meta.default)) return null;
-        if (isNullable(value)) return value;
-        if (this.type === "object" || this.type === "dict") {
-          const result = {};
-          for (const key in value) {
-            const schema = this.type === "object" ? this.dict[key] : this.inner;
-            const item = schema?.simplify(value[key]);
-            if (!isNullable(item)) result[key] = item;
-          }
-          return result;
-        } else if (this.type === "array" || this.type === "tuple") {
-          const result = [];
-          value.forEach((value2, index) => {
-            const schema = this.type === "array" ? this.inner : this.list[index];
-            const item = schema ? schema.simplify(value2) : value2;
-            result.push(item);
-          });
-          return result;
-        } else if (this.type === "intersect") {
-          const result = {};
-          for (const item of this.list) {
-            Object.assign(result, item.simplify(value));
-          }
-          return result;
-        } else if (this.type === "union") {
-          for (const schema of this.list) {
-            try {
-              Schema.resolve(value, schema);
-              return schema.simplify(value);
-            } catch {}
-          }
-        }
-        return value;
-      }, "simplify");
-      Schema.prototype.toString = /* @__PURE__ */__name$5(function toString(inline) {
-        return formatters[this.type]?.(this, inline) ?? `Schema<${this.type}>`;
-      }, "toString");
-      Schema.prototype.role = /* @__PURE__ */__name$5(function role(role, extra) {
-        const schema = Schema(this);
-        schema.meta = {
-          ...schema.meta,
-          role,
-          extra
-        };
-        return schema;
-      }, "role");
-      for (const key of ["default", "link", "comment", "description", "max", "min", "step"]) {
-        Object.assign(Schema.prototype, {
-          [key](value) {
-            const schema = Schema(this);
-            schema.meta = {
-              ...schema.meta,
-              [key]: value
-            };
-            return schema;
-          }
-        });
-      }
-      var resolvers = {};
-      Schema.extend = /* @__PURE__ */__name$5(function extend(type, resolve) {
-        resolvers[type] = resolve;
-      }, "extend");
-      Schema.resolve = /* @__PURE__ */__name$5(function resolve(data, schema, options = {}, strict = false) {
-        if (!schema) return [data];
-        if (isNullable(data)) {
-          if (schema.meta.required) throw new TypeError(`missing required value`);
-          let current = schema;
-          let fallback = schema.meta.default;
-          while (current?.type === "intersect" && isNullable(fallback)) {
-            current = current.list[0];
-            fallback = current?.meta.default;
-          }
-          if (isNullable(fallback)) return [data];
-          data = clone(fallback);
-        }
-        const callback = resolvers[schema.type];
-        if (!callback) throw new TypeError(`unsupported type "${schema.type}"`);
-        try {
-          return callback(data, schema, options, strict);
-        } catch (error) {
-          if (!schema.meta.loose) throw error;
-          return [schema.meta.default];
-        }
-      }, "resolve");
-      Schema.from = /* @__PURE__ */__name$5(function from(source) {
-        if (isNullable(source)) {
-          return Schema.any();
-        } else if (["string", "number", "boolean"].includes(typeof source)) {
-          return Schema.const(source).required();
-        } else if (source[kSchema]) {
-          return source;
-        } else if (typeof source === "function") {
-          switch (source) {
-            case String:
-              return Schema.string().required();
-            case Number:
-              return Schema.number().required();
-            case Boolean:
-              return Schema.boolean().required();
-            case Function:
-              return Schema.function().required();
-            default:
-              return Schema.is(source).required();
-          }
-        } else {
-          throw new TypeError(`cannot infer schema from ${source}`);
-        }
-      }, "from");
-      Schema.natural = /* @__PURE__ */__name$5(function natural() {
-        return Schema.number().step(1).min(0);
-      }, "natural");
-      Schema.percent = /* @__PURE__ */__name$5(function percent() {
-        return Schema.number().step(0.01).min(0).max(1).role("slider");
-      }, "percent");
-      Schema.date = /* @__PURE__ */__name$5(function date() {
-        return Schema.union([Schema.is(Date), Schema.transform(Schema.string().role("datetime"), value => {
-          const date2 = new Date(value);
-          if (isNaN(+date2)) throw new TypeError(`invalid date "${value}"`);
-          return date2;
-        }, true)]);
-      }, "date");
-      Schema.extend("any", data => {
-        return [data];
-      });
-      Schema.extend("never", data => {
-        throw new TypeError(`expected nullable but got ${data}`);
-      });
-      Schema.extend("const", (data, {
-        value
-      }) => {
-        if (data === value) return [value];
-        throw new TypeError(`expected ${value} but got ${data}`);
-      });
-      function checkWithinRange(data, meta, description) {
-        const {
-          max = Infinity,
-          min = -Infinity
-        } = meta;
-        if (data > max) throw new TypeError(`expected ${description} <= ${max} but got ${data}`);
-        if (data < min) throw new TypeError(`expected ${description} >= ${min} but got ${data}`);
-      }
-      __name$5(checkWithinRange, "checkWithinRange");
-      Schema.extend("string", (data, {
-        meta
-      }) => {
-        if (typeof data !== "string") throw new TypeError(`expected string but got ${data}`);
-        if (meta.pattern) {
-          const regexp = new RegExp(meta.pattern.source, meta.pattern.flags);
-          if (!regexp.test(data)) throw new TypeError(`expect string to match regexp ${regexp}`);
-        }
-        checkWithinRange(data.length, meta, "string length");
-        return [data];
-      });
-      function decimalShift(data, digits) {
-        const str = data.toString();
-        if (str.includes("e")) return data * Math.pow(10, digits);
-        const index = str.indexOf(".");
-        if (index === -1) return data * Math.pow(10, digits);
-        const frac = str.slice(index + 1);
-        const integer = str.slice(0, index);
-        if (frac.length <= digits) return +(integer + frac.padEnd(digits, "0"));
-        return +(integer + frac.slice(0, digits) + "." + frac.slice(digits));
-      }
-      __name$5(decimalShift, "decimalShift");
-      function isMultipleOf(data, min, step) {
-        step = Math.abs(step);
-        if (!/^\d+\.\d+$/.test(step.toString())) {
-          return (data - min) % step === 0;
-        }
-        const index = step.toString().indexOf(".");
-        const digits = step.toString().slice(index + 1).length;
-        return Math.abs(decimalShift(data, digits) - decimalShift(min, digits)) % decimalShift(step, digits) === 0;
-      }
-      __name$5(isMultipleOf, "isMultipleOf");
-      Schema.extend("number", (data, {
-        meta
-      }) => {
-        if (typeof data !== "number") throw new TypeError(`expected number but got ${data}`);
-        checkWithinRange(data, meta, "number");
-        const {
-          step
-        } = meta;
-        if (step && !isMultipleOf(data, meta.min ?? 0, step)) {
-          throw new TypeError(`expected number multiple of ${step} but got ${data}`);
-        }
-        return [data];
-      });
-      Schema.extend("boolean", data => {
-        if (typeof data === "boolean") return [data];
-        throw new TypeError(`expected boolean but got ${data}`);
-      });
-      Schema.extend("bitset", (data, {
-        bits,
-        meta
-      }) => {
-        let value = 0,
-          keys = [];
-        if (typeof data === "number") {
-          value = data;
-          for (const key in bits) {
-            if (data & bits[key]) {
-              keys.push(key);
-            }
-          }
-        } else if (Array.isArray(data)) {
-          keys = data;
-          for (const key of keys) {
-            if (typeof key !== "string") throw new TypeError(`expected string but got ${key}`);
-            if (key in bits) value |= bits[key];
-          }
-        } else {
-          throw new TypeError(`expected number or array but got ${data}`);
-        }
-        if (value === meta.default) return [value];
-        return [value, keys];
-      });
-      Schema.extend("function", data => {
-        if (typeof data === "function") return [data];
-        throw new TypeError(`expected function but got ${data}`);
-      });
-      Schema.extend("is", (data, {
-        callback
-      }) => {
-        if (data instanceof callback) return [data];
-        throw new TypeError(`expected ${callback.name} but got ${data}`);
-      });
-      function property(data, key, schema, options) {
-        try {
-          const [value, adapted] = Schema.resolve(data[key], schema, options);
-          if (adapted !== void 0) data[key] = adapted;
-          return value;
-        } catch (e) {
-          if (!options?.autofix) throw e;
-          delete data[key];
-          return schema.meta.default;
-        }
-      }
-      __name$5(property, "property");
-      Schema.extend("array", (data, {
-        inner,
-        meta
-      }, options) => {
-        if (!Array.isArray(data)) throw new TypeError(`expected array but got ${data}`);
-        checkWithinRange(data.length, meta, "array length");
-        return [data.map((_, index) => property(data, index, inner, options))];
-      });
-      Schema.extend("dict", (data, {
-        inner,
-        sKey
-      }, options, strict) => {
-        if (!isPlainObject(data)) throw new TypeError(`expected object but got ${data}`);
-        const result = {};
-        for (const key in data) {
-          let rKey;
-          try {
-            rKey = Schema.resolve(key, sKey)[0];
-          } catch (error) {
-            if (strict) continue;
-            throw error;
-          }
-          result[rKey] = property(data, key, inner, options);
-          data[rKey] = data[key];
-          if (key !== rKey) delete data[key];
-        }
-        return [result];
-      });
-      Schema.extend("tuple", (data, {
-        list
-      }, options, strict) => {
-        if (!Array.isArray(data)) throw new TypeError(`expected array but got ${data}`);
-        const result = list.map((inner, index) => property(data, index, inner, options));
-        if (strict) return [result];
-        result.push(...data.slice(list.length));
-        return [result];
-      });
-      function merge(result, data) {
-        for (const key in data) {
-          if (key in result) continue;
-          result[key] = data[key];
-        }
-      }
-      __name$5(merge, "merge");
-      Schema.extend("object", (data, {
-        dict
-      }, options, strict) => {
-        if (!isPlainObject(data)) throw new TypeError(`expected object but got ${data}`);
-        const result = {};
-        for (const key in dict) {
-          const value = property(data, key, dict[key], options);
-          if (!isNullable(value) || key in data) {
-            result[key] = value;
-          }
-        }
-        if (!strict) merge(result, data);
-        return [result];
-      });
-      Schema.extend("union", (data, {
-        list,
-        toString
-      }, options, strict) => {
-        for (const inner of list) {
-          try {
-            return Schema.resolve(data, inner, options, strict);
-          } catch (error) {}
-        }
-        throw new TypeError(`expected ${toString()} but got ${JSON.stringify(data)}`);
-      });
-      Schema.extend("intersect", (data, {
-        list,
-        toString
-      }, options, strict) => {
-        let result;
-        for (const inner of list) {
-          const value = Schema.resolve(data, inner, options, true)[0];
-          if (isNullable(value)) continue;
-          if (isNullable(result)) {
-            result = value;
-          } else if (typeof result !== typeof value) {
-            throw new TypeError(`expected ${toString()} but got ${JSON.stringify(data)}`);
-          } else if (typeof value === "object") {
-            merge(result ??= {}, value);
-          } else if (result !== value) {
-            throw new TypeError(`expected ${toString()} but got ${JSON.stringify(data)}`);
-          }
-        }
-        if (!strict && isPlainObject(data)) merge(result, data);
-        return [result];
-      });
-      Schema.extend("transform", (data, {
-        inner,
-        callback,
-        preserve
-      }, options) => {
-        const [result, adapted = data] = Schema.resolve(data, inner, options, true);
-        if (preserve) {
-          return [callback(result)];
-        } else {
-          return [callback(result), callback(adapted)];
-        }
-      });
-      var formatters = {};
-      function defineMethod(name, keys, format) {
-        formatters[name] = format;
-        Object.assign(Schema, {
-          [name](...args) {
-            const schema = new Schema({
-              type: name
-            });
-            keys.forEach((key, index) => {
-              switch (key) {
-                case "sKey":
-                  schema.sKey = args[index] ?? Schema.string();
-                  break;
-                case "inner":
-                  schema.inner = Schema.from(args[index]);
-                  break;
-                case "list":
-                  schema.list = args[index].map(Schema.from);
-                  break;
-                case "dict":
-                  schema.dict = mapValues(args[index], Schema.from);
-                  break;
-                case "bits":
-                  {
-                    schema.bits = {};
-                    for (const key2 in args[index]) {
-                      if (typeof args[index][key2] !== "number") continue;
-                      schema.bits[key2] = args[index][key2];
-                    }
-                    break;
-                  }
-                case "callback":
-                  {
-                    schema.callback = args[index];
-                    schema.callback["toJSON"] ||= () => schema.callback.toString();
-                    break;
-                  }
-                default:
-                  schema[key] = args[index];
-              }
-            });
-            if (name === "object" || name === "dict") {
-              schema.meta.default = {};
-            } else if (name === "array" || name === "tuple") {
-              schema.meta.default = [];
-            } else if (name === "bitset") {
-              schema.meta.default = 0;
-            }
-            return schema;
-          }
-        });
-      }
-      __name$5(defineMethod, "defineMethod");
-      defineMethod("is", ["callback"], ({
-        callback
-      }) => callback.name);
-      defineMethod("any", [], () => "any");
-      defineMethod("never", [], () => "never");
-      defineMethod("const", ["value"], ({
-        value
-      }) => typeof value === "string" ? JSON.stringify(value) : value);
-      defineMethod("string", [], () => "string");
-      defineMethod("number", [], () => "number");
-      defineMethod("boolean", [], () => "boolean");
-      defineMethod("bitset", ["bits"], () => "bitset");
-      defineMethod("function", [], () => "function");
-      defineMethod("array", ["inner"], ({
-        inner
-      }) => `${inner.toString(true)}[]`);
-      defineMethod("dict", ["inner", "sKey"], ({
-        inner,
-        sKey
-      }) => `{ [key: ${sKey.toString()}]: ${inner.toString()} }`);
-      defineMethod("tuple", ["list"], ({
-        list
-      }) => `[${list.map(inner => inner.toString()).join(", ")}]`);
-      defineMethod("object", ["dict"], ({
-        dict
-      }) => {
-        if (Object.keys(dict).length === 0) return "{}";
-        return `{ ${Object.entries(dict).map(([key, inner]) => {
-        return `${key}${inner.meta.required ? "" : "?"}: ${inner.toString()}`;
-      }).join(", ")} }`;
-      });
-      defineMethod("union", ["list"], ({
-        list
-      }, inline) => {
-        const result = list.map(({
-          toString: format
-        }) => format()).join(" | ");
-        return inline ? `(${result})` : result;
-      });
-      defineMethod("intersect", ["list"], ({
-        list
-      }) => {
-        return `${list.map(inner => inner.toString(true)).join(" & ")}`;
-      });
-      defineMethod("transform", ["inner", "callback", "preserve"], ({
-        inner
-      }, isInner) => inner.toString(isInner));
-      module.exports = Schema;
-    }
-  });
-  var z2 = require_src$1();
+  }, __name$5(_Class18, "TimerService"), _Class18);
   var __defProp$4 = Object.defineProperty;
   var __name$4 = (target, value) => __defProp$4(target, "name", {
     value,
     configurable: true
   });
-  var Context2 = (_Class8 = class Context2 extends Context$1 {
+  var Context2 = (_Class19 = class Context2 extends Context$1 {
     constructor(config) {
       super(config);
       _defineProperty(this, "baseDir", void 0);
@@ -6091,8 +9251,8 @@
       this.plugin(LoggerService);
       this.plugin(TimerService);
     }
-  }, __name$4(_Class8, "Context"), _Class8);
-  var Service2$1 = (_Service$setup = Service.setup, (_Service3 = class Service2 extends Service {
+  }, __name$4(_Class19, "Context"), _Class19);
+  var Service2$1 = (_Service$setup = Service.setup, (_Service4 = class Service2 extends Service {
     constructor(...args) {
       super(...args);
       /** @deprecated use `this.ctx.logger` instead */
@@ -6102,7 +9262,7 @@
     [_Service$setup]() {
       this.ctx = new Context2();
     }
-  }, __name$4(_Service3, "Service"), _Service3));
+  }, __name$4(_Service4, "Service"), _Service4));
 
   // src/index.ts
   function src_default() {}
@@ -6151,6 +9311,9 @@
   });
   class Loader extends Loader$1 {
     async import(name) {
+      if (this.options.importMapping && name in this.options.importMapping) {
+        name = this.options.importMapping[name];
+      }
       const base = trimSlash(this.options.requireBase ?? this.options.baseDir ?? "");
       try {
         return require(`${base}/${name}`);
@@ -6261,7 +9424,7 @@
     WebSocket2.CLOSING = 2;
     WebSocket2.CLOSED = 3;
   })(WebSocket$1 || (WebSocket$1 = {}));
-  var index = /*#__PURE__*/Object.freeze({
+  var index = _exports.Universal = /*#__PURE__*/Object.freeze({
     __proto__: null,
     get Channel() {
       return Channel;
@@ -6286,9 +9449,9 @@
   };
   var require_src = __commonJS({
     "src/index.ts"(exports, module) {
-      var _Class9;
+      var _Class20;
       var kElement = Symbol.for("satori.element");
-      var ElementConstructor = (_Class9 = class ElementConstructor {
+      var ElementConstructor = (_Class20 = class ElementConstructor {
         get data() {
           return this.attrs;
         }
@@ -6319,7 +9482,7 @@
           if (!this.children.length) return `<${tag}${attrs}/>`;
           return `<${tag}${attrs}>${inner}</${tag}>`;
         }
-      }, __name$2(_Class9, "ElementConstructor"), _Class9);
+      }, __name$2(_Class20, "ElementConstructor"), _Class20);
       defineProperty(ElementConstructor, "name", "Element");
       defineProperty(ElementConstructor.prototype, kElement, true);
       function Element(type, ...args) {
@@ -6769,7 +9932,7 @@
       module.exports = Element;
     }
   });
-  var h3 = require_src();
+  var h3 = _exports.segment = _exports.h = _exports.Element = require_src();
   var __defProp$1 = Object.defineProperty;
   var __name$1 = (target, value) => __defProp$1(target, "name", {
     value,
@@ -6781,7 +9944,7 @@
     return new Promise(resolve => setTimeout(resolve, ms));
   }
   __name$1(sleep, "sleep");
-  var WebSocket = (_Class10 = class WebSocket extends EventTarget {
+  var WebSocket = (_Class21 = class WebSocket extends EventTarget {
     constructor(url, config) {
       super();
       _defineProperty(this, "ws", void 0);
@@ -6875,11 +10038,11 @@
       if (!this.ws) throw new Error("Connection Closed");
       this.ws.send(data);
     }
-  }, __name$1(_Class10, "WebSocket"), _Class10);
+  }, __name$1(_Class21, "WebSocket"), _Class21);
 
   // src/index.ts
   var kHTTPError = Symbol.for("undios.error");
-  var HTTPError = (_Class11 = class HTTPError extends Error {
+  var HTTPError = (_Class22 = class HTTPError extends Error {
     constructor(...args) {
       super(...args);
       _defineProperty(this, kHTTPError, true);
@@ -6893,8 +10056,8 @@
     static is(error) {
       return !!error?.[kHTTPError];
     }
-  }, __name$1(_Class11, "HTTPError"), _Class11);
-  var HTTP = (_Service2$1$provide = Service2$1.provide, _Service2$1$immediate = Service2$1.immediate, _Service2$1$invoke = Service2$1.invoke, (_HTTP2 = class _HTTP extends Service2$1 {
+  }, __name$1(_Class22, "HTTPError"), _Class22);
+  var HTTP = (_Service2$1$provide = Service2$1.provide, _Service2$1$immediate = Service2$1.immediate, _Service2$1$invoke = Service2$1.invoke, (_HTTP3 = class _HTTP extends Service2$1 {
     constructor(...args) {
       super(args[0], args[1]);
       _defineProperty(this, "_decoders", /* @__PURE__ */Object.create(null));
@@ -6968,7 +10131,7 @@
           ;
           init.data = JSON.stringify(config.data);
         }
-        caller.emit("http/fetch-init", init, config);
+        caller.emit("http/fetch-init", init.url, init, config);
         const rawResp = await this.fetch(init);
         const validateStatus = config.validateStatus ?? (status => Math.floor(status / 100) === 2);
         if (!validateStatus(rawResp.status)) {
@@ -7023,13 +10186,14 @@
       }
     }
     ws(url, init) {
+      if (init?.headers) this.ctx.logger.warn("headers is not supported in ws");
       const caller = this[Context2.current];
       const config = this.resolveConfig(init);
       url = this.resolveURL(url, config);
       init = {
         timeout: config.timeout
       };
-      caller.emit("http/websocket-init", init, config);
+      caller.emit("http/websocket-init", url, init, config);
       const socket = new WebSocket(url, init);
       const dispose = caller.on("dispose", () => {
         socket.close(1001, "context disposed");
@@ -7039,9 +10203,9 @@
       });
       return socket;
     }
-  }, __name$1(_HTTP2, "HTTP"), _defineProperty(_HTTP2, "Error", HTTPError), _defineProperty(_HTTP2, _Service2$1$provide, "http"), _defineProperty(_HTTP2, _Service2$1$immediate, true), (() => {
+  }, __name$1(_HTTP3, "HTTP"), _defineProperty(_HTTP3, "Error", HTTPError), _defineProperty(_HTTP3, _Service2$1$provide, "http"), _defineProperty(_HTTP3, _Service2$1$immediate, true), (() => {
     for (const method of ["get"]) {
-      defineProperty(_HTTP2.prototype, method, async function (url, config) {
+      defineProperty(_HTTP3.prototype, method, async function (url, config) {
         const response = await this(url, {
           method,
           ...config
@@ -7050,7 +10214,7 @@
       });
     }
     for (const method of ["post"]) {
-      defineProperty(_HTTP2.prototype, method, async function (url, data, config) {
+      defineProperty(_HTTP3.prototype, method, async function (url, data, config) {
         const response = await this(url, {
           method,
           data,
@@ -7059,20 +10223,20 @@
         return response.data;
       });
     }
-  })(), _defineProperty(_HTTP2, "mergeConfig", (target, source) => ({
+  })(), _defineProperty(_HTTP3, "mergeConfig", (target, source) => ({
     ...target,
     ...source,
     headers: {
       ...target?.headers,
       ...source?.headers
     }
-  })), _HTTP2));
+  })), _HTTP3));
   var __defProp = Object.defineProperty;
   var __name = (target, value) => __defProp(target, "name", {
     value,
     configurable: true
   });
-  var Session = (_Session2 = class _Session {
+  var Session = _exports.Session = (_Session3 = class _Session {
     constructor(bot, event) {
       _defineProperty(this, "id", void 0);
       _defineProperty(this, "bot", void 0);
@@ -7086,8 +10250,8 @@
       this.id = ++_Session.counter;
       defineProperty(this, "bot", bot);
       defineProperty(this, "app", bot.ctx.root);
-      defineProperty(this, exports.Context.current, bot.ctx);
-      return exports.Context.associate(this, "session");
+      defineProperty(this, Context.current, bot.ctx);
+      return Context.associate(this, "session");
     }
     /** @deprecated */
     get data() {
@@ -7158,7 +10322,7 @@
         id: this.id
       };
     }
-  }, __name(_Session2, "Session"), _defineProperty(_Session2, "counter", 0), _Session2);
+  }, __name(_Session3, "Session"), _defineProperty(_Session3, "counter", 0), _Session3);
   function defineAccessor(prototype, name, keys) {
     Object.defineProperty(prototype, name, {
       get() {
@@ -7190,7 +10354,7 @@
   defineAccessor(Session.prototype, "roleId", ["event", "role", "id"]);
   defineAccessor(Session.prototype, "quote", ["event", "message", "quote"]);
   var eventAliases = [["message-created", "message"]];
-  var Bot = (_Class12 = class Bot {
+  var Bot = _exports.Bot = (_Class23 = class Bot {
     constructor(ctx, config, platform) {
       _defineProperty(this, "user", {});
       _defineProperty(this, "isBot", true);
@@ -7353,7 +10517,7 @@
       } = await this.getLogin();
       return user;
     }
-  }, __name(_Class12, "Bot"), _defineProperty(_Class12, "reusable", true), _defineProperty(_Class12, "MessageEncoder", void 0), _Class12);
+  }, __name(_Class23, "Bot"), _defineProperty(_Class23, "reusable", true), _defineProperty(_Class23, "MessageEncoder", void 0), _Class23);
   var iterableMethods = ["getMessage", "getReaction", "getFriend", "getGuild", "getGuildMember", "getGuildRole", "getChannel"];
   for (const name of iterableMethods) {
     Bot.prototype[name + "Iter"] = function (...args) {
@@ -7383,7 +10547,7 @@
   }
   defineAccessor(Bot.prototype, "selfId", ["user", "id"]);
   defineAccessor(Bot.prototype, "userId", ["user", "id"]);
-  exports.Adapter = (_Class13 = class Adapter {
+  var Adapter = _exports.Adapter = (_Class24 = class Adapter {
     constructor(ctx) {
       _defineProperty(this, "bots", []);
       this.ctx = ctx;
@@ -7397,12 +10561,12 @@
         remove(this.bots, bot);
       });
     }
-  }, __name(_Class13, "Adapter"), _defineProperty(_Class13, "schema", false), _Class13);
-  ((Adapter2, _WsClientBase, _WsClient) => {
+  }, __name(_Class24, "Adapter"), _defineProperty(_Class24, "schema", false), _Class24);
+  ((Adapter2, _WsClientBase2, _WsClient2) => {
     Adapter2.WsClientConfig = z2.object({
       retryTimes: z2.natural().description("初次连接时的最大重试次数。").default(6),
-      retryInterval: z2.natural().role("ms").description("初次连接时的重试时间间隔。").default(5 * exports.Time.second),
-      retryLazy: z2.natural().role("ms").description("连接关闭后的重试时间间隔。").default(exports.Time.minute)
+      retryInterval: z2.natural().role("ms").description("初次连接时的重试时间间隔。").default(5 * Time.second),
+      retryLazy: z2.natural().role("ms").description("连接关闭后的重试时间间隔。").default(Time.minute)
     }).description("连接设置");
     class WsClientBase extends Adapter2 {
       constructor(ctx, config) {
@@ -7443,7 +10607,7 @@
             }
             _retryCount++;
             this.setStatus(Status.RECONNECT);
-            logger.warn(`${message}, will retry in ${exports.Time.format(timeout)}...`);
+            logger.warn(`${message}, will retry in ${Time.format(timeout)}...`);
             setTimeout(() => {
               if (this.getActive()) reconnect();
             }, timeout);
@@ -7461,8 +10625,8 @@
         this.socket?.close();
       }
     }
-    _WsClientBase = WsClientBase;
-    __name(_WsClientBase, "WsClientBase");
+    _WsClientBase2 = WsClientBase;
+    __name(_WsClientBase2, "WsClientBase");
     Adapter2.WsClientBase = WsClientBase;
     class WsClient extends WsClientBase {
       constructor(ctx, bot) {
@@ -7484,18 +10648,18 @@
         this.stop();
       }
     }
-    _WsClient = WsClient;
-    __name(_WsClient, "WsClient");
+    _WsClient2 = WsClient;
+    __name(_WsClient2, "WsClient");
     _defineProperty(WsClient, "reusable", true);
     Adapter2.WsClient = WsClient;
-  })(exports.Adapter || (exports.Adapter = {}));
-  var AggregateError = (_Class14 = class AggregateError extends Error {
+  })(Adapter || (_exports.Adapter = Adapter = {}));
+  var AggregateError = (_Class25 = class AggregateError extends Error {
     constructor(errors, message = "") {
       super(message);
       this.errors = errors;
     }
-  }, __name(_Class14, "AggregateError"), _Class14);
-  var MessageEncoder = (_Class15 = class MessageEncoder {
+  }, __name(_Class25, "AggregateError"), _Class25);
+  var MessageEncoder = _exports.Modulator = _exports.Messenger = _exports.MessageEncoder = (_Class26 = class MessageEncoder {
     constructor(bot, channelId, guildId, options = {}) {
       _defineProperty(this, "errors", []);
       _defineProperty(this, "results", []);
@@ -7545,7 +10709,7 @@
         return this.results;
       }
     }
-  }, __name(_Class15, "MessageEncoder"), _Class15);
+  }, __name(_Class26, "MessageEncoder"), _Class26);
 
   // src/index.ts
   h3.warn = new Logger$1("element").warn;
@@ -7559,7 +10723,7 @@
       ...this.Config.dict
     }).description("请求设置");
   }, "createConfig");
-  exports.Context = (_Class16 = class Context extends Context2 {
+  var Context = _exports.Context = (_Class27 = class Context extends Context2 {
     constructor(config = {}) {
       super(config);
       _defineProperty(this, "bots", new Proxy([], {
@@ -7597,15 +10761,15 @@
         return () => this[service] = null;
       });
     }
-  }, __name(_Class16, "Context"), _defineProperty(_Class16, "session", Symbol("session")), _defineProperty(_Class16, "Session", Session), _Class16);
+  }, __name(_Class27, "Context"), _defineProperty(_Class27, "session", Symbol("session")), _defineProperty(_Class27, "Session", Session), _Class27);
   (Context3 => {
     Context3.Config = z2.intersect([z2.object({})]);
-  })(exports.Context || (exports.Context = {}));
-  var Service2 = (_Service2$1$setup = Service2$1.setup, (_Class17 = class Service2 extends Service2$1 {
+  })(Context || (_exports.Context = Context = {}));
+  var Service2 = _exports.Service = (_Service2$1$setup = Service2$1.setup, (_Class28 = class Service2 extends Service2$1 {
     [_Service2$1$setup]() {
-      this.ctx = new exports.Context();
+      this.ctx = new Context();
     }
-  }, __name(_Class17, "Service"), _Class17));
+  }, __name(_Class28, "Service"), _Class28));
   const name = "LeviSatori";
   const baseDir = `./plugins/${name}`;
   const pluginBaseDir = `./plugins/${name}/plugins`;
@@ -7624,70 +10788,10 @@
       requireBase,
       logger: {
         levels: 2
+      },
+      importMapping: {
+        "adapter-satori": lib.SatoriAdapter
       }
     }).catch(e => logger.error(`${e}`));
   });
-
-  exports.Bot = Bot;
-  exports.EffectScope = EffectScope;
-  exports.Element = h3;
-  exports.ForkScope = ForkScope;
-  exports.Lifecycle = Lifecycle;
-  exports.Logger = Logger$1;
-  exports.MainScope = MainScope;
-  exports.MessageEncoder = MessageEncoder;
-  exports.Messenger = MessageEncoder;
-  exports.Modulator = MessageEncoder;
-  exports.Registry = Registry;
-  exports.Schema = z2;
-  exports.ScopeStatus = ScopeStatus;
-  exports.Service = Service2;
-  exports.Session = Session;
-  exports.TimerService = TimerService;
-  exports.Universal = index;
-  exports.applyTraceable = applyTraceable;
-  exports.arrayBufferToBase64 = arrayBufferToBase64;
-  exports.base64ToArrayBuffer = base64ToArrayBuffer;
-  exports.camelCase = camelCase;
-  exports.camelize = camelize;
-  exports.capitalize = capitalize;
-  exports.clone = clone;
-  exports.contain = contain;
-  exports.createCallable = createCallable;
-  exports.createTraceable = createTraceable;
-  exports.deduplicate = deduplicate;
-  exports.deepEqual = deepEqual;
-  exports.defineAccessor = defineAccessor;
-  exports.defineProperty = defineProperty;
-  exports.difference = difference;
-  exports.filterKeys = filterKeys;
-  exports.h = h3;
-  exports.hyphenate = hyphenate;
-  exports.intersection = intersection;
-  exports.is = is;
-  exports.isApplicable = isApplicable;
-  exports.isBailed = isBailed;
-  exports.isConstructor = isConstructor;
-  exports.isNullable = isNullable;
-  exports.isPlainObject = isPlainObject;
-  exports.isUnproxyable = isUnproxyable;
-  exports.joinPrototype = joinPrototype;
-  exports.makeArray = makeArray;
-  exports.mapValues = mapValues;
-  exports.noop = noop;
-  exports.omit = omit;
-  exports.paramCase = paramCase;
-  exports.pick = pick;
-  exports.remove = remove;
-  exports.resolveConfig = resolveConfig;
-  exports.sanitize = sanitize;
-  exports.segment = h3;
-  exports.snakeCase = snakeCase;
-  exports.symbols = symbols;
-  exports.trimSlash = trimSlash;
-  exports.uncapitalize = uncapitalize;
-  exports.union = union;
-  exports.valueMap = mapValues;
-  exports.z = z2;
-
-}));
+});

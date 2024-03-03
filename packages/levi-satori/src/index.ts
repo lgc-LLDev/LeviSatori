@@ -3,10 +3,12 @@
 import "./polyfill";
 
 import Logger from "levi-reggol";
+import { SatoriAdapter } from "@levi-satorijs/adapter-satori";
 
 import { start } from "./loader";
 
 export * from "@levi-satorijs/satori";
+export * from "@levi-satorijs/adapter-satori";
 export * from "cosmokit";
 export { Logger };
 
@@ -28,5 +30,6 @@ mc.listen("onServerStarted", () => {
     baseDir,
     requireBase,
     logger: { levels: 2 },
+    importMapping: { "adapter-satori": SatoriAdapter },
   }).catch((e) => logger.error(`${e}`));
 });

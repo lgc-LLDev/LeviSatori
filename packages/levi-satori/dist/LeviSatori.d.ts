@@ -1,5 +1,1 @@
-/* eslint-disable */
-// @ts-nocheck
-export namespace globalThis {
-  const LeviSatori: import("./index");
-}
+declare const LeviSatori: typeof import("./index");

@@ -4,9 +4,8 @@
   "compilerOptions": {
     "module": "ESNext",
     "moduleResolution": "Node",
-    "rootDir": ".",
+    "rootDir": "./src",
     "outDir": "./dist",
-    "noEmit": true,
     "composite": false,
     "incremental": false
   }

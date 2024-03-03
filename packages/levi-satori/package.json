@@ -5,7 +5,7 @@
   "main": "dist/LeviSatori.js",
   "types": "dist/LeviSatori.d.ts",
   "scripts": {
-    "build": "rollup -c && node -e \"const fs=require('fs');fs.copyFileSync('./src/index.bundle.d.ts','./dist/LeviSatori.d.ts');\" && rimraf ./dist/LeviSatori.tmp.js",
+    "build": "rollup -c",
     "clean": "rimraf ./dist"
   },
   "keywords": [],
@@ -17,6 +17,7 @@
     "@babel/core": "^7.24.0",
     "@babel/plugin-transform-class-properties": "^7.23.3",
     "@babel/plugin-transform-class-static-block": "^7.23.4",
+    "@babel/plugin-transform-modules-umd": "^7.23.3",
     "@rollup/plugin-babel": "^6.0.4",
     "@rollup/plugin-commonjs": "^25.0.7",
     "@rollup/plugin-json": "^6.1.0",
@@ -31,7 +32,6 @@
   "dependencies": {
     "@levi-satorijs/satori": "workspace:^",
     "cosmokit": "^1.5.2",
-    "event-target-polyfill": "^0.0.4",
-    "js-yaml": "^4.1.0"
+    "event-target-polyfill": "^0.0.4"
   }
 }

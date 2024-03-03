@@ -1,11 +1,12 @@
 import { Loader as BaseLoader } from "@levi-cordisjs/loader";
-import { trimSlash } from "cosmokit";
+import { Dict, trimSlash } from "cosmokit";
 import { Context } from "levi-cordis";
 import * as Logger from "./logger";
 
 export namespace Loader {
   export interface Options extends BaseLoader.Options {
     requireBase?: string;
+    importMapping?: Dict;
   }
 }
 
@@ -13,6 +14,9 @@ export class Loader<
   T extends Loader.Options = Loader.Options
 > extends BaseLoader<T> {
   public override async import(name: string) {
+    if (this.options.importMapping && name in this.options.importMapping) {
+      name = this.options.importMapping[name];
+    }
     const base = trimSlash(
       this.options.requireBase ?? this.options.baseDir ?? ""
     );

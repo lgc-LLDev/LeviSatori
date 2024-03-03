@@ -5,7 +5,8 @@
   "private": true,
   "license": "MIT",
   "workspaces": [
-    "packages/*"
+    "packages/*",
+    "external/*"
   ],
   "scripts": {
     "build": "yarn workspace levi-reggol build && yarn workspace @root/cordis build && yarn workspace @root/undios build && yarn workspace @root/satori build && yarn workspace levi-satori build"
