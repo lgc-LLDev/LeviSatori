@@ -2,21 +2,31 @@
 
 import "./polyfill";
 
-import { start } from "levi-cordis";
+import Logger from "levi-reggol";
+
+import { start } from "./loader";
 
 export * from "@levi-satorijs/satori";
+export * from "cosmokit";
+export { Logger };
 
 const name = "LeviSatori";
 const baseDir = `./plugins/${name}`;
+const pluginBaseDir = `./plugins/${name}/plugins`;
+const requireBase = `./${name}/plugins`;
 const configPath = `${baseDir}/${name}.yml`;
 
 mc.listen("onServerStarted", () => {
   if (!file.exists(configPath)) {
-    file.writeTo(configPath, "");
+    file.writeTo(configPath, "plugins: []");
+  }
+  if (!file.exists(pluginBaseDir)) {
+    file.mkdir(pluginBaseDir);
   }
   start({
     name,
     baseDir,
+    requireBase,
     logger: { levels: 2 },
-  });
+  }).catch((e) => logger.error(`${e}`));
 });

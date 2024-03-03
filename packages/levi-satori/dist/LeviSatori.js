@@ -4,8 +4,8 @@
   (global = typeof globalThis !== 'undefined' ? globalThis : global || self, factory(global.LeviSatori = {}));
 })(this, (function (exports) { 'use strict';
 
-  let _Symbol$for, _symbols$trace, _symbols$filter, _symbols$setup, _symbols$extend, _Symbol$hasInstance, _Service$invoke, _Service$setup, _Service$setup2, _Service2$1$provide, _Service2$1$immediate, _Service2$1$invoke, _Service2$1$setup;
-  var _Class, _CordisError2, _Class2, _Class3, _Class4, _Class5, _Context2, _Service2, _LoggerService2, _Class6, _Class7, _Class8, _Context3, _Class9, _Class10, _Service3, _Class12, _Class13, _HTTP2, _Session2, _Class14, _Class15, _Class16, _Class17, _Class18, _Class19;
+  let _Symbol$for, _symbols$trace, _symbols$filter, _symbols$setup, _symbols$extend, _Symbol$hasInstance, _Service$invoke, _Service$setup, _Service2$1$provide, _Service2$1$immediate, _Service2$1$invoke, _Service2$1$setup;
+  var _Class, _CordisError2, _Class2, _Class3, _Class4, _Class5, _Context2, _Service2, _Class6, _Loader, _LoggerService2, _Class7, _Class8, _Service3, _Class10, _Class11, _HTTP2, _Session2, _Class12, _Class13, _Class14, _Class15, _Class16, _Class17;
   function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
   function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == typeof i ? i : String(i); }
   function _toPrimitive(t, r) { if ("object" != typeof t || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != typeof i) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
@@ -144,36 +144,36 @@
       return EventTarget;
     }();
   }
-  var __defProp$b = Object.defineProperty;
-  var __name$a = (target, value) => __defProp$b(target, "name", {
+  var __defProp$a = Object.defineProperty;
+  var __name$9 = (target, value) => __defProp$a(target, "name", {
     value,
     configurable: true
   });
 
   // packages/cosmokit/src/misc.ts
   function noop() {}
-  __name$a(noop, "noop");
+  __name$9(noop, "noop");
   function isNullable(value) {
     return value === null || value === void 0;
   }
-  __name$a(isNullable, "isNullable");
+  __name$9(isNullable, "isNullable");
   function isPlainObject(data) {
     return data && typeof data === "object" && !Array.isArray(data);
   }
-  __name$a(isPlainObject, "isPlainObject");
+  __name$9(isPlainObject, "isPlainObject");
   function filterKeys(object, filter) {
     return Object.fromEntries(Object.entries(object).filter(([key, value]) => filter(key, value)));
   }
-  __name$a(filterKeys, "filterKeys");
+  __name$9(filterKeys, "filterKeys");
   function mapValues(object, transform) {
     return Object.fromEntries(Object.entries(object).map(([key, value]) => [key, transform(value, key)]));
   }
-  __name$a(mapValues, "mapValues");
+  __name$9(mapValues, "mapValues");
   function is(type, value) {
     if (arguments.length === 1) return value2 => is(type, value2);
     return type in globalThis && value instanceof globalThis[type] || Object.prototype.toString.call(value).slice(8, -1) === type;
   }
-  __name$a(is, "is");
+  __name$9(is, "is");
   function clone(source) {
     if (!source || typeof source !== "object") return source;
     if (Array.isArray(source)) return source.map(clone);
@@ -181,7 +181,7 @@
     if (is("RegExp", source)) return new RegExp(source.source, source.flags);
     return mapValues(source, clone);
   }
-  __name$a(clone, "clone");
+  __name$9(clone, "clone");
   function deepEqual(a, b, strict) {
     if (a === b) return true;
     if (!strict && isNullable(a) && isNullable(b)) return true;
@@ -191,13 +191,13 @@
     function check(test, then) {
       return test(a) ? test(b) ? then(a, b) : false : test(b) ? false : void 0;
     }
-    __name$a(check, "check");
+    __name$9(check, "check");
     return check(Array.isArray, (a2, b2) => a2.length === b2.length && a2.every((item, index) => deepEqual(item, b2[index]))) ?? check(is("Date"), (a2, b2) => a2.valueOf() === b2.valueOf()) ?? check(is("RegExp"), (a2, b2) => a2.source === b2.source && a2.flags === b2.flags) ?? Object.keys({
       ...a,
       ...b
     }).every(key => deepEqual(a[key], b[key], strict));
   }
-  __name$a(deepEqual, "deepEqual");
+  __name$9(deepEqual, "deepEqual");
   function pick(source, keys, forced) {
     if (!keys) return {
       ...source
@@ -208,7 +208,7 @@
     }
     return result;
   }
-  __name$a(pick, "pick");
+  __name$9(pick, "pick");
   function omit(source, keys) {
     if (!keys) return {
       ...source
@@ -221,7 +221,7 @@
     }
     return result;
   }
-  __name$a(omit, "omit");
+  __name$9(omit, "omit");
   function defineProperty(object, key, value) {
     return Object.defineProperty(object, key, {
       writable: true,
@@ -229,29 +229,29 @@
       enumerable: false
     });
   }
-  __name$a(defineProperty, "defineProperty");
+  __name$9(defineProperty, "defineProperty");
 
   // packages/cosmokit/src/array.ts
   function contain(array1, array2) {
     return array2.every(item => array1.includes(item));
   }
-  __name$a(contain, "contain");
+  __name$9(contain, "contain");
   function intersection(array1, array2) {
     return array1.filter(item => array2.includes(item));
   }
-  __name$a(intersection, "intersection");
+  __name$9(intersection, "intersection");
   function difference(array1, array2) {
     return array1.filter(item => !array2.includes(item));
   }
-  __name$a(difference, "difference");
+  __name$9(difference, "difference");
   function union(array1, array2) {
     return Array.from( /* @__PURE__ */new Set([...array1, ...array2]));
   }
-  __name$a(union, "union");
+  __name$9(union, "union");
   function deduplicate(array) {
     return [...new Set(array)];
   }
-  __name$a(deduplicate, "deduplicate");
+  __name$9(deduplicate, "deduplicate");
   function remove(list, item) {
     const index = list.indexOf(item);
     if (index >= 0) {
@@ -261,11 +261,11 @@
       return false;
     }
   }
-  __name$a(remove, "remove");
+  __name$9(remove, "remove");
   function makeArray(source) {
     return Array.isArray(source) ? source : isNullable(source) ? [] : [source];
   }
-  __name$a(makeArray, "makeArray");
+  __name$9(makeArray, "makeArray");
 
   // packages/cosmokit/src/binary.ts
   function arrayBufferToBase64(buffer) {
@@ -279,7 +279,7 @@
     }
     return btoa(binary);
   }
-  __name$a(arrayBufferToBase64, "arrayBufferToBase64");
+  __name$9(arrayBufferToBase64, "arrayBufferToBase64");
   function base64ToArrayBuffer(base64) {
     if (typeof Buffer !== "undefined") {
       const buf = Buffer.from(base64, "base64");
@@ -292,40 +292,40 @@
     }
     return buffer;
   }
-  __name$a(base64ToArrayBuffer, "base64ToArrayBuffer");
+  __name$9(base64ToArrayBuffer, "base64ToArrayBuffer");
 
   // packages/cosmokit/src/string.ts
   function capitalize(source) {
     return source.charAt(0).toUpperCase() + source.slice(1);
   }
-  __name$a(capitalize, "capitalize");
+  __name$9(capitalize, "capitalize");
   function uncapitalize(source) {
     return source.charAt(0).toLowerCase() + source.slice(1);
   }
-  __name$a(uncapitalize, "uncapitalize");
+  __name$9(uncapitalize, "uncapitalize");
   function camelCase(source) {
     return source.replace(/[_-][a-z]/g, str => str.slice(1).toUpperCase());
   }
-  __name$a(camelCase, "camelCase");
+  __name$9(camelCase, "camelCase");
   function paramCase(source) {
     return uncapitalize(source).replace(/_/g, "-").replace(/.[A-Z]+/g, str => str[0] + "-" + str.slice(1).toLowerCase());
   }
-  __name$a(paramCase, "paramCase");
+  __name$9(paramCase, "paramCase");
   function snakeCase(source) {
     return uncapitalize(source).replace(/-/g, "_").replace(/.[A-Z]+/g, str => str[0] + "_" + str.slice(1).toLowerCase());
   }
-  __name$a(snakeCase, "snakeCase");
+  __name$9(snakeCase, "snakeCase");
   var camelize = camelCase;
   var hyphenate = paramCase;
   function trimSlash(source) {
     return source.replace(/\/$/, "");
   }
-  __name$a(trimSlash, "trimSlash");
+  __name$9(trimSlash, "trimSlash");
   function sanitize(source) {
     if (!source.startsWith("/")) source = "/" + source;
     return trimSlash(source);
   }
-  __name$a(sanitize, "sanitize");
+  __name$9(sanitize, "sanitize");
 
   // packages/cosmokit/src/time.ts
   exports.Time = void 0;
@@ -341,26 +341,26 @@
       timezoneOffset = offset;
     }
     Time2.setTimezoneOffset = setTimezoneOffset;
-    __name$a(setTimezoneOffset, "setTimezoneOffset");
+    __name$9(setTimezoneOffset, "setTimezoneOffset");
     function getTimezoneOffset() {
       return timezoneOffset;
     }
     Time2.getTimezoneOffset = getTimezoneOffset;
-    __name$a(getTimezoneOffset, "getTimezoneOffset");
+    __name$9(getTimezoneOffset, "getTimezoneOffset");
     function getDateNumber(date = /* @__PURE__ */new Date(), offset) {
       if (typeof date === "number") date = new Date(date);
       if (offset === void 0) offset = timezoneOffset;
       return Math.floor((date.valueOf() / Time2.minute - offset) / 1440);
     }
     Time2.getDateNumber = getDateNumber;
-    __name$a(getDateNumber, "getDateNumber");
+    __name$9(getDateNumber, "getDateNumber");
     function fromDateNumber(value, offset) {
       const date = new Date(value * Time2.day);
       if (offset === void 0) offset = timezoneOffset;
       return new Date(+date + offset * Time2.minute);
     }
     Time2.fromDateNumber = fromDateNumber;
-    __name$a(fromDateNumber, "fromDateNumber");
+    __name$9(fromDateNumber, "fromDateNumber");
     const numeric = /\d+(?:\.\d+)?/.source;
     const timeRegExp = new RegExp(`^${["w(?:eek(?:s)?)?", "d(?:ay(?:s)?)?", "h(?:our(?:s)?)?", "m(?:in(?:ute)?(?:s)?)?", "s(?:ec(?:ond)?(?:s)?)?"].map(unit => `(${numeric}${unit})?`).join("")}$`);
     function parseTime(source) {
@@ -369,7 +369,7 @@
       return (parseFloat(capture[1]) * Time2.week || 0) + (parseFloat(capture[2]) * Time2.day || 0) + (parseFloat(capture[3]) * Time2.hour || 0) + (parseFloat(capture[4]) * Time2.minute || 0) + (parseFloat(capture[5]) * Time2.second || 0);
     }
     Time2.parseTime = parseTime;
-    __name$a(parseTime, "parseTime");
+    __name$9(parseTime, "parseTime");
     function parseDate(date) {
       const parsed = parseTime(date);
       if (parsed) {
@@ -382,7 +382,7 @@
       return date ? new Date(date) : /* @__PURE__ */new Date();
     }
     Time2.parseDate = parseDate;
-    __name$a(parseDate, "parseDate");
+    __name$9(parseDate, "parseDate");
     function format(ms) {
       const abs = Math.abs(ms);
       if (abs >= Time2.day - Time2.hour / 2) {
@@ -397,17 +397,17 @@
       return ms + "ms";
     }
     Time2.format = format;
-    __name$a(format, "format");
+    __name$9(format, "format");
     function toDigits(source, length = 2) {
       return source.toString().padStart(length, "0");
     }
     Time2.toDigits = toDigits;
-    __name$a(toDigits, "toDigits");
+    __name$9(toDigits, "toDigits");
     function template(template2, time = /* @__PURE__ */new Date()) {
       return template2.replace("yyyy", time.getFullYear().toString()).replace("yy", time.getFullYear().toString().slice(2)).replace("MM", toDigits(time.getMonth() + 1)).replace("dd", toDigits(time.getDate())).replace("hh", toDigits(time.getHours())).replace("mm", toDigits(time.getMinutes())).replace("ss", toDigits(time.getSeconds())).replace("SSS", toDigits(time.getMilliseconds(), 3));
     }
     Time2.template = template;
-    __name$a(template, "template");
+    __name$9(template, "template");
   })(exports.Time || (exports.Time = {}));
   var lib$1 = /*#__PURE__*/Object.freeze({
     __proto__: null,
@@ -445,950 +445,6 @@
     union: union,
     valueMap: mapValues
   });
-  var __defProp$a = Object.defineProperty;
-  var __name$9 = (target, value) => __defProp$a(target, "name", {
-    value,
-    configurable: true
-  });
-  function isBailed(value) {
-    return value !== null && value !== false && value !== void 0;
-  }
-  __name$9(isBailed, "isBailed");
-  var Lifecycle = (_Class = class Lifecycle {
-    constructor(root) {
-      _defineProperty(this, "isActive", false);
-      _defineProperty(this, "_tasks", /* @__PURE__ */new Set());
-      _defineProperty(this, "_hooks", {});
-      this.root = root;
-      defineProperty(this, Context$1.trace, root);
-      defineProperty(this.on("internal/listener", function (name, listener, prepend) {
-        const method = prepend ? "unshift" : "push";
-        if (name === "ready") {
-          if (!this.lifecycle.isActive) return;
-          this.scope.ensure(async () => listener());
-          return () => false;
-        } else if (name === "dispose") {
-          this.scope.disposables[method](listener);
-          defineProperty(listener, "name", "event <dispose>");
-          return () => remove(this.scope.disposables, listener);
-        } else if (name === "fork") {
-          this.scope.runtime.forkables[method](listener);
-          return this.scope.collect("event <fork>", () => remove(this.scope.runtime.forkables, listener));
-        }
-      }), Context$1.static, root.scope);
-      for (const level of ["info", "error", "warning"]) {
-        defineProperty(this.on(`internal/${level}`, (format, ...param) => {
-          if (this._hooks[`internal/${level}`].length > 1) return;
-          console.info(format, ...param);
-        }), Context$1.static, root.scope);
-      }
-    }
-    async flush() {
-      while (this._tasks.size) {
-        await Promise.all(Array.from(this._tasks));
-      }
-    }
-    getHooks(name, thisArg) {
-      const hooks = this._hooks[name] || [];
-      return hooks.slice().filter(([context]) => {
-        const filter = thisArg?.[Context$1.filter];
-        return !filter || filter.call(thisArg, context);
-      }).map(([, callback]) => callback);
-    }
-    prepareEvent(type, args) {
-      const thisArg = typeof args[0] === "object" ? args.shift() : null;
-      const name = args.shift();
-      if (name !== "internal/event") {
-        this.emit("internal/event", type, name, args, thisArg);
-      }
-      return [this.getHooks(name, thisArg), thisArg ?? this[Context$1.trace]];
-    }
-    async parallel(...args) {
-      const [hooks, thisArg] = this.prepareEvent("parallel", args);
-      await Promise.all(hooks.map(async callback => {
-        await callback.apply(thisArg, args);
-      }));
-    }
-    emit(...args) {
-      const [hooks, thisArg] = this.prepareEvent("emit", args);
-      for (const callback of hooks) {
-        callback.apply(thisArg, args);
-      }
-    }
-    async serial(...args) {
-      const [hooks, thisArg] = this.prepareEvent("serial", args);
-      for (const callback of hooks) {
-        const result = await callback.apply(thisArg, args);
-        if (isBailed(result)) return result;
-      }
-    }
-    bail(...args) {
-      const [hooks, thisArg] = this.prepareEvent("bail", args);
-      for (const callback of hooks) {
-        const result = callback.apply(thisArg, args);
-        if (isBailed(result)) return result;
-      }
-    }
-    register(label, hooks, listener, prepend) {
-      const caller = this[Context$1.trace];
-      const method = prepend ? "unshift" : "push";
-      hooks[method]([caller, listener]);
-      return caller.state.collect(label, () => this.unregister(hooks, listener));
-    }
-    unregister(hooks, listener) {
-      const index = hooks.findIndex(([context, callback]) => callback === listener);
-      if (index >= 0) {
-        hooks.splice(index, 1);
-        return true;
-      }
-    }
-    on(name, listener, prepend = false) {
-      const caller = this[Context$1.trace];
-      caller.scope.assertActive();
-      const result = this.bail(caller, "internal/listener", name, listener, prepend);
-      if (result) return result;
-      const hooks = this._hooks[name] ||= [];
-      const label = typeof name === "string" ? `event <${name}>` : "event (Symbol)";
-      return this.register(label, hooks, listener, prepend);
-    }
-    once(name, listener, prepend = false) {
-      const dispose = this.on(name, function (...args) {
-        dispose();
-        return listener.apply(this, args);
-      }, prepend);
-      return dispose;
-    }
-    off(name, listener) {
-      return this.unregister(this._hooks[name] || [], listener);
-    }
-    async start() {
-      this.isActive = true;
-      const hooks = this._hooks.ready || [];
-      while (hooks.length) {
-        const [context, callback] = hooks.shift();
-        context.scope.ensure(async () => callback());
-      }
-      await this.flush();
-    }
-    async stop() {
-      this.isActive = false;
-      this.root.scope.reset();
-    }
-  }, __name$9(_Class, "Lifecycle"), _Class);
-  var symbols = {
-    // context symbols
-    trace: Symbol.for("cordis.trace"),
-    events: Symbol.for("cordis.events"),
-    static: Symbol.for("cordis.static"),
-    filter: Symbol.for("cordis.filter"),
-    expose: Symbol.for("cordis.expose"),
-    isolate: Symbol.for("cordis.isolate"),
-    internal: Symbol.for("cordis.internal"),
-    intercept: Symbol.for("cordis.intercept"),
-    // service symbols
-    setup: Symbol.for("cordis.setup"),
-    invoke: Symbol.for("cordis.invoke"),
-    extend: Symbol.for("cordis.extend"),
-    provide: Symbol.for("cordis.provide"),
-    immediate: Symbol.for("cordis.immediate")
-  };
-  function isConstructor(func) {
-    if (!func.prototype) return false;
-    if (func.prototype.constructor !== func) return false;
-    return true;
-  }
-  __name$9(isConstructor, "isConstructor");
-  function resolveConfig(plugin, config) {
-    const schema = plugin["Config"] || plugin["schema"];
-    if (schema && plugin["schema"] !== false) config = schema(config);
-    return config ?? {};
-  }
-  __name$9(resolveConfig, "resolveConfig");
-  function isUnproxyable(value) {
-    return [Map, Set, Date, Promise].some(constructor => value instanceof constructor);
-  }
-  __name$9(isUnproxyable, "isUnproxyable");
-  function joinPrototype(proto1, proto2) {
-    if (proto1 === Object.prototype) return proto2;
-    const result = Object.create(joinPrototype(Object.getPrototypeOf(proto1), proto2));
-    for (const key of Reflect.ownKeys(proto1)) {
-      Object.defineProperty(result, key, Object.getOwnPropertyDescriptor(proto1, key));
-    }
-    return result;
-  }
-  __name$9(joinPrototype, "joinPrototype");
-  function createTraceable(ctx, value) {
-    const proxy = new Proxy(value, {
-      get: (target, name, receiver) => {
-        if (name === symbols.trace || name === "caller") return ctx;
-        return Reflect.get(target, name, receiver);
-      },
-      apply: (target, thisArg, args) => {
-        return applyTraceable(proxy, target, thisArg, args);
-      }
-    });
-    return proxy;
-  }
-  __name$9(createTraceable, "createTraceable");
-  function applyTraceable(proxy, value, thisArg, args) {
-    if (!value[symbols.invoke]) return Reflect.apply(value, thisArg, args);
-    return value[symbols.invoke].apply(proxy, args);
-  }
-  __name$9(applyTraceable, "applyTraceable");
-  function createCallable(name, proto) {
-    const self = /* @__PURE__ */__name$9(function (...args) {
-      const proxy = createTraceable(self[symbols.trace], self);
-      return applyTraceable(proxy, self, this, args);
-    }, "self");
-    defineProperty(self, "name", name);
-    return Object.setPrototypeOf(self, proto);
-  }
-  __name$9(createCallable, "createCallable");
-
-  // src/scope.ts
-  var ScopeStatus = /* @__PURE__ */(ScopeStatus2 => {
-    ScopeStatus2[ScopeStatus2["PENDING"] = 0] = "PENDING";
-    ScopeStatus2[ScopeStatus2["LOADING"] = 1] = "LOADING";
-    ScopeStatus2[ScopeStatus2["ACTIVE"] = 2] = "ACTIVE";
-    ScopeStatus2[ScopeStatus2["FAILED"] = 3] = "FAILED";
-    ScopeStatus2[ScopeStatus2["DISPOSED"] = 4] = "DISPOSED";
-    return ScopeStatus2;
-  })(ScopeStatus || {});
-  exports.CordisError = (_CordisError2 = class _CordisError extends Error {
-    constructor(code, message) {
-      super(message ?? _CordisError.Code[code]);
-      this.code = code;
-    }
-  }, __name$9(_CordisError2, "CordisError"), _CordisError2);
-  (CordisError2 => {
-    CordisError2.Code = {
-      INACTIVE_EFFECT: "cannot create effect on inactive context"
-    };
-  })(exports.CordisError || (exports.CordisError = {}));
-  var EffectScope = (_Class2 = class EffectScope {
-    constructor(parent, config) {
-      _defineProperty(this, "uid", void 0);
-      _defineProperty(this, "ctx", void 0);
-      _defineProperty(this, "disposables", []);
-      _defineProperty(this, "error", void 0);
-      _defineProperty(this, "status", 0 /* PENDING */);
-      _defineProperty(this, "isActive", false);
-      // Same as `this.ctx`, but with a more specific type.
-      _defineProperty(this, "context", void 0);
-      _defineProperty(this, "proxy", void 0);
-      _defineProperty(this, "acceptors", []);
-      _defineProperty(this, "tasks", /* @__PURE__ */new Set());
-      _defineProperty(this, "hasError", false);
-      this.parent = parent;
-      this.config = config;
-      this.uid = parent.registry ? parent.registry.counter : 0;
-      this.ctx = this.context = parent.extend({
-        scope: this
-      });
-      this.proxy = new Proxy({}, {
-        get: (target, key) => Reflect.get(this.config, key)
-      });
-    }
-    get _config() {
-      return this.runtime.isReactive ? this.proxy : this.config;
-    }
-    assertActive() {
-      if (this.uid !== null || this.isActive) return;
-      throw new exports.CordisError("INACTIVE_EFFECT");
-    }
-    effect(callback, config) {
-      this.assertActive();
-      const result = isConstructor(callback) ? new callback(this.ctx, config) : callback(this.ctx, config);
-      let disposed = false;
-      const original = typeof result === "function" ? result : result.dispose.bind(result);
-      const wrapped = /* @__PURE__ */__name$9(() => {
-        if (disposed) return;
-        disposed = true;
-        remove(this.disposables, wrapped);
-        return original();
-      }, "wrapped");
-      this.disposables.push(wrapped);
-      if (typeof result === "function") return wrapped;
-      result.dispose = wrapped;
-      return result;
-    }
-    collect(label, callback) {
-      const dispose = defineProperty(() => {
-        remove(this.disposables, dispose);
-        return callback();
-      }, "name", label);
-      this.disposables.push(dispose);
-      return dispose;
-    }
-    restart() {
-      this.reset();
-      this.error = null;
-      this.hasError = false;
-      this.status = 0 /* PENDING */;
-      this.start();
-    }
-    _getStatus() {
-      if (this.uid === null) return 4 /* DISPOSED */;
-      if (this.hasError) return 3 /* FAILED */;
-      if (this.tasks.size) return 1 /* LOADING */;
-      if (this.ready) return 2 /* ACTIVE */;
-      return 0 /* PENDING */;
-    }
-    _updateStatus(callback) {
-      const oldValue = this.status;
-      callback?.();
-      this.status = this._getStatus();
-      if (oldValue !== this.status) {
-        this.context.emit("internal/status", this, oldValue);
-      }
-    }
-    ensure(callback) {
-      const task = callback().catch(reason => {
-        this.context.emit("internal/error", reason);
-        this.cancel(reason);
-      }).finally(() => {
-        this._updateStatus(() => this.tasks.delete(task));
-        this.context.events._tasks.delete(task);
-      });
-      this._updateStatus(() => this.tasks.add(task));
-      this.context.events._tasks.add(task);
-    }
-    cancel(reason) {
-      this.error = reason;
-      this._updateStatus(() => this.hasError = true);
-      this.reset();
-    }
-    setupInject() {
-      if (!this.runtime.using.length) return;
-      defineProperty(this.context.on("internal/before-service", name => {
-        if (!this.runtime.using.includes(name)) return;
-        this._updateStatus();
-        this.reset();
-      }), Context$1.static, this);
-      defineProperty(this.context.on("internal/service", name => {
-        if (!this.runtime.using.includes(name)) return;
-        this.start();
-      }), Context$1.static, this);
-    }
-    get ready() {
-      return this.runtime.using.every(name => !isNullable(this.ctx[name]));
-    }
-    reset() {
-      this.isActive = false;
-      this.disposables = this.disposables.splice(0).filter(dispose => {
-        if (this.uid !== null && dispose[Context$1.static] === this) return true;
-        (async () => dispose())().catch(reason => {
-          this.context.emit("internal/error", reason);
-        });
-      });
-    }
-    init(error) {
-      if (!this.config) {
-        this.cancel(error);
-      } else {
-        this.start();
-      }
-    }
-    start() {
-      if (!this.ready || this.isActive || this.uid === null) return true;
-      this.isActive = true;
-      this._updateStatus(() => this.hasError = false);
-    }
-    accept(...args) {
-      const keys = Array.isArray(args[0]) ? args.shift() : null;
-      const acceptor = {
-        keys,
-        callback: args[0],
-        ...args[1]
-      };
-      return this.effect(() => {
-        this.acceptors.push(acceptor);
-        if (acceptor.immediate) acceptor.callback?.(this.config);
-        return () => remove(this.acceptors, acceptor);
-      });
-    }
-    decline(keys) {
-      return this.accept(keys, () => true);
-    }
-    checkUpdate(resolved, forced) {
-      if (forced || !this.config) return [true, true];
-      if (forced === false) return [false, false];
-      const modified = /* @__PURE__ */Object.create(null);
-      const checkPropertyUpdate = /* @__PURE__ */__name$9(key => {
-        const result = modified[key] ??= !deepEqual(this.config[key], resolved[key]);
-        hasUpdate ||= result;
-        return result;
-      }, "checkPropertyUpdate");
-      const ignored = /* @__PURE__ */new Set();
-      let hasUpdate = false,
-        shouldRestart = false;
-      let fallback = this.runtime.isReactive || null;
-      for (const {
-        keys,
-        callback,
-        passive
-      } of this.acceptors) {
-        if (!keys) {
-          fallback ||= !passive;
-        } else if (passive) {
-          keys?.forEach(key => ignored.add(key));
-        } else {
-          let hasUpdate2 = false;
-          for (const key of keys) {
-            hasUpdate2 ||= checkPropertyUpdate(key);
-          }
-          if (!hasUpdate2) continue;
-        }
-        const result = callback?.(resolved);
-        if (result) shouldRestart = true;
-      }
-      for (const key in {
-        ...this.config,
-        ...resolved
-      }) {
-        if (fallback === false) continue;
-        if (!(key in modified) && !ignored.has(key)) {
-          const hasUpdate2 = checkPropertyUpdate(key);
-          if (fallback === null) shouldRestart ||= hasUpdate2;
-        }
-      }
-      return [hasUpdate, shouldRestart];
-    }
-  }, __name$9(_Class2, "EffectScope"), _Class2);
-  var ForkScope = (_Class3 = class ForkScope extends EffectScope {
-    constructor(parent, runtime, config, error) {
-      super(parent, config);
-      _defineProperty(this, "dispose", void 0);
-      this.runtime = runtime;
-      this.dispose = defineProperty(parent.scope.collect(`fork <${parent.runtime.name}>`, () => {
-        this.uid = null;
-        this.reset();
-        this.context.emit("internal/fork", this);
-        const result = remove(runtime.disposables, this.dispose);
-        if (remove(runtime.children, this) && !runtime.children.length) {
-          parent.registry.delete(runtime.plugin);
-        }
-        return result;
-      }), Context$1.static, runtime);
-      runtime.children.push(this);
-      runtime.disposables.push(this.dispose);
-      this.context.emit("internal/fork", this);
-      if (runtime.isReusable) {
-        this.setupInject();
-      }
-      this.init(error);
-    }
-    start() {
-      if (super.start()) return true;
-      for (const fork of this.runtime.forkables) {
-        this.ensure(async () => fork(this.context, this._config));
-      }
-    }
-    update(config, forced) {
-      const oldConfig = this.config;
-      const state = this.runtime.isForkable ? this : this.runtime;
-      if (state.config !== oldConfig) return;
-      const resolved = resolveConfig(this.runtime.plugin, config);
-      const [hasUpdate, shouldRestart] = state.checkUpdate(resolved, forced);
-      this.context.emit("internal/before-update", this, config);
-      this.config = resolved;
-      state.config = resolved;
-      if (hasUpdate) {
-        this.context.emit("internal/update", this, oldConfig);
-      }
-      if (shouldRestart) state.restart();
-    }
-  }, __name$9(_Class3, "ForkScope"), _Class3);
-  var MainScope = (_Class4 = class MainScope extends EffectScope {
-    constructor(registry, plugin, _config, error) {
-      super(registry[Context$1.trace], _config);
-      _defineProperty(this, "value", void 0);
-      _defineProperty(this, "runtime", this);
-      _defineProperty(this, "schema", void 0);
-      _defineProperty(this, "name", void 0);
-      _defineProperty(this, "using", []);
-      _defineProperty(this, "inject", /* @__PURE__ */new Set());
-      _defineProperty(this, "forkables", []);
-      _defineProperty(this, "children", []);
-      _defineProperty(this, "isReusable", false);
-      _defineProperty(this, "isReactive", false);
-      _defineProperty(this, "apply", (context, config) => {
-        if (typeof this.plugin !== "function") {
-          return this.plugin.apply(context, config);
-        } else if (isConstructor(this.plugin)) {
-          const instance = new this.plugin(context, config);
-          const name = instance[Context$1.expose];
-          if (name) {
-            context[name] = instance;
-          }
-          if (instance["fork"]) {
-            this.forkables.push(instance["fork"].bind(instance));
-          }
-          return instance;
-        } else {
-          return this.plugin(context, config);
-        }
-      });
-      this.plugin = plugin;
-      registry.set(plugin, this);
-      if (!plugin) {
-        this.name = "root";
-        this.isActive = true;
-      } else {
-        this.setup();
-        this.init(error);
-      }
-    }
-    get isForkable() {
-      return this.forkables.length > 0;
-    }
-    fork(parent, config, error) {
-      return new ForkScope(parent, this, config, error);
-    }
-    dispose() {
-      this.uid = null;
-      this.reset();
-      this.context.emit("internal/runtime", this);
-      return true;
-    }
-    setup() {
-      const {
-        name
-      } = this.plugin;
-      if (name && name !== "apply") this.name = name;
-      this.schema = this.plugin["Config"] || this.plugin["schema"];
-      const inject = this.plugin["using"] || this.plugin["inject"] || [];
-      if (Array.isArray(inject)) {
-        this.using = inject;
-        this.inject = new Set(inject);
-      } else {
-        this.using = inject.required || [];
-        this.inject = /* @__PURE__ */new Set([...this.using, ...(inject.optional || [])]);
-      }
-      this.isReusable = this.plugin["reusable"];
-      this.isReactive = this.plugin["reactive"];
-      this.context.emit("internal/runtime", this);
-      if (this.isReusable) {
-        this.forkables.push(this.apply);
-      } else {
-        super.setupInject();
-      }
-    }
-    reset() {
-      super.reset();
-      for (const fork of this.children) {
-        fork.reset();
-      }
-    }
-    start() {
-      if (super.start()) return true;
-      if (!this.isReusable && this.plugin) {
-        this.ensure(async () => this.value = this.apply(this.ctx, this._config));
-      }
-      for (const fork of this.children) {
-        fork.start();
-      }
-    }
-    update(config, forced) {
-      if (this.isForkable) {
-        this.context.emit("internal/warning", new Error(`attempting to update forkable plugin "${this.plugin.name}", which may lead to unexpected behavior`));
-      }
-      const oldConfig = this.config;
-      const resolved = resolveConfig(this.runtime.plugin || this.context.constructor, config);
-      const [hasUpdate, shouldRestart] = this.checkUpdate(resolved, forced);
-      const state = this.children.find(fork => fork.config === oldConfig);
-      this.config = resolved;
-      if (state) {
-        this.context.emit("internal/before-update", state, config);
-        state.config = resolved;
-        if (hasUpdate) {
-          this.context.emit("internal/update", state, oldConfig);
-        }
-      }
-      if (shouldRestart) this.restart();
-    }
-  }, __name$9(_Class4, "MainScope"), _Class4);
-
-  // src/registry.ts
-  function isApplicable(object) {
-    return object && typeof object === "object" && typeof object.apply === "function";
-  }
-  __name$9(isApplicable, "isApplicable");
-  var Registry = (_Class5 = class Registry {
-    constructor(root, config) {
-      _defineProperty(this, "_counter", 0);
-      _defineProperty(this, "_internal", /* @__PURE__ */new Map());
-      this.root = root;
-      defineProperty(this, Context$1.trace, root);
-      root.scope = new MainScope(this, null, config);
-      root.scope.runtime.isReactive = true;
-    }
-    get counter() {
-      return ++this._counter;
-    }
-    get size() {
-      return this._internal.size;
-    }
-    resolve(plugin) {
-      if (plugin === null) return plugin;
-      if (typeof plugin === "function") return plugin;
-      if (isApplicable(plugin)) return plugin.apply;
-      throw new Error('invalid plugin, expect function or object with an "apply" method, received ' + typeof plugin);
-    }
-    get(plugin) {
-      return this._internal.get(this.resolve(plugin));
-    }
-    has(plugin) {
-      return this._internal.has(this.resolve(plugin));
-    }
-    set(plugin, state) {
-      const oldValue = this._internal.get(this.resolve(plugin));
-      this._internal.set(this.resolve(plugin), state);
-      return oldValue;
-    }
-    delete(plugin) {
-      plugin = this.resolve(plugin);
-      const runtime = this.get(plugin);
-      if (!runtime) return;
-      this._internal.delete(plugin);
-      runtime.dispose();
-      return runtime;
-    }
-    keys() {
-      return this._internal.keys();
-    }
-    values() {
-      return this._internal.values();
-    }
-    entries() {
-      return this._internal.entries();
-    }
-    forEach(callback) {
-      return this._internal.forEach(callback);
-    }
-    using(inject, callback) {
-      return this.inject(inject, callback);
-    }
-    inject(inject, callback) {
-      return this.plugin({
-        inject,
-        apply: callback,
-        name: callback.name
-      });
-    }
-    plugin(plugin, config) {
-      this.resolve(plugin);
-      const context = this[Context$1.trace];
-      context.scope.assertActive();
-      let error;
-      try {
-        config = resolveConfig(plugin, config);
-      } catch (reason) {
-        context.emit("internal/error", reason);
-        error = reason;
-        config = null;
-      }
-      let runtime = this.get(plugin);
-      if (runtime) {
-        if (!runtime.isForkable) {
-          context.emit("internal/warning", new Error(`duplicate plugin detected: ${plugin.name}`));
-        }
-        return runtime.fork(context, config, error);
-      }
-      runtime = new MainScope(this, plugin, config, error);
-      return runtime.fork(context, config, error);
-    }
-  }, __name$9(_Class5, "Registry"), _Class5);
-
-  // src/context.ts
-  var Context$1 = (_Symbol$for = Symbol.for("nodejs.util.inspect.custom"), (_Context2 = class _Context {
-    static is(value) {
-      return !!value?.[_Context.is];
-    }
-    static ensureInternal() {
-      const ctx = this.prototype || this;
-      if (Object.prototype.hasOwnProperty.call(ctx, symbols.internal)) {
-        return ctx[symbols.internal];
-      }
-      const parent = _Context.ensureInternal.call(Object.getPrototypeOf(this));
-      return ctx[symbols.internal] = Object.create(parent);
-    }
-    static resolveInject(ctx, name) {
-      let internal = ctx[symbols.internal][name];
-      while (internal?.type === "alias") {
-        name = internal.name;
-        internal = ctx[symbols.internal][name];
-      }
-      return [name, internal];
-    }
-    static associate(object, name) {
-      return new Proxy(object, {
-        get(target, key, receiver) {
-          if (typeof key === "symbol" || key in target) return Reflect.get(target, key, receiver);
-          const caller = receiver[symbols.trace];
-          if (!caller?.[symbols.internal][`${name}.${key}`]) return Reflect.get(target, key, receiver);
-          return caller.get(`${name}.${key}`);
-        },
-        set(target, key, value, receiver) {
-          if (typeof key === "symbol" || key in target) return Reflect.set(target, key, value, receiver);
-          const caller = receiver[symbols.trace];
-          if (!caller?.[symbols.internal][`${name}.${key}`]) return Reflect.set(target, key, value, receiver);
-          caller[`${name}.${key}`] = value;
-          return true;
-        }
-      });
-    }
-    constructor(config) {
-      const self = new Proxy(this, _Context.handler);
-      config = resolveConfig(this.constructor, config);
-      self[symbols.isolate] = /* @__PURE__ */Object.create(null);
-      self[symbols.intercept] = /* @__PURE__ */Object.create(null);
-      self.root = self;
-      self.mixin("scope", ["config", "runtime", "effect", "collect", "accept", "decline"]);
-      self.mixin("registry", ["using", "inject", "plugin", "dispose"]);
-      self.mixin("lifecycle", ["on", "once", "off", "after", "parallel", "emit", "serial", "bail", "start", "stop"]);
-      self.provide("registry", new Registry(self, config), true);
-      self.provide("lifecycle", new Lifecycle(self), true);
-      const attach = /* @__PURE__ */__name$9(internal => {
-        if (!internal) return;
-        attach(Object.getPrototypeOf(internal));
-        for (const key of Object.getOwnPropertyNames(internal)) {
-          const constructor = internal[key]["prototype"]?.constructor;
-          if (!constructor) continue;
-          self[internal[key]["key"]] = new constructor(self, config);
-          defineProperty(self[internal[key]["key"]], symbols.trace, self);
-        }
-      }, "attach");
-      attach(this[symbols.internal]);
-      return self;
-    }
-    [_Symbol$for]() {
-      return `Context <${this.name}>`;
-    }
-    get name() {
-      let runtime = this.runtime;
-      while (runtime && !runtime.name) {
-        runtime = runtime.parent.runtime;
-      }
-      return runtime?.name;
-    }
-    get events() {
-      return this.lifecycle;
-    }
-    /** @deprecated */
-    get state() {
-      return this.scope;
-    }
-    get(name) {
-      const internal = this[symbols.internal][name];
-      if (internal?.type !== "service") return;
-      const value = this.root[this[symbols.isolate][name]];
-      if (!value || typeof value !== "object" && typeof value !== "function") return value;
-      if (isUnproxyable(value)) {
-        defineProperty(value, symbols.trace, this);
-        return value;
-      }
-      return createTraceable(this, value);
-    }
-    provide(name, value, builtin) {
-      const internal = _Context.ensureInternal.call(this.root);
-      if (name in internal) return;
-      const key = Symbol(name);
-      internal[name] = {
-        type: "service",
-        builtin
-      };
-      this.root[key] = value;
-      this.root[_Context.isolate][name] = key;
-    }
-    accessor(name, options) {
-      const internal = _Context.ensureInternal.call(this.root);
-      internal[name] ||= {
-        type: "accessor",
-        ...options
-      };
-    }
-    alias(name, aliases) {
-      const internal = _Context.ensureInternal.call(this.root);
-      for (const key of aliases) {
-        internal[key] ||= {
-          type: "alias",
-          name
-        };
-      }
-    }
-    mixin(name, mixins) {
-      for (const key of mixins) {
-        this.accessor(key, {
-          get() {
-            const service = this[name];
-            if (isNullable(service)) return service;
-            const value = Reflect.get(service, key);
-            if (typeof value !== "function") return value;
-            return value.bind(service);
-          },
-          set(value) {
-            return Reflect.set(this[name], key, value);
-          }
-        });
-      }
-    }
-    extend(meta = {}) {
-      return Object.assign(Object.create(this), meta);
-    }
-    isolate(name, label) {
-      const shadow = Object.create(this[symbols.isolate]);
-      shadow[name] = label ?? Symbol(name);
-      return this.extend({
-        [symbols.isolate]: shadow
-      });
-    }
-    intercept(name, config) {
-      const intercept = Object.create(this[symbols.intercept]);
-      intercept[name] = config;
-      return this.extend({
-        [symbols.intercept]: intercept
-      });
-    }
-  }, __name$9(_Context2, "Context"), _defineProperty(_Context2, "trace", symbols.trace), _defineProperty(_Context2, "events", symbols.events), _defineProperty(_Context2, "static", symbols.static), _defineProperty(_Context2, "filter", symbols.filter), _defineProperty(_Context2, "expose", symbols.expose), _defineProperty(_Context2, "isolate", symbols.isolate), _defineProperty(_Context2, "internal", symbols.internal), _defineProperty(_Context2, "intercept", symbols.intercept), _defineProperty(_Context2, "current", _Context2.trace), (() => {
-    _Context2.is[Symbol.toPrimitive] = () => Symbol.for("cordis.is");
-    _Context2.prototype[_Context2.is] = true;
-  })(), _defineProperty(_Context2, "handler", {
-    get(target, prop, ctx) {
-      if (typeof prop !== "string") return Reflect.get(target, prop, ctx);
-      const checkInject = /* @__PURE__ */__name$9(name2 => {
-        if (Reflect.has(target, name2)) return;
-        if (["prototype", "then", "registry", "lifecycle"].includes(name2)) return;
-        if (name2[0] === "$" || name2[0] === "_") return;
-        if (!ctx.runtime.plugin) return;
-        let parent = ctx;
-        while (parent.runtime.plugin) {
-          for (const key of parent.runtime.inject) {
-            if (name2 === _Context2.resolveInject(parent, key)[0]) return;
-          }
-          parent = parent.scope.parent;
-        }
-        ctx.emit("internal/warning", new Error(`property ${name2} is not registered, declare it as \`inject\` to suppress this warning`));
-      }, "checkInject");
-      const [name, internal] = _Context2.resolveInject(ctx, prop);
-      if (!internal) {
-        checkInject(name);
-        return Reflect.get(target, name, ctx);
-      }
-      if (internal.type === "accessor") {
-        return internal.get.call(ctx);
-      } else if (internal.type === "service") {
-        if (!internal.builtin) checkInject(name);
-        return ctx.get(name);
-      }
-    },
-    set(target, prop, value, ctx) {
-      if (typeof prop !== "string") return Reflect.set(target, prop, value, ctx);
-      const [name, internal] = _Context2.resolveInject(ctx, prop);
-      if (!internal) return Reflect.set(target, name, value, ctx);
-      if (internal.type === "accessor") {
-        if (!internal.set) return false;
-        return internal.set.call(ctx, value);
-      }
-      const key = ctx[symbols.isolate][name];
-      const oldValue = ctx.root[key];
-      if (oldValue === value) return true;
-      if (value && oldValue) {
-        throw new Error(`service ${name} has been registered`);
-      }
-      if (value) {
-        ctx.on("dispose", () => ctx[name] = void 0);
-      }
-      if (isUnproxyable(value)) {
-        ctx.emit("internal/warning", new Error(`service ${name} is an unproxyable object, which may lead to unexpected behavior`));
-      }
-      const self = /* @__PURE__ */Object.create(null);
-      self[symbols.filter] = ctx2 => {
-        return ctx[symbols.isolate][name] === ctx2[symbols.isolate][name];
-      };
-      ctx.root.emit(self, "internal/before-service", name, value);
-      ctx.root[key] = value;
-      if (value instanceof Object) {
-        defineProperty(value, symbols.trace, ctx);
-      }
-      ctx.root.emit(self, "internal/service", name, oldValue);
-      return true;
-    }
-  }), _Context2));
-  Context$1.prototype[Context$1.internal] = /* @__PURE__ */Object.create(null);
-  var Service = (_symbols$trace = symbols.trace, _symbols$filter = symbols.filter, _symbols$setup = symbols.setup, _symbols$extend = symbols.extend, _Symbol$hasInstance = Symbol.hasInstance, (_Service2 = class _Service {
-    start() {}
-    stop() {}
-    constructor(...args) {
-      _defineProperty(this, "ctx", void 0);
-      _defineProperty(this, _symbols$trace, void 0);
-      _defineProperty(this, "name", void 0);
-      _defineProperty(this, "config", void 0);
-      let _ctx, name, immediate, config;
-      if (Context$1.is(args[0])) {
-        _ctx = args[0];
-        if (typeof args[1] === "string") {
-          name = args[1];
-          immediate = args[2];
-        } else {
-          config = args[1];
-        }
-      } else {
-        config = args[0];
-      }
-      name ??= this.constructor[symbols.provide];
-      immediate ??= this.constructor[symbols.immediate];
-      let self = this;
-      if (self[symbols.invoke]) {
-        self = createCallable(name, joinPrototype(Object.getPrototypeOf(this), Function.prototype));
-      }
-      if (_ctx) {
-        self.ctx = _ctx;
-      } else {
-        self[symbols.setup]();
-      }
-      self.name = name;
-      self.config = config;
-      defineProperty(self, symbols.trace, self.ctx);
-      self.ctx.provide(name);
-      self.ctx.runtime.name = name;
-      if (immediate) {
-        if (_ctx) self[symbols.expose] = name;else self.ctx[name] = self;
-      }
-      self.ctx.on("ready", async () => {
-        await Promise.resolve();
-        await self.start();
-        if (!immediate) self.ctx[name] = self;
-      });
-      self.ctx.on("dispose", () => self.stop());
-      return Context$1.associate(self, name);
-    }
-    [_symbols$filter](ctx) {
-      return ctx[symbols.isolate][this.name] === this.ctx[symbols.isolate][this.name];
-    }
-    [_symbols$setup]() {
-      this.ctx = new Context$1();
-    }
-    [_symbols$extend](props) {
-      const caller = this[symbols.trace];
-      let self;
-      if (this[_Service.invoke]) {
-        self = createCallable(this.name, this);
-      } else {
-        self = Object.create(this);
-      }
-      defineProperty(self, symbols.trace, caller);
-      return Context$1.associate(Object.assign(self, props), this.name);
-    }
-    static [_Symbol$hasInstance](instance) {
-      let constructor = instance.constructor;
-      while (constructor) {
-        if (constructor === this) return true;
-        constructor = Object.getPrototypeOf(constructor);
-      }
-      return false;
-    }
-  }, __name$9(_Service2, "Service"), _defineProperty(_Service2, "setup", symbols.setup), _defineProperty(_Service2, "invoke", symbols.invoke), _defineProperty(_Service2, "extend", symbols.extend), _defineProperty(_Service2, "provide", symbols.provide), _defineProperty(_Service2, "immediate", symbols.immediate), _Service2));
   var require$$0 = /*@__PURE__*/getAugmentedNamespace(lib$1);
   var __create = Object.create;
   var __defProp$9 = Object.defineProperty;
@@ -1940,741 +996,953 @@
   // src/index.ts
   var import_node = __toESM(require_node());
   var lib = import_node.default;
-  var Logger = /*@__PURE__*/getDefaultExportFromCjs(lib);
-
-  // src/index.ts
-  var LoggerService = (_Service$invoke = Service.invoke, (_LoggerService2 = class _LoggerService extends Service {
-    constructor(ctx) {
-      super(ctx, "logger", true);
-      ctx.on("internal/info", function (format, ...args) {
-        this.logger("app").info(format, ...args);
-      });
-      ctx.on("internal/error", function (format, ...args) {
-        this.logger("app").error(format, ...args);
-      });
-      ctx.on("internal/warning", function (format, ...args) {
-        this.logger("app").warn(format, ...args);
-      });
-    }
-    [_Service$invoke](name) {
-      return new Logger(name, {
-        [Context$1.trace]: this
-      });
-    }
-  }, _defineProperty(_LoggerService2, "name", "logger"), (() => {
-    for (const type of ["success", "error", "info", "warn", "debug", "extend"]) {
-      _LoggerService2.prototype[type] = function (...args) {
-        const caller = this[Context$1.trace];
-        return this(caller.name)[type](...args);
-      };
-    }
-  })(), _LoggerService2));
+  var Logger$1 = /*@__PURE__*/getDefaultExportFromCjs(lib);
   var __defProp$8 = Object.defineProperty;
   var __name$8 = (target, value) => __defProp$8(target, "name", {
     value,
     configurable: true
   });
-  var TimerService = (_Class6 = class TimerService extends Service {
-    constructor(ctx) {
-      super(ctx, "timer", true);
-      ctx.mixin("timer", ["setTimeout", "setInterval", "sleep", "throttle", "debounce"]);
+  function isBailed(value) {
+    return value !== null && value !== false && value !== void 0;
+  }
+  __name$8(isBailed, "isBailed");
+  var Lifecycle = (_Class = class Lifecycle {
+    constructor(root) {
+      _defineProperty(this, "isActive", false);
+      _defineProperty(this, "_tasks", /* @__PURE__ */new Set());
+      _defineProperty(this, "_hooks", {});
+      this.root = root;
+      defineProperty(this, Context$1.trace, root);
+      defineProperty(this.on("internal/listener", function (name, listener, prepend) {
+        const method = prepend ? "unshift" : "push";
+        if (name === "ready") {
+          if (!this.lifecycle.isActive) return;
+          this.scope.ensure(async () => listener());
+          return () => false;
+        } else if (name === "dispose") {
+          this.scope.disposables[method](listener);
+          defineProperty(listener, "name", "event <dispose>");
+          return () => remove(this.scope.disposables, listener);
+        } else if (name === "fork") {
+          this.scope.runtime.forkables[method](listener);
+          return this.scope.collect("event <fork>", () => remove(this.scope.runtime.forkables, listener));
+        }
+      }), Context$1.static, root.scope);
+      for (const level of ["info", "error", "warning"]) {
+        defineProperty(this.on(`internal/${level}`, (format, ...param) => {
+          if (this._hooks[`internal/${level}`].length > 1) return;
+          console.info(format, ...param);
+        }), Context$1.static, root.scope);
+      }
     }
-    setTimeout(callback, delay) {
-      const dispose = this[Context$1.trace].effect(() => {
-        const timer = setTimeout(() => {
-          dispose();
-          callback();
-        }, delay);
-        return () => clearTimeout(timer);
-      });
-      return dispose;
+    async flush() {
+      while (this._tasks.size) {
+        await Promise.all(Array.from(this._tasks));
+      }
     }
-    setInterval(callback, delay) {
-      return this[Context$1.trace].effect(() => {
-        const timer = setInterval(callback, delay);
-        return () => clearInterval(timer);
-      });
+    getHooks(name, thisArg) {
+      const hooks = this._hooks[name] || [];
+      return hooks.slice().filter(([context]) => {
+        const filter = thisArg?.[Context$1.filter];
+        return !filter || filter.call(thisArg, context);
+      }).map(([, callback]) => callback);
     }
-    sleep(delay) {
+    prepareEvent(type, args) {
+      const thisArg = typeof args[0] === "object" ? args.shift() : null;
+      const name = args.shift();
+      if (name !== "internal/event") {
+        this.emit("internal/event", type, name, args, thisArg);
+      }
+      return [this.getHooks(name, thisArg), thisArg ?? this[Context$1.trace]];
+    }
+    async parallel(...args) {
+      const [hooks, thisArg] = this.prepareEvent("parallel", args);
+      await Promise.all(hooks.map(async callback => {
+        await callback.apply(thisArg, args);
+      }));
+    }
+    emit(...args) {
+      const [hooks, thisArg] = this.prepareEvent("emit", args);
+      for (const callback of hooks) {
+        callback.apply(thisArg, args);
+      }
+    }
+    async serial(...args) {
+      const [hooks, thisArg] = this.prepareEvent("serial", args);
+      for (const callback of hooks) {
+        const result = await callback.apply(thisArg, args);
+        if (isBailed(result)) return result;
+      }
+    }
+    bail(...args) {
+      const [hooks, thisArg] = this.prepareEvent("bail", args);
+      for (const callback of hooks) {
+        const result = callback.apply(thisArg, args);
+        if (isBailed(result)) return result;
+      }
+    }
+    register(label, hooks, listener, prepend) {
       const caller = this[Context$1.trace];
-      return new Promise((resolve, reject) => {
-        const dispose1 = this.setTimeout(() => {
-          dispose1();
-          dispose2();
-          resolve();
-        }, delay);
-        const dispose2 = caller.on("dispose", () => {
-          dispose1();
-          dispose2();
-          reject(new Error("Context has been disposed"));
-        });
-      });
+      const method = prepend ? "unshift" : "push";
+      hooks[method]([caller, listener]);
+      return caller.state.collect(label, () => this.unregister(hooks, listener));
     }
-    createWrapper(callback, isDisposed = false) {
+    unregister(hooks, listener) {
+      const index = hooks.findIndex(([context, callback]) => callback === listener);
+      if (index >= 0) {
+        hooks.splice(index, 1);
+        return true;
+      }
+    }
+    on(name, listener, prepend = false) {
       const caller = this[Context$1.trace];
       caller.scope.assertActive();
-      let timer;
-      const dispose = /* @__PURE__ */__name$8(() => {
-        isDisposed = true;
-        remove(caller.scope.disposables, dispose);
-        clearTimeout(timer);
-      }, "dispose");
-      const wrapper = /* @__PURE__ */__name$8((...args) => {
-        clearTimeout(timer);
-        timer = callback(args, () => !isDisposed && caller.scope.isActive);
-      }, "wrapper");
-      wrapper.dispose = dispose;
-      caller.scope.disposables.push(dispose);
-      return wrapper;
+      const result = this.bail(caller, "internal/listener", name, listener, prepend);
+      if (result) return result;
+      const hooks = this._hooks[name] ||= [];
+      const label = typeof name === "string" ? `event <${name}>` : "event (Symbol)";
+      return this.register(label, hooks, listener, prepend);
     }
-    throttle(callback, delay, noTrailing) {
-      let lastCall = -Infinity;
-      const execute = /* @__PURE__ */__name$8((...args) => {
-        lastCall = Date.now();
-        callback(...args);
-      }, "execute");
-      return this.createWrapper((args, isActive) => {
-        const now = Date.now();
-        const remaining = delay - (now - lastCall);
-        if (remaining <= 0) {
-          execute(...args);
-        } else if (isActive()) {
-          return setTimeout(execute, remaining, ...args);
-        }
-      }, noTrailing);
+    once(name, listener, prepend = false) {
+      const dispose = this.on(name, function (...args) {
+        dispose();
+        return listener.apply(this, args);
+      }, prepend);
+      return dispose;
     }
-    debounce(callback, delay) {
-      return this.createWrapper((args, isActive) => {
-        if (!isActive()) return;
-        return setTimeout(callback, delay, ...args);
-      });
+    off(name, listener) {
+      return this.unregister(this._hooks[name] || [], listener);
     }
-  }, __name$8(_Class6, "TimerService"), _Class6);
-  var __defProp$7 = Object.defineProperty;
-  var __getOwnPropNames$1 = Object.getOwnPropertyNames;
-  var __name$7 = (target, value) => __defProp$7(target, "name", {
-    value,
-    configurable: true
-  });
-  var __commonJS$1 = (cb, mod) => function __require() {
-    return mod || (0, cb[__getOwnPropNames$1(cb)[0]])((mod = {
-      exports: {}
-    }).exports, mod), mod.exports;
+    async start() {
+      this.isActive = true;
+      const hooks = this._hooks.ready || [];
+      while (hooks.length) {
+        const [context, callback] = hooks.shift();
+        context.scope.ensure(async () => callback());
+      }
+      await this.flush();
+    }
+    async stop() {
+      this.isActive = false;
+      this.root.scope.reset();
+    }
+  }, __name$8(_Class, "Lifecycle"), _Class);
+  var symbols = {
+    // context symbols
+    trace: Symbol.for("cordis.trace"),
+    events: Symbol.for("cordis.events"),
+    static: Symbol.for("cordis.static"),
+    filter: Symbol.for("cordis.filter"),
+    expose: Symbol.for("cordis.expose"),
+    isolate: Symbol.for("cordis.isolate"),
+    internal: Symbol.for("cordis.internal"),
+    intercept: Symbol.for("cordis.intercept"),
+    // service symbols
+    setup: Symbol.for("cordis.setup"),
+    invoke: Symbol.for("cordis.invoke"),
+    extend: Symbol.for("cordis.extend"),
+    provide: Symbol.for("cordis.provide"),
+    immediate: Symbol.for("cordis.immediate")
   };
-  var require_src$1 = __commonJS$1({
-    "packages/schemastery/packages/core/src/index.ts"(exports, module) {
-      var kSchema = Symbol.for("schemastery");
-      globalThis.__schemastery_index__ ??= 0;
-      var Schema = /* @__PURE__ */__name$7(function (options) {
-        const schema = /* @__PURE__ */__name$7(function (data, options2) {
-          return Schema.resolve(data, schema, options2)[0];
-        }, "schema");
-        if (options.refs) {
-          const refs2 = mapValues(options.refs, options2 => new Schema(options2));
-          const getRef = /* @__PURE__ */__name$7(uid => refs2[uid], "getRef");
-          for (const key in refs2) {
-            const options2 = refs2[key];
-            options2.sKey = getRef(options2.sKey);
-            options2.inner = getRef(options2.inner);
-            options2.list = options2.list && options2.list.map(getRef);
-            options2.dict = options2.dict && mapValues(options2.dict, getRef);
-          }
-          return refs2[options.uid];
-        }
-        Object.assign(schema, options);
-        if (typeof schema.callback === "string") {
-          try {
-            schema.callback = new Function("return " + schema.callback)();
-          } catch {}
-        }
-        Object.defineProperty(schema, "uid", {
-          value: globalThis.__schemastery_index__++
-        });
-        Object.setPrototypeOf(schema, Schema.prototype);
-        schema.meta ||= {};
-        schema.toString = schema.toString.bind(schema);
-        return schema;
-      }, "Schema");
-      Schema.prototype = Object.create(Function.prototype);
-      Schema.prototype[kSchema] = true;
-      var refs;
-      Schema.prototype.toJSON = /* @__PURE__ */__name$7(function toJSON() {
-        if (refs) {
-          refs[this.uid] ??= JSON.parse(JSON.stringify({
-            ...this
-          }));
-          return this.uid;
-        }
-        refs = {
-          [this.uid]: {
-            ...this
-          }
-        };
-        refs[this.uid] = JSON.parse(JSON.stringify({
-          ...this
-        }));
-        const result = {
-          uid: this.uid,
-          refs
-        };
-        refs = void 0;
-        return result;
-      }, "toJSON");
-      Schema.prototype.set = /* @__PURE__ */__name$7(function set(key, value) {
-        this.dict[key] = value;
-        return this;
-      }, "set");
-      Schema.prototype.push = /* @__PURE__ */__name$7(function push(value) {
-        this.list.push(value);
-        return this;
-      }, "push");
-      function mergeDesc(original, messages) {
-        const result = typeof original === "string" ? {
-          "": original
-        } : {
-          ...original
-        };
-        for (const locale in messages) {
-          const value = messages[locale];
-          if (value?.$description || value?.$desc) {
-            result[locale] = value.$description || value.$desc;
-          } else if (typeof value === "string") {
-            result[locale] = value;
-          }
-        }
-        return result;
-      }
-      __name$7(mergeDesc, "mergeDesc");
-      function getInner(value) {
-        return value?.$value ?? value?.$inner;
-      }
-      __name$7(getInner, "getInner");
-      function extractKeys(data) {
-        return Object.fromEntries(Object.entries(data ?? {}).filter(([key]) => !key.startsWith("$")));
-      }
-      __name$7(extractKeys, "extractKeys");
-      Schema.prototype.i18n = /* @__PURE__ */__name$7(function i18n(messages) {
-        const schema = Schema(this);
-        schema.meta.description = mergeDesc(schema.meta.description, messages);
-        if (schema.dict) {
-          schema.dict = mapValues(schema.dict, (inner, key) => {
-            return inner.i18n(mapValues(messages, data => getInner(data)?.[key] ?? data?.[key]));
-          });
-        }
-        if (schema.list) {
-          schema.list = schema.list.map((inner, index) => {
-            return inner.i18n(mapValues(messages, (data = {}) => {
-              if (Array.isArray(getInner(data))) return getInner(data)[index];
-              if (Array.isArray(data)) return data[index];
-              return extractKeys(data);
-            }));
-          });
-        }
-        if (schema.inner) {
-          schema.inner = schema.inner.i18n(mapValues(messages, data => {
-            if (getInner(data)) return getInner(data);
-            return extractKeys(data);
-          }));
-        }
-        if (schema.sKey) {
-          schema.sKey = schema.sKey.i18n(mapValues(messages, data => data?.$key));
-        }
-        return schema;
-      }, "i18n");
-      Schema.prototype.extra = /* @__PURE__ */__name$7(function extra(key, value) {
-        const schema = Schema(this);
-        schema.meta = {
-          ...schema.meta,
-          [key]: value
-        };
-        return schema;
-      }, "extra");
-      for (const key of ["required", "disabled", "collapse", "hidden", "loose"]) {
-        Object.assign(Schema.prototype, {
-          [key](value = true) {
-            const schema = Schema(this);
-            schema.meta = {
-              ...schema.meta,
-              [key]: value
-            };
-            return schema;
-          }
-        });
-      }
-      Schema.prototype.deprecated = /* @__PURE__ */__name$7(function deprecated() {
-        const schema = Schema(this);
-        schema.meta.badges ||= [];
-        schema.meta.badges.push({
-          text: "deprecated",
-          type: "danger"
-        });
-        return schema;
-      }, "deprecated");
-      Schema.prototype.experimental = /* @__PURE__ */__name$7(function experimental() {
-        const schema = Schema(this);
-        schema.meta.badges ||= [];
-        schema.meta.badges.push({
-          text: "experimental",
-          type: "warning"
-        });
-        return schema;
-      }, "experimental");
-      Schema.prototype.pattern = /* @__PURE__ */__name$7(function pattern(regexp) {
-        const schema = Schema(this);
-        const pattern2 = pick(regexp, ["source", "flags"]);
-        schema.meta = {
-          ...schema.meta,
-          pattern: pattern2
-        };
-        return schema;
-      }, "pattern");
-      Schema.prototype.simplify = /* @__PURE__ */__name$7(function simplify(value) {
-        if (deepEqual(value, this.meta.default)) return null;
-        if (isNullable(value)) return value;
-        if (this.type === "object" || this.type === "dict") {
-          const result = {};
-          for (const key in value) {
-            const schema = this.type === "object" ? this.dict[key] : this.inner;
-            const item = schema?.simplify(value[key]);
-            if (!isNullable(item)) result[key] = item;
-          }
-          return result;
-        } else if (this.type === "array" || this.type === "tuple") {
-          const result = [];
-          value.forEach((value2, index) => {
-            const schema = this.type === "array" ? this.inner : this.list[index];
-            const item = schema ? schema.simplify(value2) : value2;
-            result.push(item);
-          });
-          return result;
-        } else if (this.type === "intersect") {
-          const result = {};
-          for (const item of this.list) {
-            Object.assign(result, item.simplify(value));
-          }
-          return result;
-        } else if (this.type === "union") {
-          for (const schema of this.list) {
-            try {
-              Schema.resolve(value, schema);
-              return schema.simplify(value);
-            } catch {}
-          }
-        }
-        return value;
-      }, "simplify");
-      Schema.prototype.toString = /* @__PURE__ */__name$7(function toString(inline) {
-        return formatters[this.type]?.(this, inline) ?? `Schema<${this.type}>`;
-      }, "toString");
-      Schema.prototype.role = /* @__PURE__ */__name$7(function role(role, extra) {
-        const schema = Schema(this);
-        schema.meta = {
-          ...schema.meta,
-          role,
-          extra
-        };
-        return schema;
-      }, "role");
-      for (const key of ["default", "link", "comment", "description", "max", "min", "step"]) {
-        Object.assign(Schema.prototype, {
-          [key](value) {
-            const schema = Schema(this);
-            schema.meta = {
-              ...schema.meta,
-              [key]: value
-            };
-            return schema;
-          }
-        });
-      }
-      var resolvers = {};
-      Schema.extend = /* @__PURE__ */__name$7(function extend(type, resolve) {
-        resolvers[type] = resolve;
-      }, "extend");
-      Schema.resolve = /* @__PURE__ */__name$7(function resolve(data, schema, options = {}, strict = false) {
-        if (!schema) return [data];
-        if (isNullable(data)) {
-          if (schema.meta.required) throw new TypeError(`missing required value`);
-          let current = schema;
-          let fallback = schema.meta.default;
-          while (current?.type === "intersect" && isNullable(fallback)) {
-            current = current.list[0];
-            fallback = current?.meta.default;
-          }
-          if (isNullable(fallback)) return [data];
-          data = clone(fallback);
-        }
-        const callback = resolvers[schema.type];
-        if (!callback) throw new TypeError(`unsupported type "${schema.type}"`);
-        try {
-          return callback(data, schema, options, strict);
-        } catch (error) {
-          if (!schema.meta.loose) throw error;
-          return [schema.meta.default];
-        }
-      }, "resolve");
-      Schema.from = /* @__PURE__ */__name$7(function from(source) {
-        if (isNullable(source)) {
-          return Schema.any();
-        } else if (["string", "number", "boolean"].includes(typeof source)) {
-          return Schema.const(source).required();
-        } else if (source[kSchema]) {
-          return source;
-        } else if (typeof source === "function") {
-          switch (source) {
-            case String:
-              return Schema.string().required();
-            case Number:
-              return Schema.number().required();
-            case Boolean:
-              return Schema.boolean().required();
-            case Function:
-              return Schema.function().required();
-            default:
-              return Schema.is(source).required();
-          }
-        } else {
-          throw new TypeError(`cannot infer schema from ${source}`);
-        }
-      }, "from");
-      Schema.natural = /* @__PURE__ */__name$7(function natural() {
-        return Schema.number().step(1).min(0);
-      }, "natural");
-      Schema.percent = /* @__PURE__ */__name$7(function percent() {
-        return Schema.number().step(0.01).min(0).max(1).role("slider");
-      }, "percent");
-      Schema.date = /* @__PURE__ */__name$7(function date() {
-        return Schema.union([Schema.is(Date), Schema.transform(Schema.string().role("datetime"), value => {
-          const date2 = new Date(value);
-          if (isNaN(+date2)) throw new TypeError(`invalid date "${value}"`);
-          return date2;
-        }, true)]);
-      }, "date");
-      Schema.extend("any", data => {
-        return [data];
-      });
-      Schema.extend("never", data => {
-        throw new TypeError(`expected nullable but got ${data}`);
-      });
-      Schema.extend("const", (data, {
-        value
-      }) => {
-        if (data === value) return [value];
-        throw new TypeError(`expected ${value} but got ${data}`);
-      });
-      function checkWithinRange(data, meta, description) {
-        const {
-          max = Infinity,
-          min = -Infinity
-        } = meta;
-        if (data > max) throw new TypeError(`expected ${description} <= ${max} but got ${data}`);
-        if (data < min) throw new TypeError(`expected ${description} >= ${min} but got ${data}`);
-      }
-      __name$7(checkWithinRange, "checkWithinRange");
-      Schema.extend("string", (data, {
-        meta
-      }) => {
-        if (typeof data !== "string") throw new TypeError(`expected string but got ${data}`);
-        if (meta.pattern) {
-          const regexp = new RegExp(meta.pattern.source, meta.pattern.flags);
-          if (!regexp.test(data)) throw new TypeError(`expect string to match regexp ${regexp}`);
-        }
-        checkWithinRange(data.length, meta, "string length");
-        return [data];
-      });
-      function decimalShift(data, digits) {
-        const str = data.toString();
-        if (str.includes("e")) return data * Math.pow(10, digits);
-        const index = str.indexOf(".");
-        if (index === -1) return data * Math.pow(10, digits);
-        const frac = str.slice(index + 1);
-        const integer = str.slice(0, index);
-        if (frac.length <= digits) return +(integer + frac.padEnd(digits, "0"));
-        return +(integer + frac.slice(0, digits) + "." + frac.slice(digits));
-      }
-      __name$7(decimalShift, "decimalShift");
-      function isMultipleOf(data, min, step) {
-        step = Math.abs(step);
-        if (!/^\d+\.\d+$/.test(step.toString())) {
-          return (data - min) % step === 0;
-        }
-        const index = step.toString().indexOf(".");
-        const digits = step.toString().slice(index + 1).length;
-        return Math.abs(decimalShift(data, digits) - decimalShift(min, digits)) % decimalShift(step, digits) === 0;
-      }
-      __name$7(isMultipleOf, "isMultipleOf");
-      Schema.extend("number", (data, {
-        meta
-      }) => {
-        if (typeof data !== "number") throw new TypeError(`expected number but got ${data}`);
-        checkWithinRange(data, meta, "number");
-        const {
-          step
-        } = meta;
-        if (step && !isMultipleOf(data, meta.min ?? 0, step)) {
-          throw new TypeError(`expected number multiple of ${step} but got ${data}`);
-        }
-        return [data];
-      });
-      Schema.extend("boolean", data => {
-        if (typeof data === "boolean") return [data];
-        throw new TypeError(`expected boolean but got ${data}`);
-      });
-      Schema.extend("bitset", (data, {
-        bits,
-        meta
-      }) => {
-        let value = 0,
-          keys = [];
-        if (typeof data === "number") {
-          value = data;
-          for (const key in bits) {
-            if (data & bits[key]) {
-              keys.push(key);
-            }
-          }
-        } else if (Array.isArray(data)) {
-          keys = data;
-          for (const key of keys) {
-            if (typeof key !== "string") throw new TypeError(`expected string but got ${key}`);
-            if (key in bits) value |= bits[key];
-          }
-        } else {
-          throw new TypeError(`expected number or array but got ${data}`);
-        }
-        if (value === meta.default) return [value];
-        return [value, keys];
-      });
-      Schema.extend("function", data => {
-        if (typeof data === "function") return [data];
-        throw new TypeError(`expected function but got ${data}`);
-      });
-      Schema.extend("is", (data, {
-        callback
-      }) => {
-        if (data instanceof callback) return [data];
-        throw new TypeError(`expected ${callback.name} but got ${data}`);
-      });
-      function property(data, key, schema, options) {
-        try {
-          const [value, adapted] = Schema.resolve(data[key], schema, options);
-          if (adapted !== void 0) data[key] = adapted;
-          return value;
-        } catch (e) {
-          if (!options?.autofix) throw e;
-          delete data[key];
-          return schema.meta.default;
-        }
-      }
-      __name$7(property, "property");
-      Schema.extend("array", (data, {
-        inner,
-        meta
-      }, options) => {
-        if (!Array.isArray(data)) throw new TypeError(`expected array but got ${data}`);
-        checkWithinRange(data.length, meta, "array length");
-        return [data.map((_, index) => property(data, index, inner, options))];
-      });
-      Schema.extend("dict", (data, {
-        inner,
-        sKey
-      }, options, strict) => {
-        if (!isPlainObject(data)) throw new TypeError(`expected object but got ${data}`);
-        const result = {};
-        for (const key in data) {
-          let rKey;
-          try {
-            rKey = Schema.resolve(key, sKey)[0];
-          } catch (error) {
-            if (strict) continue;
-            throw error;
-          }
-          result[rKey] = property(data, key, inner, options);
-          data[rKey] = data[key];
-          if (key !== rKey) delete data[key];
-        }
-        return [result];
-      });
-      Schema.extend("tuple", (data, {
-        list
-      }, options, strict) => {
-        if (!Array.isArray(data)) throw new TypeError(`expected array but got ${data}`);
-        const result = list.map((inner, index) => property(data, index, inner, options));
-        if (strict) return [result];
-        result.push(...data.slice(list.length));
-        return [result];
-      });
-      function merge(result, data) {
-        for (const key in data) {
-          if (key in result) continue;
-          result[key] = data[key];
-        }
-      }
-      __name$7(merge, "merge");
-      Schema.extend("object", (data, {
-        dict
-      }, options, strict) => {
-        if (!isPlainObject(data)) throw new TypeError(`expected object but got ${data}`);
-        const result = {};
-        for (const key in dict) {
-          const value = property(data, key, dict[key], options);
-          if (!isNullable(value) || key in data) {
-            result[key] = value;
-          }
-        }
-        if (!strict) merge(result, data);
-        return [result];
-      });
-      Schema.extend("union", (data, {
-        list,
-        toString
-      }, options, strict) => {
-        for (const inner of list) {
-          try {
-            return Schema.resolve(data, inner, options, strict);
-          } catch (error) {}
-        }
-        throw new TypeError(`expected ${toString()} but got ${JSON.stringify(data)}`);
-      });
-      Schema.extend("intersect", (data, {
-        list,
-        toString
-      }, options, strict) => {
-        let result;
-        for (const inner of list) {
-          const value = Schema.resolve(data, inner, options, true)[0];
-          if (isNullable(value)) continue;
-          if (isNullable(result)) {
-            result = value;
-          } else if (typeof result !== typeof value) {
-            throw new TypeError(`expected ${toString()} but got ${JSON.stringify(data)}`);
-          } else if (typeof value === "object") {
-            merge(result ??= {}, value);
-          } else if (result !== value) {
-            throw new TypeError(`expected ${toString()} but got ${JSON.stringify(data)}`);
-          }
-        }
-        if (!strict && isPlainObject(data)) merge(result, data);
-        return [result];
-      });
-      Schema.extend("transform", (data, {
-        inner,
-        callback,
-        preserve
-      }, options) => {
-        const [result, adapted = data] = Schema.resolve(data, inner, options, true);
-        if (preserve) {
-          return [callback(result)];
-        } else {
-          return [callback(result), callback(adapted)];
-        }
-      });
-      var formatters = {};
-      function defineMethod(name, keys, format) {
-        formatters[name] = format;
-        Object.assign(Schema, {
-          [name](...args) {
-            const schema = new Schema({
-              type: name
-            });
-            keys.forEach((key, index) => {
-              switch (key) {
-                case "sKey":
-                  schema.sKey = args[index] ?? Schema.string();
-                  break;
-                case "inner":
-                  schema.inner = Schema.from(args[index]);
-                  break;
-                case "list":
-                  schema.list = args[index].map(Schema.from);
-                  break;
-                case "dict":
-                  schema.dict = mapValues(args[index], Schema.from);
-                  break;
-                case "bits":
-                  {
-                    schema.bits = {};
-                    for (const key2 in args[index]) {
-                      if (typeof args[index][key2] !== "number") continue;
-                      schema.bits[key2] = args[index][key2];
-                    }
-                    break;
-                  }
-                case "callback":
-                  {
-                    schema.callback = args[index];
-                    schema.callback["toJSON"] ||= () => schema.callback.toString();
-                    break;
-                  }
-                default:
-                  schema[key] = args[index];
-              }
-            });
-            if (name === "object" || name === "dict") {
-              schema.meta.default = {};
-            } else if (name === "array" || name === "tuple") {
-              schema.meta.default = [];
-            } else if (name === "bitset") {
-              schema.meta.default = 0;
-            }
-            return schema;
-          }
-        });
-      }
-      __name$7(defineMethod, "defineMethod");
-      defineMethod("is", ["callback"], ({
-        callback
-      }) => callback.name);
-      defineMethod("any", [], () => "any");
-      defineMethod("never", [], () => "never");
-      defineMethod("const", ["value"], ({
-        value
-      }) => typeof value === "string" ? JSON.stringify(value) : value);
-      defineMethod("string", [], () => "string");
-      defineMethod("number", [], () => "number");
-      defineMethod("boolean", [], () => "boolean");
-      defineMethod("bitset", ["bits"], () => "bitset");
-      defineMethod("function", [], () => "function");
-      defineMethod("array", ["inner"], ({
-        inner
-      }) => `${inner.toString(true)}[]`);
-      defineMethod("dict", ["inner", "sKey"], ({
-        inner,
-        sKey
-      }) => `{ [key: ${sKey.toString()}]: ${inner.toString()} }`);
-      defineMethod("tuple", ["list"], ({
-        list
-      }) => `[${list.map(inner => inner.toString()).join(", ")}]`);
-      defineMethod("object", ["dict"], ({
-        dict
-      }) => {
-        if (Object.keys(dict).length === 0) return "{}";
-        return `{ ${Object.entries(dict).map(([key, inner]) => {
-        return `${key}${inner.meta.required ? "" : "?"}: ${inner.toString()}`;
-      }).join(", ")} }`;
-      });
-      defineMethod("union", ["list"], ({
-        list
-      }, inline) => {
-        const result = list.map(({
-          toString: format
-        }) => format()).join(" | ");
-        return inline ? `(${result})` : result;
-      });
-      defineMethod("intersect", ["list"], ({
-        list
-      }) => {
-        return `${list.map(inner => inner.toString(true)).join(" & ")}`;
-      });
-      defineMethod("transform", ["inner", "callback", "preserve"], ({
-        inner
-      }, isInner) => inner.toString(isInner));
-      module.exports = Schema;
+  function isConstructor(func) {
+    if (!func.prototype) return false;
+    if (func.prototype.constructor !== func) return false;
+    return true;
+  }
+  __name$8(isConstructor, "isConstructor");
+  function resolveConfig(plugin, config) {
+    const schema = plugin["Config"] || plugin["schema"];
+    if (schema && plugin["schema"] !== false) config = schema(config);
+    return config ?? {};
+  }
+  __name$8(resolveConfig, "resolveConfig");
+  function isUnproxyable(value) {
+    return [Map, Set, Date, Promise].some(constructor => value instanceof constructor);
+  }
+  __name$8(isUnproxyable, "isUnproxyable");
+  function joinPrototype(proto1, proto2) {
+    if (proto1 === Object.prototype) return proto2;
+    const result = Object.create(joinPrototype(Object.getPrototypeOf(proto1), proto2));
+    for (const key of Reflect.ownKeys(proto1)) {
+      Object.defineProperty(result, key, Object.getOwnPropertyDescriptor(proto1, key));
     }
-  });
-  var z2 = require_src$1();
-  var loader$1 = {};
-  var common$5 = {};
+    return result;
+  }
+  __name$8(joinPrototype, "joinPrototype");
+  function createTraceable(ctx, value) {
+    const proxy = new Proxy(value, {
+      get: (target, name, receiver) => {
+        if (name === symbols.trace || name === "caller") return ctx;
+        return Reflect.get(target, name, receiver);
+      },
+      apply: (target, thisArg, args) => {
+        return applyTraceable(proxy, target, thisArg, args);
+      }
+    });
+    return proxy;
+  }
+  __name$8(createTraceable, "createTraceable");
+  function applyTraceable(proxy, value, thisArg, args) {
+    if (!value[symbols.invoke]) return Reflect.apply(value, thisArg, args);
+    return value[symbols.invoke].apply(proxy, args);
+  }
+  __name$8(applyTraceable, "applyTraceable");
+  function createCallable(name, proto) {
+    const self = /* @__PURE__ */__name$8(function (...args) {
+      const proxy = createTraceable(self[symbols.trace], self);
+      return applyTraceable(proxy, self, this, args);
+    }, "self");
+    defineProperty(self, "name", name);
+    return Object.setPrototypeOf(self, proto);
+  }
+  __name$8(createCallable, "createCallable");
+
+  // src/scope.ts
+  var ScopeStatus = /* @__PURE__ */(ScopeStatus2 => {
+    ScopeStatus2[ScopeStatus2["PENDING"] = 0] = "PENDING";
+    ScopeStatus2[ScopeStatus2["LOADING"] = 1] = "LOADING";
+    ScopeStatus2[ScopeStatus2["ACTIVE"] = 2] = "ACTIVE";
+    ScopeStatus2[ScopeStatus2["FAILED"] = 3] = "FAILED";
+    ScopeStatus2[ScopeStatus2["DISPOSED"] = 4] = "DISPOSED";
+    return ScopeStatus2;
+  })(ScopeStatus || {});
+  exports.CordisError = (_CordisError2 = class _CordisError extends Error {
+    constructor(code, message) {
+      super(message ?? _CordisError.Code[code]);
+      this.code = code;
+    }
+  }, __name$8(_CordisError2, "CordisError"), _CordisError2);
+  (CordisError2 => {
+    CordisError2.Code = {
+      INACTIVE_EFFECT: "cannot create effect on inactive context"
+    };
+  })(exports.CordisError || (exports.CordisError = {}));
+  var EffectScope = (_Class2 = class EffectScope {
+    constructor(parent, config) {
+      _defineProperty(this, "uid", void 0);
+      _defineProperty(this, "ctx", void 0);
+      _defineProperty(this, "disposables", []);
+      _defineProperty(this, "error", void 0);
+      _defineProperty(this, "status", 0 /* PENDING */);
+      _defineProperty(this, "isActive", false);
+      // Same as `this.ctx`, but with a more specific type.
+      _defineProperty(this, "context", void 0);
+      _defineProperty(this, "proxy", void 0);
+      _defineProperty(this, "acceptors", []);
+      _defineProperty(this, "tasks", /* @__PURE__ */new Set());
+      _defineProperty(this, "hasError", false);
+      this.parent = parent;
+      this.config = config;
+      this.uid = parent.registry ? parent.registry.counter : 0;
+      this.ctx = this.context = parent.extend({
+        scope: this
+      });
+      this.proxy = new Proxy({}, {
+        get: (target, key) => Reflect.get(this.config, key)
+      });
+    }
+    get _config() {
+      return this.runtime.isReactive ? this.proxy : this.config;
+    }
+    assertActive() {
+      if (this.uid !== null || this.isActive) return;
+      throw new exports.CordisError("INACTIVE_EFFECT");
+    }
+    effect(callback, config) {
+      this.assertActive();
+      const result = isConstructor(callback) ? new callback(this.ctx, config) : callback(this.ctx, config);
+      let disposed = false;
+      const original = typeof result === "function" ? result : result.dispose.bind(result);
+      const wrapped = /* @__PURE__ */__name$8(() => {
+        if (disposed) return;
+        disposed = true;
+        remove(this.disposables, wrapped);
+        return original();
+      }, "wrapped");
+      this.disposables.push(wrapped);
+      if (typeof result === "function") return wrapped;
+      result.dispose = wrapped;
+      return result;
+    }
+    collect(label, callback) {
+      const dispose = defineProperty(() => {
+        remove(this.disposables, dispose);
+        return callback();
+      }, "name", label);
+      this.disposables.push(dispose);
+      return dispose;
+    }
+    restart() {
+      this.reset();
+      this.error = null;
+      this.hasError = false;
+      this.status = 0 /* PENDING */;
+      this.start();
+    }
+    _getStatus() {
+      if (this.uid === null) return 4 /* DISPOSED */;
+      if (this.hasError) return 3 /* FAILED */;
+      if (this.tasks.size) return 1 /* LOADING */;
+      if (this.ready) return 2 /* ACTIVE */;
+      return 0 /* PENDING */;
+    }
+    _updateStatus(callback) {
+      const oldValue = this.status;
+      callback?.();
+      this.status = this._getStatus();
+      if (oldValue !== this.status) {
+        this.context.emit("internal/status", this, oldValue);
+      }
+    }
+    ensure(callback) {
+      const task = callback().catch(reason => {
+        this.context.emit("internal/error", reason);
+        this.cancel(reason);
+      }).finally(() => {
+        this._updateStatus(() => this.tasks.delete(task));
+        this.context.events._tasks.delete(task);
+      });
+      this._updateStatus(() => this.tasks.add(task));
+      this.context.events._tasks.add(task);
+    }
+    cancel(reason) {
+      this.error = reason;
+      this._updateStatus(() => this.hasError = true);
+      this.reset();
+    }
+    setupInject() {
+      if (!this.runtime.using.length) return;
+      defineProperty(this.context.on("internal/before-service", name => {
+        if (!this.runtime.using.includes(name)) return;
+        this._updateStatus();
+        this.reset();
+      }), Context$1.static, this);
+      defineProperty(this.context.on("internal/service", name => {
+        if (!this.runtime.using.includes(name)) return;
+        this.start();
+      }), Context$1.static, this);
+    }
+    get ready() {
+      return this.runtime.using.every(name => !isNullable(this.ctx[name]));
+    }
+    reset() {
+      this.isActive = false;
+      this.disposables = this.disposables.splice(0).filter(dispose => {
+        if (this.uid !== null && dispose[Context$1.static] === this) return true;
+        (async () => dispose())().catch(reason => {
+          this.context.emit("internal/error", reason);
+        });
+      });
+    }
+    init(error) {
+      if (!this.config) {
+        this.cancel(error);
+      } else {
+        this.start();
+      }
+    }
+    start() {
+      if (!this.ready || this.isActive || this.uid === null) return true;
+      this.isActive = true;
+      this._updateStatus(() => this.hasError = false);
+    }
+    accept(...args) {
+      const keys = Array.isArray(args[0]) ? args.shift() : null;
+      const acceptor = {
+        keys,
+        callback: args[0],
+        ...args[1]
+      };
+      return this.effect(() => {
+        this.acceptors.push(acceptor);
+        if (acceptor.immediate) acceptor.callback?.(this.config);
+        return () => remove(this.acceptors, acceptor);
+      });
+    }
+    decline(keys) {
+      return this.accept(keys, () => true);
+    }
+    checkUpdate(resolved, forced) {
+      if (forced || !this.config) return [true, true];
+      if (forced === false) return [false, false];
+      const modified = /* @__PURE__ */Object.create(null);
+      const checkPropertyUpdate = /* @__PURE__ */__name$8(key => {
+        const result = modified[key] ??= !deepEqual(this.config[key], resolved[key]);
+        hasUpdate ||= result;
+        return result;
+      }, "checkPropertyUpdate");
+      const ignored = /* @__PURE__ */new Set();
+      let hasUpdate = false,
+        shouldRestart = false;
+      let fallback = this.runtime.isReactive || null;
+      for (const {
+        keys,
+        callback,
+        passive
+      } of this.acceptors) {
+        if (!keys) {
+          fallback ||= !passive;
+        } else if (passive) {
+          keys?.forEach(key => ignored.add(key));
+        } else {
+          let hasUpdate2 = false;
+          for (const key of keys) {
+            hasUpdate2 ||= checkPropertyUpdate(key);
+          }
+          if (!hasUpdate2) continue;
+        }
+        const result = callback?.(resolved);
+        if (result) shouldRestart = true;
+      }
+      for (const key in {
+        ...this.config,
+        ...resolved
+      }) {
+        if (fallback === false) continue;
+        if (!(key in modified) && !ignored.has(key)) {
+          const hasUpdate2 = checkPropertyUpdate(key);
+          if (fallback === null) shouldRestart ||= hasUpdate2;
+        }
+      }
+      return [hasUpdate, shouldRestart];
+    }
+  }, __name$8(_Class2, "EffectScope"), _Class2);
+  var ForkScope = (_Class3 = class ForkScope extends EffectScope {
+    constructor(parent, runtime, config, error) {
+      super(parent, config);
+      _defineProperty(this, "dispose", void 0);
+      this.runtime = runtime;
+      this.dispose = defineProperty(parent.scope.collect(`fork <${parent.runtime.name}>`, () => {
+        this.uid = null;
+        this.reset();
+        this.context.emit("internal/fork", this);
+        const result = remove(runtime.disposables, this.dispose);
+        if (remove(runtime.children, this) && !runtime.children.length) {
+          parent.registry.delete(runtime.plugin);
+        }
+        return result;
+      }), Context$1.static, runtime);
+      runtime.children.push(this);
+      runtime.disposables.push(this.dispose);
+      this.context.emit("internal/fork", this);
+      if (runtime.isReusable) {
+        this.setupInject();
+      }
+      this.init(error);
+    }
+    start() {
+      if (super.start()) return true;
+      for (const fork of this.runtime.forkables) {
+        this.ensure(async () => fork(this.context, this._config));
+      }
+    }
+    update(config, forced) {
+      const oldConfig = this.config;
+      const state = this.runtime.isForkable ? this : this.runtime;
+      if (state.config !== oldConfig) return;
+      const resolved = resolveConfig(this.runtime.plugin, config);
+      const [hasUpdate, shouldRestart] = state.checkUpdate(resolved, forced);
+      this.context.emit("internal/before-update", this, config);
+      this.config = resolved;
+      state.config = resolved;
+      if (hasUpdate) {
+        this.context.emit("internal/update", this, oldConfig);
+      }
+      if (shouldRestart) state.restart();
+    }
+  }, __name$8(_Class3, "ForkScope"), _Class3);
+  var MainScope = (_Class4 = class MainScope extends EffectScope {
+    constructor(registry, plugin, _config, error) {
+      super(registry[Context$1.trace], _config);
+      _defineProperty(this, "value", void 0);
+      _defineProperty(this, "runtime", this);
+      _defineProperty(this, "schema", void 0);
+      _defineProperty(this, "name", void 0);
+      _defineProperty(this, "using", []);
+      _defineProperty(this, "inject", /* @__PURE__ */new Set());
+      _defineProperty(this, "forkables", []);
+      _defineProperty(this, "children", []);
+      _defineProperty(this, "isReusable", false);
+      _defineProperty(this, "isReactive", false);
+      _defineProperty(this, "apply", (context, config) => {
+        if (typeof this.plugin !== "function") {
+          return this.plugin.apply(context, config);
+        } else if (isConstructor(this.plugin)) {
+          const instance = new this.plugin(context, config);
+          const name = instance[Context$1.expose];
+          if (name) {
+            context[name] = instance;
+          }
+          if (instance["fork"]) {
+            this.forkables.push(instance["fork"].bind(instance));
+          }
+          return instance;
+        } else {
+          return this.plugin(context, config);
+        }
+      });
+      this.plugin = plugin;
+      registry.set(plugin, this);
+      if (!plugin) {
+        this.name = "root";
+        this.isActive = true;
+      } else {
+        this.setup();
+        this.init(error);
+      }
+    }
+    get isForkable() {
+      return this.forkables.length > 0;
+    }
+    fork(parent, config, error) {
+      return new ForkScope(parent, this, config, error);
+    }
+    dispose() {
+      this.uid = null;
+      this.reset();
+      this.context.emit("internal/runtime", this);
+      return true;
+    }
+    setup() {
+      const {
+        name
+      } = this.plugin;
+      if (name && name !== "apply") this.name = name;
+      this.schema = this.plugin["Config"] || this.plugin["schema"];
+      const inject = this.plugin["using"] || this.plugin["inject"] || [];
+      if (Array.isArray(inject)) {
+        this.using = inject;
+        this.inject = new Set(inject);
+      } else {
+        this.using = inject.required || [];
+        this.inject = /* @__PURE__ */new Set([...this.using, ...(inject.optional || [])]);
+      }
+      this.isReusable = this.plugin["reusable"];
+      this.isReactive = this.plugin["reactive"];
+      this.context.emit("internal/runtime", this);
+      if (this.isReusable) {
+        this.forkables.push(this.apply);
+      } else {
+        super.setupInject();
+      }
+    }
+    reset() {
+      super.reset();
+      for (const fork of this.children) {
+        fork.reset();
+      }
+    }
+    start() {
+      if (super.start()) return true;
+      if (!this.isReusable && this.plugin) {
+        this.ensure(async () => this.value = this.apply(this.ctx, this._config));
+      }
+      for (const fork of this.children) {
+        fork.start();
+      }
+    }
+    update(config, forced) {
+      if (this.isForkable) {
+        this.context.emit("internal/warning", new Error(`attempting to update forkable plugin "${this.plugin.name}", which may lead to unexpected behavior`));
+      }
+      const oldConfig = this.config;
+      const resolved = resolveConfig(this.runtime.plugin || this.context.constructor, config);
+      const [hasUpdate, shouldRestart] = this.checkUpdate(resolved, forced);
+      const state = this.children.find(fork => fork.config === oldConfig);
+      this.config = resolved;
+      if (state) {
+        this.context.emit("internal/before-update", state, config);
+        state.config = resolved;
+        if (hasUpdate) {
+          this.context.emit("internal/update", state, oldConfig);
+        }
+      }
+      if (shouldRestart) this.restart();
+    }
+  }, __name$8(_Class4, "MainScope"), _Class4);
+
+  // src/registry.ts
+  function isApplicable(object) {
+    return object && typeof object === "object" && typeof object.apply === "function";
+  }
+  __name$8(isApplicable, "isApplicable");
+  var Registry = (_Class5 = class Registry {
+    constructor(root, config) {
+      _defineProperty(this, "_counter", 0);
+      _defineProperty(this, "_internal", /* @__PURE__ */new Map());
+      this.root = root;
+      defineProperty(this, Context$1.trace, root);
+      root.scope = new MainScope(this, null, config);
+      root.scope.runtime.isReactive = true;
+    }
+    get counter() {
+      return ++this._counter;
+    }
+    get size() {
+      return this._internal.size;
+    }
+    resolve(plugin) {
+      if (plugin === null) return plugin;
+      if (typeof plugin === "function") return plugin;
+      if (isApplicable(plugin)) return plugin.apply;
+      throw new Error('invalid plugin, expect function or object with an "apply" method, received ' + typeof plugin);
+    }
+    get(plugin) {
+      return this._internal.get(this.resolve(plugin));
+    }
+    has(plugin) {
+      return this._internal.has(this.resolve(plugin));
+    }
+    set(plugin, state) {
+      const oldValue = this._internal.get(this.resolve(plugin));
+      this._internal.set(this.resolve(plugin), state);
+      return oldValue;
+    }
+    delete(plugin) {
+      plugin = this.resolve(plugin);
+      const runtime = this.get(plugin);
+      if (!runtime) return;
+      this._internal.delete(plugin);
+      runtime.dispose();
+      return runtime;
+    }
+    keys() {
+      return this._internal.keys();
+    }
+    values() {
+      return this._internal.values();
+    }
+    entries() {
+      return this._internal.entries();
+    }
+    forEach(callback) {
+      return this._internal.forEach(callback);
+    }
+    using(inject, callback) {
+      return this.inject(inject, callback);
+    }
+    inject(inject, callback) {
+      return this.plugin({
+        inject,
+        apply: callback,
+        name: callback.name
+      });
+    }
+    plugin(plugin, config) {
+      this.resolve(plugin);
+      const context = this[Context$1.trace];
+      context.scope.assertActive();
+      let error;
+      try {
+        config = resolveConfig(plugin, config);
+      } catch (reason) {
+        context.emit("internal/error", reason);
+        error = reason;
+        config = null;
+      }
+      let runtime = this.get(plugin);
+      if (runtime) {
+        if (!runtime.isForkable) {
+          context.emit("internal/warning", new Error(`duplicate plugin detected: ${plugin.name}`));
+        }
+        return runtime.fork(context, config, error);
+      }
+      runtime = new MainScope(this, plugin, config, error);
+      return runtime.fork(context, config, error);
+    }
+  }, __name$8(_Class5, "Registry"), _Class5);
+
+  // src/context.ts
+  var Context$1 = (_Symbol$for = Symbol.for("nodejs.util.inspect.custom"), (_Context2 = class _Context {
+    static is(value) {
+      return !!value?.[_Context.is];
+    }
+    static ensureInternal() {
+      const ctx = this.prototype || this;
+      if (Object.prototype.hasOwnProperty.call(ctx, symbols.internal)) {
+        return ctx[symbols.internal];
+      }
+      const parent = _Context.ensureInternal.call(Object.getPrototypeOf(this));
+      return ctx[symbols.internal] = Object.create(parent);
+    }
+    static resolveInject(ctx, name) {
+      let internal = ctx[symbols.internal][name];
+      while (internal?.type === "alias") {
+        name = internal.name;
+        internal = ctx[symbols.internal][name];
+      }
+      return [name, internal];
+    }
+    static associate(object, name) {
+      return new Proxy(object, {
+        get(target, key, receiver) {
+          if (typeof key === "symbol" || key in target) return Reflect.get(target, key, receiver);
+          const caller = receiver[symbols.trace];
+          if (!caller?.[symbols.internal][`${name}.${key}`]) return Reflect.get(target, key, receiver);
+          return caller.get(`${name}.${key}`);
+        },
+        set(target, key, value, receiver) {
+          if (typeof key === "symbol" || key in target) return Reflect.set(target, key, value, receiver);
+          const caller = receiver[symbols.trace];
+          if (!caller?.[symbols.internal][`${name}.${key}`]) return Reflect.set(target, key, value, receiver);
+          caller[`${name}.${key}`] = value;
+          return true;
+        }
+      });
+    }
+    constructor(config) {
+      const self = new Proxy(this, _Context.handler);
+      config = resolveConfig(this.constructor, config);
+      self[symbols.isolate] = /* @__PURE__ */Object.create(null);
+      self[symbols.intercept] = /* @__PURE__ */Object.create(null);
+      self.root = self;
+      self.mixin("scope", ["config", "runtime", "effect", "collect", "accept", "decline"]);
+      self.mixin("registry", ["using", "inject", "plugin", "dispose"]);
+      self.mixin("lifecycle", ["on", "once", "off", "after", "parallel", "emit", "serial", "bail", "start", "stop"]);
+      self.provide("registry", new Registry(self, config), true);
+      self.provide("lifecycle", new Lifecycle(self), true);
+      const attach = /* @__PURE__ */__name$8(internal => {
+        if (!internal) return;
+        attach(Object.getPrototypeOf(internal));
+        for (const key of Object.getOwnPropertyNames(internal)) {
+          const constructor = internal[key]["prototype"]?.constructor;
+          if (!constructor) continue;
+          self[internal[key]["key"]] = new constructor(self, config);
+          defineProperty(self[internal[key]["key"]], symbols.trace, self);
+        }
+      }, "attach");
+      attach(this[symbols.internal]);
+      return self;
+    }
+    [_Symbol$for]() {
+      return `Context <${this.name}>`;
+    }
+    get name() {
+      let runtime = this.runtime;
+      while (runtime && !runtime.name) {
+        runtime = runtime.parent.runtime;
+      }
+      return runtime?.name;
+    }
+    get events() {
+      return this.lifecycle;
+    }
+    /** @deprecated */
+    get state() {
+      return this.scope;
+    }
+    get(name) {
+      const internal = this[symbols.internal][name];
+      if (internal?.type !== "service") return;
+      const value = this.root[this[symbols.isolate][name]];
+      if (!value || typeof value !== "object" && typeof value !== "function") return value;
+      if (isUnproxyable(value)) {
+        defineProperty(value, symbols.trace, this);
+        return value;
+      }
+      return createTraceable(this, value);
+    }
+    provide(name, value, builtin) {
+      const internal = _Context.ensureInternal.call(this.root);
+      if (name in internal) return;
+      const key = Symbol(name);
+      internal[name] = {
+        type: "service",
+        builtin
+      };
+      this.root[key] = value;
+      this.root[_Context.isolate][name] = key;
+    }
+    accessor(name, options) {
+      const internal = _Context.ensureInternal.call(this.root);
+      internal[name] ||= {
+        type: "accessor",
+        ...options
+      };
+    }
+    alias(name, aliases) {
+      const internal = _Context.ensureInternal.call(this.root);
+      for (const key of aliases) {
+        internal[key] ||= {
+          type: "alias",
+          name
+        };
+      }
+    }
+    mixin(name, mixins) {
+      for (const key of mixins) {
+        this.accessor(key, {
+          get() {
+            const service = this[name];
+            if (isNullable(service)) return service;
+            const value = Reflect.get(service, key);
+            if (typeof value !== "function") return value;
+            return value.bind(service);
+          },
+          set(value) {
+            return Reflect.set(this[name], key, value);
+          }
+        });
+      }
+    }
+    extend(meta = {}) {
+      return Object.assign(Object.create(this), meta);
+    }
+    isolate(name, label) {
+      const shadow = Object.create(this[symbols.isolate]);
+      shadow[name] = label ?? Symbol(name);
+      return this.extend({
+        [symbols.isolate]: shadow
+      });
+    }
+    intercept(name, config) {
+      const intercept = Object.create(this[symbols.intercept]);
+      intercept[name] = config;
+      return this.extend({
+        [symbols.intercept]: intercept
+      });
+    }
+  }, __name$8(_Context2, "Context"), _defineProperty(_Context2, "trace", symbols.trace), _defineProperty(_Context2, "events", symbols.events), _defineProperty(_Context2, "static", symbols.static), _defineProperty(_Context2, "filter", symbols.filter), _defineProperty(_Context2, "expose", symbols.expose), _defineProperty(_Context2, "isolate", symbols.isolate), _defineProperty(_Context2, "internal", symbols.internal), _defineProperty(_Context2, "intercept", symbols.intercept), _defineProperty(_Context2, "current", _Context2.trace), (() => {
+    _Context2.is[Symbol.toPrimitive] = () => Symbol.for("cordis.is");
+    _Context2.prototype[_Context2.is] = true;
+  })(), _defineProperty(_Context2, "handler", {
+    get(target, prop, ctx) {
+      if (typeof prop !== "string") return Reflect.get(target, prop, ctx);
+      const checkInject = /* @__PURE__ */__name$8(name2 => {
+        if (Reflect.has(target, name2)) return;
+        if (["prototype", "then", "registry", "lifecycle"].includes(name2)) return;
+        if (name2[0] === "$" || name2[0] === "_") return;
+        if (!ctx.runtime.plugin) return;
+        let parent = ctx;
+        while (parent.runtime.plugin) {
+          for (const key of parent.runtime.inject) {
+            if (name2 === _Context2.resolveInject(parent, key)[0]) return;
+          }
+          parent = parent.scope.parent;
+        }
+        ctx.emit("internal/warning", new Error(`property ${name2} is not registered, declare it as \`inject\` to suppress this warning`));
+      }, "checkInject");
+      const [name, internal] = _Context2.resolveInject(ctx, prop);
+      if (!internal) {
+        checkInject(name);
+        return Reflect.get(target, name, ctx);
+      }
+      if (internal.type === "accessor") {
+        return internal.get.call(ctx);
+      } else if (internal.type === "service") {
+        if (!internal.builtin) checkInject(name);
+        return ctx.get(name);
+      }
+    },
+    set(target, prop, value, ctx) {
+      if (typeof prop !== "string") return Reflect.set(target, prop, value, ctx);
+      const [name, internal] = _Context2.resolveInject(ctx, prop);
+      if (!internal) return Reflect.set(target, name, value, ctx);
+      if (internal.type === "accessor") {
+        if (!internal.set) return false;
+        return internal.set.call(ctx, value);
+      }
+      const key = ctx[symbols.isolate][name];
+      const oldValue = ctx.root[key];
+      if (oldValue === value) return true;
+      if (value && oldValue) {
+        throw new Error(`service ${name} has been registered`);
+      }
+      if (value) {
+        ctx.on("dispose", () => ctx[name] = void 0);
+      }
+      if (isUnproxyable(value)) {
+        ctx.emit("internal/warning", new Error(`service ${name} is an unproxyable object, which may lead to unexpected behavior`));
+      }
+      const self = /* @__PURE__ */Object.create(null);
+      self[symbols.filter] = ctx2 => {
+        return ctx[symbols.isolate][name] === ctx2[symbols.isolate][name];
+      };
+      ctx.root.emit(self, "internal/before-service", name, value);
+      ctx.root[key] = value;
+      if (value instanceof Object) {
+        defineProperty(value, symbols.trace, ctx);
+      }
+      ctx.root.emit(self, "internal/service", name, oldValue);
+      return true;
+    }
+  }), _Context2));
+  Context$1.prototype[Context$1.internal] = /* @__PURE__ */Object.create(null);
+  var Service = (_symbols$trace = symbols.trace, _symbols$filter = symbols.filter, _symbols$setup = symbols.setup, _symbols$extend = symbols.extend, _Symbol$hasInstance = Symbol.hasInstance, (_Service2 = class _Service {
+    start() {}
+    stop() {}
+    constructor(...args) {
+      _defineProperty(this, "ctx", void 0);
+      _defineProperty(this, _symbols$trace, void 0);
+      _defineProperty(this, "name", void 0);
+      _defineProperty(this, "config", void 0);
+      let _ctx, name, immediate, config;
+      if (Context$1.is(args[0])) {
+        _ctx = args[0];
+        if (typeof args[1] === "string") {
+          name = args[1];
+          immediate = args[2];
+        } else {
+          config = args[1];
+        }
+      } else {
+        config = args[0];
+      }
+      name ??= this.constructor[symbols.provide];
+      immediate ??= this.constructor[symbols.immediate];
+      let self = this;
+      if (self[symbols.invoke]) {
+        self = createCallable(name, joinPrototype(Object.getPrototypeOf(this), Function.prototype));
+      }
+      if (_ctx) {
+        self.ctx = _ctx;
+      } else {
+        self[symbols.setup]();
+      }
+      self.name = name;
+      self.config = config;
+      defineProperty(self, symbols.trace, self.ctx);
+      self.ctx.provide(name);
+      self.ctx.runtime.name = name;
+      if (immediate) {
+        if (_ctx) self[symbols.expose] = name;else self.ctx[name] = self;
+      }
+      self.ctx.on("ready", async () => {
+        await Promise.resolve();
+        await self.start();
+        if (!immediate) self.ctx[name] = self;
+      });
+      self.ctx.on("dispose", () => self.stop());
+      return Context$1.associate(self, name);
+    }
+    [_symbols$filter](ctx) {
+      return ctx[symbols.isolate][this.name] === this.ctx[symbols.isolate][this.name];
+    }
+    [_symbols$setup]() {
+      this.ctx = new Context$1();
+    }
+    [_symbols$extend](props) {
+      const caller = this[symbols.trace];
+      let self;
+      if (this[_Service.invoke]) {
+        self = createCallable(this.name, this);
+      } else {
+        self = Object.create(this);
+      }
+      defineProperty(self, symbols.trace, caller);
+      return Context$1.associate(Object.assign(self, props), this.name);
+    }
+    static [_Symbol$hasInstance](instance) {
+      let constructor = instance.constructor;
+      while (constructor) {
+        if (constructor === this) return true;
+        constructor = Object.getPrototypeOf(constructor);
+      }
+      return false;
+    }
+  }, __name$8(_Service2, "Service"), _defineProperty(_Service2, "setup", symbols.setup), _defineProperty(_Service2, "invoke", symbols.invoke), _defineProperty(_Service2, "extend", symbols.extend), _defineProperty(_Service2, "provide", symbols.provide), _defineProperty(_Service2, "immediate", symbols.immediate), _Service2));
+
+  /*! js-yaml 4.1.0 https://github.com/nodeca/js-yaml @license MIT */
   function isNothing(subject) {
     return typeof subject === 'undefined' || subject === null;
   }
@@ -2707,12 +1975,23 @@
   function isNegativeZero(number) {
     return number === 0 && Number.NEGATIVE_INFINITY === 1 / number;
   }
-  common$5.isNothing = isNothing;
-  common$5.isObject = isObject;
-  common$5.toArray = toArray;
-  common$5.repeat = repeat;
-  common$5.isNegativeZero = isNegativeZero;
-  common$5.extend = extend;
+  var isNothing_1 = isNothing;
+  var isObject_1 = isObject;
+  var toArray_1 = toArray;
+  var repeat_1 = repeat;
+  var isNegativeZero_1 = isNegativeZero;
+  var extend_1 = extend;
+  var common = {
+    isNothing: isNothing_1,
+    isObject: isObject_1,
+    toArray: toArray_1,
+    repeat: repeat_1,
+    isNegativeZero: isNegativeZero_1,
+    extend: extend_1
+  };
+
+  // YAML error class. http://stackoverflow.com/questions/8458984
+
   function formatError(exception, compact) {
     var where = '',
       message = exception.reason || '(unknown reason)';
@@ -2726,7 +2005,7 @@
     }
     return message + ' ' + where;
   }
-  function YAMLException$4(reason, mark) {
+  function YAMLException$1(reason, mark) {
     // Super constructor
     Error.call(this);
     this.name = 'YAMLException';
@@ -2745,13 +2024,12 @@
   }
 
   // Inherit from Error
-  YAMLException$4.prototype = Object.create(Error.prototype);
-  YAMLException$4.prototype.constructor = YAMLException$4;
-  YAMLException$4.prototype.toString = function toString(compact) {
+  YAMLException$1.prototype = Object.create(Error.prototype);
+  YAMLException$1.prototype.constructor = YAMLException$1;
+  YAMLException$1.prototype.toString = function toString(compact) {
     return this.name + ': ' + formatError(this, compact);
   };
-  var exception = YAMLException$4;
-  var common$4 = common$5;
+  var exception = YAMLException$1;
 
   // get snippet for a single line, respecting maxLength
   function getLine(buffer, lineStart, lineEnd, position, maxLineLength) {
@@ -2772,9 +2050,9 @@
     };
   }
   function padStart(string, max) {
-    return common$4.repeat(' ', max - string.length) + string;
+    return common.repeat(' ', max - string.length) + string;
   }
-  function makeSnippet$1(mark, options) {
+  function makeSnippet(mark, options) {
     options = Object.create(options || null);
     if (!mark.buffer) return null;
     if (!options.maxLength) options.maxLength = 79;
@@ -2802,20 +2080,19 @@
     for (i = 1; i <= options.linesBefore; i++) {
       if (foundLineNo - i < 0) break;
       line = getLine(mark.buffer, lineStarts[foundLineNo - i], lineEnds[foundLineNo - i], mark.position - (lineStarts[foundLineNo] - lineStarts[foundLineNo - i]), maxLineLength);
-      result = common$4.repeat(' ', options.indent) + padStart((mark.line - i + 1).toString(), lineNoLength) + ' | ' + line.str + '\n' + result;
+      result = common.repeat(' ', options.indent) + padStart((mark.line - i + 1).toString(), lineNoLength) + ' | ' + line.str + '\n' + result;
     }
     line = getLine(mark.buffer, lineStarts[foundLineNo], lineEnds[foundLineNo], mark.position, maxLineLength);
-    result += common$4.repeat(' ', options.indent) + padStart((mark.line + 1).toString(), lineNoLength) + ' | ' + line.str + '\n';
-    result += common$4.repeat('-', options.indent + lineNoLength + 3 + line.pos) + '^' + '\n';
+    result += common.repeat(' ', options.indent) + padStart((mark.line + 1).toString(), lineNoLength) + ' | ' + line.str + '\n';
+    result += common.repeat('-', options.indent + lineNoLength + 3 + line.pos) + '^' + '\n';
     for (i = 1; i <= options.linesAfter; i++) {
       if (foundLineNo + i >= lineEnds.length) break;
       line = getLine(mark.buffer, lineStarts[foundLineNo + i], lineEnds[foundLineNo + i], mark.position - (lineStarts[foundLineNo] - lineStarts[foundLineNo + i]), maxLineLength);
-      result += common$4.repeat(' ', options.indent) + padStart((mark.line + i + 1).toString(), lineNoLength) + ' | ' + line.str + '\n';
+      result += common.repeat(' ', options.indent) + padStart((mark.line + i + 1).toString(), lineNoLength) + ' | ' + line.str + '\n';
     }
     return result.replace(/\n$/, '');
   }
-  var snippet = makeSnippet$1;
-  var YAMLException$3 = exception;
+  var snippet = makeSnippet;
   var TYPE_CONSTRUCTOR_OPTIONS = ['kind', 'multi', 'resolve', 'construct', 'instanceOf', 'predicate', 'represent', 'representName', 'defaultStyle', 'styleAliases'];
   var YAML_NODE_KINDS = ['scalar', 'sequence', 'mapping'];
   function compileStyleAliases(map) {
@@ -2829,11 +2106,11 @@
     }
     return result;
   }
-  function Type$e(tag, options) {
+  function Type$1(tag, options) {
     options = options || {};
     Object.keys(options).forEach(function (name) {
       if (TYPE_CONSTRUCTOR_OPTIONS.indexOf(name) === -1) {
-        throw new YAMLException$3('Unknown option "' + name + '" is met in definition of "' + tag + '" YAML type.');
+        throw new exception('Unknown option "' + name + '" is met in definition of "' + tag + '" YAML type.');
       }
     });
 
@@ -2855,15 +2132,13 @@
     this.multi = options['multi'] || false;
     this.styleAliases = compileStyleAliases(options['styleAliases'] || null);
     if (YAML_NODE_KINDS.indexOf(this.kind) === -1) {
-      throw new YAMLException$3('Unknown kind "' + this.kind + '" is specified for "' + tag + '" YAML type.');
+      throw new exception('Unknown kind "' + this.kind + '" is specified for "' + tag + '" YAML type.');
     }
   }
-  var type = Type$e;
+  var type = Type$1;
 
   /*eslint-disable max-len*/
 
-  var YAMLException$2 = exception;
-  var Type$d = type;
   function compileList(schema, name) {
     var result = [];
     schema[name].forEach(function (currentType) {
@@ -2912,7 +2187,7 @@
   Schema$1.prototype.extend = function extend(definition) {
     var implicit = [];
     var explicit = [];
-    if (definition instanceof Type$d) {
+    if (definition instanceof type) {
       // Schema.extend(type)
       explicit.push(definition);
     } else if (Array.isArray(definition)) {
@@ -2923,22 +2198,22 @@
       if (definition.implicit) implicit = implicit.concat(definition.implicit);
       if (definition.explicit) explicit = explicit.concat(definition.explicit);
     } else {
-      throw new YAMLException$2('Schema.extend argument should be a Type, [ Type ], ' + 'or a schema definition ({ implicit: [...], explicit: [...] })');
+      throw new exception('Schema.extend argument should be a Type, [ Type ], ' + 'or a schema definition ({ implicit: [...], explicit: [...] })');
     }
-    implicit.forEach(function (type) {
-      if (!(type instanceof Type$d)) {
-        throw new YAMLException$2('Specified list of YAML types (or a single Type object) contains a non-Type object.');
+    implicit.forEach(function (type$1) {
+      if (!(type$1 instanceof type)) {
+        throw new exception('Specified list of YAML types (or a single Type object) contains a non-Type object.');
       }
-      if (type.loadKind && type.loadKind !== 'scalar') {
-        throw new YAMLException$2('There is a non-scalar type in the implicit list of a schema. Implicit resolving of such types is not supported.');
+      if (type$1.loadKind && type$1.loadKind !== 'scalar') {
+        throw new exception('There is a non-scalar type in the implicit list of a schema. Implicit resolving of such types is not supported.');
       }
-      if (type.multi) {
-        throw new YAMLException$2('There is a multi type in the implicit list of a schema. Multi tags can only be listed as explicit.');
+      if (type$1.multi) {
+        throw new exception('There is a multi type in the implicit list of a schema. Multi tags can only be listed as explicit.');
       }
     });
-    explicit.forEach(function (type) {
-      if (!(type instanceof Type$d)) {
-        throw new YAMLException$2('Specified list of YAML types (or a single Type object) contains a non-Type object.');
+    explicit.forEach(function (type$1) {
+      if (!(type$1 instanceof type)) {
+        throw new exception('Specified list of YAML types (or a single Type object) contains a non-Type object.');
       }
     });
     var result = Object.create(Schema$1.prototype);
@@ -2950,32 +2225,27 @@
     return result;
   };
   var schema = Schema$1;
-  var Type$c = type;
-  var str = new Type$c('tag:yaml.org,2002:str', {
+  var str = new type('tag:yaml.org,2002:str', {
     kind: 'scalar',
     construct: function (data) {
       return data !== null ? data : '';
     }
   });
-  var Type$b = type;
-  var seq = new Type$b('tag:yaml.org,2002:seq', {
+  var seq = new type('tag:yaml.org,2002:seq', {
     kind: 'sequence',
     construct: function (data) {
       return data !== null ? data : [];
     }
   });
-  var Type$a = type;
-  var map = new Type$a('tag:yaml.org,2002:map', {
+  var map = new type('tag:yaml.org,2002:map', {
     kind: 'mapping',
     construct: function (data) {
       return data !== null ? data : {};
     }
   });
-  var Schema = schema;
-  var failsafe = new Schema({
+  var failsafe = new schema({
     explicit: [str, seq, map]
   });
-  var Type$9 = type;
   function resolveYamlNull(data) {
     if (data === null) return true;
     var max = data.length;
@@ -2987,7 +2257,7 @@
   function isNull(object) {
     return object === null;
   }
-  var _null = new Type$9('tag:yaml.org,2002:null', {
+  var _null = new type('tag:yaml.org,2002:null', {
     kind: 'scalar',
     resolve: resolveYamlNull,
     construct: constructYamlNull,
@@ -3011,7 +2281,6 @@
     },
     defaultStyle: 'lowercase'
   });
-  var Type$8 = type;
   function resolveYamlBoolean(data) {
     if (data === null) return false;
     var max = data.length;
@@ -3023,7 +2292,7 @@
   function isBoolean(object) {
     return Object.prototype.toString.call(object) === '[object Boolean]';
   }
-  var bool = new Type$8('tag:yaml.org,2002:bool', {
+  var bool = new type('tag:yaml.org,2002:bool', {
     kind: 'scalar',
     resolve: resolveYamlBoolean,
     construct: constructYamlBoolean,
@@ -3041,8 +2310,6 @@
     },
     defaultStyle: 'lowercase'
   });
-  var common$3 = common$5;
-  var Type$7 = type;
   function isHexCode(c) {
     return 0x30 /* 0 */ <= c && c <= 0x39 /* 9 */ || 0x41 /* A */ <= c && c <= 0x46 /* F */ || 0x61 /* a */ <= c && c <= 0x66 /* f */;
   }
@@ -3146,9 +2413,9 @@
     return sign * parseInt(value, 10);
   }
   function isInteger(object) {
-    return Object.prototype.toString.call(object) === '[object Number]' && object % 1 === 0 && !common$3.isNegativeZero(object);
+    return Object.prototype.toString.call(object) === '[object Number]' && object % 1 === 0 && !common.isNegativeZero(object);
   }
-  var int = new Type$7('tag:yaml.org,2002:int', {
+  var int = new type('tag:yaml.org,2002:int', {
     kind: 'scalar',
     resolve: resolveYamlInteger,
     construct: constructYamlInteger,
@@ -3176,8 +2443,6 @@
       hexadecimal: [16, 'hex']
     }
   });
-  var common$2 = common$5;
-  var Type$6 = type;
   var YAML_FLOAT_PATTERN = new RegExp(
   // 2.5e4, 2.5 and integers
   '^(?:[-+]?(?:[0-9][0-9_]*)(?:\\.[0-9_]*)?(?:[eE][-+]?[0-9]+)?' +
@@ -3242,7 +2507,7 @@
         case 'camelcase':
           return '-.Inf';
       }
-    } else if (common$2.isNegativeZero(object)) {
+    } else if (common.isNegativeZero(object)) {
       return '-0.0';
     }
     res = object.toString(10);
@@ -3253,9 +2518,9 @@
     return SCIENTIFIC_WITHOUT_DOT.test(res) ? res.replace('e', '.e') : res;
   }
   function isFloat(object) {
-    return Object.prototype.toString.call(object) === '[object Number]' && (object % 1 !== 0 || common$2.isNegativeZero(object));
+    return Object.prototype.toString.call(object) === '[object Number]' && (object % 1 !== 0 || common.isNegativeZero(object));
   }
-  var float = new Type$6('tag:yaml.org,2002:float', {
+  var float = new type('tag:yaml.org,2002:float', {
     kind: 'scalar',
     resolve: resolveYamlFloat,
     construct: constructYamlFloat,
@@ -3267,7 +2532,6 @@
     implicit: [_null, bool, int, float]
   });
   var core = json;
-  var Type$5 = type;
   var YAML_DATE_REGEXP = new RegExp('^([0-9][0-9][0-9][0-9])' +
   // [1] year
   '-([0-9][0-9])' +
@@ -3356,25 +2620,22 @@
   function representYamlTimestamp(object /*, style*/) {
     return object.toISOString();
   }
-  var timestamp = new Type$5('tag:yaml.org,2002:timestamp', {
+  var timestamp = new type('tag:yaml.org,2002:timestamp', {
     kind: 'scalar',
     resolve: resolveYamlTimestamp,
     construct: constructYamlTimestamp,
     instanceOf: Date,
     represent: representYamlTimestamp
   });
-  var Type$4 = type;
   function resolveYamlMerge(data) {
     return data === '<<' || data === null;
   }
-  var merge = new Type$4('tag:yaml.org,2002:merge', {
+  var merge = new type('tag:yaml.org,2002:merge', {
     kind: 'scalar',
     resolve: resolveYamlMerge
   });
 
   /*eslint-disable no-bitwise*/
-
-  var Type$3 = type;
 
   // [ 64, 65, 66 ] -> [ padding, CR, LF ]
   var BASE64_MAP = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=\n\r';
@@ -3481,14 +2742,13 @@
   function isBinary(obj) {
     return Object.prototype.toString.call(obj) === '[object Uint8Array]';
   }
-  var binary = new Type$3('tag:yaml.org,2002:binary', {
+  var binary = new type('tag:yaml.org,2002:binary', {
     kind: 'scalar',
     resolve: resolveYamlBinary,
     construct: constructYamlBinary,
     predicate: isBinary,
     represent: representYamlBinary
   });
-  var Type$2 = type;
   var _hasOwnProperty$3 = Object.prototype.hasOwnProperty;
   var _toString$2 = Object.prototype.toString;
   function resolveYamlOmap(data) {
@@ -3517,12 +2777,11 @@
   function constructYamlOmap(data) {
     return data !== null ? data : [];
   }
-  var omap = new Type$2('tag:yaml.org,2002:omap', {
+  var omap = new type('tag:yaml.org,2002:omap', {
     kind: 'sequence',
     resolve: resolveYamlOmap,
     construct: constructYamlOmap
   });
-  var Type$1 = type;
   var _toString$1 = Object.prototype.toString;
   function resolveYamlPairs(data) {
     if (data === null) return true;
@@ -3558,12 +2817,11 @@
     }
     return result;
   }
-  var pairs = new Type$1('tag:yaml.org,2002:pairs', {
+  var pairs = new type('tag:yaml.org,2002:pairs', {
     kind: 'sequence',
     resolve: resolveYamlPairs,
     construct: constructYamlPairs
   });
-  var Type = type;
   var _hasOwnProperty$2 = Object.prototype.hasOwnProperty;
   function resolveYamlSet(data) {
     if (data === null) return true;
@@ -3579,7 +2837,7 @@
   function constructYamlSet(data) {
     return data !== null ? data : {};
   }
-  var set = new Type('tag:yaml.org,2002:set', {
+  var set = new type('tag:yaml.org,2002:set', {
     kind: 'mapping',
     resolve: resolveYamlSet,
     construct: constructYamlSet
@@ -3591,10 +2849,6 @@
 
   /*eslint-disable max-len,no-use-before-define*/
 
-  var common$1 = common$5;
-  var YAMLException$1 = exception;
-  var makeSnippet = snippet;
-  var DEFAULT_SCHEMA$1 = _default;
   var _hasOwnProperty$1 = Object.prototype.hasOwnProperty;
   var CONTEXT_FLOW_IN = 1;
   var CONTEXT_FLOW_OUT = 2;
@@ -3675,7 +2929,7 @@
   function State$1(input, options) {
     this.input = input;
     this.filename = options['filename'] || null;
-    this.schema = options['schema'] || DEFAULT_SCHEMA$1;
+    this.schema = options['schema'] || _default;
     this.onWarning = options['onWarning'] || null;
     // (Hidden) Remove? makes the loader to expect YAML 1.1 documents
     // if such documents have no explicit %YAML directive
@@ -3714,8 +2968,8 @@
       line: state.line,
       column: state.position - state.lineStart
     };
-    mark.snippet = makeSnippet(mark);
-    return new YAMLException$1(message, mark);
+    mark.snippet = snippet(mark);
+    return new exception(message, mark);
   }
   function throwError(state, message) {
     throw generateError(state, message);
@@ -3792,7 +3046,7 @@
   }
   function mergeMappings(state, destination, source, overridableKeys) {
     var sourceKeys, key, index, quantity;
-    if (!common$1.isObject(source)) {
+    if (!common.isObject(source)) {
       throwError(state, 'cannot merge mappings; the provided source object is unacceptable');
     }
     sourceKeys = Object.keys(source);
@@ -3933,7 +3187,7 @@
     if (count === 1) {
       state.result += ' ';
     } else if (count > 1) {
-      state.result += common$1.repeat('\n', count - 1);
+      state.result += common.repeat('\n', count - 1);
     }
   }
   function readPlainScalar(state, nodeIndent, withinFlowCollection) {
@@ -4265,7 +3519,7 @@
       if (state.lineIndent < textIndent) {
         // Perform the chomping.
         if (chomping === CHOMPING_KEEP) {
-          state.result += common$1.repeat('\n', didReadContent ? 1 + emptyLines : emptyLines);
+          state.result += common.repeat('\n', didReadContent ? 1 + emptyLines : emptyLines);
         } else if (chomping === CHOMPING_CLIP) {
           if (didReadContent) {
             // i.e. only if the scalar is not empty.
@@ -4283,12 +3537,12 @@
         if (is_WHITE_SPACE(ch)) {
           atMoreIndented = true;
           // except for the first content line (cf. Example 8.1)
-          state.result += common$1.repeat('\n', didReadContent ? 1 + emptyLines : emptyLines);
+          state.result += common.repeat('\n', didReadContent ? 1 + emptyLines : emptyLines);
 
           // End of more-indented block.
         } else if (atMoreIndented) {
           atMoreIndented = false;
-          state.result += common$1.repeat('\n', emptyLines + 1);
+          state.result += common.repeat('\n', emptyLines + 1);
 
           // Just one line break - perceive as the same line.
         } else if (emptyLines === 0) {
@@ -4299,13 +3553,13 @@
 
           // Several line breaks - perceive as different lines.
         } else {
-          state.result += common$1.repeat('\n', emptyLines);
+          state.result += common.repeat('\n', emptyLines);
         }
 
         // Literal style: just add exact number of line breaks between content lines.
       } else {
         // Keep all line breaks except the header line break.
-        state.result += common$1.repeat('\n', didReadContent ? 1 + emptyLines : emptyLines);
+        state.result += common.repeat('\n', didReadContent ? 1 + emptyLines : emptyLines);
       }
       didReadContent = true;
       detectedIndent = true;
@@ -4899,7 +4153,7 @@
     }
     return state.documents;
   }
-  function loadAll(input, iterator, options) {
+  function loadAll$1(input, iterator, options) {
     if (iterator !== null && typeof iterator === 'object' && typeof options === 'undefined') {
       options = iterator;
       iterator = null;
@@ -4920,17 +4174,17 @@
     } else if (documents.length === 1) {
       return documents[0];
     }
-    throw new YAMLException$1('expected a single document in the stream, but found more');
+    throw new exception('expected a single document in the stream, but found more');
   }
-  loader$1.loadAll = loadAll;
-  loader$1.load = load$1;
-  var dumper$1 = {};
+  var loadAll_1 = loadAll$1;
+  var load_1 = load$1;
+  var loader = {
+    loadAll: loadAll_1,
+    load: load_1
+  };
 
   /*eslint-disable no-use-before-define*/
 
-  var common = common$5;
-  var YAMLException = exception;
-  var DEFAULT_SCHEMA = _default;
   var _toString = Object.prototype.toString;
   var _hasOwnProperty = Object.prototype.hasOwnProperty;
   var CHAR_BOM = 0xFEFF;
@@ -5009,14 +4263,14 @@
       handle = 'U';
       length = 8;
     } else {
-      throw new YAMLException('code point within a string may not be greater than 0xFFFFFFFF');
+      throw new exception('code point within a string may not be greater than 0xFFFFFFFF');
     }
     return '\\' + handle + common.repeat('0', length - string.length) + string;
   }
   var QUOTING_TYPE_SINGLE = 1,
     QUOTING_TYPE_DOUBLE = 2;
   function State(options) {
-    this.schema = options['schema'] || DEFAULT_SCHEMA;
+    this.schema = options['schema'] || _default;
     this.indent = Math.max(1, options['indent'] || 2);
     this.noArrayIndent = options['noArrayIndent'] || false;
     this.skipInvalid = options['skipInvalid'] || false;
@@ -5288,7 +4542,7 @@
         case STYLE_DOUBLE:
           return '"' + escapeString(string) + '"';
         default:
-          throw new YAMLException('impossible error: invalid scalar style');
+          throw new exception('impossible error: invalid scalar style');
       }
     }();
   }
@@ -5506,7 +4760,7 @@
       objectKeyList.sort(state.sortKeys);
     } else if (state.sortKeys) {
       // Something is wrong
-      throw new YAMLException('sortKeys must be a boolean or a function');
+      throw new exception('sortKeys must be a boolean or a function');
     }
     for (index = 0, length = objectKeyList.length; index < length; index += 1) {
       pairBuffer = '';
@@ -5571,7 +4825,7 @@
           } else if (_hasOwnProperty.call(type.represent, style)) {
             _result = type.represent[style](object, style);
           } else {
-            throw new YAMLException('!<' + type.tag + '> tag resolver accepts not "' + style + '" style');
+            throw new exception('!<' + type.tag + '> tag resolver accepts not "' + style + '" style');
           }
           state.dump = _result;
         }
@@ -5648,7 +4902,7 @@
         return false;
       } else {
         if (state.skipInvalid) return false;
-        throw new YAMLException('unacceptable kind of an object to dump ' + type);
+        throw new exception('unacceptable kind of an object to dump ' + type);
       }
       if (state.tag !== null && state.tag !== '?') {
         // Need to encode all characters except those allowed by the spec:
@@ -5724,13 +4978,14 @@
     if (writeNode(state, 0, value, true, true)) return state.dump + '\n';
     return '';
   }
-  dumper$1.dump = dump$1;
-  var loader = loader$1;
-  var dumper = dumper$1;
+  var dump_1 = dump$1;
+  var dumper = {
+    dump: dump_1
+  };
   var load = loader.load;
   var dump = dumper.dump;
-  var __defProp$6 = Object.defineProperty;
-  var __name$6 = (target, value) => __defProp$6(target, "name", {
+  var __defProp$7 = Object.defineProperty;
+  var __name$7 = (target, value) => __defProp$7(target, "name", {
     value,
     configurable: true
   });
@@ -5763,7 +5018,9 @@
     }
     return result + template.slice(lastIndex);
   }
-  __name$6(interpolate, "interpolate");
+  __name$7(interpolate, "interpolate");
+
+  // src/shared.ts
   var writable = {
     ".json": "application/json",
     ".yaml": "application/yaml",
@@ -5780,8 +5037,12 @@
     Object.assign(target, source);
     return result;
   }
-  __name$6(swapAssign, "swapAssign");
-  var Entry = (_Class7 = class Entry {
+  __name$7(swapAssign, "swapAssign");
+  function randomID() {
+    return Math.random().toString(36).slice(2, 8);
+  }
+  __name$7(randomID, "randomID");
+  var Entry = (_Class6 = class Entry {
     constructor(loader, parent, options) {
       _defineProperty(this, "fork", null);
       _defineProperty(this, "isUpdate", false);
@@ -5856,8 +5117,26 @@
       this.fork.dispose();
       this.fork = null;
     }
-  }, __name$6(_Class7, "Entry"), _Class7);
-  var Loader = (_Class8 = class Loader extends Service {
+  }, __name$7(_Class6, "Entry"), _Class6);
+  function mapEntry(pluginsConf) {
+    if (!pluginsConf) return [];
+    return Object.entries(pluginsConf).map(([name, config]) => {
+      let [realName, id] = name.split(":", 2);
+      let disabled = false;
+      if (realName.startsWith("~")) {
+        realName = realName.slice(1);
+        disabled = true;
+      }
+      return {
+        id: id ?? randomID(),
+        name: realName,
+        config,
+        disabled
+      };
+    });
+  }
+  __name$7(mapEntry, "mapEntry");
+  var Loader$1 = (_Loader = class Loader extends Service {
     constructor(app, options) {
       super(app, "loader", true);
       // process
@@ -5888,7 +5167,7 @@
     }
     async import(name) {
       try {
-        return await __require(name);
+        return __require(name);
       } catch (err) {
         this.app.emit("internal/error", err);
       }
@@ -5935,9 +5214,6 @@
         this.config = load(file.readFrom(this.filename));
       } else if (this.mimeType === "application/json") {
         this.config = JSON.parse(file.readFrom(this.filename));
-      } else {
-        const module = await import(this.filename);
-        this.config = module.default || module;
       }
       return this.config;
     }
@@ -5955,7 +5231,7 @@
     }
     async reload() {
       const config = await this.readConfig();
-      this.entryFork.update(config);
+      this.entryFork.update(mapEntry(config.plugins));
       this.app.emit("config");
     }
     interpolate(source) {
@@ -5982,7 +5258,7 @@
     async update(parent, options) {
       if (!options.id) {
         do {
-          options.id = Math.random().toString(36).slice(2, 8);
+          options.id = randomID();
         } while (this.entries[options.id]);
       }
       const entry = this.entries[options.id] ??= new Entry(this, parent, options);
@@ -6004,7 +5280,7 @@
     }
     async start() {
       await this.readConfig();
-      this.entryFork = this.app.plugin(group, this.config);
+      this.entryFork = this.app.plugin(group, mapEntry(this.config.plugins));
       this.app.on("dispose", () => {
         this.exit();
       });
@@ -6037,7 +5313,7 @@
       return module?.default || module;
     }
     exit() {}
-  }, __name$6(_Class8, "Loader"), _Class8);
+  }, __name$7(_Loader, "Loader"), _Loader);
   function group(ctx, config) {
     for (const entry of config) {
       ctx.loader.update(ctx, entry);
@@ -6065,65 +5341,747 @@
       }
     });
   }
-  __name$6(group, "group");
+  __name$7(group, "group");
   defineProperty(group, "inject", ["loader"]);
   defineProperty(group, "reusable", true);
+
+  // src/index.ts
+  var LoggerService = (_Service$invoke = Service.invoke, (_LoggerService2 = class _LoggerService extends Service {
+    constructor(ctx) {
+      super(ctx, "logger", true);
+      ctx.on("internal/info", function (format, ...args) {
+        this.logger("app").info(format, ...args);
+      });
+      ctx.on("internal/error", function (format, ...args) {
+        this.logger("app").error(format, ...args);
+      });
+      ctx.on("internal/warning", function (format, ...args) {
+        this.logger("app").warn(format, ...args);
+      });
+    }
+    [_Service$invoke](name) {
+      return new Logger$1(name, {
+        [Context$1.trace]: this
+      });
+    }
+  }, _defineProperty(_LoggerService2, "name", "logger"), (() => {
+    for (const type of ["success", "error", "info", "warn", "debug", "extend"]) {
+      _LoggerService2.prototype[type] = function (...args) {
+        const caller = this[Context$1.trace];
+        return this(caller.name)[type](...args);
+      };
+    }
+  })(), _LoggerService2));
+  var __defProp$6 = Object.defineProperty;
+  var __name$6 = (target, value) => __defProp$6(target, "name", {
+    value,
+    configurable: true
+  });
+  var TimerService = (_Class7 = class TimerService extends Service {
+    constructor(ctx) {
+      super(ctx, "timer", true);
+      ctx.mixin("timer", ["setTimeout", "setInterval", "sleep", "throttle", "debounce"]);
+    }
+    setTimeout(callback, delay) {
+      const dispose = this[Context$1.trace].effect(() => {
+        const timer = setTimeout(() => {
+          dispose();
+          callback();
+        }, delay);
+        return () => clearTimeout(timer);
+      });
+      return dispose;
+    }
+    setInterval(callback, delay) {
+      return this[Context$1.trace].effect(() => {
+        const timer = setInterval(callback, delay);
+        return () => clearInterval(timer);
+      });
+    }
+    sleep(delay) {
+      const caller = this[Context$1.trace];
+      return new Promise((resolve, reject) => {
+        const dispose1 = this.setTimeout(() => {
+          dispose1();
+          dispose2();
+          resolve();
+        }, delay);
+        const dispose2 = caller.on("dispose", () => {
+          dispose1();
+          dispose2();
+          reject(new Error("Context has been disposed"));
+        });
+      });
+    }
+    createWrapper(callback, isDisposed = false) {
+      const caller = this[Context$1.trace];
+      caller.scope.assertActive();
+      let timer;
+      const dispose = /* @__PURE__ */__name$6(() => {
+        isDisposed = true;
+        remove(caller.scope.disposables, dispose);
+        clearTimeout(timer);
+      }, "dispose");
+      const wrapper = /* @__PURE__ */__name$6((...args) => {
+        clearTimeout(timer);
+        timer = callback(args, () => !isDisposed && caller.scope.isActive);
+      }, "wrapper");
+      wrapper.dispose = dispose;
+      caller.scope.disposables.push(dispose);
+      return wrapper;
+    }
+    throttle(callback, delay, noTrailing) {
+      let lastCall = -Infinity;
+      const execute = /* @__PURE__ */__name$6((...args) => {
+        lastCall = Date.now();
+        callback(...args);
+      }, "execute");
+      return this.createWrapper((args, isActive) => {
+        const now = Date.now();
+        const remaining = delay - (now - lastCall);
+        if (remaining <= 0) {
+          execute(...args);
+        } else if (isActive()) {
+          return setTimeout(execute, remaining, ...args);
+        }
+      }, noTrailing);
+    }
+    debounce(callback, delay) {
+      return this.createWrapper((args, isActive) => {
+        if (!isActive()) return;
+        return setTimeout(callback, delay, ...args);
+      });
+    }
+  }, __name$6(_Class7, "TimerService"), _Class7);
   var __defProp$5 = Object.defineProperty;
+  var __getOwnPropNames$1 = Object.getOwnPropertyNames;
   var __name$5 = (target, value) => __defProp$5(target, "name", {
     value,
     configurable: true
   });
-  var __export = (target, all) => {
-    for (var name in all) __defProp$5(target, name, {
-      get: all[name],
-      enumerable: true
-    });
+  var __commonJS$1 = (cb, mod) => function __require() {
+    return mod || (0, cb[__getOwnPropNames$1(cb)[0]])((mod = {
+      exports: {}
+    }).exports, mod), mod.exports;
   };
-
-  // src/worker/logger.ts
-  var logger_exports = {};
-  __export(logger_exports, {
-    apply: () => apply,
-    inject: () => inject
-  });
-  var inject = ["loader"];
-  function apply(ctx, config = {}) {
-    ctx.on("loader/entry", (type, entry) => {
-      ctx.logger("loader").info("%s plugin %c", type, entry.options.name);
-    });
-    ctx.loader.prolog = [];
-    Logger.targets.push({
-      colors: 3,
-      record: record => {
-        ctx.loader.prolog.push(record);
-        ctx.loader.prolog = ctx.loader.prolog.slice(-1e3);
+  var require_src$1 = __commonJS$1({
+    "packages/schemastery/packages/core/src/index.ts"(exports, module) {
+      var kSchema = Symbol.for("schemastery");
+      globalThis.__schemastery_index__ ??= 0;
+      var Schema = /* @__PURE__ */__name$5(function (options) {
+        const schema = /* @__PURE__ */__name$5(function (data, options2) {
+          return Schema.resolve(data, schema, options2)[0];
+        }, "schema");
+        if (options.refs) {
+          const refs2 = mapValues(options.refs, options2 => new Schema(options2));
+          const getRef = /* @__PURE__ */__name$5(uid => refs2[uid], "getRef");
+          for (const key in refs2) {
+            const options2 = refs2[key];
+            options2.sKey = getRef(options2.sKey);
+            options2.inner = getRef(options2.inner);
+            options2.list = options2.list && options2.list.map(getRef);
+            options2.dict = options2.dict && mapValues(options2.dict, getRef);
+          }
+          return refs2[options.uid];
+        }
+        Object.assign(schema, options);
+        if (typeof schema.callback === "string") {
+          try {
+            schema.callback = new Function("return " + schema.callback)();
+          } catch {}
+        }
+        Object.defineProperty(schema, "uid", {
+          value: globalThis.__schemastery_index__++
+        });
+        Object.setPrototypeOf(schema, Schema.prototype);
+        schema.meta ||= {};
+        schema.toString = schema.toString.bind(schema);
+        return schema;
+      }, "Schema");
+      Schema.prototype = Object.create(Function.prototype);
+      Schema.prototype[kSchema] = true;
+      var refs;
+      Schema.prototype.toJSON = /* @__PURE__ */__name$5(function toJSON() {
+        if (refs) {
+          refs[this.uid] ??= JSON.parse(JSON.stringify({
+            ...this
+          }));
+          return this.uid;
+        }
+        refs = {
+          [this.uid]: {
+            ...this
+          }
+        };
+        refs[this.uid] = JSON.parse(JSON.stringify({
+          ...this
+        }));
+        const result = {
+          uid: this.uid,
+          refs
+        };
+        refs = void 0;
+        return result;
+      }, "toJSON");
+      Schema.prototype.set = /* @__PURE__ */__name$5(function set(key, value) {
+        this.dict[key] = value;
+        return this;
+      }, "set");
+      Schema.prototype.push = /* @__PURE__ */__name$5(function push(value) {
+        this.list.push(value);
+        return this;
+      }, "push");
+      function mergeDesc(original, messages) {
+        const result = typeof original === "string" ? {
+          "": original
+        } : {
+          ...original
+        };
+        for (const locale in messages) {
+          const value = messages[locale];
+          if (value?.$description || value?.$desc) {
+            result[locale] = value.$description || value.$desc;
+          } else if (typeof value === "string") {
+            result[locale] = value;
+          }
+        }
+        return result;
       }
-    });
-    const {
-      levels
-    } = config;
-    if (typeof levels === "object") {
-      Logger.levels = levels;
-    } else if (typeof levels === "number") {
-      Logger.levels.base = levels;
-    }
-    let showTime = config.showTime;
-    if (showTime === true) showTime = "yyyy-MM-dd hh:mm:ss";
-    if (showTime) Logger.targets[0].showTime = showTime;
-    Logger.targets[0].showDiff = config.showDiff;
-    function ensureBaseLevel(config2, base) {
-      config2.base ??= base;
-      Object.values(config2).forEach(value => {
-        if (typeof value !== "object") return;
-        ensureBaseLevel(value, config2.base);
+      __name$5(mergeDesc, "mergeDesc");
+      function getInner(value) {
+        return value?.$value ?? value?.$inner;
+      }
+      __name$5(getInner, "getInner");
+      function extractKeys(data) {
+        return Object.fromEntries(Object.entries(data ?? {}).filter(([key]) => !key.startsWith("$")));
+      }
+      __name$5(extractKeys, "extractKeys");
+      Schema.prototype.i18n = /* @__PURE__ */__name$5(function i18n(messages) {
+        const schema = Schema(this);
+        schema.meta.description = mergeDesc(schema.meta.description, messages);
+        if (schema.dict) {
+          schema.dict = mapValues(schema.dict, (inner, key) => {
+            return inner.i18n(mapValues(messages, data => getInner(data)?.[key] ?? data?.[key]));
+          });
+        }
+        if (schema.list) {
+          schema.list = schema.list.map((inner, index) => {
+            return inner.i18n(mapValues(messages, (data = {}) => {
+              if (Array.isArray(getInner(data))) return getInner(data)[index];
+              if (Array.isArray(data)) return data[index];
+              return extractKeys(data);
+            }));
+          });
+        }
+        if (schema.inner) {
+          schema.inner = schema.inner.i18n(mapValues(messages, data => {
+            if (getInner(data)) return getInner(data);
+            return extractKeys(data);
+          }));
+        }
+        if (schema.sKey) {
+          schema.sKey = schema.sKey.i18n(mapValues(messages, data => data?.$key));
+        }
+        return schema;
+      }, "i18n");
+      Schema.prototype.extra = /* @__PURE__ */__name$5(function extra(key, value) {
+        const schema = Schema(this);
+        schema.meta = {
+          ...schema.meta,
+          [key]: value
+        };
+        return schema;
+      }, "extra");
+      for (const key of ["required", "disabled", "collapse", "hidden", "loose"]) {
+        Object.assign(Schema.prototype, {
+          [key](value = true) {
+            const schema = Schema(this);
+            schema.meta = {
+              ...schema.meta,
+              [key]: value
+            };
+            return schema;
+          }
+        });
+      }
+      Schema.prototype.deprecated = /* @__PURE__ */__name$5(function deprecated() {
+        const schema = Schema(this);
+        schema.meta.badges ||= [];
+        schema.meta.badges.push({
+          text: "deprecated",
+          type: "danger"
+        });
+        return schema;
+      }, "deprecated");
+      Schema.prototype.experimental = /* @__PURE__ */__name$5(function experimental() {
+        const schema = Schema(this);
+        schema.meta.badges ||= [];
+        schema.meta.badges.push({
+          text: "experimental",
+          type: "warning"
+        });
+        return schema;
+      }, "experimental");
+      Schema.prototype.pattern = /* @__PURE__ */__name$5(function pattern(regexp) {
+        const schema = Schema(this);
+        const pattern2 = pick(regexp, ["source", "flags"]);
+        schema.meta = {
+          ...schema.meta,
+          pattern: pattern2
+        };
+        return schema;
+      }, "pattern");
+      Schema.prototype.simplify = /* @__PURE__ */__name$5(function simplify(value) {
+        if (deepEqual(value, this.meta.default)) return null;
+        if (isNullable(value)) return value;
+        if (this.type === "object" || this.type === "dict") {
+          const result = {};
+          for (const key in value) {
+            const schema = this.type === "object" ? this.dict[key] : this.inner;
+            const item = schema?.simplify(value[key]);
+            if (!isNullable(item)) result[key] = item;
+          }
+          return result;
+        } else if (this.type === "array" || this.type === "tuple") {
+          const result = [];
+          value.forEach((value2, index) => {
+            const schema = this.type === "array" ? this.inner : this.list[index];
+            const item = schema ? schema.simplify(value2) : value2;
+            result.push(item);
+          });
+          return result;
+        } else if (this.type === "intersect") {
+          const result = {};
+          for (const item of this.list) {
+            Object.assign(result, item.simplify(value));
+          }
+          return result;
+        } else if (this.type === "union") {
+          for (const schema of this.list) {
+            try {
+              Schema.resolve(value, schema);
+              return schema.simplify(value);
+            } catch {}
+          }
+        }
+        return value;
+      }, "simplify");
+      Schema.prototype.toString = /* @__PURE__ */__name$5(function toString(inline) {
+        return formatters[this.type]?.(this, inline) ?? `Schema<${this.type}>`;
+      }, "toString");
+      Schema.prototype.role = /* @__PURE__ */__name$5(function role(role, extra) {
+        const schema = Schema(this);
+        schema.meta = {
+          ...schema.meta,
+          role,
+          extra
+        };
+        return schema;
+      }, "role");
+      for (const key of ["default", "link", "comment", "description", "max", "min", "step"]) {
+        Object.assign(Schema.prototype, {
+          [key](value) {
+            const schema = Schema(this);
+            schema.meta = {
+              ...schema.meta,
+              [key]: value
+            };
+            return schema;
+          }
+        });
+      }
+      var resolvers = {};
+      Schema.extend = /* @__PURE__ */__name$5(function extend(type, resolve) {
+        resolvers[type] = resolve;
+      }, "extend");
+      Schema.resolve = /* @__PURE__ */__name$5(function resolve(data, schema, options = {}, strict = false) {
+        if (!schema) return [data];
+        if (isNullable(data)) {
+          if (schema.meta.required) throw new TypeError(`missing required value`);
+          let current = schema;
+          let fallback = schema.meta.default;
+          while (current?.type === "intersect" && isNullable(fallback)) {
+            current = current.list[0];
+            fallback = current?.meta.default;
+          }
+          if (isNullable(fallback)) return [data];
+          data = clone(fallback);
+        }
+        const callback = resolvers[schema.type];
+        if (!callback) throw new TypeError(`unsupported type "${schema.type}"`);
+        try {
+          return callback(data, schema, options, strict);
+        } catch (error) {
+          if (!schema.meta.loose) throw error;
+          return [schema.meta.default];
+        }
+      }, "resolve");
+      Schema.from = /* @__PURE__ */__name$5(function from(source) {
+        if (isNullable(source)) {
+          return Schema.any();
+        } else if (["string", "number", "boolean"].includes(typeof source)) {
+          return Schema.const(source).required();
+        } else if (source[kSchema]) {
+          return source;
+        } else if (typeof source === "function") {
+          switch (source) {
+            case String:
+              return Schema.string().required();
+            case Number:
+              return Schema.number().required();
+            case Boolean:
+              return Schema.boolean().required();
+            case Function:
+              return Schema.function().required();
+            default:
+              return Schema.is(source).required();
+          }
+        } else {
+          throw new TypeError(`cannot infer schema from ${source}`);
+        }
+      }, "from");
+      Schema.natural = /* @__PURE__ */__name$5(function natural() {
+        return Schema.number().step(1).min(0);
+      }, "natural");
+      Schema.percent = /* @__PURE__ */__name$5(function percent() {
+        return Schema.number().step(0.01).min(0).max(1).role("slider");
+      }, "percent");
+      Schema.date = /* @__PURE__ */__name$5(function date() {
+        return Schema.union([Schema.is(Date), Schema.transform(Schema.string().role("datetime"), value => {
+          const date2 = new Date(value);
+          if (isNaN(+date2)) throw new TypeError(`invalid date "${value}"`);
+          return date2;
+        }, true)]);
+      }, "date");
+      Schema.extend("any", data => {
+        return [data];
       });
+      Schema.extend("never", data => {
+        throw new TypeError(`expected nullable but got ${data}`);
+      });
+      Schema.extend("const", (data, {
+        value
+      }) => {
+        if (data === value) return [value];
+        throw new TypeError(`expected ${value} but got ${data}`);
+      });
+      function checkWithinRange(data, meta, description) {
+        const {
+          max = Infinity,
+          min = -Infinity
+        } = meta;
+        if (data > max) throw new TypeError(`expected ${description} <= ${max} but got ${data}`);
+        if (data < min) throw new TypeError(`expected ${description} >= ${min} but got ${data}`);
+      }
+      __name$5(checkWithinRange, "checkWithinRange");
+      Schema.extend("string", (data, {
+        meta
+      }) => {
+        if (typeof data !== "string") throw new TypeError(`expected string but got ${data}`);
+        if (meta.pattern) {
+          const regexp = new RegExp(meta.pattern.source, meta.pattern.flags);
+          if (!regexp.test(data)) throw new TypeError(`expect string to match regexp ${regexp}`);
+        }
+        checkWithinRange(data.length, meta, "string length");
+        return [data];
+      });
+      function decimalShift(data, digits) {
+        const str = data.toString();
+        if (str.includes("e")) return data * Math.pow(10, digits);
+        const index = str.indexOf(".");
+        if (index === -1) return data * Math.pow(10, digits);
+        const frac = str.slice(index + 1);
+        const integer = str.slice(0, index);
+        if (frac.length <= digits) return +(integer + frac.padEnd(digits, "0"));
+        return +(integer + frac.slice(0, digits) + "." + frac.slice(digits));
+      }
+      __name$5(decimalShift, "decimalShift");
+      function isMultipleOf(data, min, step) {
+        step = Math.abs(step);
+        if (!/^\d+\.\d+$/.test(step.toString())) {
+          return (data - min) % step === 0;
+        }
+        const index = step.toString().indexOf(".");
+        const digits = step.toString().slice(index + 1).length;
+        return Math.abs(decimalShift(data, digits) - decimalShift(min, digits)) % decimalShift(step, digits) === 0;
+      }
+      __name$5(isMultipleOf, "isMultipleOf");
+      Schema.extend("number", (data, {
+        meta
+      }) => {
+        if (typeof data !== "number") throw new TypeError(`expected number but got ${data}`);
+        checkWithinRange(data, meta, "number");
+        const {
+          step
+        } = meta;
+        if (step && !isMultipleOf(data, meta.min ?? 0, step)) {
+          throw new TypeError(`expected number multiple of ${step} but got ${data}`);
+        }
+        return [data];
+      });
+      Schema.extend("boolean", data => {
+        if (typeof data === "boolean") return [data];
+        throw new TypeError(`expected boolean but got ${data}`);
+      });
+      Schema.extend("bitset", (data, {
+        bits,
+        meta
+      }) => {
+        let value = 0,
+          keys = [];
+        if (typeof data === "number") {
+          value = data;
+          for (const key in bits) {
+            if (data & bits[key]) {
+              keys.push(key);
+            }
+          }
+        } else if (Array.isArray(data)) {
+          keys = data;
+          for (const key of keys) {
+            if (typeof key !== "string") throw new TypeError(`expected string but got ${key}`);
+            if (key in bits) value |= bits[key];
+          }
+        } else {
+          throw new TypeError(`expected number or array but got ${data}`);
+        }
+        if (value === meta.default) return [value];
+        return [value, keys];
+      });
+      Schema.extend("function", data => {
+        if (typeof data === "function") return [data];
+        throw new TypeError(`expected function but got ${data}`);
+      });
+      Schema.extend("is", (data, {
+        callback
+      }) => {
+        if (data instanceof callback) return [data];
+        throw new TypeError(`expected ${callback.name} but got ${data}`);
+      });
+      function property(data, key, schema, options) {
+        try {
+          const [value, adapted] = Schema.resolve(data[key], schema, options);
+          if (adapted !== void 0) data[key] = adapted;
+          return value;
+        } catch (e) {
+          if (!options?.autofix) throw e;
+          delete data[key];
+          return schema.meta.default;
+        }
+      }
+      __name$5(property, "property");
+      Schema.extend("array", (data, {
+        inner,
+        meta
+      }, options) => {
+        if (!Array.isArray(data)) throw new TypeError(`expected array but got ${data}`);
+        checkWithinRange(data.length, meta, "array length");
+        return [data.map((_, index) => property(data, index, inner, options))];
+      });
+      Schema.extend("dict", (data, {
+        inner,
+        sKey
+      }, options, strict) => {
+        if (!isPlainObject(data)) throw new TypeError(`expected object but got ${data}`);
+        const result = {};
+        for (const key in data) {
+          let rKey;
+          try {
+            rKey = Schema.resolve(key, sKey)[0];
+          } catch (error) {
+            if (strict) continue;
+            throw error;
+          }
+          result[rKey] = property(data, key, inner, options);
+          data[rKey] = data[key];
+          if (key !== rKey) delete data[key];
+        }
+        return [result];
+      });
+      Schema.extend("tuple", (data, {
+        list
+      }, options, strict) => {
+        if (!Array.isArray(data)) throw new TypeError(`expected array but got ${data}`);
+        const result = list.map((inner, index) => property(data, index, inner, options));
+        if (strict) return [result];
+        result.push(...data.slice(list.length));
+        return [result];
+      });
+      function merge(result, data) {
+        for (const key in data) {
+          if (key in result) continue;
+          result[key] = data[key];
+        }
+      }
+      __name$5(merge, "merge");
+      Schema.extend("object", (data, {
+        dict
+      }, options, strict) => {
+        if (!isPlainObject(data)) throw new TypeError(`expected object but got ${data}`);
+        const result = {};
+        for (const key in dict) {
+          const value = property(data, key, dict[key], options);
+          if (!isNullable(value) || key in data) {
+            result[key] = value;
+          }
+        }
+        if (!strict) merge(result, data);
+        return [result];
+      });
+      Schema.extend("union", (data, {
+        list,
+        toString
+      }, options, strict) => {
+        for (const inner of list) {
+          try {
+            return Schema.resolve(data, inner, options, strict);
+          } catch (error) {}
+        }
+        throw new TypeError(`expected ${toString()} but got ${JSON.stringify(data)}`);
+      });
+      Schema.extend("intersect", (data, {
+        list,
+        toString
+      }, options, strict) => {
+        let result;
+        for (const inner of list) {
+          const value = Schema.resolve(data, inner, options, true)[0];
+          if (isNullable(value)) continue;
+          if (isNullable(result)) {
+            result = value;
+          } else if (typeof result !== typeof value) {
+            throw new TypeError(`expected ${toString()} but got ${JSON.stringify(data)}`);
+          } else if (typeof value === "object") {
+            merge(result ??= {}, value);
+          } else if (result !== value) {
+            throw new TypeError(`expected ${toString()} but got ${JSON.stringify(data)}`);
+          }
+        }
+        if (!strict && isPlainObject(data)) merge(result, data);
+        return [result];
+      });
+      Schema.extend("transform", (data, {
+        inner,
+        callback,
+        preserve
+      }, options) => {
+        const [result, adapted = data] = Schema.resolve(data, inner, options, true);
+        if (preserve) {
+          return [callback(result)];
+        } else {
+          return [callback(result), callback(adapted)];
+        }
+      });
+      var formatters = {};
+      function defineMethod(name, keys, format) {
+        formatters[name] = format;
+        Object.assign(Schema, {
+          [name](...args) {
+            const schema = new Schema({
+              type: name
+            });
+            keys.forEach((key, index) => {
+              switch (key) {
+                case "sKey":
+                  schema.sKey = args[index] ?? Schema.string();
+                  break;
+                case "inner":
+                  schema.inner = Schema.from(args[index]);
+                  break;
+                case "list":
+                  schema.list = args[index].map(Schema.from);
+                  break;
+                case "dict":
+                  schema.dict = mapValues(args[index], Schema.from);
+                  break;
+                case "bits":
+                  {
+                    schema.bits = {};
+                    for (const key2 in args[index]) {
+                      if (typeof args[index][key2] !== "number") continue;
+                      schema.bits[key2] = args[index][key2];
+                    }
+                    break;
+                  }
+                case "callback":
+                  {
+                    schema.callback = args[index];
+                    schema.callback["toJSON"] ||= () => schema.callback.toString();
+                    break;
+                  }
+                default:
+                  schema[key] = args[index];
+              }
+            });
+            if (name === "object" || name === "dict") {
+              schema.meta.default = {};
+            } else if (name === "array" || name === "tuple") {
+              schema.meta.default = [];
+            } else if (name === "bitset") {
+              schema.meta.default = 0;
+            }
+            return schema;
+          }
+        });
+      }
+      __name$5(defineMethod, "defineMethod");
+      defineMethod("is", ["callback"], ({
+        callback
+      }) => callback.name);
+      defineMethod("any", [], () => "any");
+      defineMethod("never", [], () => "never");
+      defineMethod("const", ["value"], ({
+        value
+      }) => typeof value === "string" ? JSON.stringify(value) : value);
+      defineMethod("string", [], () => "string");
+      defineMethod("number", [], () => "number");
+      defineMethod("boolean", [], () => "boolean");
+      defineMethod("bitset", ["bits"], () => "bitset");
+      defineMethod("function", [], () => "function");
+      defineMethod("array", ["inner"], ({
+        inner
+      }) => `${inner.toString(true)}[]`);
+      defineMethod("dict", ["inner", "sKey"], ({
+        inner,
+        sKey
+      }) => `{ [key: ${sKey.toString()}]: ${inner.toString()} }`);
+      defineMethod("tuple", ["list"], ({
+        list
+      }) => `[${list.map(inner => inner.toString()).join(", ")}]`);
+      defineMethod("object", ["dict"], ({
+        dict
+      }) => {
+        if (Object.keys(dict).length === 0) return "{}";
+        return `{ ${Object.entries(dict).map(([key, inner]) => {
+        return `${key}${inner.meta.required ? "" : "?"}: ${inner.toString()}`;
+      }).join(", ")} }`;
+      });
+      defineMethod("union", ["list"], ({
+        list
+      }, inline) => {
+        const result = list.map(({
+          toString: format
+        }) => format()).join(" | ");
+        return inline ? `(${result})` : result;
+      });
+      defineMethod("intersect", ["list"], ({
+        list
+      }) => {
+        return `${list.map(inner => inner.toString(true)).join(" & ")}`;
+      });
+      defineMethod("transform", ["inner", "callback", "preserve"], ({
+        inner
+      }, isInner) => inner.toString(isInner));
+      module.exports = Schema;
     }
-    __name$5(ensureBaseLevel, "ensureBaseLevel");
-    ensureBaseLevel(Logger.levels, 2);
-    Logger.targets[0].timestamp = Date.now();
-  }
-  __name$5(apply, "apply");
-  var Context2$1 = (_Context3 = class Context2 extends Context$1 {
+  });
+  var z2 = require_src$1();
+  var __defProp$4 = Object.defineProperty;
+  var __name$4 = (target, value) => __defProp$4(target, "name", {
+    value,
+    configurable: true
+  });
+  var Context2 = (_Class8 = class Context2 extends Context$1 {
     constructor(config) {
       super(config);
       _defineProperty(this, "baseDir", void 0);
@@ -6133,9 +6091,8 @@
       this.plugin(LoggerService);
       this.plugin(TimerService);
     }
-  }, __name$5(_Context3, "Context"), _Context3);
-  _Service$setup = Service.setup;
-  _Class9 = class extends Service {
+  }, __name$4(_Class8, "Context"), _Class8);
+  var Service2$1 = (_Service$setup = Service.setup, (_Service3 = class Service2 extends Service {
     constructor(...args) {
       super(...args);
       /** @deprecated use `this.ctx.logger` instead */
@@ -6143,48 +6100,78 @@
       this.logger = this.ctx.logger(this.name);
     }
     [_Service$setup]() {
-      this.ctx = new Context2$1();
-    }
-  };
-
-  // src/worker/index.ts
-  __name$5(_Class9, "Service");
-  async function start(options) {
-    const ctx = new Context2$1();
-    ctx.plugin(Loader, options);
-    if (options.logger) ctx.plugin(logger_exports, options.logger);
-    await ctx.start();
-  }
-  __name$5(start, "start");
-  var __defProp$4 = Object.defineProperty;
-  var __name$4 = (target, value) => __defProp$4(target, "name", {
-    value,
-    configurable: true
-  });
-  var Context2 = (_Class10 = class Context2 extends Context$1 {
-    constructor(config) {
-      super(config);
-      _defineProperty(this, "baseDir", void 0);
-      this.baseDir = globalThis.process?.cwd() || "";
-      this.provide("logger", void 0, true);
-      this.provide("timer", void 0, true);
-      this.plugin(LoggerService);
-      this.plugin(TimerService);
-    }
-  }, __name$4(_Class10, "Context"), _Class10);
-  var Service2$1 = (_Service$setup2 = Service.setup, (_Service3 = class Service2 extends Service {
-    constructor(...args) {
-      super(...args);
-      /** @deprecated use `this.ctx.logger` instead */
-      _defineProperty(this, "logger", void 0);
-      this.logger = this.ctx.logger(this.name);
-    }
-    [_Service$setup2]() {
       this.ctx = new Context2();
     }
   }, __name$4(_Service3, "Service"), _Service3));
+
+  // src/index.ts
   function src_default() {}
   __name$4(src_default, "default");
+  const inject = ["loader"];
+  function apply(ctx, config = {}) {
+    ctx.on("loader/entry", (type, entry) => {
+      ctx.logger("loader").info("%s plugin %c", type, entry.options.name);
+    });
+    ctx.loader.prolog = [];
+    Logger$1.targets.push({
+      colors: 3,
+      record: record => {
+        ctx.loader.prolog.push(record);
+        ctx.loader.prolog = ctx.loader.prolog.slice(-1000);
+      }
+    });
+    const {
+      levels
+    } = config;
+    if (typeof levels === "object") {
+      Logger$1.levels = levels;
+    } else if (typeof levels === "number") {
+      Logger$1.levels.base = levels;
+    }
+    let {
+      showTime
+    } = config;
+    if (showTime === true) showTime = "yyyy-MM-dd hh:mm:ss";
+    if (showTime) Logger$1.targets[0].showTime = showTime;
+    Logger$1.targets[0].showDiff = config.showDiff;
+    function ensureBaseLevel(conf, base) {
+      conf.base ?? (conf.base = base);
+      Object.values(config).forEach(value => {
+        if (typeof value !== "object") return;
+        ensureBaseLevel(value, conf.base);
+      });
+    }
+    ensureBaseLevel(Logger$1.levels, 2);
+    Logger$1.targets[0].timestamp = Date.now();
+  }
+  var Logger = /*#__PURE__*/Object.freeze({
+    __proto__: null,
+    apply: apply,
+    inject: inject
+  });
+  class Loader extends Loader$1 {
+    async import(name) {
+      const base = trimSlash(this.options.requireBase ?? this.options.baseDir ?? "");
+      try {
+        return require(`${base}/${name}`);
+      } catch (err) {
+        this.app.emit("internal/error", err);
+      }
+      return undefined;
+    }
+    async reload() {
+      const config = await this.readConfig();
+      this.entryFork.update(config);
+      this.app.emit("config");
+    }
+  }
+  async function start(options) {
+    const ctx = new Context2();
+    ctx.plugin(Loader, options);
+    await ctx.loader.init();
+    if (options.logger) ctx.plugin(Logger, options.logger);
+    await ctx.start();
+  }
   var __defProp$3 = Object.defineProperty;
   var __name$3 = (target, value) => __defProp$3(target, "name", {
     value,
@@ -6299,9 +6286,9 @@
   };
   var require_src = __commonJS({
     "src/index.ts"(exports, module) {
-      var _Class11;
+      var _Class9;
       var kElement = Symbol.for("satori.element");
-      var ElementConstructor = (_Class11 = class ElementConstructor {
+      var ElementConstructor = (_Class9 = class ElementConstructor {
         get data() {
           return this.attrs;
         }
@@ -6332,7 +6319,7 @@
           if (!this.children.length) return `<${tag}${attrs}/>`;
           return `<${tag}${attrs}>${inner}</${tag}>`;
         }
-      }, __name$2(_Class11, "ElementConstructor"), _Class11);
+      }, __name$2(_Class9, "ElementConstructor"), _Class9);
       defineProperty(ElementConstructor, "name", "Element");
       defineProperty(ElementConstructor.prototype, kElement, true);
       function Element(type, ...args) {
@@ -6794,7 +6781,7 @@
     return new Promise(resolve => setTimeout(resolve, ms));
   }
   __name$1(sleep, "sleep");
-  var WebSocket = (_Class12 = class WebSocket extends EventTarget {
+  var WebSocket = (_Class10 = class WebSocket extends EventTarget {
     constructor(url, config) {
       super();
       _defineProperty(this, "ws", void 0);
@@ -6888,11 +6875,11 @@
       if (!this.ws) throw new Error("Connection Closed");
       this.ws.send(data);
     }
-  }, __name$1(_Class12, "WebSocket"), _Class12);
+  }, __name$1(_Class10, "WebSocket"), _Class10);
 
   // src/index.ts
   var kHTTPError = Symbol.for("undios.error");
-  var HTTPError = (_Class13 = class HTTPError extends Error {
+  var HTTPError = (_Class11 = class HTTPError extends Error {
     constructor(...args) {
       super(...args);
       _defineProperty(this, kHTTPError, true);
@@ -6906,7 +6893,7 @@
     static is(error) {
       return !!error?.[kHTTPError];
     }
-  }, __name$1(_Class13, "HTTPError"), _Class13);
+  }, __name$1(_Class11, "HTTPError"), _Class11);
   var HTTP = (_Service2$1$provide = Service2$1.provide, _Service2$1$immediate = Service2$1.immediate, _Service2$1$invoke = Service2$1.invoke, (_HTTP2 = class _HTTP extends Service2$1 {
     constructor(...args) {
       super(args[0], args[1]);
@@ -7203,7 +7190,7 @@
   defineAccessor(Session.prototype, "roleId", ["event", "role", "id"]);
   defineAccessor(Session.prototype, "quote", ["event", "message", "quote"]);
   var eventAliases = [["message-created", "message"]];
-  var Bot = (_Class14 = class Bot {
+  var Bot = (_Class12 = class Bot {
     constructor(ctx, config, platform) {
       _defineProperty(this, "user", {});
       _defineProperty(this, "isBot", true);
@@ -7366,7 +7353,7 @@
       } = await this.getLogin();
       return user;
     }
-  }, __name(_Class14, "Bot"), _defineProperty(_Class14, "reusable", true), _defineProperty(_Class14, "MessageEncoder", void 0), _Class14);
+  }, __name(_Class12, "Bot"), _defineProperty(_Class12, "reusable", true), _defineProperty(_Class12, "MessageEncoder", void 0), _Class12);
   var iterableMethods = ["getMessage", "getReaction", "getFriend", "getGuild", "getGuildMember", "getGuildRole", "getChannel"];
   for (const name of iterableMethods) {
     Bot.prototype[name + "Iter"] = function (...args) {
@@ -7396,7 +7383,7 @@
   }
   defineAccessor(Bot.prototype, "selfId", ["user", "id"]);
   defineAccessor(Bot.prototype, "userId", ["user", "id"]);
-  exports.Adapter = (_Class15 = class Adapter {
+  exports.Adapter = (_Class13 = class Adapter {
     constructor(ctx) {
       _defineProperty(this, "bots", []);
       this.ctx = ctx;
@@ -7410,7 +7397,7 @@
         remove(this.bots, bot);
       });
     }
-  }, __name(_Class15, "Adapter"), _defineProperty(_Class15, "schema", false), _Class15);
+  }, __name(_Class13, "Adapter"), _defineProperty(_Class13, "schema", false), _Class13);
   ((Adapter2, _WsClientBase, _WsClient) => {
     Adapter2.WsClientConfig = z2.object({
       retryTimes: z2.natural().description("初次连接时的最大重试次数。").default(6),
@@ -7502,13 +7489,13 @@
     _defineProperty(WsClient, "reusable", true);
     Adapter2.WsClient = WsClient;
   })(exports.Adapter || (exports.Adapter = {}));
-  var AggregateError = (_Class16 = class AggregateError extends Error {
+  var AggregateError = (_Class14 = class AggregateError extends Error {
     constructor(errors, message = "") {
       super(message);
       this.errors = errors;
     }
-  }, __name(_Class16, "AggregateError"), _Class16);
-  var MessageEncoder = (_Class17 = class MessageEncoder {
+  }, __name(_Class14, "AggregateError"), _Class14);
+  var MessageEncoder = (_Class15 = class MessageEncoder {
     constructor(bot, channelId, guildId, options = {}) {
       _defineProperty(this, "errors", []);
       _defineProperty(this, "results", []);
@@ -7558,10 +7545,10 @@
         return this.results;
       }
     }
-  }, __name(_Class17, "MessageEncoder"), _Class17);
+  }, __name(_Class15, "MessageEncoder"), _Class15);
 
   // src/index.ts
-  h3.warn = new Logger("element").warn;
+  h3.warn = new Logger$1("element").warn;
   defineProperty(HTTP, "Config", z2.object({
     timeout: z2.natural().role("ms").description("等待连接建立的最长时间。")
   }).description("请求设置"));
@@ -7572,7 +7559,7 @@
       ...this.Config.dict
     }).description("请求设置");
   }, "createConfig");
-  exports.Context = (_Class18 = class Context extends Context2 {
+  exports.Context = (_Class16 = class Context extends Context2 {
     constructor(config = {}) {
       super(config);
       _defineProperty(this, "bots", new Proxy([], {
@@ -7610,29 +7597,35 @@
         return () => this[service] = null;
       });
     }
-  }, __name(_Class18, "Context"), _defineProperty(_Class18, "session", Symbol("session")), _defineProperty(_Class18, "Session", Session), _Class18);
+  }, __name(_Class16, "Context"), _defineProperty(_Class16, "session", Symbol("session")), _defineProperty(_Class16, "Session", Session), _Class16);
   (Context3 => {
     Context3.Config = z2.intersect([z2.object({})]);
   })(exports.Context || (exports.Context = {}));
-  var Service2 = (_Service2$1$setup = Service2$1.setup, (_Class19 = class Service2 extends Service2$1 {
+  var Service2 = (_Service2$1$setup = Service2$1.setup, (_Class17 = class Service2 extends Service2$1 {
     [_Service2$1$setup]() {
       this.ctx = new exports.Context();
     }
-  }, __name(_Class19, "Service"), _Class19));
+  }, __name(_Class17, "Service"), _Class17));
   const name = "LeviSatori";
   const baseDir = `./plugins/${name}`;
+  const pluginBaseDir = `./plugins/${name}/plugins`;
+  const requireBase = `./${name}/plugins`;
   const configPath = `${baseDir}/${name}.yml`;
   mc.listen("onServerStarted", () => {
     if (!file.exists(configPath)) {
-      file.writeTo(configPath, "");
+      file.writeTo(configPath, "plugins: []");
+    }
+    if (!file.exists(pluginBaseDir)) {
+      file.mkdir(pluginBaseDir);
     }
     start({
       name,
       baseDir,
+      requireBase,
       logger: {
         levels: 2
       }
-    });
+    }).catch(e => logger.error(`${e}`));
   });
 
   exports.Bot = Bot;
@@ -7640,7 +7633,7 @@
   exports.Element = h3;
   exports.ForkScope = ForkScope;
   exports.Lifecycle = Lifecycle;
-  exports.Logger = Logger;
+  exports.Logger = Logger$1;
   exports.MainScope = MainScope;
   exports.MessageEncoder = MessageEncoder;
   exports.Messenger = MessageEncoder;
@@ -7690,7 +7683,6 @@
   exports.sanitize = sanitize;
   exports.segment = h3;
   exports.snakeCase = snakeCase;
-  exports.start = start;
   exports.symbols = symbols;
   exports.trimSlash = trimSlash;
   exports.uncapitalize = uncapitalize;

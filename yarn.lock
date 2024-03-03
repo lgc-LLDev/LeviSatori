@@ -183,7 +183,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/helper-plugin-utils@npm:^7.14.5, @babel/helper-plugin-utils@npm:^7.22.5, @babel/helper-plugin-utils@npm:^7.8.0":
+"@babel/helper-plugin-utils@npm:^7.14.5, @babel/helper-plugin-utils@npm:^7.22.5":
   version: 7.24.0
   resolution: "@babel/helper-plugin-utils@npm:7.24.0"
   checksum: 10c0/90f41bd1b4dfe7226b1d33a4bb745844c5c63e400f9e4e8bf9103a7ceddd7d425d65333b564d9daba3cebd105985764d51b4bd4c95822b97c2e3ac1201a8a5da
@@ -282,17 +282,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/plugin-syntax-bigint@npm:^7.8.3":
-  version: 7.8.3
-  resolution: "@babel/plugin-syntax-bigint@npm:7.8.3"
-  dependencies:
-    "@babel/helper-plugin-utils": "npm:^7.8.0"
-  peerDependencies:
-    "@babel/core": ^7.0.0-0
-  checksum: 10c0/686891b81af2bc74c39013655da368a480f17dd237bf9fbc32048e5865cb706d5a8f65438030da535b332b1d6b22feba336da8fa931f663b6b34e13147d12dde
-  languageName: node
-  linkType: hard
-
 "@babel/plugin-syntax-class-static-block@npm:^7.14.5":
   version: 7.14.5
   resolution: "@babel/plugin-syntax-class-static-block@npm:7.14.5"
@@ -326,18 +315,6 @@ __metadata:
   peerDependencies:
     "@babel/core": ^7.12.0
   checksum: 10c0/fdca96640ef29d8641a7f8de106f65f18871b38cc01c0f7b696d2b49c76b77816b30a812c08e759d06dd10b4d9b3af6b5e4ac22a2017a88c4077972224b77ab0
-  languageName: node
-  linkType: hard
-
-"@babel/plugin-transform-modules-umd@npm:^7.23.3":
-  version: 7.23.3
-  resolution: "@babel/plugin-transform-modules-umd@npm:7.23.3"
-  dependencies:
-    "@babel/helper-module-transforms": "npm:^7.23.3"
-    "@babel/helper-plugin-utils": "npm:^7.22.5"
-  peerDependencies:
-    "@babel/core": ^7.0.0-0
-  checksum: 10c0/f0d2f890a15b4367d0d8f160bed7062bdb145c728c24e9bfbc1211c7925aae5df72a88df3832c92dd2011927edfed4da1b1249e4c78402e893509316c0c2caa6
   languageName: node
   linkType: hard
 
@@ -933,6 +910,7 @@ __metadata:
     cosmokit: "npm:^1.5.2"
     dotenv: "npm:^16.3.1"
     js-yaml: "npm:^4.1.0"
+    schemastery: "npm:^3.14.3"
   peerDependencies:
     "@levi-cordisjs/core": "workspace:^"
   languageName: unknown
@@ -1099,22 +1077,6 @@ __metadata:
     rollup:
       optional: true
   checksum: 10c0/d096af5aedd55c19ac528daa84a4cacdf21a69c9c9b20c23e04f27a64966cb383f5e2b01b9c903d40318e35dcaa74dc7b5292a844c6cbc66c252f5447eac05b4
-  languageName: node
-  linkType: hard
-
-"@rollup/plugin-inject@npm:^5.0.4":
-  version: 5.0.5
-  resolution: "@rollup/plugin-inject@npm:5.0.5"
-  dependencies:
-    "@rollup/pluginutils": "npm:^5.0.1"
-    estree-walker: "npm:^2.0.2"
-    magic-string: "npm:^0.30.3"
-  peerDependencies:
-    rollup: ^1.20.0||^2.0.0||^3.0.0||^4.0.0
-  peerDependenciesMeta:
-    rollup:
-      optional: true
-  checksum: 10c0/22d10cf44fa56a6683d5ac4df24a9003379b3dcaae9897f5c30c844afc2ebca83cfaa5557f13a1399b1c8a0d312c3217bcacd508b7ebc4b2cbee401bd1ec8be2
   languageName: node
   linkType: hard
 
@@ -1411,6 +1373,13 @@ __metadata:
   version: 2.0.6
   resolution: "@types/istanbul-lib-coverage@npm:2.0.6"
   checksum: 10c0/3948088654f3eeb45363f1db158354fb013b362dba2a5c2c18c559484d5eb9f6fd85b23d66c0a7c2fcfab7308d0a585b14dadaca6cc8bf89ebfdc7f8f5102fb7
+  languageName: node
+  linkType: hard
+
+"@types/js-yaml@npm:^4.0.9":
+  version: 4.0.9
+  resolution: "@types/js-yaml@npm:4.0.9"
+  checksum: 10c0/24de857aa8d61526bbfbbaa383aa538283ad17363fcd5bb5148e2c7f604547db36646440e739d78241ed008702a8920665d1add5618687b6743858fae00da211
   languageName: node
   linkType: hard
 
@@ -2025,16 +1994,6 @@ __metadata:
   dependencies:
     dequal: "npm:^2.0.3"
   checksum: 10c0/f7debc2012e456139b57d888c223f6d3cb4b61eb104164a85e3d346273dd6ef0bc9a04b6660ca9407704a14a8e05fa6b6eb9d55f44f348c7210de7ffb350c3a7
-  languageName: node
-  linkType: hard
-
-"babel-plugin-transform-bigint-to-jsbi@npm:^1.0.3":
-  version: 1.0.3
-  resolution: "babel-plugin-transform-bigint-to-jsbi@npm:1.0.3"
-  peerDependencies:
-    "@babel/core": ^7.17.2
-    "@babel/plugin-syntax-bigint": ^7.8.3
-  checksum: 10c0/6037050299f07cdeeebf5e3407807b4bb00bdf4c362fffbae8711c17943aacbd29fa61ec10b34a80bdf10dfe8e31946bcc3f967403b3ac599308e34d5ad62a5c
   languageName: node
   linkType: hard
 
@@ -4630,7 +4589,6 @@ __metadata:
     esbuild: "npm:^0.18.14"
     esbuild-register: "npm:^3.4.2"
     mocha: "npm:^9.2.2"
-    object-inspect: "npm:^1.12.3"
     shx: "npm:^0.3.4"
     typescript: "npm:^5.1.6"
   languageName: unknown
@@ -4641,22 +4599,21 @@ __metadata:
   resolution: "levi-satori@workspace:packages/levi-satori"
   dependencies:
     "@babel/core": "npm:^7.24.0"
-    "@babel/plugin-syntax-bigint": "npm:^7.8.3"
     "@babel/plugin-transform-class-properties": "npm:^7.23.3"
     "@babel/plugin-transform-class-static-block": "npm:^7.23.4"
-    "@babel/plugin-transform-modules-umd": "npm:^7.23.3"
     "@levi-satorijs/satori": "workspace:^"
     "@rollup/plugin-babel": "npm:^6.0.4"
     "@rollup/plugin-commonjs": "npm:^25.0.7"
     "@rollup/plugin-json": "npm:^6.1.0"
     "@rollup/plugin-node-resolve": "npm:^15.2.3"
     "@rollup/plugin-typescript": "npm:^9.0.2"
-    babel-plugin-transform-bigint-to-jsbi: "npm:^1.0.3"
+    "@types/js-yaml": "npm:^4.0.9"
+    cosmokit: "npm:^1.5.2"
     event-target-polyfill: "npm:^0.0.4"
+    js-yaml: "npm:^4.1.0"
     rimraf: "npm:^5.0.5"
     rollup: "npm:^4.12.0"
     rollup-plugin-dts: "npm:^6.1.0"
-    rollup-plugin-polyfill-node: "npm:^0.13.0"
     typescript: "npm:^5.3.2"
   languageName: unknown
   linkType: soft
@@ -5627,17 +5584,6 @@ __metadata:
     "@babel/code-frame":
       optional: true
   checksum: 10c0/8fed9f292fec09a21fdac86964aee92f6d76cfa688faa7f47065a1b25e12be209d437329868d706f8a189c246b5e918efc6046eb09cd974cc7989e68fe746927
-  languageName: node
-  linkType: hard
-
-"rollup-plugin-polyfill-node@npm:^0.13.0":
-  version: 0.13.0
-  resolution: "rollup-plugin-polyfill-node@npm:0.13.0"
-  dependencies:
-    "@rollup/plugin-inject": "npm:^5.0.4"
-  peerDependencies:
-    rollup: ^1.20.0 || ^2.0.0 || ^3.0.0 || ^4.0.0
-  checksum: 10c0/a6d7746d73b48869c2650d733a4f1bf4cd8613669959811485e866c13b6462465b227f9923a21521013cfc85dd23c28b5ccee1c1359584f1ccf6320e7c823fb3
   languageName: node
   linkType: hard
 
