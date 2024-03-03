@@ -5,7 +5,7 @@
   "main": "dist/LeviSatori.js",
   "types": "dist/LeviSatori.d.ts",
   "scripts": {
-    "build": "rollup -c && node -e \"require('fs').copyFileSync('./src/index.bundle.d.ts','./dist/LeviSatori.d.ts')\"",
+    "build": "rollup -c && node -e \"const fs=require('fs');fs.copyFileSync('./src/index.bundle.d.ts','./dist/LeviSatori.d.ts');\" && rimraf ./dist/LeviSatori.tmp.js",
     "clean": "rimraf ./dist"
   },
   "keywords": [],
@@ -14,6 +14,10 @@
   "license": "MIT",
   "funding": "https://afdian.net/a/lgc2333",
   "devDependencies": {
+    "@babel/core": "^7.24.0",
+    "@babel/plugin-transform-class-properties": "^7.23.3",
+    "@babel/plugin-transform-class-static-block": "^7.23.4",
+    "@rollup/plugin-babel": "^6.0.4",
     "@rollup/plugin-commonjs": "^25.0.7",
     "@rollup/plugin-json": "^6.1.0",
     "@rollup/plugin-node-resolve": "^15.2.3",

@@ -8,7 +8,7 @@
     "packages/*"
   ],
   "scripts": {
-    "build": "yarn workspaces foreach -W run build"
+    "build": "yarn workspace levi-reggol build && yarn workspace @root/cordis build && yarn workspace @root/undios build && yarn workspace @root/satori build && yarn workspace levi-satori build"
   },
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^7.1.0",
