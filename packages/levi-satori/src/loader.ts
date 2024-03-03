@@ -1,6 +1,6 @@
 import { Loader as BaseLoader } from "@levi-cordisjs/loader";
+import { Context } from "@levi-satorijs/satori";
 import { Dict, trimSlash } from "cosmokit";
-import { Context } from "levi-cordis";
 import * as Logger from "./logger";
 
 export namespace Loader {

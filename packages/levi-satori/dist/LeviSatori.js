@@ -3464,7 +3464,7 @@ ${args[0].stack}`;
         default: () => src_default2
       });
       module.exports = __toCommonJS2(src_exports2);
-      var import_levi_cordis5 = require_lib7();
+      var import_levi_cordis4 = require_lib7();
       var import_cosmokit16 = require_lib();
       function sleep2(ms) {
         return new Promise((resolve) => setTimeout(resolve, ms));
@@ -3590,7 +3590,7 @@ ${args[0].stack}`;
         }
       }, _a26 = kHTTPError2, __name10(_b5, "HTTPError"), _b5);
       var _a27, _b6, _c2;
-      var HTTP2 = (_a27 = class extends import_levi_cordis5.Service {
+      var HTTP2 = (_a27 = class extends import_levi_cordis4.Service {
         constructor(...args) {
           super(args[0], args[1]);
           __publicField(this, "_decoders", /* @__PURE__ */ Object.create(null));
@@ -3598,21 +3598,21 @@ ${args[0].stack}`;
           this.decoder("text", (raw) => raw);
         }
         decoder(type2, decoder) {
-          return this[import_levi_cordis5.Context.current].effect(() => {
+          return this[import_levi_cordis4.Context.current].effect(() => {
             this._decoders[type2] = decoder;
             return () => delete this._decoders[type2];
           });
         }
         extend(config = {}) {
-          return this[import_levi_cordis5.Service.extend]({
+          return this[import_levi_cordis4.Service.extend]({
             config: _a27.mergeConfig(this.config, config)
           });
         }
         resolveConfig(init) {
-          const caller = this[import_levi_cordis5.Context.current];
+          const caller = this[import_levi_cordis4.Context.current];
           let result = { headers: {}, ...this.config };
           caller.emit("http/config", result);
-          let intercept = caller[import_levi_cordis5.Context.intercept];
+          let intercept = caller[import_levi_cordis4.Context.intercept];
           while (intercept) {
             result = _a27.mergeConfig(result, intercept.http);
             intercept = Object.getPrototypeOf(intercept);
@@ -3632,8 +3632,8 @@ ${args[0].stack}`;
           }
           return url;
         }
-        async [(_b6 = import_levi_cordis5.Service.provide, _c2 = import_levi_cordis5.Service.immediate, import_levi_cordis5.Service.invoke)](...args) {
-          const caller = this[import_levi_cordis5.Context.current];
+        async [(_b6 = import_levi_cordis4.Service.provide, _c2 = import_levi_cordis4.Service.immediate, import_levi_cordis4.Service.invoke)](...args) {
+          const caller = this[import_levi_cordis4.Context.current];
           let method;
           if (typeof args[1] === "string") {
             method = args.shift();
@@ -3716,7 +3716,7 @@ ${args[0].stack}`;
         ws(url, init) {
           if (init?.headers)
             this.ctx.logger.warn("headers is not supported in ws");
-          const caller = this[import_levi_cordis5.Context.current];
+          const caller = this[import_levi_cordis4.Context.current];
           const config = this.resolveConfig(init);
           url = this.resolveURL(url, config);
           init = {
@@ -4139,7 +4139,7 @@ ${args[0].stack}`;
       defineAccessor2(Bot2.prototype, "userId", ["user", "id"]);
       var import_cosmokit32 = require_lib();
       var import_protocol32 = require_lib8();
-      var import_levi_cordis5 = require_lib7();
+      var import_levi_cordis4 = require_lib7();
       var _a27;
       var Adapter2 = (_a27 = class {
         constructor(ctx) {
@@ -4159,10 +4159,10 @@ ${args[0].stack}`;
         }
       }, __name10(_a27, "Adapter"), __publicField(_a27, "schema", false), _a27);
       ((Adapter22) => {
-        Adapter22.WsClientConfig = import_levi_cordis5.z.object({
-          retryTimes: import_levi_cordis5.z.natural().description("\u521D\u6B21\u8FDE\u63A5\u65F6\u7684\u6700\u5927\u91CD\u8BD5\u6B21\u6570\u3002").default(6),
-          retryInterval: import_levi_cordis5.z.natural().role("ms").description("\u521D\u6B21\u8FDE\u63A5\u65F6\u7684\u91CD\u8BD5\u65F6\u95F4\u95F4\u9694\u3002").default(5 * import_cosmokit32.Time.second),
-          retryLazy: import_levi_cordis5.z.natural().role("ms").description("\u8FDE\u63A5\u5173\u95ED\u540E\u7684\u91CD\u8BD5\u65F6\u95F4\u95F4\u9694\u3002").default(import_cosmokit32.Time.minute)
+        Adapter22.WsClientConfig = import_levi_cordis4.z.object({
+          retryTimes: import_levi_cordis4.z.natural().description("\u521D\u6B21\u8FDE\u63A5\u65F6\u7684\u6700\u5927\u91CD\u8BD5\u6B21\u6570\u3002").default(6),
+          retryInterval: import_levi_cordis4.z.natural().role("ms").description("\u521D\u6B21\u8FDE\u63A5\u65F6\u7684\u91CD\u8BD5\u65F6\u95F4\u95F4\u9694\u3002").default(5 * import_cosmokit32.Time.second),
+          retryLazy: import_levi_cordis4.z.natural().role("ms").description("\u8FDE\u63A5\u5173\u95ED\u540E\u7684\u91CD\u8BD5\u65F6\u95F4\u95F4\u9694\u3002").default(import_cosmokit32.Time.minute)
         }).description("\u8FDE\u63A5\u8BBE\u7F6E");
         const _WsClientBase = class _WsClientBase extends Adapter22 {
           constructor(ctx, config) {
@@ -4428,7 +4428,7 @@ ${args[0].stack}`;
       });
       module.exports = __toCommonJS2(src_exports2);
       var import_satori2 = require_lib12();
-      var import_satori = require_lib12();
+      var import_satori3 = require_lib12();
       function transformKey(source, callback) {
         if (!source || typeof source !== "object")
           return source;
@@ -4445,7 +4445,7 @@ ${args[0].stack}`;
         return new Proxy(() => {
         }, {
           apply(target, thisArg, args) {
-            return bot.http.post("/internal/" + (0, import_satori.snakeCase)(prefix.slice(1)), args);
+            return bot.http.post("/internal/" + (0, import_satori3.snakeCase)(prefix.slice(1)), args);
           },
           get(target, key, receiver) {
             if (typeof key === "symbol" || key in target) {
@@ -4457,7 +4457,7 @@ ${args[0].stack}`;
       }
       __name10(createInternal, "createInternal");
       var _a25;
-      var SatoriBot = (_a25 = class extends import_satori.Bot {
+      var SatoriBot = (_a25 = class extends import_satori3.Bot {
         constructor(ctx, config) {
           super(ctx, config, "satori");
           __publicField(this, "http");
@@ -4465,14 +4465,14 @@ ${args[0].stack}`;
           Object.assign(this, config);
         }
       }, __name10(_a25, "SatoriBot"), _a25);
-      for (const [key, method] of Object.entries(import_satori.Universal.Methods)) {
+      for (const [key, method] of Object.entries(import_satori3.Universal.Methods)) {
         SatoriBot.prototype[method.name] = function(...args) {
           const payload = {};
           for (const { name: name2 } of method.fields) {
             if (name2 === "content") {
-              payload[name2] = import_satori.h.normalize(args.shift()).join("");
+              payload[name2] = import_satori3.h.normalize(args.shift()).join("");
             } else {
-              payload[name2] = transformKey(args.shift(), import_satori.snakeCase);
+              payload[name2] = transformKey(args.shift(), import_satori3.snakeCase);
             }
           }
           this.logger.debug("[request]", key, payload);
@@ -8753,8 +8753,44 @@ ${args[0].stack}`;
   (0, import_cosmokit7.defineProperty)(group, "inject", ["loader"]);
   (0, import_cosmokit7.defineProperty)(group, "reusable", true);
 
-  // src/loader.ts
-  var import_cosmokit9 = __toESM(require_lib());
+  // ../satori/packages/satori/lib/index.mjs
+  var lib_exports4 = {};
+  __export(lib_exports4, {
+    Adapter: () => Adapter,
+    Bot: () => Bot,
+    Context: () => Context3,
+    CordisError: () => CordisError,
+    EffectScope: () => EffectScope,
+    Element: () => lib_default,
+    ForkScope: () => ForkScope,
+    Lifecycle: () => Lifecycle,
+    Logger: () => import_levi_reggol.default,
+    MainScope: () => MainScope,
+    MessageEncoder: () => MessageEncoder,
+    Messenger: () => MessageEncoder,
+    Modulator: () => MessageEncoder,
+    Registry: () => Registry,
+    Schema: () => import_schemastery.default,
+    ScopeStatus: () => ScopeStatus,
+    Service: () => Service23,
+    Session: () => Session,
+    TimerService: () => TimerService2,
+    Universal: () => lib_exports2,
+    applyTraceable: () => applyTraceable,
+    createCallable: () => createCallable,
+    createTraceable: () => createTraceable,
+    defineAccessor: () => defineAccessor,
+    h: () => lib_default,
+    isApplicable: () => isApplicable,
+    isBailed: () => isBailed,
+    isConstructor: () => isConstructor,
+    isUnproxyable: () => isUnproxyable,
+    joinPrototype: () => joinPrototype,
+    resolveConfig: () => resolveConfig,
+    segment: () => lib_default,
+    symbols: () => symbols,
+    z: () => import_schemastery.default
+  });
 
   // ../cordis/packages/cordis/lib/index.mjs
   var import_schemastery = __toESM(require_lib3(), 1);
@@ -8910,117 +8946,9 @@ ${args[0].stack}`;
   }
   __name5(src_default, "default");
 
-  // src/logger.ts
-  var logger_exports = {};
-  __export(logger_exports, {
-    apply: () => apply,
-    inject: () => inject
-  });
-  var inject = ["loader"];
-  function apply(ctx, config = {}) {
-    ctx.on("loader/entry", (type2, entry) => {
-      ctx.logger("loader").info("%s plugin %c", type2, entry.options.name);
-    });
-    ctx.loader.prolog = [];
-    import_levi_reggol.default.targets.push({
-      colors: 3,
-      record: (record) => {
-        ctx.loader.prolog.push(record);
-        ctx.loader.prolog = ctx.loader.prolog.slice(-1e3);
-      }
-    });
-    const { levels } = config;
-    if (typeof levels === "object") {
-      import_levi_reggol.default.levels = levels;
-    } else if (typeof levels === "number") {
-      import_levi_reggol.default.levels.base = levels;
-    }
-    let { showTime } = config;
-    if (showTime === true)
-      showTime = "yyyy-MM-dd hh:mm:ss";
-    if (showTime)
-      import_levi_reggol.default.targets[0].showTime = showTime;
-    import_levi_reggol.default.targets[0].showDiff = config.showDiff;
-    function ensureBaseLevel(conf, base) {
-      conf.base ?? (conf.base = base);
-      Object.values(config).forEach((value) => {
-        if (typeof value !== "object")
-          return;
-        ensureBaseLevel(value, conf.base);
-      });
-    }
-    ensureBaseLevel(import_levi_reggol.default.levels, 2);
-    import_levi_reggol.default.targets[0].timestamp = Date.now();
-  }
-
-  // src/loader.ts
-  var Loader2 = class extends Loader {
-    async import(name2) {
-      if (this.options.importMapping && name2 in this.options.importMapping) {
-        return this.options.importMapping[name2];
-      }
-      const base = (0, import_cosmokit9.trimSlash)(
-        this.options.requireBase ?? this.options.baseDir ?? ""
-      );
-      try {
-        return __require(`${base}/${name2}`);
-      } catch (err) {
-        this.app.emit("internal/error", err);
-      }
-      return void 0;
-    }
-  };
-  async function start(options) {
-    const ctx = new Context22();
-    ctx.plugin(Loader2, options);
-    await ctx.loader.init();
-    const config = await ctx.loader.readConfig();
-    ctx.plugin(logger_exports, config.logger ?? {});
-    await ctx.start();
-  }
-
-  // ../satori/packages/satori/lib/index.mjs
-  var lib_exports4 = {};
-  __export(lib_exports4, {
-    Adapter: () => Adapter,
-    Bot: () => Bot,
-    Context: () => Context3,
-    CordisError: () => CordisError,
-    EffectScope: () => EffectScope,
-    Element: () => lib_default,
-    ForkScope: () => ForkScope,
-    Lifecycle: () => Lifecycle,
-    Logger: () => import_levi_reggol.default,
-    MainScope: () => MainScope,
-    MessageEncoder: () => MessageEncoder,
-    Messenger: () => MessageEncoder,
-    Modulator: () => MessageEncoder,
-    Registry: () => Registry,
-    Schema: () => import_schemastery.default,
-    ScopeStatus: () => ScopeStatus,
-    Service: () => Service23,
-    Session: () => Session,
-    TimerService: () => TimerService2,
-    Universal: () => lib_exports2,
-    applyTraceable: () => applyTraceable,
-    createCallable: () => createCallable,
-    createTraceable: () => createTraceable,
-    defineAccessor: () => defineAccessor,
-    h: () => lib_default,
-    isApplicable: () => isApplicable,
-    isBailed: () => isBailed,
-    isConstructor: () => isConstructor,
-    isUnproxyable: () => isUnproxyable,
-    joinPrototype: () => joinPrototype,
-    resolveConfig: () => resolveConfig,
-    segment: () => lib_default,
-    symbols: () => symbols,
-    z: () => import_schemastery.default
-  });
-
   // ../satori/packages/core/lib/index.mjs
+  var import_cosmokit11 = __toESM(require_lib(), 1);
   var import_cosmokit12 = __toESM(require_lib(), 1);
-  var import_cosmokit13 = __toESM(require_lib(), 1);
 
   // ../satori/packages/protocol/lib/index.mjs
   var lib_exports2 = {};
@@ -9113,7 +9041,7 @@ ${args[0].stack}`;
   })(WebSocket || (WebSocket = {}));
 
   // ../satori/packages/element/lib/index.mjs
-  var import_cosmokit10 = __toESM(require_lib(), 1);
+  var import_cosmokit9 = __toESM(require_lib(), 1);
   var __defProp8 = Object.defineProperty;
   var __getOwnPropNames2 = Object.getOwnPropertyNames;
   var __name7 = (target, value) => __defProp8(target, "name", { value, configurable: true });
@@ -9137,9 +9065,9 @@ ${args[0].stack}`;
         }
         toAttrString() {
           return Object.entries(this.attrs).map(([key, value]) => {
-            if ((0, import_cosmokit10.isNullable)(value))
+            if ((0, import_cosmokit9.isNullable)(value))
               return "";
-            key = (0, import_cosmokit10.hyphenate)(key);
+            key = (0, import_cosmokit9.hyphenate)(key);
             if (value === true)
               return ` ${key}`;
             if (value === false)
@@ -9161,20 +9089,20 @@ ${args[0].stack}`;
           return `<${tag}${attrs}>${inner}</${tag}>`;
         }
       }, __name7(_a25, "ElementConstructor"), _a25);
-      (0, import_cosmokit10.defineProperty)(ElementConstructor, "name", "Element");
-      (0, import_cosmokit10.defineProperty)(ElementConstructor.prototype, kElement, true);
+      (0, import_cosmokit9.defineProperty)(ElementConstructor, "name", "Element");
+      (0, import_cosmokit9.defineProperty)(ElementConstructor.prototype, kElement, true);
       function Element2(type2, ...args) {
         const el = Object.create(ElementConstructor.prototype);
         const attrs = {}, children = [];
         if (args[0] && typeof args[0] === "object" && !Element2.isElement(args[0]) && !Array.isArray(args[0])) {
           const props = args.shift();
           for (const [key, value] of Object.entries(props)) {
-            if ((0, import_cosmokit10.isNullable)(value))
+            if ((0, import_cosmokit9.isNullable)(value))
               continue;
             if (key === "children") {
-              args.push(...(0, import_cosmokit10.makeArray)(value));
+              args.push(...(0, import_cosmokit9.makeArray)(value));
             } else {
-              attrs[(0, import_cosmokit10.camelize)(key)] = value;
+              attrs[(0, import_cosmokit9.camelize)(key)] = value;
             }
           }
         }
@@ -9212,7 +9140,7 @@ ${args[0].stack}`;
               return Element22("text", { content });
           } else if (isElement(content)) {
             return content;
-          } else if (!(0, import_cosmokit10.isNullable)(content)) {
+          } else if (!(0, import_cosmokit9.isNullable)(content)) {
             throw new TypeError(`Invalid content: ${content}`);
           }
         }
@@ -9320,7 +9248,7 @@ ${args[0].stack}`;
           let value = context;
           for (const part of expr.split(".")) {
             value = value[part];
-            if ((0, import_cosmokit10.isNullable)(value))
+            if ((0, import_cosmokit9.isNullable)(value))
               return "";
           }
           return value ?? "";
@@ -9450,7 +9378,7 @@ ${args[0].stack}`;
                 const [, key, v1, v2 = v1, v3] = attrCap;
                 if (v3) {
                   attrs[key] = interpolate2(v3, context);
-                } else if (!(0, import_cosmokit10.isNullable)(v2)) {
+                } else if (!(0, import_cosmokit9.isNullable)(v2)) {
                   attrs[key] = unescape(v2);
                 } else if (key.startsWith("no-")) {
                   attrs[key.slice(3)] = false;
@@ -9530,7 +9458,7 @@ ${args[0].stack}`;
           return (...args) => {
             const element = Element22(type2);
             keys.forEach((key, index) => {
-              if (!(0, import_cosmokit10.isNullable)(args[index])) {
+              if (!(0, import_cosmokit9.isNullable)(args[index])) {
                 element.attrs[key] = args[index];
               }
             });
@@ -9549,10 +9477,10 @@ ${args[0].stack}`;
             if (typeof args[0] === "string") {
               prefix = `data:${args.shift()};base64,`;
             }
-            if ((0, import_cosmokit10.is)("ArrayBuffer", src)) {
-              src = prefix + (0, import_cosmokit10.arrayBufferToBase64)(src);
+            if ((0, import_cosmokit9.is)("ArrayBuffer", src)) {
+              src = prefix + (0, import_cosmokit9.arrayBufferToBase64)(src);
             } else if (ArrayBuffer.isView(src)) {
-              src = prefix + (0, import_cosmokit10.arrayBufferToBase64)(src.buffer);
+              src = prefix + (0, import_cosmokit9.arrayBufferToBase64)(src.buffer);
             }
             if (src.startsWith("base64://")) {
               (0, Element22.warn)(`protocol "base64:" is deprecated and will be removed in the future, please use "data:" instead`);
@@ -9582,7 +9510,7 @@ ${args[0].stack}`;
   var lib_default = require_src();
 
   // ../undios/packages/core/lib/index.js
-  var import_cosmokit11 = __toESM(require_lib(), 1);
+  var import_cosmokit10 = __toESM(require_lib(), 1);
   var __defProp9 = Object.defineProperty;
   var __name8 = (target, value) => __defProp9(target, "name", { value, configurable: true });
   function sleep(ms) {
@@ -9741,7 +9669,7 @@ ${args[0].stack}`;
     }
     resolveURL(url, config) {
       if (config.baseURL) {
-        url = `${(0, import_cosmokit11.trimSlash)(config.baseURL)}/${url}`;
+        url = `${(0, import_cosmokit10.trimSlash)(config.baseURL)}/${url}`;
       }
       if (config.params) {
         const params = Object.entries(config.params).map(
@@ -9853,7 +9781,7 @@ ${args[0].stack}`;
     }
   }, __name8(_a17, "HTTP"), __publicField(_a17, "Error", HTTPError), __publicField(_a17, _b4, "http"), __publicField(_a17, _c, true), (() => {
     for (const method of ["get"]) {
-      (0, import_cosmokit11.defineProperty)(
+      (0, import_cosmokit10.defineProperty)(
         _a17.prototype,
         method,
         async function(url, config) {
@@ -9863,7 +9791,7 @@ ${args[0].stack}`;
       );
     }
     for (const method of ["post"]) {
-      (0, import_cosmokit11.defineProperty)(
+      (0, import_cosmokit10.defineProperty)(
         _a17.prototype,
         method,
         async function(url, data, config) {
@@ -9882,8 +9810,8 @@ ${args[0].stack}`;
   })), _a17);
 
   // ../satori/packages/core/lib/index.mjs
+  var import_cosmokit13 = __toESM(require_lib(), 1);
   var import_cosmokit14 = __toESM(require_lib(), 1);
-  var import_cosmokit15 = __toESM(require_lib(), 1);
   var __defProp10 = Object.defineProperty;
   var __name9 = (target, value) => __defProp10(target, "name", { value, configurable: true });
   var _a18;
@@ -9899,9 +9827,9 @@ ${args[0].stack}`;
       event.timestamp ?? (event.timestamp = Date.now());
       this.event = event;
       this.id = ++_a18.counter;
-      (0, import_cosmokit13.defineProperty)(this, "bot", bot);
-      (0, import_cosmokit13.defineProperty)(this, "app", bot.ctx.root);
-      (0, import_cosmokit13.defineProperty)(this, Context3.current, bot.ctx);
+      (0, import_cosmokit12.defineProperty)(this, "bot", bot);
+      (0, import_cosmokit12.defineProperty)(this, "app", bot.ctx.root);
+      (0, import_cosmokit12.defineProperty)(this, Context3.current, bot.ctx);
       return Context3.associate(this, "session");
     }
     /** @deprecated */
@@ -9952,13 +9880,13 @@ ${args[0].stack}`;
     }
     set content(value) {
       var _a25;
-      ((_a25 = this.event).message ?? (_a25.message = {})).elements = (0, import_cosmokit13.isNullable)(value) ? value : lib_default.parse(value);
+      ((_a25 = this.event).message ?? (_a25.message = {})).elements = (0, import_cosmokit12.isNullable)(value) ? value : lib_default.parse(value);
     }
     setInternal(type2, data) {
       this.event._type = type2;
       this.event._data = data;
       const internal = Object.create(this.bot.internal);
-      (0, import_cosmokit13.defineProperty)(this, type2, Object.assign(internal, data));
+      (0, import_cosmokit12.defineProperty)(this, type2, Object.assign(internal, data));
     }
     async transform(elements) {
       return await lib_default.transformAsync(elements, ({ type: type2, attrs, children }, session) => {
@@ -10046,7 +9974,7 @@ ${args[0].stack}`;
       this.status = status;
     }
     dispose() {
-      (0, import_cosmokit14.remove)(this.ctx.bots, this);
+      (0, import_cosmokit13.remove)(this.ctx.bots, this);
       this.context.emit("bot-removed", this);
       this.dispatchLoginEvent("login-removed");
       return this.stop();
@@ -10152,7 +10080,7 @@ ${args[0].stack}`;
       }
     }
     toJSON() {
-      return (0, import_cosmokit14.clone)((0, import_cosmokit14.pick)(this, ["platform", "selfId", "status", "user", "hidden"]));
+      return (0, import_cosmokit13.clone)((0, import_cosmokit13.pick)(this, ["platform", "selfId", "status", "user", "hidden"]));
     }
     async getLogin() {
       return this.toJSON();
@@ -10211,15 +10139,15 @@ ${args[0].stack}`;
       bot.adapter = this;
       this.bots.push(bot);
       ctx.on("dispose", () => {
-        (0, import_cosmokit15.remove)(this.bots, bot);
+        (0, import_cosmokit14.remove)(this.bots, bot);
       });
     }
   }, __name9(_a20, "Adapter"), __publicField(_a20, "schema", false), _a20);
   ((Adapter2) => {
     Adapter2.WsClientConfig = import_schemastery.default.object({
       retryTimes: import_schemastery.default.natural().description("\u521D\u6B21\u8FDE\u63A5\u65F6\u7684\u6700\u5927\u91CD\u8BD5\u6B21\u6570\u3002").default(6),
-      retryInterval: import_schemastery.default.natural().role("ms").description("\u521D\u6B21\u8FDE\u63A5\u65F6\u7684\u91CD\u8BD5\u65F6\u95F4\u95F4\u9694\u3002").default(5 * import_cosmokit15.Time.second),
-      retryLazy: import_schemastery.default.natural().role("ms").description("\u8FDE\u63A5\u5173\u95ED\u540E\u7684\u91CD\u8BD5\u65F6\u95F4\u95F4\u9694\u3002").default(import_cosmokit15.Time.minute)
+      retryInterval: import_schemastery.default.natural().role("ms").description("\u521D\u6B21\u8FDE\u63A5\u65F6\u7684\u91CD\u8BD5\u65F6\u95F4\u95F4\u9694\u3002").default(5 * import_cosmokit14.Time.second),
+      retryLazy: import_schemastery.default.natural().role("ms").description("\u8FDE\u63A5\u5173\u95ED\u540E\u7684\u91CD\u8BD5\u65F6\u95F4\u95F4\u9694\u3002").default(import_cosmokit14.Time.minute)
     }).description("\u8FDE\u63A5\u8BBE\u7F6E");
     const _WsClientBase = class _WsClientBase extends Adapter2 {
       constructor(ctx, config) {
@@ -10255,7 +10183,7 @@ ${args[0].stack}`;
             }
             _retryCount++;
             this.setStatus(Status.RECONNECT);
-            logger2.warn(`${message}, will retry in ${import_cosmokit15.Time.format(timeout)}...`);
+            logger2.warn(`${message}, will retry in ${import_cosmokit14.Time.format(timeout)}...`);
             setTimeout(() => {
               if (this.getActive())
                 reconnect();
@@ -10364,7 +10292,7 @@ ${args[0].stack}`;
     }
   }, __name9(_a22, "MessageEncoder"), _a22);
   lib_default.warn = new import_levi_reggol.default("element").warn;
-  (0, import_cosmokit12.defineProperty)(HTTP, "Config", import_schemastery.default.object({
+  (0, import_cosmokit11.defineProperty)(HTTP, "Config", import_schemastery.default.object({
     timeout: import_schemastery.default.natural().role("ms").description("\u7B49\u5F85\u8FDE\u63A5\u5EFA\u7ACB\u7684\u6700\u957F\u65F6\u95F4\u3002")
   }).description("\u8BF7\u6C42\u8BBE\u7F6E"));
   HTTP.createConfig = /* @__PURE__ */ __name9(function createConfig(endpoint) {
@@ -10430,6 +10358,78 @@ ${args[0].stack}`;
 
   // ../satori/packages/satori/lib/index.mjs
   __reExport(lib_exports4, __toESM(require_lib(), 1));
+
+  // src/loader.ts
+  var import_cosmokit15 = __toESM(require_lib());
+
+  // src/logger.ts
+  var logger_exports = {};
+  __export(logger_exports, {
+    apply: () => apply,
+    inject: () => inject
+  });
+  var inject = ["loader"];
+  function apply(ctx, config = {}) {
+    ctx.on("loader/entry", (type2, entry) => {
+      ctx.logger("loader").info("%s plugin %c", type2, entry.options.name);
+    });
+    ctx.loader.prolog = [];
+    import_levi_reggol.default.targets.push({
+      colors: 3,
+      record: (record) => {
+        ctx.loader.prolog.push(record);
+        ctx.loader.prolog = ctx.loader.prolog.slice(-1e3);
+      }
+    });
+    const { levels } = config;
+    if (typeof levels === "object") {
+      import_levi_reggol.default.levels = levels;
+    } else if (typeof levels === "number") {
+      import_levi_reggol.default.levels.base = levels;
+    }
+    let { showTime } = config;
+    if (showTime === true)
+      showTime = "yyyy-MM-dd hh:mm:ss";
+    if (showTime)
+      import_levi_reggol.default.targets[0].showTime = showTime;
+    import_levi_reggol.default.targets[0].showDiff = config.showDiff;
+    function ensureBaseLevel(conf, base) {
+      conf.base ?? (conf.base = base);
+      Object.values(config).forEach((value) => {
+        if (typeof value !== "object")
+          return;
+        ensureBaseLevel(value, conf.base);
+      });
+    }
+    ensureBaseLevel(import_levi_reggol.default.levels, 2);
+    import_levi_reggol.default.targets[0].timestamp = Date.now();
+  }
+
+  // src/loader.ts
+  var Loader2 = class extends Loader {
+    async import(name2) {
+      if (this.options.importMapping && name2 in this.options.importMapping) {
+        return this.options.importMapping[name2];
+      }
+      const base = (0, import_cosmokit15.trimSlash)(
+        this.options.requireBase ?? this.options.baseDir ?? ""
+      );
+      try {
+        return __require(`${base}/${name2}`);
+      } catch (err) {
+        this.app.emit("internal/error", err);
+      }
+      return void 0;
+    }
+  };
+  async function start(options) {
+    const ctx = new Context3();
+    ctx.plugin(Loader2, options);
+    await ctx.loader.init();
+    const config = await ctx.loader.readConfig();
+    ctx.plugin(logger_exports, config.logger ?? {});
+    await ctx.start();
+  }
 
   // src/index.ts
   __reExport(src_exports, lib_exports4);
