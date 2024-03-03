@@ -3,8 +3,6 @@ import { Dict, trimSlash } from "cosmokit";
 import { Context } from "levi-cordis";
 import * as Logger from "./logger";
 
-import Satori from "@levi-satorijs/adapter-satori";
-
 export namespace Loader {
   export interface Options extends BaseLoader.Options {
     requireBase?: string;
