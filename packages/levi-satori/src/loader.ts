@@ -3,6 +3,8 @@ import { Dict, trimSlash } from "cosmokit";
 import { Context } from "levi-cordis";
 import * as Logger from "./logger";
 
+import Satori from "@levi-satorijs/adapter-satori";
+
 export namespace Loader {
   export interface Options extends BaseLoader.Options {
     requireBase?: string;
@@ -29,22 +31,27 @@ export class Loader<
     }
     return undefined;
   }
-
-  public override async reload() {
-    const config = await this.readConfig();
-    this.entryFork.update(config);
-    this.app.emit("config");
-  }
 }
 
-export interface Options extends Loader.Options {
-  logger?: Logger.Config;
+export interface Options extends Loader.Options {}
+
+declare module "@levi-cordisjs/loader" {
+  // eslint-disable-next-line @typescript-eslint/no-shadow
+  namespace Loader {
+    interface Config {
+      logger?: Logger.Config;
+    }
+  }
 }
 
 export async function start(options: Options) {
   const ctx = new Context();
+
   ctx.plugin(Loader, options);
   await ctx.loader.init();
-  if (options.logger) ctx.plugin(Logger, options.logger);
+  const config = await ctx.loader.readConfig();
+
+  ctx.plugin(Logger, config.logger ?? {});
+
   await ctx.start();
 }

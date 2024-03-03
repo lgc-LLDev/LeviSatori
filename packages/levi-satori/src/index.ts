@@ -3,7 +3,7 @@
 import "./polyfill";
 
 import Logger from "levi-reggol";
-import { SatoriAdapter } from "@levi-satorijs/adapter-satori";
+import Satori from "@levi-satorijs/adapter-satori";
 
 import { start } from "./loader";
 
@@ -29,7 +29,6 @@ mc.listen("onServerStarted", () => {
     name,
     baseDir,
     requireBase,
-    logger: { levels: 2 },
-    importMapping: { "adapter-satori": SatoriAdapter },
-  }).catch((e) => logger.error(`${e}`));
+    importMapping: { "adapter-satori": Satori },
+  }).catch((e) => new Logger("app").info(e));
 });

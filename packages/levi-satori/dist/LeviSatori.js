@@ -881,7 +881,8 @@ var LeviSatori = (() => {
             }
             format(target, ...args) {
               if (args[0] instanceof Error) {
-                args[0] = args[0].stack || args[0].message;
+                args[0] = `${args[0].message}
+${args[0].stack}`;
                 args.unshift("%s");
               } else if (typeof args[0] !== "string") {
                 args.unshift("%o");
@@ -4420,7 +4421,7 @@ var LeviSatori = (() => {
       var __toCommonJS2 = (mod) => __copyProps2(__defProp11({}, "__esModule", { value: true }), mod);
       var src_exports2 = {};
       __export2(src_exports2, {
-        SatoriAdapter: () => SatoriAdapter2,
+        SatoriAdapter: () => SatoriAdapter,
         SatoriBot: () => SatoriBot,
         default: () => src_default2,
         transformKey: () => transformKey
@@ -4479,7 +4480,7 @@ var LeviSatori = (() => {
         };
       }
       var _a26;
-      var SatoriAdapter2 = (_a26 = class extends import_satori2.Adapter.WsClientBase {
+      var SatoriAdapter = (_a26 = class extends import_satori2.Adapter.WsClientBase {
         // NodeJS.Timeout
         constructor(ctx, config) {
           super(ctx, config);
@@ -4497,6 +4498,7 @@ var LeviSatori = (() => {
               "Authorization": `Bearer ${config.token}`
             }
           });
+          this.logger.info("apply");
           ctx.on("ready", () => this.start());
           ctx.on("dispose", () => this.stop());
         }
@@ -4584,6 +4586,7 @@ var LeviSatori = (() => {
           });
         }
         async start() {
+          this.logger.info("start");
           this.setStatus(import_satori2.Universal.Status.CONNECT);
           await super.start();
         }
@@ -4592,16 +4595,16 @@ var LeviSatori = (() => {
           await super.stop();
         }
       }, __name10(_a26, "SatoriAdapter"), __publicField(_a26, "schema", true), __publicField(_a26, "reusable", true), __publicField(_a26, "inject", ["http"]), _a26);
-      ((SatoriAdapter22) => {
-        SatoriAdapter22.Config = import_satori2.Schema.intersect([
+      ((SatoriAdapter2) => {
+        SatoriAdapter2.Config = import_satori2.Schema.intersect([
           import_satori2.Schema.object({
             endpoint: import_satori2.Schema.string().description("API \u7EC8\u7ED3\u70B9\u3002").required(),
             token: import_satori2.Schema.string().description("API \u8BBF\u95EE\u4EE4\u724C\u3002")
           }),
           import_satori2.Adapter.WsClientConfig
         ]);
-      })(SatoriAdapter2 || (SatoriAdapter2 = {}));
-      var src_default2 = SatoriAdapter2;
+      })(SatoriAdapter || (SatoriAdapter = {}));
+      var src_default2 = SatoriAdapter;
     }
   });
 
@@ -8966,18 +8969,13 @@ var LeviSatori = (() => {
       }
       return void 0;
     }
-    async reload() {
-      const config = await this.readConfig();
-      this.entryFork.update(config);
-      this.app.emit("config");
-    }
   };
   async function start(options) {
     const ctx = new Context22();
     ctx.plugin(Loader2, options);
     await ctx.loader.init();
-    if (options.logger)
-      ctx.plugin(logger_exports, options.logger);
+    const config = await ctx.loader.readConfig();
+    ctx.plugin(logger_exports, config.logger ?? {});
     await ctx.start();
   }
 
@@ -10453,9 +10451,8 @@ var LeviSatori = (() => {
       name,
       baseDir,
       requireBase,
-      logger: { levels: 2 },
-      importMapping: { "adapter-satori": import_adapter_satori.SatoriAdapter }
-    }).catch((e) => logger.error(`${e}`));
+      importMapping: { "adapter-satori": import_adapter_satori.default }
+    }).catch((e) => new import_levi_reggol2.default("app").info(e));
   });
   return __toCommonJS(src_exports);
 })();
