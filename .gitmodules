@@ -1,15 +1,15 @@
-[submodule "packages/satori"]
-	path = packages/satori
-	url = https://github.com/satorijs/satori
-[submodule "packages/cordis"]
-	path = packages/cordis
-	url = https://github.com/cordiverse/cordis
 [submodule "HelperLib"]
 	path = HelperLib
 	url = https://github.com/LiteLDev/HelperLib
+[submodule "packages/cordis"]
+	path = packages/cordis
+	url = https://github.com/lgc-LLDev/LeviAdaptedCordis
 [submodule "packages/undios"]
 	path = packages/undios
-	url = https://github.com/cordiverse/undios
+	url = https://github.com/lgc-LLDev/LeviAdaptedUndios
+[submodule "packages/satori"]
+	path = packages/satori
+	url = https://github.com/lgc-LLDev/LeviAdaptedSatori
 [submodule "packages/reggol"]
 	path = packages/reggol
-	url = https://github.com/shigma/reggol
+	url = https://github.com/lgc-LLDev/LeviAdaptedReggol
