@@ -1,2349 +1,1053 @@
-(function (global, factory) {
-  if (typeof define === "function" && define.amd) {
-    define("LeviSatori", ["exports"], factory);
-  } else if (typeof exports !== "undefined") {
-    factory(exports);
-  } else {
-    var mod = {
-      exports: {}
-    };
-    factory(mod.exports);
-    global.LeviSatori = mod.exports;
-  }
-})(typeof globalThis !== "undefined" ? globalThis : typeof self !== "undefined" ? self : this, function (_exports) {
-  "use strict";
-
-  Object.defineProperty(_exports, "__esModule", {
-    value: true
+"use strict";
+var LeviSatori = (() => {
+  var __create = Object.create;
+  var __defProp = Object.defineProperty;
+  var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+  var __getOwnPropNames = Object.getOwnPropertyNames;
+  var __getProtoOf = Object.getPrototypeOf;
+  var __hasOwnProp = Object.prototype.hasOwnProperty;
+  var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
+  var __require = /* @__PURE__ */ ((x) => typeof require !== "undefined" ? require : typeof Proxy !== "undefined" ? new Proxy(x, {
+    get: (a, b) => (typeof require !== "undefined" ? require : a)[b]
+  }) : x)(function(x) {
+    if (typeof require !== "undefined")
+      return require.apply(this, arguments);
+    throw Error('Dynamic require of "' + x + '" is not supported');
   });
-  _exports.Universal = _exports.TimerService = _exports.Time = _exports.Session = _exports.Service = _exports.ScopeStatus = _exports.Schema = _exports.Registry = _exports.Modulator = _exports.Messenger = _exports.MessageEncoder = _exports.MainScope = _exports.Logger = _exports.Lifecycle = _exports.ForkScope = _exports.Element = _exports.EffectScope = _exports.CordisError = _exports.Context = _exports.Bot = _exports.Adapter = void 0;
-  _exports.applyTraceable = applyTraceable;
-  _exports.arrayBufferToBase64 = arrayBufferToBase64;
-  _exports.base64ToArrayBuffer = base64ToArrayBuffer;
-  _exports.camelCase = camelCase;
-  _exports.camelize = void 0;
-  _exports.capitalize = capitalize;
-  _exports.clone = clone;
-  _exports.contain = contain;
-  _exports.createCallable = createCallable;
-  _exports.createTraceable = createTraceable;
-  _exports.deduplicate = deduplicate;
-  _exports.deepEqual = deepEqual;
-  _exports.defineAccessor = defineAccessor;
-  _exports.defineProperty = defineProperty;
-  _exports.difference = difference;
-  _exports.filterKeys = filterKeys;
-  _exports.hyphenate = _exports.h = void 0;
-  _exports.intersection = intersection;
-  _exports.is = is;
-  _exports.isApplicable = isApplicable;
-  _exports.isBailed = isBailed;
-  _exports.isConstructor = isConstructor;
-  _exports.isNullable = isNullable;
-  _exports.isPlainObject = isPlainObject;
-  _exports.isUnproxyable = isUnproxyable;
-  _exports.joinPrototype = joinPrototype;
-  _exports.makeArray = makeArray;
-  _exports.valueMap = _exports.mapValues = mapValues;
-  _exports.noop = noop;
-  _exports.omit = omit;
-  _exports.paramCase = paramCase;
-  _exports.pick = pick;
-  _exports.remove = remove;
-  _exports.resolveConfig = resolveConfig;
-  _exports.sanitize = sanitize;
-  _exports.segment = void 0;
-  _exports.snakeCase = snakeCase;
-  _exports.symbols = void 0;
-  _exports.trimSlash = trimSlash;
-  _exports.uncapitalize = uncapitalize;
-  _exports.union = union;
-  _exports.z = void 0;
-  let _Symbol$for, _symbols$1$origin, _symbols$1$filter, _symbols$1$setup, _symbols$1$extend, _Symbol$hasInstance, _import_core$1$Servic, _import_core$1$Servic2, _import_levi_cordis$S, _import_levi_cordis$S2, _import_levi_cordis$S3, _Symbol$for2, _symbols$origin, _symbols$filter, _symbols$setup, _symbols$extend, _Symbol$hasInstance2, _Service$provide, _Service$invoke, _Service$setup, _Service2$1$provide, _Service2$1$immediate, _Service2$1$invoke, _Service2$1$setup;
-  var _Lifecycle, _CordisError2, _EffectScope, _ForkScope, _MainScope, _Registry, _Context2, _Service2, _LoggerService2, _TimerService, _Class3, _WebSocket, _HTTPError, _HTTP2, _Class10, _Class11, _Class12, _CordisError3, _Class13, _Class14, _Class15, _Class16, _Context3, _Service3, _Class17, _Loader, _LoggerService3, _Class18, _Class19, _Service4, _Class21, _Class22, _HTTP3, _Session3, _Class23, _Class24, _Class25, _Class26, _Class27, _Class28;
-  function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-  function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == typeof i ? i : String(i); }
-  function _toPrimitive(t, r) { if ("object" != typeof t || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != typeof i) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
-  var commonjsGlobal = typeof globalThis !== 'undefined' ? globalThis : typeof window !== 'undefined' ? window : typeof global !== 'undefined' ? global : typeof self !== 'undefined' ? self : {};
-  function getDefaultExportFromCjs(x) {
-    return x && x.__esModule && Object.prototype.hasOwnProperty.call(x, 'default') ? x['default'] : x;
-  }
-  function getAugmentedNamespace(n) {
-    if (n.__esModule) return n;
-    var f = n.default;
-    if (typeof f == "function") {
-      var a = function a() {
-        if (this instanceof a) {
-          return Reflect.construct(f, arguments, this.constructor);
-        }
-        return f.apply(this, arguments);
-      };
-      a.prototype = f.prototype;
-    } else a = {};
-    Object.defineProperty(a, '__esModule', {
-      value: true
-    });
-    Object.keys(n).forEach(function (k) {
-      var d = Object.getOwnPropertyDescriptor(n, k);
-      Object.defineProperty(a, k, d.get ? d : {
-        enumerable: true,
-        get: function () {
-          return n[k];
-        }
-      });
-    });
-    return a;
-  }
-  const root = typeof globalThis !== "undefined" && globalThis || typeof self !== "undefined" && self || typeof commonjsGlobal !== "undefined" && commonjsGlobal;
-  const shouldPolyfillEvent = function () {
-    try {
-      new root.Event("");
-    } catch (error) {
-      return true;
-    }
-    return false;
-  }();
-  const shouldPolyfillEventTarget = function () {
-    try {
-      new root.EventTarget();
-    } catch (error) {
-      return true;
-    }
-    return false;
-  }();
-  if (shouldPolyfillEvent) {
-    root.Event = function () {
-      function Event(type, options) {
-        this.bubbles = !!options && !!options.bubbles;
-        this.cancelable = !!options && !!options.cancelable;
-        this.composed = !!options && !!options.composed;
-        this.type = type;
-      }
-      return Event;
-    }();
-  }
-  if (shouldPolyfillEventTarget) {
-    root.EventTarget = function () {
-      function EventTarget() {
-        this.__listeners = new Map();
-      }
-      EventTarget.prototype = Object.create(Object.prototype);
-      EventTarget.prototype.addEventListener = function (type, listener, options) {
-        if (arguments.length < 2) {
-          throw new TypeError("TypeError: Failed to execute 'addEventListener' on 'EventTarget': 2 arguments required, but only " + arguments.length + " present.");
-        }
-        const __listeners = this.__listeners;
-        const actualType = type.toString();
-        if (!__listeners.has(actualType)) {
-          __listeners.set(actualType, new Map());
-        }
-        const listenersForType = __listeners.get(actualType);
-        if (!listenersForType.has(listener)) {
-          // Any given listener is only registered once
-          listenersForType.set(listener, options);
-        }
-      };
-      EventTarget.prototype.removeEventListener = function (type, listener, _options) {
-        if (arguments.length < 2) {
-          throw new TypeError("TypeError: Failed to execute 'addEventListener' on 'EventTarget': 2 arguments required, but only " + arguments.length + " present.");
-        }
-        const __listeners = this.__listeners;
-        const actualType = type.toString();
-        if (__listeners.has(actualType)) {
-          const listenersForType = __listeners.get(actualType);
-          if (listenersForType.has(listener)) {
-            listenersForType.delete(listener);
-          }
-        }
-      };
-      EventTarget.prototype.dispatchEvent = function (event) {
-        if (!(event instanceof Event)) {
-          throw new TypeError("Failed to execute 'dispatchEvent' on 'EventTarget': parameter 1 is not of type 'Event'.");
-        }
-        const type = event.type;
-        const __listeners = this.__listeners;
-        const listenersForType = __listeners.get(type);
-        if (listenersForType) {
-          for (var listnerEntry of listenersForType.entries()) {
-            const listener = listnerEntry[0];
-            const options = listnerEntry[1];
-            try {
-              if (typeof listener === "function") {
-                // Listener functions must be executed with the EventTarget as the `this` context.
-                listener.call(this, event);
-              } else if (listener && typeof listener.handleEvent === "function") {
-                // Listener objects have their handleEvent method called, if they have one
-                listener.handleEvent(event);
-              }
-            } catch (err) {
-              // We need to report the error to the global error handling event,
-              // but we do not want to break the loop that is executing the events.
-              // Unfortunately, this is the best we can do, which isn't great, because the
-              // native EventTarget will actually do this synchronously before moving to the next
-              // event in the loop.
-              setTimeout(() => {
-                throw err;
-              });
-            }
-            if (options && options.once) {
-              // If this was registered with { once: true }, we need
-              // to remove it now.
-              listenersForType.delete(listener);
-            }
-          }
-        }
-        // Since there are no cancellable events on a base EventTarget,
-        // this should always return true.
-        return true;
-      };
-      return EventTarget;
-    }();
-  }
-  var __defProp$i = Object.defineProperty;
-  var __name$h = (target, value) => __defProp$i(target, "name", {
-    value,
-    configurable: true
-  });
-
-  // packages/cosmokit/src/misc.ts
-  function noop() {}
-  __name$h(noop, "noop");
-  function isNullable(value) {
-    return value === null || value === void 0;
-  }
-  __name$h(isNullable, "isNullable");
-  function isPlainObject(data) {
-    return data && typeof data === "object" && !Array.isArray(data);
-  }
-  __name$h(isPlainObject, "isPlainObject");
-  function filterKeys(object, filter) {
-    return Object.fromEntries(Object.entries(object).filter(([key, value]) => filter(key, value)));
-  }
-  __name$h(filterKeys, "filterKeys");
-  function mapValues(object, transform) {
-    return Object.fromEntries(Object.entries(object).map(([key, value]) => [key, transform(value, key)]));
-  }
-  __name$h(mapValues, "mapValues");
-  function is(type, value) {
-    if (arguments.length === 1) return value2 => is(type, value2);
-    return type in globalThis && value instanceof globalThis[type] || Object.prototype.toString.call(value).slice(8, -1) === type;
-  }
-  __name$h(is, "is");
-  function clone(source) {
-    if (!source || typeof source !== "object") return source;
-    if (Array.isArray(source)) return source.map(clone);
-    if (is("Date", source)) return new Date(source.valueOf());
-    if (is("RegExp", source)) return new RegExp(source.source, source.flags);
-    return mapValues(source, clone);
-  }
-  __name$h(clone, "clone");
-  function deepEqual(a, b, strict) {
-    if (a === b) return true;
-    if (!strict && isNullable(a) && isNullable(b)) return true;
-    if (typeof a !== typeof b) return false;
-    if (typeof a !== "object") return false;
-    if (!a || !b) return false;
-    function check(test, then) {
-      return test(a) ? test(b) ? then(a, b) : false : test(b) ? false : void 0;
-    }
-    __name$h(check, "check");
-    return check(Array.isArray, (a2, b2) => a2.length === b2.length && a2.every((item, index) => deepEqual(item, b2[index]))) ?? check(is("Date"), (a2, b2) => a2.valueOf() === b2.valueOf()) ?? check(is("RegExp"), (a2, b2) => a2.source === b2.source && a2.flags === b2.flags) ?? Object.keys({
-      ...a,
-      ...b
-    }).every(key => deepEqual(a[key], b[key], strict));
-  }
-  __name$h(deepEqual, "deepEqual");
-  function pick(source, keys, forced) {
-    if (!keys) return {
-      ...source
-    };
-    const result = {};
-    for (const key of keys) {
-      if (forced || source[key] !== void 0) result[key] = source[key];
-    }
-    return result;
-  }
-  __name$h(pick, "pick");
-  function omit(source, keys) {
-    if (!keys) return {
-      ...source
-    };
-    const result = {
-      ...source
-    };
-    for (const key of keys) {
-      Reflect.deleteProperty(result, key);
-    }
-    return result;
-  }
-  __name$h(omit, "omit");
-  function defineProperty(object, key, value) {
-    return Object.defineProperty(object, key, {
-      writable: true,
-      value,
-      enumerable: false
-    });
-  }
-  __name$h(defineProperty, "defineProperty");
-
-  // packages/cosmokit/src/array.ts
-  function contain(array1, array2) {
-    return array2.every(item => array1.includes(item));
-  }
-  __name$h(contain, "contain");
-  function intersection(array1, array2) {
-    return array1.filter(item => array2.includes(item));
-  }
-  __name$h(intersection, "intersection");
-  function difference(array1, array2) {
-    return array1.filter(item => !array2.includes(item));
-  }
-  __name$h(difference, "difference");
-  function union(array1, array2) {
-    return Array.from( /* @__PURE__ */new Set([...array1, ...array2]));
-  }
-  __name$h(union, "union");
-  function deduplicate(array) {
-    return [...new Set(array)];
-  }
-  __name$h(deduplicate, "deduplicate");
-  function remove(list, item) {
-    const index = list.indexOf(item);
-    if (index >= 0) {
-      list.splice(index, 1);
-      return true;
-    } else {
-      return false;
-    }
-  }
-  __name$h(remove, "remove");
-  function makeArray(source) {
-    return Array.isArray(source) ? source : isNullable(source) ? [] : [source];
-  }
-  __name$h(makeArray, "makeArray");
-
-  // packages/cosmokit/src/binary.ts
-  function arrayBufferToBase64(buffer) {
-    if (typeof Buffer !== "undefined") {
-      return Buffer.from(buffer).toString("base64");
-    }
-    let binary = "";
-    const bytes = new Uint8Array(buffer);
-    for (let i = 0; i < bytes.byteLength; i++) {
-      binary += String.fromCharCode(bytes[i]);
-    }
-    return btoa(binary);
-  }
-  __name$h(arrayBufferToBase64, "arrayBufferToBase64");
-  function base64ToArrayBuffer(base64) {
-    if (typeof Buffer !== "undefined") {
-      const buf = Buffer.from(base64, "base64");
-      return new Uint8Array(buf.buffer, buf.byteOffset, buf.length);
-    }
-    const binary = atob(base64.replace(/\s/g, ""));
-    const buffer = new Uint8Array(binary.length);
-    for (let i = 0; i < binary.length; i++) {
-      buffer[i] = binary.charCodeAt(i);
-    }
-    return buffer;
-  }
-  __name$h(base64ToArrayBuffer, "base64ToArrayBuffer");
-
-  // packages/cosmokit/src/string.ts
-  function capitalize(source) {
-    return source.charAt(0).toUpperCase() + source.slice(1);
-  }
-  __name$h(capitalize, "capitalize");
-  function uncapitalize(source) {
-    return source.charAt(0).toLowerCase() + source.slice(1);
-  }
-  __name$h(uncapitalize, "uncapitalize");
-  function camelCase(source) {
-    return source.replace(/[_-][a-z]/g, str => str.slice(1).toUpperCase());
-  }
-  __name$h(camelCase, "camelCase");
-  function paramCase(source) {
-    return uncapitalize(source).replace(/_/g, "-").replace(/.[A-Z]+/g, str => str[0] + "-" + str.slice(1).toLowerCase());
-  }
-  __name$h(paramCase, "paramCase");
-  function snakeCase(source) {
-    return uncapitalize(source).replace(/-/g, "_").replace(/.[A-Z]+/g, str => str[0] + "_" + str.slice(1).toLowerCase());
-  }
-  __name$h(snakeCase, "snakeCase");
-  var camelize = _exports.camelize = camelCase;
-  var hyphenate = _exports.hyphenate = paramCase;
-  function trimSlash(source) {
-    return source.replace(/\/$/, "");
-  }
-  __name$h(trimSlash, "trimSlash");
-  function sanitize(source) {
-    if (!source.startsWith("/")) source = "/" + source;
-    return trimSlash(source);
-  }
-  __name$h(sanitize, "sanitize");
-
-  // packages/cosmokit/src/time.ts
-  var Time;
-  (Time2 => {
-    Time2.millisecond = 1;
-    Time2.second = 1e3;
-    Time2.minute = Time2.second * 60;
-    Time2.hour = Time2.minute * 60;
-    Time2.day = Time2.hour * 24;
-    Time2.week = Time2.day * 7;
-    let timezoneOffset = ( /* @__PURE__ */new Date()).getTimezoneOffset();
-    function setTimezoneOffset(offset) {
-      timezoneOffset = offset;
-    }
-    Time2.setTimezoneOffset = setTimezoneOffset;
-    __name$h(setTimezoneOffset, "setTimezoneOffset");
-    function getTimezoneOffset() {
-      return timezoneOffset;
-    }
-    Time2.getTimezoneOffset = getTimezoneOffset;
-    __name$h(getTimezoneOffset, "getTimezoneOffset");
-    function getDateNumber(date = /* @__PURE__ */new Date(), offset) {
-      if (typeof date === "number") date = new Date(date);
-      if (offset === void 0) offset = timezoneOffset;
-      return Math.floor((date.valueOf() / Time2.minute - offset) / 1440);
-    }
-    Time2.getDateNumber = getDateNumber;
-    __name$h(getDateNumber, "getDateNumber");
-    function fromDateNumber(value, offset) {
-      const date = new Date(value * Time2.day);
-      if (offset === void 0) offset = timezoneOffset;
-      return new Date(+date + offset * Time2.minute);
-    }
-    Time2.fromDateNumber = fromDateNumber;
-    __name$h(fromDateNumber, "fromDateNumber");
-    const numeric = /\d+(?:\.\d+)?/.source;
-    const timeRegExp = new RegExp(`^${["w(?:eek(?:s)?)?", "d(?:ay(?:s)?)?", "h(?:our(?:s)?)?", "m(?:in(?:ute)?(?:s)?)?", "s(?:ec(?:ond)?(?:s)?)?"].map(unit => `(${numeric}${unit})?`).join("")}$`);
-    function parseTime(source) {
-      const capture = timeRegExp.exec(source);
-      if (!capture) return 0;
-      return (parseFloat(capture[1]) * Time2.week || 0) + (parseFloat(capture[2]) * Time2.day || 0) + (parseFloat(capture[3]) * Time2.hour || 0) + (parseFloat(capture[4]) * Time2.minute || 0) + (parseFloat(capture[5]) * Time2.second || 0);
-    }
-    Time2.parseTime = parseTime;
-    __name$h(parseTime, "parseTime");
-    function parseDate(date) {
-      const parsed = parseTime(date);
-      if (parsed) {
-        date = Date.now() + parsed;
-      } else if (/^\d{1,2}(:\d{1,2}){1,2}$/.test(date)) {
-        date = `${( /* @__PURE__ */new Date()).toLocaleDateString()}-${date}`;
-      } else if (/^\d{1,2}-\d{1,2}-\d{1,2}(:\d{1,2}){1,2}$/.test(date)) {
-        date = `${( /* @__PURE__ */new Date()).getFullYear()}-${date}`;
-      }
-      return date ? new Date(date) : /* @__PURE__ */new Date();
-    }
-    Time2.parseDate = parseDate;
-    __name$h(parseDate, "parseDate");
-    function format(ms) {
-      const abs = Math.abs(ms);
-      if (abs >= Time2.day - Time2.hour / 2) {
-        return Math.round(ms / Time2.day) + "d";
-      } else if (abs >= Time2.hour - Time2.minute / 2) {
-        return Math.round(ms / Time2.hour) + "h";
-      } else if (abs >= Time2.minute - Time2.second / 2) {
-        return Math.round(ms / Time2.minute) + "m";
-      } else if (abs >= Time2.second) {
-        return Math.round(ms / Time2.second) + "s";
-      }
-      return ms + "ms";
-    }
-    Time2.format = format;
-    __name$h(format, "format");
-    function toDigits(source, length = 2) {
-      return source.toString().padStart(length, "0");
-    }
-    Time2.toDigits = toDigits;
-    __name$h(toDigits, "toDigits");
-    function template(template2, time = /* @__PURE__ */new Date()) {
-      return template2.replace("yyyy", time.getFullYear().toString()).replace("yy", time.getFullYear().toString().slice(2)).replace("MM", toDigits(time.getMonth() + 1)).replace("dd", toDigits(time.getDate())).replace("hh", toDigits(time.getHours())).replace("mm", toDigits(time.getMinutes())).replace("ss", toDigits(time.getSeconds())).replace("SSS", toDigits(time.getMilliseconds(), 3));
-    }
-    Time2.template = template;
-    __name$h(template, "template");
-  })(Time || (_exports.Time = Time = {}));
-  var lib$c = /*#__PURE__*/Object.freeze({
-    __proto__: null,
-    get Time() {
-      return Time;
-    },
-    arrayBufferToBase64: arrayBufferToBase64,
-    base64ToArrayBuffer: base64ToArrayBuffer,
-    camelCase: camelCase,
-    camelize: camelize,
-    capitalize: capitalize,
-    clone: clone,
-    contain: contain,
-    deduplicate: deduplicate,
-    deepEqual: deepEqual,
-    defineProperty: defineProperty,
-    difference: difference,
-    filterKeys: filterKeys,
-    hyphenate: hyphenate,
-    intersection: intersection,
-    is: is,
-    isNullable: isNullable,
-    isPlainObject: isPlainObject,
-    makeArray: makeArray,
-    mapValues: mapValues,
-    noop: noop,
-    omit: omit,
-    paramCase: paramCase,
-    pick: pick,
-    remove: remove,
-    sanitize: sanitize,
-    snakeCase: snakeCase,
-    trimSlash: trimSlash,
-    uncapitalize: uncapitalize,
-    union: union,
-    valueMap: mapValues
-  });
-  var require$$1 = /*@__PURE__*/getAugmentedNamespace(lib$c);
-  var __create$1 = Object.create;
-  var __defProp$h = Object.defineProperty;
-  var __getOwnPropDesc$6 = Object.getOwnPropertyDescriptor;
-  var __getOwnPropNames$8 = Object.getOwnPropertyNames;
-  var __getProtoOf$1 = Object.getPrototypeOf;
-  var __hasOwnProp$6 = Object.prototype.hasOwnProperty;
-  var __defNormalProp = (obj, key, value) => key in obj ? __defProp$h(obj, key, {
-    enumerable: true,
-    configurable: true,
-    writable: true,
-    value
-  }) : obj[key] = value;
-  var __esm = (fn, res) => function __init() {
-    return fn && (res = (0, fn[__getOwnPropNames$8(fn)[0]])(fn = 0)), res;
+  var __commonJS = (cb, mod) => function __require3() {
+    return mod || (0, cb[__getOwnPropNames(cb)[0]])((mod = { exports: {} }).exports, mod), mod.exports;
   };
-  var __commonJS$2 = (cb, mod) => function __require() {
-    return mod || (0, cb[__getOwnPropNames$8(cb)[0]])((mod = {
-      exports: {}
-    }).exports, mod), mod.exports;
+  var __export = (target, all) => {
+    for (var name2 in all)
+      __defProp(target, name2, { get: all[name2], enumerable: true });
   };
-  var __copyProps$6 = (to, from, except, desc) => {
+  var __copyProps = (to, from, except, desc) => {
     if (from && typeof from === "object" || typeof from === "function") {
-      for (let key of __getOwnPropNames$8(from)) if (!__hasOwnProp$6.call(to, key) && key !== except) __defProp$h(to, key, {
-        get: () => from[key],
-        enumerable: !(desc = __getOwnPropDesc$6(from, key)) || desc.enumerable
-      });
+      for (let key of __getOwnPropNames(from))
+        if (!__hasOwnProp.call(to, key) && key !== except)
+          __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
     }
     return to;
   };
-  var __toESM$1 = (mod, isNodeMode, target) => (target = mod != null ? __create$1(__getProtoOf$1(mod)) : {}, __copyProps$6(
-  // If the importer is in node compatibility mode or this is not an ESM
-  // file that has been converted to a CommonJS file using a Babel-
-  // compatible transform (i.e. "__esModule" has not been set), then set
-  // "default" to the CommonJS "module.exports" for node compatibility.
-  isNodeMode || !mod || !mod.__esModule ? __defProp$h(target, "default", {
-    value: mod,
-    enumerable: true
-  }) : target, mod));
+  var __reExport = (target, mod, secondTarget) => (__copyProps(target, mod, "default"), secondTarget && __copyProps(secondTarget, mod, "default"));
+  var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(
+    // If the importer is in node compatibility mode or this is not an ESM
+    // file that has been converted to a CommonJS file using a Babel-
+    // compatible transform (i.e. "__esModule" has not been set), then set
+    // "default" to the CommonJS "module.exports" for node compatibility.
+    isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target,
+    mod
+  ));
+  var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
   var __publicField = (obj, key, value) => {
     __defNormalProp(obj, typeof key !== "symbol" ? key + "" : key, value);
     return value;
   };
 
-  // src/util.ts
-  function objectToString(o) {
-    return Object.prototype.toString.call(o);
-  }
-  function isArray(ar) {
-    return Array.isArray(ar);
-  }
-  function isBoolean$1(arg) {
-    return typeof arg === "boolean";
-  }
-  function isNull$1(arg) {
-    return arg === null;
-  }
-  function isNumber(arg) {
-    return typeof arg === "number";
-  }
-  function isString(arg) {
-    return typeof arg === "string";
-  }
-  function isUndefined(arg) {
-    return arg === void 0;
-  }
-  function isRegExp(re) {
-    return isObject$1(re) && objectToString(re) === "[object RegExp]";
-  }
-  function isObject$1(arg) {
-    return typeof arg === "object" && arg !== null;
-  }
-  function isDate(d) {
-    return isObject$1(d) && objectToString(d) === "[object Date]";
-  }
-  function isError(e) {
-    return isObject$1(e) && (objectToString(e) === "[object Error]" || e instanceof Error);
-  }
-  function isFunction(arg) {
-    return typeof arg === "function";
-  }
-  function hasOwnProperty(obj, prop) {
-    return Object.prototype.hasOwnProperty.call(obj, prop);
-  }
-  function _extend(origin, add) {
-    if (!add || !isObject$1(add)) return origin;
-    var keys = Object.keys(add);
-    var i = keys.length;
-    while (i--) {
-      origin[keys[i]] = add[keys[i]];
-    }
-    return origin;
-  }
-  function stylizeWithColor(str, styleType) {
-    var style = inspect.styles[styleType];
-    if (style) {
-      return "\x1B[" + inspect.colors[style][0] + "m" + str + "\x1B[" + inspect.colors[style][1] + "m";
-    } else {
-      return str;
-    }
-  }
-  function stylizeNoColor(str, styleType) {
-    return str;
-  }
-  function formatPrimitive(ctx, value) {
-    if (isUndefined(value)) return ctx.stylize("undefined", "undefined");
-    if (isString(value)) {
-      var simple = "'" + JSON.stringify(value).replace(/^"|"$/g, "").replace(/'/g, "\\'").replace(/\\"/g, '"') + "'";
-      return ctx.stylize(simple, "string");
-    }
-    if (isNumber(value)) return ctx.stylize("" + value, "number");
-    if (isBoolean$1(value)) return ctx.stylize("" + value, "boolean");
-    if (isNull$1(value)) return ctx.stylize("null", "null");
-  }
-  function formatError$1(value) {
-    return "[" + Error.prototype.toString.call(value) + "]";
-  }
-  function formatArray(ctx, value, recurseTimes, visibleKeys, keys) {
-    var output = [];
-    for (var i = 0, l = value.length; i < l; ++i) {
-      if (hasOwnProperty(value, String(i))) {
-        output.push(formatProperty(ctx, value, recurseTimes, visibleKeys, String(i), true));
-      } else {
-        output.push("");
-      }
-    }
-    keys.forEach(function (key) {
-      if (!key.match(/^\d+$/)) {
-        output.push(formatProperty(ctx, value, recurseTimes, visibleKeys, key, true));
-      }
-    });
-    return output;
-  }
-  function formatProperty(ctx, value, recurseTimes, visibleKeys, key, array) {
-    var name, str, desc;
-    desc = Object.getOwnPropertyDescriptor(value, key) || {
-      value: value[key]
-    };
-    if (desc.get) {
-      if (desc.set) {
-        str = ctx.stylize("[Getter/Setter]", "special");
-      } else {
-        str = ctx.stylize("[Getter]", "special");
-      }
-    } else {
-      if (desc.set) {
-        str = ctx.stylize("[Setter]", "special");
-      }
-    }
-    if (!hasOwnProperty(visibleKeys, key)) {
-      name = "[" + key + "]";
-    }
-    if (!str) {
-      if (ctx.seen.indexOf(desc.value) < 0) {
-        if (isNull$1(recurseTimes)) {
-          str = formatValue(ctx, desc.value, null);
-        } else {
-          str = formatValue(ctx, desc.value, recurseTimes - 1);
+  // ../../node_modules/cosmokit/lib/index.cjs
+  var require_lib = __commonJS({
+    "../../node_modules/cosmokit/lib/index.cjs"(exports, module) {
+      "use strict";
+      var __defProp11 = Object.defineProperty;
+      var __getOwnPropDesc2 = Object.getOwnPropertyDescriptor;
+      var __getOwnPropNames3 = Object.getOwnPropertyNames;
+      var __hasOwnProp2 = Object.prototype.hasOwnProperty;
+      var __name10 = (target, value) => __defProp11(target, "name", { value, configurable: true });
+      var __export2 = (target, all) => {
+        for (var name2 in all)
+          __defProp11(target, name2, { get: all[name2], enumerable: true });
+      };
+      var __copyProps2 = (to, from, except, desc) => {
+        if (from && typeof from === "object" || typeof from === "function") {
+          for (let key of __getOwnPropNames3(from))
+            if (!__hasOwnProp2.call(to, key) && key !== except)
+              __defProp11(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc2(from, key)) || desc.enumerable });
         }
-        if (str.indexOf("\n") > -1) {
-          if (array) {
-            str = str.split("\n").map(function (line) {
-              return "  " + line;
-            }).join("\n").substr(2);
-          } else {
-            str = "\n" + str.split("\n").map(function (line) {
-              return "   " + line;
-            }).join("\n");
-          }
-        }
-      } else {
-        str = ctx.stylize("[Circular]", "special");
-      }
-    }
-    if (isUndefined(name)) {
-      if (array && key.match(/^\d+$/)) {
-        return str;
-      }
-      name = JSON.stringify("" + key);
-      if (name.match(/^"([a-zA-Z_][a-zA-Z_0-9]*)"$/)) {
-        name = name.substr(1, name.length - 2);
-        name = ctx.stylize(name, "name");
-      } else {
-        name = name.replace(/'/g, "\\'").replace(/\\"/g, '"').replace(/(^"|"$)/g, "'");
-        name = ctx.stylize(name, "string");
-      }
-    }
-    return name + ": " + str;
-  }
-  function arrayToHash(array) {
-    var hash = {};
-    array.forEach(function (val, idx) {
-      hash[val] = true;
-    });
-    return hash;
-  }
-  function reduceToSingleString(output, base, braces) {
-    var length = output.reduce(function (prev, cur) {
-      if (cur.indexOf("\n") >= 0) ;
-      return prev + cur.replace(/\u001b\[\d\d?m/g, "").length + 1;
-    }, 0);
-    if (length > 60) {
-      return braces[0] + (base === "" ? "" : base + "\n ") + " " + output.join(",\n  ") + " " + braces[1];
-    }
-    return braces[0] + base + " " + output.join(", ") + " " + braces[1];
-  }
-  function formatValue(ctx, value, recurseTimes) {
-    if (ctx.customInspect && value && isFunction(value.inspect) &&
-    // Filter out the util module, it's inspect function is special
-    value.inspect !== inspect &&
-    // Also filter out any prototype objects using the circular check.
-    !(value.constructor && value.constructor.prototype === value)) {
-      var ret = value.inspect(recurseTimes, ctx);
-      if (!isString(ret)) {
-        ret = formatValue(ctx, ret, recurseTimes);
-      }
-      return ret;
-    }
-    var primitive = formatPrimitive(ctx, value);
-    if (primitive) {
-      return primitive;
-    }
-    var keys = Object.keys(value);
-    var visibleKeys = arrayToHash(keys);
-    if (ctx.showHidden) {
-      keys = Object.getOwnPropertyNames(value);
-    }
-    if (isError(value) && (keys.indexOf("message") >= 0 || keys.indexOf("description") >= 0)) {
-      return formatError$1(value);
-    }
-    if (keys.length === 0) {
-      if (isFunction(value)) {
-        var name = value.name ? ": " + value.name : "";
-        return ctx.stylize("[Function" + name + "]", "special");
-      }
-      if (isRegExp(value)) {
-        return ctx.stylize(RegExp.prototype.toString.call(value), "regexp");
-      }
-      if (isDate(value)) {
-        return ctx.stylize(Date.prototype.toString.call(value), "date");
-      }
-      if (isError(value)) {
-        return formatError$1(value);
-      }
-    }
-    var base = "",
-      array = false,
-      braces = ["{", "}"];
-    if (isArray(value)) {
-      array = true;
-      braces = ["[", "]"];
-    }
-    if (isFunction(value)) {
-      var n = value.name ? ": " + value.name : "";
-      base = " [Function" + n + "]";
-    }
-    if (isRegExp(value)) {
-      base = " " + RegExp.prototype.toString.call(value);
-    }
-    if (isDate(value)) {
-      base = " " + Date.prototype.toUTCString.call(value);
-    }
-    if (isError(value)) {
-      base = " " + formatError$1(value);
-    }
-    if (keys.length === 0 && (!array || value.length == 0)) {
-      return braces[0] + base + braces[1];
-    }
-    if (recurseTimes < 0) {
-      if (isRegExp(value)) {
-        return ctx.stylize(RegExp.prototype.toString.call(value), "regexp");
-      } else {
-        return ctx.stylize("[Object]", "special");
-      }
-    }
-    ctx.seen.push(value);
-    var output;
-    if (array) {
-      output = formatArray(ctx, value, recurseTimes, visibleKeys, keys);
-    } else {
-      output = keys.map(function (key) {
-        return formatProperty(ctx, value, recurseTimes, visibleKeys, key, array);
+        return to;
+      };
+      var __toCommonJS2 = (mod) => __copyProps2(__defProp11({}, "__esModule", { value: true }), mod);
+      var src_exports2 = {};
+      __export2(src_exports2, {
+        Time: () => Time2,
+        arrayBufferToBase64: () => arrayBufferToBase642,
+        base64ToArrayBuffer: () => base64ToArrayBuffer,
+        camelCase: () => camelCase,
+        camelize: () => camelize2,
+        capitalize: () => capitalize,
+        clone: () => clone2,
+        contain: () => contain,
+        deduplicate: () => deduplicate,
+        deepEqual: () => deepEqual2,
+        defineProperty: () => defineProperty11,
+        difference: () => difference,
+        filterKeys: () => filterKeys,
+        hyphenate: () => hyphenate2,
+        intersection: () => intersection,
+        is: () => is2,
+        isNullable: () => isNullable6,
+        isPlainObject: () => isPlainObject,
+        makeArray: () => makeArray2,
+        mapValues: () => mapValues,
+        noop: () => noop,
+        omit: () => omit,
+        paramCase: () => paramCase,
+        pick: () => pick2,
+        remove: () => remove5,
+        sanitize: () => sanitize,
+        snakeCase: () => snakeCase,
+        trimSlash: () => trimSlash4,
+        uncapitalize: () => uncapitalize,
+        union: () => union,
+        valueMap: () => mapValues
       });
-    }
-    ctx.seen.pop();
-    return reduceToSingleString(output, base, braces);
-  }
-  function inspect(obj, opts) {
-    const ctx = {
-      seen: [],
-      stylize: stylizeNoColor
-    };
-    if (arguments.length >= 3) ctx.depth = arguments[2];
-    if (arguments.length >= 4) ctx.colors = arguments[3];
-    if (isBoolean$1(opts)) {
-      ctx.showHidden = opts;
-    } else if (opts) {
-      _extend(ctx, opts);
-    }
-    if (isUndefined(ctx.showHidden)) ctx.showHidden = false;
-    if (isUndefined(ctx.depth)) ctx.depth = 2;
-    if (isUndefined(ctx.colors)) ctx.colors = false;
-    if (isUndefined(ctx.customInspect)) ctx.customInspect = true;
-    if (ctx.colors) ctx.stylize = stylizeWithColor;
-    return formatValue(ctx, obj, ctx.depth);
-  }
-  var init_util = __esm({
-    "src/util.ts"() {
-      inspect.colors = {
-        bold: [1, 22],
-        italic: [3, 23],
-        underline: [4, 24],
-        inverse: [7, 27],
-        white: [37, 39],
-        grey: [90, 39],
-        black: [30, 39],
-        blue: [34, 39],
-        cyan: [36, 39],
-        green: [32, 39],
-        magenta: [35, 39],
-        red: [31, 39],
-        yellow: [33, 39]
-      };
-      inspect.styles = {
-        special: "cyan",
-        number: "yellow",
-        boolean: "yellow",
-        undefined: "grey",
-        null: "bold",
-        string: "green",
-        date: "magenta",
-        // "name": intentionally not styling
-        regexp: "red"
-      };
+      module.exports = __toCommonJS2(src_exports2);
+      function noop() {
+      }
+      __name10(noop, "noop");
+      function isNullable6(value) {
+        return value === null || value === void 0;
+      }
+      __name10(isNullable6, "isNullable");
+      function isPlainObject(data) {
+        return data && typeof data === "object" && !Array.isArray(data);
+      }
+      __name10(isPlainObject, "isPlainObject");
+      function filterKeys(object, filter) {
+        return Object.fromEntries(Object.entries(object).filter(([key, value]) => filter(key, value)));
+      }
+      __name10(filterKeys, "filterKeys");
+      function mapValues(object, transform) {
+        return Object.fromEntries(Object.entries(object).map(([key, value]) => [key, transform(value, key)]));
+      }
+      __name10(mapValues, "mapValues");
+      function is2(type2, value) {
+        if (arguments.length === 1)
+          return (value2) => is2(type2, value2);
+        return type2 in globalThis && value instanceof globalThis[type2] || Object.prototype.toString.call(value).slice(8, -1) === type2;
+      }
+      __name10(is2, "is");
+      function clone2(source) {
+        if (!source || typeof source !== "object")
+          return source;
+        if (Array.isArray(source))
+          return source.map(clone2);
+        if (is2("Date", source))
+          return new Date(source.valueOf());
+        if (is2("RegExp", source))
+          return new RegExp(source.source, source.flags);
+        return mapValues(source, clone2);
+      }
+      __name10(clone2, "clone");
+      function deepEqual2(a, b, strict) {
+        var _a25, _b5, _c2;
+        if (a === b)
+          return true;
+        if (!strict && isNullable6(a) && isNullable6(b))
+          return true;
+        if (typeof a !== typeof b)
+          return false;
+        if (typeof a !== "object")
+          return false;
+        if (!a || !b)
+          return false;
+        function check(test, then) {
+          return test(a) ? test(b) ? then(a, b) : false : test(b) ? false : void 0;
+        }
+        __name10(check, "check");
+        return (_c2 = (_b5 = (_a25 = check(Array.isArray, (a2, b2) => a2.length === b2.length && a2.every((item, index) => deepEqual2(item, b2[index])))) != null ? _a25 : check(is2("Date"), (a2, b2) => a2.valueOf() === b2.valueOf())) != null ? _b5 : check(is2("RegExp"), (a2, b2) => a2.source === b2.source && a2.flags === b2.flags)) != null ? _c2 : Object.keys({ ...a, ...b }).every((key) => deepEqual2(a[key], b[key], strict));
+      }
+      __name10(deepEqual2, "deepEqual");
+      function pick2(source, keys, forced) {
+        if (!keys)
+          return { ...source };
+        const result = {};
+        for (const key of keys) {
+          if (forced || source[key] !== void 0)
+            result[key] = source[key];
+        }
+        return result;
+      }
+      __name10(pick2, "pick");
+      function omit(source, keys) {
+        if (!keys)
+          return { ...source };
+        const result = { ...source };
+        for (const key of keys) {
+          Reflect.deleteProperty(result, key);
+        }
+        return result;
+      }
+      __name10(omit, "omit");
+      function defineProperty11(object, key, value) {
+        return Object.defineProperty(object, key, { writable: true, value, enumerable: false });
+      }
+      __name10(defineProperty11, "defineProperty");
+      function contain(array1, array2) {
+        return array2.every((item) => array1.includes(item));
+      }
+      __name10(contain, "contain");
+      function intersection(array1, array2) {
+        return array1.filter((item) => array2.includes(item));
+      }
+      __name10(intersection, "intersection");
+      function difference(array1, array2) {
+        return array1.filter((item) => !array2.includes(item));
+      }
+      __name10(difference, "difference");
+      function union(array1, array2) {
+        return Array.from(/* @__PURE__ */ new Set([...array1, ...array2]));
+      }
+      __name10(union, "union");
+      function deduplicate(array) {
+        return [...new Set(array)];
+      }
+      __name10(deduplicate, "deduplicate");
+      function remove5(list, item) {
+        const index = list.indexOf(item);
+        if (index >= 0) {
+          list.splice(index, 1);
+          return true;
+        } else {
+          return false;
+        }
+      }
+      __name10(remove5, "remove");
+      function makeArray2(source) {
+        return Array.isArray(source) ? source : isNullable6(source) ? [] : [source];
+      }
+      __name10(makeArray2, "makeArray");
+      function arrayBufferToBase642(buffer) {
+        if (typeof Buffer !== "undefined") {
+          return Buffer.from(buffer).toString("base64");
+        }
+        let binary2 = "";
+        const bytes = new Uint8Array(buffer);
+        for (let i = 0; i < bytes.byteLength; i++) {
+          binary2 += String.fromCharCode(bytes[i]);
+        }
+        return btoa(binary2);
+      }
+      __name10(arrayBufferToBase642, "arrayBufferToBase64");
+      function base64ToArrayBuffer(base64) {
+        if (typeof Buffer !== "undefined") {
+          const buf = Buffer.from(base64, "base64");
+          return new Uint8Array(buf.buffer, buf.byteOffset, buf.length);
+        }
+        const binary2 = atob(base64.replace(/\s/g, ""));
+        const buffer = new Uint8Array(binary2.length);
+        for (let i = 0; i < binary2.length; i++) {
+          buffer[i] = binary2.charCodeAt(i);
+        }
+        return buffer;
+      }
+      __name10(base64ToArrayBuffer, "base64ToArrayBuffer");
+      function capitalize(source) {
+        return source.charAt(0).toUpperCase() + source.slice(1);
+      }
+      __name10(capitalize, "capitalize");
+      function uncapitalize(source) {
+        return source.charAt(0).toLowerCase() + source.slice(1);
+      }
+      __name10(uncapitalize, "uncapitalize");
+      function camelCase(source) {
+        return source.replace(/[_-][a-z]/g, (str2) => str2.slice(1).toUpperCase());
+      }
+      __name10(camelCase, "camelCase");
+      function paramCase(source) {
+        return uncapitalize(source).replace(/_/g, "-").replace(/.[A-Z]+/g, (str2) => str2[0] + "-" + str2.slice(1).toLowerCase());
+      }
+      __name10(paramCase, "paramCase");
+      function snakeCase(source) {
+        return uncapitalize(source).replace(/-/g, "_").replace(/.[A-Z]+/g, (str2) => str2[0] + "_" + str2.slice(1).toLowerCase());
+      }
+      __name10(snakeCase, "snakeCase");
+      var camelize2 = camelCase;
+      var hyphenate2 = paramCase;
+      function trimSlash4(source) {
+        return source.replace(/\/$/, "");
+      }
+      __name10(trimSlash4, "trimSlash");
+      function sanitize(source) {
+        if (!source.startsWith("/"))
+          source = "/" + source;
+        return trimSlash4(source);
+      }
+      __name10(sanitize, "sanitize");
+      var Time2;
+      ((Time22) => {
+        Time22.millisecond = 1;
+        Time22.second = 1e3;
+        Time22.minute = Time22.second * 60;
+        Time22.hour = Time22.minute * 60;
+        Time22.day = Time22.hour * 24;
+        Time22.week = Time22.day * 7;
+        let timezoneOffset = (/* @__PURE__ */ new Date()).getTimezoneOffset();
+        function setTimezoneOffset(offset) {
+          timezoneOffset = offset;
+        }
+        Time22.setTimezoneOffset = setTimezoneOffset;
+        __name10(setTimezoneOffset, "setTimezoneOffset");
+        function getTimezoneOffset() {
+          return timezoneOffset;
+        }
+        Time22.getTimezoneOffset = getTimezoneOffset;
+        __name10(getTimezoneOffset, "getTimezoneOffset");
+        function getDateNumber(date = /* @__PURE__ */ new Date(), offset) {
+          if (typeof date === "number")
+            date = new Date(date);
+          if (offset === void 0)
+            offset = timezoneOffset;
+          return Math.floor((date.valueOf() / Time22.minute - offset) / 1440);
+        }
+        Time22.getDateNumber = getDateNumber;
+        __name10(getDateNumber, "getDateNumber");
+        function fromDateNumber(value, offset) {
+          const date = new Date(value * Time22.day);
+          if (offset === void 0)
+            offset = timezoneOffset;
+          return new Date(+date + offset * Time22.minute);
+        }
+        Time22.fromDateNumber = fromDateNumber;
+        __name10(fromDateNumber, "fromDateNumber");
+        const numeric = /\d+(?:\.\d+)?/.source;
+        const timeRegExp = new RegExp(`^${[
+          "w(?:eek(?:s)?)?",
+          "d(?:ay(?:s)?)?",
+          "h(?:our(?:s)?)?",
+          "m(?:in(?:ute)?(?:s)?)?",
+          "s(?:ec(?:ond)?(?:s)?)?"
+        ].map((unit) => `(${numeric}${unit})?`).join("")}$`);
+        function parseTime(source) {
+          const capture = timeRegExp.exec(source);
+          if (!capture)
+            return 0;
+          return (parseFloat(capture[1]) * Time22.week || 0) + (parseFloat(capture[2]) * Time22.day || 0) + (parseFloat(capture[3]) * Time22.hour || 0) + (parseFloat(capture[4]) * Time22.minute || 0) + (parseFloat(capture[5]) * Time22.second || 0);
+        }
+        Time22.parseTime = parseTime;
+        __name10(parseTime, "parseTime");
+        function parseDate(date) {
+          const parsed = parseTime(date);
+          if (parsed) {
+            date = Date.now() + parsed;
+          } else if (/^\d{1,2}(:\d{1,2}){1,2}$/.test(date)) {
+            date = `${(/* @__PURE__ */ new Date()).toLocaleDateString()}-${date}`;
+          } else if (/^\d{1,2}-\d{1,2}-\d{1,2}(:\d{1,2}){1,2}$/.test(date)) {
+            date = `${(/* @__PURE__ */ new Date()).getFullYear()}-${date}`;
+          }
+          return date ? new Date(date) : /* @__PURE__ */ new Date();
+        }
+        Time22.parseDate = parseDate;
+        __name10(parseDate, "parseDate");
+        function format(ms) {
+          const abs = Math.abs(ms);
+          if (abs >= Time22.day - Time22.hour / 2) {
+            return Math.round(ms / Time22.day) + "d";
+          } else if (abs >= Time22.hour - Time22.minute / 2) {
+            return Math.round(ms / Time22.hour) + "h";
+          } else if (abs >= Time22.minute - Time22.second / 2) {
+            return Math.round(ms / Time22.minute) + "m";
+          } else if (abs >= Time22.second) {
+            return Math.round(ms / Time22.second) + "s";
+          }
+          return ms + "ms";
+        }
+        Time22.format = format;
+        __name10(format, "format");
+        function toDigits(source, length = 2) {
+          return source.toString().padStart(length, "0");
+        }
+        Time22.toDigits = toDigits;
+        __name10(toDigits, "toDigits");
+        function template(template2, time = /* @__PURE__ */ new Date()) {
+          return template2.replace("yyyy", time.getFullYear().toString()).replace("yy", time.getFullYear().toString().slice(2)).replace("MM", toDigits(time.getMonth() + 1)).replace("dd", toDigits(time.getDate())).replace("hh", toDigits(time.getHours())).replace("mm", toDigits(time.getMinutes())).replace("ss", toDigits(time.getSeconds())).replace("SSS", toDigits(time.getMilliseconds(), 3));
+        }
+        Time22.template = template;
+        __name10(template, "template");
+      })(Time2 || (Time2 = {}));
     }
   });
 
-  // src/shared.ts
-  var require_shared = __commonJS$2({
-    "src/shared.ts"(exports2, module2) {
-      var import_cosmokit = require$$1;
-      var c16 = [6, 2, 3, 4, 5, 1];
-      var c256 = [20, 21, 26, 27, 32, 33, 38, 39, 40, 41, 42, 43, 44, 45, 56, 57, 62, 63, 68, 69, 74, 75, 76, 77, 78, 79, 80, 81, 92, 93, 98, 99, 112, 113, 129, 134, 135, 148, 149, 160, 161, 162, 163, 164, 165, 166, 167, 168, 169, 170, 171, 172, 173, 178, 179, 184, 185, 196, 197, 198, 199, 200, 201, 202, 203, 204, 205, 206, 207, 208, 209, 214, 215, 220, 221];
-      function isAggregateError(error) {
-        return error instanceof Error && Array.isArray(error["errors"]);
+  // ../reggol/lib/index.cjs
+  var require_lib2 = __commonJS({
+    "../reggol/lib/index.cjs"(exports, module) {
+      "use strict";
+      var __create2 = Object.create;
+      var __defProp11 = Object.defineProperty;
+      var __getOwnPropDesc2 = Object.getOwnPropertyDescriptor;
+      var __getOwnPropNames3 = Object.getOwnPropertyNames;
+      var __getProtoOf2 = Object.getPrototypeOf;
+      var __hasOwnProp2 = Object.prototype.hasOwnProperty;
+      var __defNormalProp2 = (obj, key, value) => key in obj ? __defProp11(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
+      var __esm = (fn, res) => function __init() {
+        return fn && (res = (0, fn[__getOwnPropNames3(fn)[0]])(fn = 0)), res;
+      };
+      var __commonJS3 = (cb, mod) => function __require3() {
+        return mod || (0, cb[__getOwnPropNames3(cb)[0]])((mod = { exports: {} }).exports, mod), mod.exports;
+      };
+      var __copyProps2 = (to, from, except, desc) => {
+        if (from && typeof from === "object" || typeof from === "function") {
+          for (let key of __getOwnPropNames3(from))
+            if (!__hasOwnProp2.call(to, key) && key !== except)
+              __defProp11(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc2(from, key)) || desc.enumerable });
+        }
+        return to;
+      };
+      var __toESM2 = (mod, isNodeMode, target) => (target = mod != null ? __create2(__getProtoOf2(mod)) : {}, __copyProps2(
+        // If the importer is in node compatibility mode or this is not an ESM
+        // file that has been converted to a CommonJS file using a Babel-
+        // compatible transform (i.e. "__esModule" has not been set), then set
+        // "default" to the CommonJS "module.exports" for node compatibility.
+        isNodeMode || !mod || !mod.__esModule ? __defProp11(target, "default", { value: mod, enumerable: true }) : target,
+        mod
+      ));
+      var __publicField2 = (obj, key, value) => {
+        __defNormalProp2(obj, typeof key !== "symbol" ? key + "" : key, value);
+        return value;
+      };
+      function objectToString(o) {
+        return Object.prototype.toString.call(o);
       }
-      var _Logger = class _Logger {
-        constructor(name, meta) {
-          this.name = name;
-          this.meta = meta;
-          __publicField(this, "extend", namespace => {
-            return new _Logger(`${this.name}:${namespace}`);
-          });
-          __publicField(this, "warning", (format, ...args) => {
-            this.warn(format, ...args);
-          });
-          this.createMethod("success", _Logger.SUCCESS);
-          this.createMethod("error", _Logger.ERROR);
-          this.createMethod("info", _Logger.INFO);
-          this.createMethod("warn", _Logger.WARN);
-          this.createMethod("debug", _Logger.DEBUG);
+      function isArray(ar) {
+        return Array.isArray(ar);
+      }
+      function isBoolean2(arg) {
+        return typeof arg === "boolean";
+      }
+      function isNull2(arg) {
+        return arg === null;
+      }
+      function isNumber(arg) {
+        return typeof arg === "number";
+      }
+      function isString(arg) {
+        return typeof arg === "string";
+      }
+      function isUndefined(arg) {
+        return arg === void 0;
+      }
+      function isRegExp(re) {
+        return isObject2(re) && objectToString(re) === "[object RegExp]";
+      }
+      function isObject2(arg) {
+        return typeof arg === "object" && arg !== null;
+      }
+      function isDate(d) {
+        return isObject2(d) && objectToString(d) === "[object Date]";
+      }
+      function isError(e) {
+        return isObject2(e) && (objectToString(e) === "[object Error]" || e instanceof Error);
+      }
+      function isFunction(arg) {
+        return typeof arg === "function";
+      }
+      function hasOwnProperty(obj, prop) {
+        return Object.prototype.hasOwnProperty.call(obj, prop);
+      }
+      function _extend(origin, add) {
+        if (!add || !isObject2(add))
+          return origin;
+        var keys = Object.keys(add);
+        var i = keys.length;
+        while (i--) {
+          origin[keys[i]] = add[keys[i]];
         }
-        static format(name, formatter) {
-          this.formatters[name] = formatter;
+        return origin;
+      }
+      function stylizeWithColor(str2, styleType) {
+        var style = inspect.styles[styleType];
+        if (style) {
+          return "\x1B[" + inspect.colors[style][0] + "m" + str2 + "\x1B[" + inspect.colors[style][1] + "m";
+        } else {
+          return str2;
         }
-        static color(target, code, value, decoration = "") {
-          if (!target.colors) return "" + value;
-          return `\x1B[3${code < 8 ? code : "8;5;" + code}${target.colors >= 2 ? decoration : ""}m${value}\x1B[0m`;
+      }
+      function stylizeNoColor(str2, styleType) {
+        return str2;
+      }
+      function formatPrimitive(ctx, value) {
+        if (isUndefined(value))
+          return ctx.stylize("undefined", "undefined");
+        if (isString(value)) {
+          var simple = "'" + JSON.stringify(value).replace(/^"|"$/g, "").replace(/'/g, "\\'").replace(/\\"/g, '"') + "'";
+          return ctx.stylize(simple, "string");
         }
-        static code(name, target) {
-          let hash = 0;
-          for (let i = 0; i < name.length; i++) {
-            hash = (hash << 3) - hash + name.charCodeAt(i) + 13;
-            hash |= 0;
-          }
-          const colors = !target.colors ? [] : target.colors >= 2 ? c256 : c16;
-          return colors[Math.abs(hash) % colors.length];
-        }
-        static render(target, record) {
-          var _a, _b, _c, _d, _e, _f;
-          const prefix = `[${record.type[0].toUpperCase()}]`;
-          const space = " ".repeat((_b = (_a = target.label) == null ? void 0 : _a.margin) != null ? _b : 1);
-          let indent = 3 + space.length,
-            output = "";
-          if (target.showTime) {
-            indent += target.showTime.length + space.length;
-            output += _Logger.color(target, 8, import_cosmokit.Time.template(target.showTime)) + space;
-          }
-          const code = _Logger.code(record.name, target);
-          const label = _Logger.color(target, code, record.name, ";1");
-          const padLength = ((_d = (_c = target.label) == null ? void 0 : _c.width) != null ? _d : 0) + label.length - record.name.length;
-          if (((_e = target.label) == null ? void 0 : _e.align) === "right") {
-            output += label.padStart(padLength) + space + prefix + space;
-            indent += ((_f = target.label.width) != null ? _f : 0) + space.length;
+        if (isNumber(value))
+          return ctx.stylize("" + value, "number");
+        if (isBoolean2(value))
+          return ctx.stylize("" + value, "boolean");
+        if (isNull2(value))
+          return ctx.stylize("null", "null");
+      }
+      function formatError2(value) {
+        return "[" + Error.prototype.toString.call(value) + "]";
+      }
+      function formatArray(ctx, value, recurseTimes, visibleKeys, keys) {
+        var output = [];
+        for (var i = 0, l = value.length; i < l; ++i) {
+          if (hasOwnProperty(value, String(i))) {
+            output.push(
+              formatProperty(ctx, value, recurseTimes, visibleKeys, String(i), true)
+            );
           } else {
-            output += prefix + space + label.padEnd(padLength) + space;
+            output.push("");
           }
-          output += record.content.replace(/\n/g, "\n" + " ".repeat(indent));
-          if (target.showDiff && target.timestamp) {
-            const diff = record.timestamp - target.timestamp;
-            output += _Logger.color(target, code, " +" + import_cosmokit.Time.format(diff));
-          }
-          return output;
         }
-        createMethod(type, level) {
-          this[type] = (...args) => {
-            if (args.length === 1 && args[0] instanceof Error) {
-              if (args[0].cause) {
-                this[type](args[0].cause);
-              } else if (isAggregateError(args[0])) {
-                args[0].errors.forEach(error => this[type](error));
-                return;
-              }
+        keys.forEach(function(key) {
+          if (!key.match(/^\d+$/)) {
+            output.push(
+              formatProperty(ctx, value, recurseTimes, visibleKeys, key, true)
+            );
+          }
+        });
+        return output;
+      }
+      function formatProperty(ctx, value, recurseTimes, visibleKeys, key, array) {
+        var name2, str2, desc;
+        desc = Object.getOwnPropertyDescriptor(value, key) || { value: value[key] };
+        if (desc.get) {
+          if (desc.set) {
+            str2 = ctx.stylize("[Getter/Setter]", "special");
+          } else {
+            str2 = ctx.stylize("[Getter]", "special");
+          }
+        } else {
+          if (desc.set) {
+            str2 = ctx.stylize("[Setter]", "special");
+          }
+        }
+        if (!hasOwnProperty(visibleKeys, key)) {
+          name2 = "[" + key + "]";
+        }
+        if (!str2) {
+          if (ctx.seen.indexOf(desc.value) < 0) {
+            if (isNull2(recurseTimes)) {
+              str2 = formatValue(ctx, desc.value, null);
+            } else {
+              str2 = formatValue(ctx, desc.value, recurseTimes - 1);
             }
-            const id = ++_Logger.id;
-            const timestamp = Date.now();
-            for (const target of _Logger.targets) {
-              if (this.getLevel(target) < level) continue;
-              const content = this.format(target, ...args);
-              const record = {
-                id,
-                type,
-                level,
-                name: this.name,
-                meta: this.meta,
-                content,
-                timestamp
-              };
-              if (target.record) {
-                target.record(record);
+            if (str2.indexOf("\n") > -1) {
+              if (array) {
+                str2 = str2.split("\n").map(function(line) {
+                  return "  " + line;
+                }).join("\n").substr(2);
               } else {
-                const {
-                  print = console.log
-                } = target;
-                print(_Logger.render(target, record));
+                str2 = "\n" + str2.split("\n").map(function(line) {
+                  return "   " + line;
+                }).join("\n");
               }
-              target.timestamp = timestamp;
             }
+          } else {
+            str2 = ctx.stylize("[Circular]", "special");
+          }
+        }
+        if (isUndefined(name2)) {
+          if (array && key.match(/^\d+$/)) {
+            return str2;
+          }
+          name2 = JSON.stringify("" + key);
+          if (name2.match(/^"([a-zA-Z_][a-zA-Z_0-9]*)"$/)) {
+            name2 = name2.substr(1, name2.length - 2);
+            name2 = ctx.stylize(name2, "name");
+          } else {
+            name2 = name2.replace(/'/g, "\\'").replace(/\\"/g, '"').replace(/(^"|"$)/g, "'");
+            name2 = ctx.stylize(name2, "string");
+          }
+        }
+        return name2 + ": " + str2;
+      }
+      function arrayToHash(array) {
+        var hash = {};
+        array.forEach(function(val, idx) {
+          hash[val] = true;
+        });
+        return hash;
+      }
+      function reduceToSingleString(output, base, braces) {
+        var numLinesEst = 0;
+        var length = output.reduce(function(prev, cur) {
+          numLinesEst++;
+          if (cur.indexOf("\n") >= 0)
+            numLinesEst++;
+          return prev + cur.replace(/\u001b\[\d\d?m/g, "").length + 1;
+        }, 0);
+        if (length > 60) {
+          return braces[0] + (base === "" ? "" : base + "\n ") + " " + output.join(",\n  ") + " " + braces[1];
+        }
+        return braces[0] + base + " " + output.join(", ") + " " + braces[1];
+      }
+      function formatValue(ctx, value, recurseTimes) {
+        if (ctx.customInspect && value && isFunction(value.inspect) && // Filter out the util module, it's inspect function is special
+        value.inspect !== inspect && // Also filter out any prototype objects using the circular check.
+        !(value.constructor && value.constructor.prototype === value)) {
+          var ret = value.inspect(recurseTimes, ctx);
+          if (!isString(ret)) {
+            ret = formatValue(ctx, ret, recurseTimes);
+          }
+          return ret;
+        }
+        var primitive = formatPrimitive(ctx, value);
+        if (primitive) {
+          return primitive;
+        }
+        var keys = Object.keys(value);
+        var visibleKeys = arrayToHash(keys);
+        if (ctx.showHidden) {
+          keys = Object.getOwnPropertyNames(value);
+        }
+        if (isError(value) && (keys.indexOf("message") >= 0 || keys.indexOf("description") >= 0)) {
+          return formatError2(value);
+        }
+        if (keys.length === 0) {
+          if (isFunction(value)) {
+            var name2 = value.name ? ": " + value.name : "";
+            return ctx.stylize("[Function" + name2 + "]", "special");
+          }
+          if (isRegExp(value)) {
+            return ctx.stylize(RegExp.prototype.toString.call(value), "regexp");
+          }
+          if (isDate(value)) {
+            return ctx.stylize(Date.prototype.toString.call(value), "date");
+          }
+          if (isError(value)) {
+            return formatError2(value);
+          }
+        }
+        var base = "", array = false, braces = ["{", "}"];
+        if (isArray(value)) {
+          array = true;
+          braces = ["[", "]"];
+        }
+        if (isFunction(value)) {
+          var n = value.name ? ": " + value.name : "";
+          base = " [Function" + n + "]";
+        }
+        if (isRegExp(value)) {
+          base = " " + RegExp.prototype.toString.call(value);
+        }
+        if (isDate(value)) {
+          base = " " + Date.prototype.toUTCString.call(value);
+        }
+        if (isError(value)) {
+          base = " " + formatError2(value);
+        }
+        if (keys.length === 0 && (!array || value.length == 0)) {
+          return braces[0] + base + braces[1];
+        }
+        if (recurseTimes < 0) {
+          if (isRegExp(value)) {
+            return ctx.stylize(RegExp.prototype.toString.call(value), "regexp");
+          } else {
+            return ctx.stylize("[Object]", "special");
+          }
+        }
+        ctx.seen.push(value);
+        var output;
+        if (array) {
+          output = formatArray(ctx, value, recurseTimes, visibleKeys, keys);
+        } else {
+          output = keys.map(function(key) {
+            return formatProperty(ctx, value, recurseTimes, visibleKeys, key, array);
+          });
+        }
+        ctx.seen.pop();
+        return reduceToSingleString(output, base, braces);
+      }
+      function inspect(obj, opts) {
+        const ctx = {
+          seen: [],
+          stylize: stylizeNoColor
+        };
+        if (arguments.length >= 3)
+          ctx.depth = arguments[2];
+        if (arguments.length >= 4)
+          ctx.colors = arguments[3];
+        if (isBoolean2(opts)) {
+          ctx.showHidden = opts;
+        } else if (opts) {
+          _extend(ctx, opts);
+        }
+        if (isUndefined(ctx.showHidden))
+          ctx.showHidden = false;
+        if (isUndefined(ctx.depth))
+          ctx.depth = 2;
+        if (isUndefined(ctx.colors))
+          ctx.colors = false;
+        if (isUndefined(ctx.customInspect))
+          ctx.customInspect = true;
+        if (ctx.colors)
+          ctx.stylize = stylizeWithColor;
+        return formatValue(ctx, obj, ctx.depth);
+      }
+      var init_util = __esm({
+        "src/util.ts"() {
+          "use strict";
+          inspect.colors = {
+            bold: [1, 22],
+            italic: [3, 23],
+            underline: [4, 24],
+            inverse: [7, 27],
+            white: [37, 39],
+            grey: [90, 39],
+            black: [30, 39],
+            blue: [34, 39],
+            cyan: [36, 39],
+            green: [32, 39],
+            magenta: [35, 39],
+            red: [31, 39],
+            yellow: [33, 39]
+          };
+          inspect.styles = {
+            special: "cyan",
+            number: "yellow",
+            boolean: "yellow",
+            undefined: "grey",
+            null: "bold",
+            string: "green",
+            date: "magenta",
+            // "name": intentionally not styling
+            regexp: "red"
           };
         }
-        format(target, ...args) {
-          if (args[0] instanceof Error) {
-            args[0] = args[0].stack || args[0].message;
-            args.unshift("%s");
-          } else if (typeof args[0] !== "string") {
-            args.unshift("%o");
+      });
+      var require_shared = __commonJS3({
+        "src/shared.ts"(exports2, module2) {
+          "use strict";
+          var import_cosmokit16 = require_lib();
+          var c16 = [6, 2, 3, 4, 5, 1];
+          var c256 = [
+            20,
+            21,
+            26,
+            27,
+            32,
+            33,
+            38,
+            39,
+            40,
+            41,
+            42,
+            43,
+            44,
+            45,
+            56,
+            57,
+            62,
+            63,
+            68,
+            69,
+            74,
+            75,
+            76,
+            77,
+            78,
+            79,
+            80,
+            81,
+            92,
+            93,
+            98,
+            99,
+            112,
+            113,
+            129,
+            134,
+            135,
+            148,
+            149,
+            160,
+            161,
+            162,
+            163,
+            164,
+            165,
+            166,
+            167,
+            168,
+            169,
+            170,
+            171,
+            172,
+            173,
+            178,
+            179,
+            184,
+            185,
+            196,
+            197,
+            198,
+            199,
+            200,
+            201,
+            202,
+            203,
+            204,
+            205,
+            206,
+            207,
+            208,
+            209,
+            214,
+            215,
+            220,
+            221
+          ];
+          function isAggregateError(error) {
+            return error instanceof Error && Array.isArray(error["errors"]);
           }
-          let format = args.shift();
-          format = format.replace(/%([a-zA-Z%])/g, (match, char) => {
-            if (match === "%%") return "%";
-            const formatter = _Logger.formatters[char];
-            if (typeof formatter === "function") {
-              const value = args.shift();
-              return formatter(value, target, this);
+          var _Logger = class _Logger2 {
+            constructor(name2, meta) {
+              this.name = name2;
+              this.meta = meta;
+              __publicField2(this, "extend", (namespace) => {
+                return new _Logger2(`${this.name}:${namespace}`);
+              });
+              __publicField2(this, "warning", (format, ...args) => {
+                this.warn(format, ...args);
+              });
+              this.createMethod("success", _Logger2.SUCCESS);
+              this.createMethod("error", _Logger2.ERROR);
+              this.createMethod("info", _Logger2.INFO);
+              this.createMethod("warn", _Logger2.WARN);
+              this.createMethod("debug", _Logger2.DEBUG);
             }
-            return match;
-          });
-          for (let arg of args) {
-            if (typeof arg === "object" && arg) {
-              arg = _Logger.formatters["o"](arg, target, this);
+            static format(name2, formatter) {
+              this.formatters[name2] = formatter;
             }
-            format += " " + arg;
-          }
-          const {
-            maxLength = 10240
-          } = target;
-          return format.split(/\r?\n/g).map(line => {
-            return line.slice(0, maxLength) + (line.length > maxLength ? "..." : "");
-          }).join("\n");
-        }
-        getLevel(target) {
-          var _a;
-          const paths = this.name.split(":");
-          let config = (target == null ? void 0 : target.levels) || _Logger.levels;
-          do {
-            config = (_a = config[paths.shift()]) != null ? _a : config["base"];
-          } while (paths.length && typeof config === "object");
-          return config;
-        }
-        get level() {
-          return this.getLevel();
-        }
-        set level(value) {
-          const paths = this.name.split(":");
-          let config = _Logger.levels;
-          while (paths.length > 1) {
-            const name = paths.shift();
-            const value2 = config[name];
-            if (typeof value2 === "object") {
-              config = value2;
-            } else {
-              config = config[name] = {
-                base: value2 != null ? value2 : config.base
+            static color(target, code, value, decoration = "") {
+              if (!target.colors)
+                return "" + value;
+              return `\x1B[3${code < 8 ? code : "8;5;" + code}${target.colors >= 2 ? decoration : ""}m${value}\x1B[0m`;
+            }
+            static code(name2, target) {
+              let hash = 0;
+              for (let i = 0; i < name2.length; i++) {
+                hash = (hash << 3) - hash + name2.charCodeAt(i) + 13;
+                hash |= 0;
+              }
+              const colors = !target.colors ? [] : target.colors >= 2 ? c256 : c16;
+              return colors[Math.abs(hash) % colors.length];
+            }
+            static render(target, record) {
+              var _a25, _b5, _c2, _d, _e, _f;
+              const prefix = `[${record.type[0].toUpperCase()}]`;
+              const space = " ".repeat((_b5 = (_a25 = target.label) == null ? void 0 : _a25.margin) != null ? _b5 : 1);
+              let indent = 3 + space.length, output = "";
+              if (target.showTime) {
+                indent += target.showTime.length + space.length;
+                output += _Logger2.color(target, 8, import_cosmokit16.Time.template(target.showTime)) + space;
+              }
+              const code = _Logger2.code(record.name, target);
+              const label = _Logger2.color(target, code, record.name, ";1");
+              const padLength = ((_d = (_c2 = target.label) == null ? void 0 : _c2.width) != null ? _d : 0) + label.length - record.name.length;
+              if (((_e = target.label) == null ? void 0 : _e.align) === "right") {
+                output += label.padStart(padLength) + space + prefix + space;
+                indent += ((_f = target.label.width) != null ? _f : 0) + space.length;
+              } else {
+                output += prefix + space + label.padEnd(padLength) + space;
+              }
+              output += record.content.replace(/\n/g, "\n" + " ".repeat(indent));
+              if (target.showDiff && target.timestamp) {
+                const diff = record.timestamp - target.timestamp;
+                output += _Logger2.color(target, code, " +" + import_cosmokit16.Time.format(diff));
+              }
+              return output;
+            }
+            createMethod(type2, level) {
+              this[type2] = (...args) => {
+                if (args.length === 1 && args[0] instanceof Error) {
+                  if (args[0].cause) {
+                    this[type2](args[0].cause);
+                  } else if (isAggregateError(args[0])) {
+                    args[0].errors.forEach((error) => this[type2](error));
+                    return;
+                  }
+                }
+                const id = ++_Logger2.id;
+                const timestamp2 = Date.now();
+                for (const target of _Logger2.targets) {
+                  if (this.getLevel(target) < level)
+                    continue;
+                  const content = this.format(target, ...args);
+                  const record = { id, type: type2, level, name: this.name, meta: this.meta, content, timestamp: timestamp2 };
+                  if (target.record) {
+                    target.record(record);
+                  } else {
+                    const { print = console.log } = target;
+                    print(_Logger2.render(target, record));
+                  }
+                  target.timestamp = timestamp2;
+                }
               };
             }
-          }
-          config[paths[0]] = value;
+            format(target, ...args) {
+              if (args[0] instanceof Error) {
+                args[0] = args[0].stack || args[0].message;
+                args.unshift("%s");
+              } else if (typeof args[0] !== "string") {
+                args.unshift("%o");
+              }
+              let format = args.shift();
+              format = format.replace(/%([a-zA-Z%])/g, (match, char) => {
+                if (match === "%%")
+                  return "%";
+                const formatter = _Logger2.formatters[char];
+                if (typeof formatter === "function") {
+                  const value = args.shift();
+                  return formatter(value, target, this);
+                }
+                return match;
+              });
+              for (let arg of args) {
+                if (typeof arg === "object" && arg) {
+                  arg = _Logger2.formatters["o"](arg, target, this);
+                }
+                format += " " + arg;
+              }
+              const { maxLength = 10240 } = target;
+              return format.split(/\r?\n/g).map((line) => {
+                return line.slice(0, maxLength) + (line.length > maxLength ? "..." : "");
+              }).join("\n");
+            }
+            getLevel(target) {
+              var _a25;
+              const paths = this.name.split(":");
+              let config = (target == null ? void 0 : target.levels) || _Logger2.levels;
+              do {
+                config = (_a25 = config[paths.shift()]) != null ? _a25 : config["base"];
+              } while (paths.length && typeof config === "object");
+              return config;
+            }
+            get level() {
+              return this.getLevel();
+            }
+            set level(value) {
+              const paths = this.name.split(":");
+              let config = _Logger2.levels;
+              while (paths.length > 1) {
+                const name2 = paths.shift();
+                const value2 = config[name2];
+                if (typeof value2 === "object") {
+                  config = value2;
+                } else {
+                  config = config[name2] = { base: value2 != null ? value2 : config.base };
+                }
+              }
+              config[paths[0]] = value;
+            }
+          };
+          __publicField2(_Logger, "SILENT", 0);
+          __publicField2(_Logger, "SUCCESS", 1);
+          __publicField2(_Logger, "ERROR", 1);
+          __publicField2(_Logger, "INFO", 2);
+          __publicField2(_Logger, "WARN", 2);
+          __publicField2(_Logger, "DEBUG", 3);
+          __publicField2(_Logger, "id", 0);
+          __publicField2(_Logger, "targets", [{
+            colors: 3,
+            print(text) {
+              logger.info(text);
+            }
+          }]);
+          __publicField2(_Logger, "formatters", /* @__PURE__ */ Object.create(null));
+          __publicField2(_Logger, "levels", {
+            base: 2
+          });
+          var Logger22 = _Logger;
+          Logger22.format("s", (value) => value);
+          Logger22.format("d", (value) => +value);
+          Logger22.format("j", (value) => JSON.stringify(value));
+          Logger22.format("c", (value, target, logger2) => {
+            return Logger22.color(target, Logger22.code(logger2.name, target), value);
+          });
+          Logger22.format("C", (value, target) => {
+            return Logger22.color(target, 15, value, ";1");
+          });
+          module2.exports = Logger22;
         }
-      };
-      // log levels
-      __publicField(_Logger, "SILENT", 0);
-      __publicField(_Logger, "SUCCESS", 1);
-      __publicField(_Logger, "ERROR", 1);
-      __publicField(_Logger, "INFO", 2);
-      __publicField(_Logger, "WARN", 2);
-      __publicField(_Logger, "DEBUG", 3);
-      // global config
-      __publicField(_Logger, "id", 0);
-      __publicField(_Logger, "targets", [{
-        colors: 3,
-        print(text) {
-          logger.info(text);
+      });
+      var require_node = __commonJS3({
+        "src/node.ts"(exports2, module2) {
+          "use strict";
+          init_util();
+          var import_shared = __toESM2(require_shared());
+          import_shared.default.format("o", (value, target) => {
+            return inspect(value, { colors: !!target.colors, depth: Infinity }).replace(/\s*\n\s*/g, " ");
+          });
+          module2.exports = import_shared.default;
         }
-      }]);
-      // global registry
-      __publicField(_Logger, "formatters", /* @__PURE__ */Object.create(null));
-      __publicField(_Logger, "levels", {
-        base: 2
       });
-      var Logger2 = _Logger;
-      Logger2.format("s", value => value);
-      Logger2.format("d", value => +value);
-      Logger2.format("j", value => JSON.stringify(value));
-      Logger2.format("c", (value, target, logger2) => {
-        return Logger2.color(target, Logger2.code(logger2.name, target), value);
-      });
-      Logger2.format("C", (value, target) => {
-        return Logger2.color(target, 15, value, ";1");
-      });
-      module2.exports = Logger2;
+      var import_node = __toESM2(require_node());
+      module.exports = import_node.default;
     }
   });
 
-  // src/node.ts
-  var require_node = __commonJS$2({
-    "src/node.ts"(exports2, module2) {
-      init_util();
-      var import_shared = __toESM$1(require_shared());
-      import_shared.default.format("o", (value, target) => {
-        return inspect(value, {
-          colors: !!target.colors,
-          depth: Infinity
-        }).replace(/\s*\n\s*/g, " ");
-      });
-      module2.exports = import_shared.default;
-    }
-  });
-
-  // src/index.ts
-  var import_node = __toESM$1(require_node());
-  var lib$b = import_node.default;
-  var Logger$1 = _exports.Logger = /*@__PURE__*/getDefaultExportFromCjs(lib$b);
-  var lib$a = {
-    exports: {}
-  };
-  var lib$9 = {
-    exports: {}
-  };
-  var lib$8 = {
-    exports: {}
-  };
-  var __defProp$g = Object.defineProperty;
-  var __getOwnPropDesc$5 = Object.getOwnPropertyDescriptor;
-  var __getOwnPropNames$7 = Object.getOwnPropertyNames;
-  var __hasOwnProp$5 = Object.prototype.hasOwnProperty;
-  var __name$g = (target, value) => __defProp$g(target, "name", {
-    value,
-    configurable: true
-  });
-  var __export$5 = (target, all) => {
-    for (var name in all) __defProp$g(target, name, {
-      get: all[name],
-      enumerable: true
-    });
-  };
-  var __copyProps$5 = (to, from, except, desc) => {
-    if (from && typeof from === "object" || typeof from === "function") {
-      for (let key of __getOwnPropNames$7(from)) if (!__hasOwnProp$5.call(to, key) && key !== except) __defProp$g(to, key, {
-        get: () => from[key],
-        enumerable: !(desc = __getOwnPropDesc$5(from, key)) || desc.enumerable
-      });
-    }
-    return to;
-  };
-  var __toCommonJS$5 = mod => __copyProps$5(__defProp$g({}, "__esModule", {
-    value: true
-  }), mod);
-
-  // src/index.ts
-  var src_exports$5 = {};
-  __export$5(src_exports$5, {
-    Context: () => Context$2,
-    CordisError: () => CordisError$1,
-    EffectScope: () => EffectScope$1,
-    ForkScope: () => ForkScope$1,
-    Lifecycle: () => Lifecycle$1,
-    MainScope: () => MainScope$1,
-    Registry: () => Registry$1,
-    ScopeStatus: () => ScopeStatus$1,
-    Service: () => Service$1,
-    applyTraceable: () => applyTraceable$1,
-    createCallable: () => createCallable$1,
-    createTraceable: () => createTraceable$1,
-    isApplicable: () => isApplicable$1,
-    isBailed: () => isBailed$1,
-    isConstructor: () => isConstructor$1,
-    isUnproxyable: () => isUnproxyable$1,
-    joinPrototype: () => joinPrototype$1,
-    resolveConfig: () => resolveConfig$1,
-    symbols: () => symbols$1
-  });
-  var lib$7 = __toCommonJS$5(src_exports$5);
-
-  // src/context.ts
-  var import_cosmokit5 = require$$1;
-
-  // src/events.ts
-  var import_cosmokit$3 = require$$1;
-  function isBailed$1(value) {
-    return value !== null && value !== false && value !== void 0;
-  }
-  __name$g(isBailed$1, "isBailed");
-  var Lifecycle$1 = (_Lifecycle = class Lifecycle {
-    constructor(root) {
-      _defineProperty(this, "isActive", false);
-      _defineProperty(this, "_tasks", /* @__PURE__ */new Set());
-      _defineProperty(this, "_hooks", {});
-      this.root = root;
-      (0, import_cosmokit$3.defineProperty)(this, Context$2.origin, root);
-      (0, import_cosmokit$3.defineProperty)(this.on("internal/listener", function (name, listener, prepend) {
-        const method = prepend ? "unshift" : "push";
-        if (name === "ready") {
-          if (!this.lifecycle.isActive) return;
-          this.scope.ensure(async () => listener());
-          return () => false;
-        } else if (name === "dispose") {
-          this.scope.disposables[method](listener);
-          (0, import_cosmokit$3.defineProperty)(listener, "name", "event <dispose>");
-          return () => (0, import_cosmokit$3.remove)(this.scope.disposables, listener);
-        } else if (name === "fork") {
-          this.scope.runtime.forkables[method](listener);
-          return this.scope.collect("event <fork>", () => (0, import_cosmokit$3.remove)(this.scope.runtime.forkables, listener));
-        }
-      }), Context$2.static, root.scope);
-      for (const level of ["info", "error", "warning"]) {
-        (0, import_cosmokit$3.defineProperty)(this.on(`internal/${level}`, (format, ...param) => {
-          if (this._hooks[`internal/${level}`].length > 1) return;
-          console.info(format, ...param);
-        }), Context$2.static, root.scope);
-      }
-    }
-    async flush() {
-      while (this._tasks.size) {
-        await Promise.all(Array.from(this._tasks));
-      }
-    }
-    getHooks(name, thisArg) {
-      const hooks = this._hooks[name] || [];
-      return hooks.slice().filter(([context]) => {
-        const filter = thisArg?.[Context$2.filter];
-        return !filter || filter.call(thisArg, context);
-      }).map(([, callback]) => callback);
-    }
-    prepareEvent(type, args) {
-      const thisArg = typeof args[0] === "object" ? args.shift() : null;
-      const name = args.shift();
-      if (name !== "internal/event") {
-        this.emit("internal/event", type, name, args, thisArg);
-      }
-      return [this.getHooks(name, thisArg), thisArg ?? this[Context$2.origin]];
-    }
-    async parallel(...args) {
-      const [hooks, thisArg] = this.prepareEvent("parallel", args);
-      await Promise.all(hooks.map(async callback => {
-        await callback.apply(thisArg, args);
-      }));
-    }
-    emit(...args) {
-      const [hooks, thisArg] = this.prepareEvent("emit", args);
-      for (const callback of hooks) {
-        callback.apply(thisArg, args);
-      }
-    }
-    async serial(...args) {
-      const [hooks, thisArg] = this.prepareEvent("serial", args);
-      for (const callback of hooks) {
-        const result = await callback.apply(thisArg, args);
-        if (isBailed$1(result)) return result;
-      }
-    }
-    bail(...args) {
-      const [hooks, thisArg] = this.prepareEvent("bail", args);
-      for (const callback of hooks) {
-        const result = callback.apply(thisArg, args);
-        if (isBailed$1(result)) return result;
-      }
-    }
-    register(label, hooks, listener, prepend) {
-      const caller = this[Context$2.origin];
-      const method = prepend ? "unshift" : "push";
-      hooks[method]([caller, listener]);
-      return caller.state.collect(label, () => this.unregister(hooks, listener));
-    }
-    unregister(hooks, listener) {
-      const index = hooks.findIndex(([context, callback]) => callback === listener);
-      if (index >= 0) {
-        hooks.splice(index, 1);
-        return true;
-      }
-    }
-    on(name, listener, prepend = false) {
-      const caller = this[Context$2.origin];
-      caller.scope.assertActive();
-      const result = this.bail(caller, "internal/listener", name, listener, prepend);
-      if (result) return result;
-      const hooks = this._hooks[name] ||= [];
-      const label = typeof name === "string" ? `event <${name}>` : "event (Symbol)";
-      return this.register(label, hooks, listener, prepend);
-    }
-    once(name, listener, prepend = false) {
-      const dispose = this.on(name, function (...args) {
-        dispose();
-        return listener.apply(this, args);
-      }, prepend);
-      return dispose;
-    }
-    off(name, listener) {
-      return this.unregister(this._hooks[name] || [], listener);
-    }
-    async start() {
-      this.isActive = true;
-      const hooks = this._hooks.ready || [];
-      while (hooks.length) {
-        const [context, callback] = hooks.shift();
-        context.scope.ensure(async () => callback());
-      }
-      await this.flush();
-    }
-    async stop() {
-      this.isActive = false;
-      this.root.scope.reset();
-    }
-  }, __name$g(_Lifecycle, "Lifecycle"), _Lifecycle);
-
-  // src/registry.ts
-  var import_cosmokit4 = require$$1;
-
-  // src/scope.ts
-  var import_cosmokit3 = require$$1;
-
-  // src/utils.ts
-  var import_cosmokit2 = require$$1;
-  var symbols$1 = {
-    // context symbols
-    origin: Symbol.for("cordis.origin"),
-    events: Symbol.for("cordis.events"),
-    static: Symbol.for("cordis.static"),
-    filter: Symbol.for("cordis.filter"),
-    expose: Symbol.for("cordis.expose"),
-    isolate: Symbol.for("cordis.isolate"),
-    internal: Symbol.for("cordis.internal"),
-    intercept: Symbol.for("cordis.intercept"),
-    // service symbols
-    setup: Symbol.for("cordis.setup"),
-    invoke: Symbol.for("cordis.invoke"),
-    extend: Symbol.for("cordis.extend"),
-    provide: Symbol.for("cordis.provide"),
-    immediate: Symbol.for("cordis.immediate")
-  };
-  function isConstructor$1(func) {
-    if (!func.prototype) return false;
-    if (func.prototype.constructor !== func) return false;
-    return true;
-  }
-  __name$g(isConstructor$1, "isConstructor");
-  function resolveConfig$1(plugin, config) {
-    const schema = plugin["Config"] || plugin["schema"];
-    if (schema && plugin["schema"] !== false) config = schema(config);
-    return config ?? {};
-  }
-  __name$g(resolveConfig$1, "resolveConfig");
-  function isUnproxyable$1(value) {
-    return [Map, Set, Date, Promise].some(constructor => value instanceof constructor);
-  }
-  __name$g(isUnproxyable$1, "isUnproxyable");
-  function joinPrototype$1(proto1, proto2) {
-    if (proto1 === Object.prototype) return proto2;
-    const result = Object.create(joinPrototype$1(Object.getPrototypeOf(proto1), proto2));
-    for (const key of Reflect.ownKeys(proto1)) {
-      Object.defineProperty(result, key, Object.getOwnPropertyDescriptor(proto1, key));
-    }
-    return result;
-  }
-  __name$g(joinPrototype$1, "joinPrototype");
-  function createTraceable$1(ctx, value) {
-    const proxy = new Proxy(value, {
-      get: (target, name, receiver) => {
-        if (name === symbols$1.origin || name === "caller") return ctx;
-        return Reflect.get(target, name, receiver);
-      },
-      apply: (target, thisArg, args) => {
-        return applyTraceable$1(proxy, target, thisArg, args);
-      }
-    });
-    return proxy;
-  }
-  __name$g(createTraceable$1, "createTraceable");
-  function applyTraceable$1(proxy, value, thisArg, args) {
-    if (!value[symbols$1.invoke]) return Reflect.apply(value, thisArg, args);
-    return value[symbols$1.invoke].apply(proxy, args);
-  }
-  __name$g(applyTraceable$1, "applyTraceable");
-  function createCallable$1(name, proto) {
-    const self = /* @__PURE__ */__name$g(function (...args) {
-      const proxy = createTraceable$1(self[symbols$1.origin], self);
-      return applyTraceable$1(proxy, self, this, args);
-    }, "self");
-    (0, import_cosmokit2.defineProperty)(self, "name", name);
-    return Object.setPrototypeOf(self, proto);
-  }
-  __name$g(createCallable$1, "createCallable");
-
-  // src/scope.ts
-  var ScopeStatus$1 = /* @__PURE__ */(ScopeStatus2 => {
-    ScopeStatus2[ScopeStatus2["PENDING"] = 0] = "PENDING";
-    ScopeStatus2[ScopeStatus2["LOADING"] = 1] = "LOADING";
-    ScopeStatus2[ScopeStatus2["ACTIVE"] = 2] = "ACTIVE";
-    ScopeStatus2[ScopeStatus2["FAILED"] = 3] = "FAILED";
-    ScopeStatus2[ScopeStatus2["DISPOSED"] = 4] = "DISPOSED";
-    return ScopeStatus2;
-  })(ScopeStatus$1 || {});
-  var CordisError$1 = (_CordisError2 = class _CordisError extends Error {
-    constructor(code, message) {
-      super(message ?? _CordisError.Code[code]);
-      this.code = code;
-    }
-  }, __name$g(_CordisError2, "CordisError"), _CordisError2);
-  (CordisError2 => {
-    CordisError2.Code = {
-      INACTIVE_EFFECT: "cannot create effect on inactive context"
-    };
-  })(CordisError$1 || (CordisError$1 = {}));
-  var EffectScope$1 = (_EffectScope = class EffectScope {
-    constructor(parent, config) {
-      _defineProperty(this, "uid", void 0);
-      _defineProperty(this, "ctx", void 0);
-      _defineProperty(this, "disposables", []);
-      _defineProperty(this, "error", void 0);
-      _defineProperty(this, "status", 0 /* PENDING */);
-      _defineProperty(this, "isActive", false);
-      // Same as `this.ctx`, but with a more specific type.
-      _defineProperty(this, "context", void 0);
-      _defineProperty(this, "proxy", void 0);
-      _defineProperty(this, "acceptors", []);
-      _defineProperty(this, "tasks", /* @__PURE__ */new Set());
-      _defineProperty(this, "hasError", false);
-      this.parent = parent;
-      this.config = config;
-      this.uid = parent.registry ? parent.registry.counter : 0;
-      this.ctx = this.context = parent.extend({
-        scope: this
-      });
-      this.proxy = new Proxy({}, {
-        get: (target, key) => Reflect.get(this.config, key)
-      });
-    }
-    get _config() {
-      return this.runtime.isReactive ? this.proxy : this.config;
-    }
-    assertActive() {
-      if (this.uid !== null || this.isActive) return;
-      throw new CordisError$1("INACTIVE_EFFECT");
-    }
-    effect(callback, config) {
-      this.assertActive();
-      const result = isConstructor$1(callback) ? new callback(this.ctx, config) : callback(this.ctx, config);
-      let disposed = false;
-      const original = typeof result === "function" ? result : result.dispose.bind(result);
-      const wrapped = /* @__PURE__ */__name$g(() => {
-        if (disposed) return;
-        disposed = true;
-        (0, import_cosmokit3.remove)(this.disposables, wrapped);
-        return original();
-      }, "wrapped");
-      this.disposables.push(wrapped);
-      if (typeof result === "function") return wrapped;
-      result.dispose = wrapped;
-      return result;
-    }
-    collect(label, callback) {
-      const dispose = (0, import_cosmokit3.defineProperty)(() => {
-        (0, import_cosmokit3.remove)(this.disposables, dispose);
-        return callback();
-      }, "name", label);
-      this.disposables.push(dispose);
-      return dispose;
-    }
-    restart() {
-      this.reset();
-      this.error = null;
-      this.hasError = false;
-      this.status = 0 /* PENDING */;
-      this.start();
-    }
-    _getStatus() {
-      if (this.uid === null) return 4 /* DISPOSED */;
-      if (this.hasError) return 3 /* FAILED */;
-      if (this.tasks.size) return 1 /* LOADING */;
-      if (this.ready) return 2 /* ACTIVE */;
-      return 0 /* PENDING */;
-    }
-    _updateStatus(callback) {
-      const oldValue = this.status;
-      callback?.();
-      this.status = this._getStatus();
-      if (oldValue !== this.status) {
-        this.context.emit("internal/status", this, oldValue);
-      }
-    }
-    ensure(callback) {
-      const task = callback().catch(reason => {
-        this.context.emit("internal/error", reason);
-        this.cancel(reason);
-      }).finally(() => {
-        this._updateStatus(() => this.tasks.delete(task));
-        this.context.events._tasks.delete(task);
-      });
-      this._updateStatus(() => this.tasks.add(task));
-      this.context.events._tasks.add(task);
-    }
-    cancel(reason) {
-      this.error = reason;
-      this._updateStatus(() => this.hasError = true);
-      this.reset();
-    }
-    setupInject() {
-      if (!this.runtime.using.length) return;
-      (0, import_cosmokit3.defineProperty)(this.context.on("internal/before-service", name => {
-        if (!this.runtime.using.includes(name)) return;
-        this._updateStatus();
-        this.reset();
-      }), Context$2.static, this);
-      (0, import_cosmokit3.defineProperty)(this.context.on("internal/service", name => {
-        if (!this.runtime.using.includes(name)) return;
-        this.start();
-      }), Context$2.static, this);
-    }
-    get ready() {
-      return this.runtime.using.every(name => !(0, import_cosmokit3.isNullable)(this.ctx[name]));
-    }
-    reset() {
-      this.isActive = false;
-      this.disposables = this.disposables.splice(0).filter(dispose => {
-        if (this.uid !== null && dispose[Context$2.static] === this) return true;
-        (async () => dispose())().catch(reason => {
-          this.context.emit("internal/error", reason);
-        });
-      });
-    }
-    init(error) {
-      if (!this.config) {
-        this.cancel(error);
-      } else {
-        this.start();
-      }
-    }
-    start() {
-      if (!this.ready || this.isActive || this.uid === null) return true;
-      this.isActive = true;
-      this._updateStatus(() => this.hasError = false);
-    }
-    accept(...args) {
-      const keys = Array.isArray(args[0]) ? args.shift() : null;
-      const acceptor = {
-        keys,
-        callback: args[0],
-        ...args[1]
-      };
-      return this.effect(() => {
-        this.acceptors.push(acceptor);
-        if (acceptor.immediate) acceptor.callback?.(this.config);
-        return () => (0, import_cosmokit3.remove)(this.acceptors, acceptor);
-      });
-    }
-    decline(keys) {
-      return this.accept(keys, () => true);
-    }
-    checkUpdate(resolved, forced) {
-      if (forced || !this.config) return [true, true];
-      if (forced === false) return [false, false];
-      const modified = /* @__PURE__ */Object.create(null);
-      const checkPropertyUpdate = /* @__PURE__ */__name$g(key => {
-        const result = modified[key] ??= !(0, import_cosmokit3.deepEqual)(this.config[key], resolved[key]);
-        hasUpdate ||= result;
-        return result;
-      }, "checkPropertyUpdate");
-      const ignored = /* @__PURE__ */new Set();
-      let hasUpdate = false,
-        shouldRestart = false;
-      let fallback = this.runtime.isReactive || null;
-      for (const {
-        keys,
-        callback,
-        passive
-      } of this.acceptors) {
-        if (!keys) {
-          fallback ||= !passive;
-        } else if (passive) {
-          keys?.forEach(key => ignored.add(key));
-        } else {
-          let hasUpdate2 = false;
-          for (const key of keys) {
-            hasUpdate2 ||= checkPropertyUpdate(key);
-          }
-          if (!hasUpdate2) continue;
-        }
-        const result = callback?.(resolved);
-        if (result) shouldRestart = true;
-      }
-      for (const key in {
-        ...this.config,
-        ...resolved
-      }) {
-        if (fallback === false) continue;
-        if (!(key in modified) && !ignored.has(key)) {
-          const hasUpdate2 = checkPropertyUpdate(key);
-          if (fallback === null) shouldRestart ||= hasUpdate2;
-        }
-      }
-      return [hasUpdate, shouldRestart];
-    }
-  }, __name$g(_EffectScope, "EffectScope"), _EffectScope);
-  var ForkScope$1 = (_ForkScope = class ForkScope extends EffectScope$1 {
-    constructor(parent, runtime, config, error) {
-      super(parent, config);
-      _defineProperty(this, "dispose", void 0);
-      this.runtime = runtime;
-      this.dispose = (0, import_cosmokit3.defineProperty)(parent.scope.collect(`fork <${parent.runtime.name}>`, () => {
-        this.uid = null;
-        this.reset();
-        this.context.emit("internal/fork", this);
-        const result = (0, import_cosmokit3.remove)(runtime.disposables, this.dispose);
-        if ((0, import_cosmokit3.remove)(runtime.children, this) && !runtime.children.length) {
-          parent.registry.delete(runtime.plugin);
-        }
-        return result;
-      }), Context$2.static, runtime);
-      runtime.children.push(this);
-      runtime.disposables.push(this.dispose);
-      this.context.emit("internal/fork", this);
-      if (runtime.isReusable) {
-        this.setupInject();
-      }
-      this.init(error);
-    }
-    start() {
-      if (super.start()) return true;
-      for (const fork of this.runtime.forkables) {
-        this.ensure(async () => fork(this.context, this._config));
-      }
-    }
-    update(config, forced) {
-      const oldConfig = this.config;
-      const state = this.runtime.isForkable ? this : this.runtime;
-      if (state.config !== oldConfig) return;
-      const resolved = resolveConfig$1(this.runtime.plugin, config);
-      const [hasUpdate, shouldRestart] = state.checkUpdate(resolved, forced);
-      this.context.emit("internal/before-update", this, config);
-      this.config = resolved;
-      state.config = resolved;
-      if (hasUpdate) {
-        this.context.emit("internal/update", this, oldConfig);
-      }
-      if (shouldRestart) state.restart();
-    }
-  }, __name$g(_ForkScope, "ForkScope"), _ForkScope);
-  var MainScope$1 = (_MainScope = class MainScope extends EffectScope$1 {
-    constructor(registry, plugin, _config, error) {
-      super(registry[Context$2.origin], _config);
-      _defineProperty(this, "value", void 0);
-      _defineProperty(this, "runtime", this);
-      _defineProperty(this, "schema", void 0);
-      _defineProperty(this, "name", void 0);
-      _defineProperty(this, "using", []);
-      _defineProperty(this, "inject", /* @__PURE__ */new Set());
-      _defineProperty(this, "forkables", []);
-      _defineProperty(this, "children", []);
-      _defineProperty(this, "isReusable", false);
-      _defineProperty(this, "isReactive", false);
-      _defineProperty(this, "apply", (context, config) => {
-        if (typeof this.plugin !== "function") {
-          return this.plugin.apply(context, config);
-        } else if (isConstructor$1(this.plugin)) {
-          const instance = new this.plugin(context, config);
-          const name = instance[Context$2.expose];
-          if (name) {
-            context[name] = instance;
-          }
-          if (instance["fork"]) {
-            this.forkables.push(instance["fork"].bind(instance));
-          }
-          return instance;
-        } else {
-          return this.plugin(context, config);
-        }
-      });
-      this.plugin = plugin;
-      registry.set(plugin, this);
-      if (!plugin) {
-        this.name = "root";
-        this.isActive = true;
-      } else {
-        this.setup();
-        this.init(error);
-      }
-    }
-    get isForkable() {
-      return this.forkables.length > 0;
-    }
-    fork(parent, config, error) {
-      return new ForkScope$1(parent, this, config, error);
-    }
-    dispose() {
-      this.uid = null;
-      this.reset();
-      this.context.emit("internal/runtime", this);
-      return true;
-    }
-    setup() {
-      const {
-        name
-      } = this.plugin;
-      if (name && name !== "apply") this.name = name;
-      this.schema = this.plugin["Config"] || this.plugin["schema"];
-      const inject = this.plugin["using"] || this.plugin["inject"] || [];
-      if (Array.isArray(inject)) {
-        this.using = inject;
-        this.inject = new Set(inject);
-      } else {
-        this.using = inject.required || [];
-        this.inject = /* @__PURE__ */new Set([...this.using, ...(inject.optional || [])]);
-      }
-      this.isReusable = this.plugin["reusable"];
-      this.isReactive = this.plugin["reactive"];
-      this.context.emit("internal/runtime", this);
-      if (this.isReusable) {
-        this.forkables.push(this.apply);
-      } else {
-        super.setupInject();
-      }
-    }
-    reset() {
-      super.reset();
-      for (const fork of this.children) {
-        fork.reset();
-      }
-    }
-    start() {
-      if (super.start()) return true;
-      if (!this.isReusable && this.plugin) {
-        this.ensure(async () => this.value = this.apply(this.ctx, this._config));
-      }
-      for (const fork of this.children) {
-        fork.start();
-      }
-    }
-    update(config, forced) {
-      if (this.isForkable) {
-        this.context.emit("internal/warning", new Error(`attempting to update forkable plugin "${this.plugin.name}", which may lead to unexpected behavior`));
-      }
-      const oldConfig = this.config;
-      const resolved = resolveConfig$1(this.runtime.plugin || this.context.constructor, config);
-      const [hasUpdate, shouldRestart] = this.checkUpdate(resolved, forced);
-      const state = this.children.find(fork => fork.config === oldConfig);
-      this.config = resolved;
-      if (state) {
-        this.context.emit("internal/before-update", state, config);
-        state.config = resolved;
-        if (hasUpdate) {
-          this.context.emit("internal/update", state, oldConfig);
-        }
-      }
-      if (shouldRestart) this.restart();
-    }
-  }, __name$g(_MainScope, "MainScope"), _MainScope);
-
-  // src/registry.ts
-  function isApplicable$1(object) {
-    return object && typeof object === "object" && typeof object.apply === "function";
-  }
-  __name$g(isApplicable$1, "isApplicable");
-  var Registry$1 = (_Registry = class Registry {
-    constructor(root, config) {
-      _defineProperty(this, "_counter", 0);
-      _defineProperty(this, "_internal", /* @__PURE__ */new Map());
-      this.root = root;
-      (0, import_cosmokit4.defineProperty)(this, Context$2.origin, root);
-      root.scope = new MainScope$1(this, null, config);
-      root.scope.runtime.isReactive = true;
-    }
-    get counter() {
-      return ++this._counter;
-    }
-    get size() {
-      return this._internal.size;
-    }
-    resolve(plugin) {
-      if (plugin === null) return plugin;
-      if (typeof plugin === "function") return plugin;
-      if (isApplicable$1(plugin)) return plugin.apply;
-      throw new Error('invalid plugin, expect function or object with an "apply" method, received ' + typeof plugin);
-    }
-    get(plugin) {
-      return this._internal.get(this.resolve(plugin));
-    }
-    has(plugin) {
-      return this._internal.has(this.resolve(plugin));
-    }
-    set(plugin, state) {
-      const oldValue = this._internal.get(this.resolve(plugin));
-      this._internal.set(this.resolve(plugin), state);
-      return oldValue;
-    }
-    delete(plugin) {
-      plugin = this.resolve(plugin);
-      const runtime = this.get(plugin);
-      if (!runtime) return;
-      this._internal.delete(plugin);
-      runtime.dispose();
-      return runtime;
-    }
-    keys() {
-      return this._internal.keys();
-    }
-    values() {
-      return this._internal.values();
-    }
-    entries() {
-      return this._internal.entries();
-    }
-    forEach(callback) {
-      return this._internal.forEach(callback);
-    }
-    using(inject, callback) {
-      return this.inject(inject, callback);
-    }
-    inject(inject, callback) {
-      return this.plugin({
-        inject,
-        apply: callback,
-        name: callback.name
-      });
-    }
-    plugin(plugin, config) {
-      this.resolve(plugin);
-      const context = this[Context$2.origin];
-      context.scope.assertActive();
-      let error;
-      try {
-        config = resolveConfig$1(plugin, config);
-      } catch (reason) {
-        context.emit("internal/error", reason);
-        error = reason;
-        config = null;
-      }
-      let runtime = this.get(plugin);
-      if (runtime) {
-        if (!runtime.isForkable) {
-          context.emit("internal/warning", new Error(`duplicate plugin detected: ${plugin.name}`));
-        }
-        return runtime.fork(context, config, error);
-      }
-      runtime = new MainScope$1(this, plugin, config, error);
-      return runtime.fork(context, config, error);
-    }
-  }, __name$g(_Registry, "Registry"), _Registry);
-
-  // src/context.ts
-  var Context$2 = (_Symbol$for = Symbol.for("nodejs.util.inspect.custom"), (_Context2 = class _Context {
-    static is(value) {
-      return !!value?.[_Context.is];
-    }
-    static ensureInternal() {
-      const ctx = this.prototype || this;
-      if (Object.prototype.hasOwnProperty.call(ctx, symbols$1.internal)) {
-        return ctx[symbols$1.internal];
-      }
-      const parent = _Context.ensureInternal.call(Object.getPrototypeOf(this));
-      return ctx[symbols$1.internal] = Object.create(parent);
-    }
-    static resolveInject(ctx, name) {
-      let internal = ctx[symbols$1.internal][name];
-      while (internal?.type === "alias") {
-        name = internal.name;
-        internal = ctx[symbols$1.internal][name];
-      }
-      return [name, internal];
-    }
-    static associate(object, name) {
-      return new Proxy(object, {
-        get(target, key, receiver) {
-          if (typeof key === "symbol" || key in target) return Reflect.get(target, key, receiver);
-          const caller = receiver[symbols$1.origin];
-          if (!caller?.[symbols$1.internal][`${name}.${key}`]) return Reflect.get(target, key, receiver);
-          return caller.get(`${name}.${key}`);
-        },
-        set(target, key, value, receiver) {
-          if (typeof key === "symbol" || key in target) return Reflect.set(target, key, value, receiver);
-          const caller = receiver[symbols$1.origin];
-          if (!caller?.[symbols$1.internal][`${name}.${key}`]) return Reflect.set(target, key, value, receiver);
-          caller[`${name}.${key}`] = value;
-          return true;
-        }
-      });
-    }
-    constructor(config) {
-      const self = new Proxy(this, _Context.handler);
-      config = resolveConfig$1(this.constructor, config);
-      self[symbols$1.isolate] = /* @__PURE__ */Object.create(null);
-      self[symbols$1.intercept] = /* @__PURE__ */Object.create(null);
-      self.root = self;
-      self.mixin("scope", ["config", "runtime", "effect", "collect", "accept", "decline"]);
-      self.mixin("registry", ["using", "inject", "plugin", "dispose"]);
-      self.mixin("lifecycle", ["on", "once", "off", "after", "parallel", "emit", "serial", "bail", "start", "stop"]);
-      self.provide("registry", new Registry$1(self, config), true);
-      self.provide("lifecycle", new Lifecycle$1(self), true);
-      const attach = /* @__PURE__ */__name$g(internal => {
-        if (!internal) return;
-        attach(Object.getPrototypeOf(internal));
-        for (const key of Object.getOwnPropertyNames(internal)) {
-          const constructor = internal[key]["prototype"]?.constructor;
-          if (!constructor) continue;
-          self[internal[key]["key"]] = new constructor(self, config);
-          (0, import_cosmokit5.defineProperty)(self[internal[key]["key"]], symbols$1.origin, self);
-        }
-      }, "attach");
-      attach(this[symbols$1.internal]);
-      return self;
-    }
-    [_Symbol$for]() {
-      return `Context <${this.name}>`;
-    }
-    get name() {
-      let runtime = this.runtime;
-      while (runtime && !runtime.name) {
-        runtime = runtime.parent.runtime;
-      }
-      return runtime?.name;
-    }
-    get events() {
-      return this.lifecycle;
-    }
-    /** @deprecated */
-    get state() {
-      return this.scope;
-    }
-    get(name) {
-      const internal = this[symbols$1.internal][name];
-      if (internal?.type !== "service") return;
-      const value = this.root[this[symbols$1.isolate][name]];
-      if (!value || typeof value !== "object" && typeof value !== "function") return value;
-      if (isUnproxyable$1(value)) {
-        (0, import_cosmokit5.defineProperty)(value, symbols$1.origin, this);
-        return value;
-      }
-      return createTraceable$1(this, value);
-    }
-    provide(name, value, builtin) {
-      const internal = _Context.ensureInternal.call(this.root);
-      if (name in internal) return;
-      const key = Symbol(name);
-      internal[name] = {
-        type: "service",
-        builtin
-      };
-      this.root[key] = value;
-      this.root[_Context.isolate][name] = key;
-    }
-    accessor(name, options) {
-      const internal = _Context.ensureInternal.call(this.root);
-      internal[name] ||= {
-        type: "accessor",
-        ...options
-      };
-    }
-    alias(name, aliases) {
-      const internal = _Context.ensureInternal.call(this.root);
-      for (const key of aliases) {
-        internal[key] ||= {
-          type: "alias",
-          name
-        };
-      }
-    }
-    mixin(name, mixins) {
-      for (const key of mixins) {
-        this.accessor(key, {
-          get() {
-            const service = this[name];
-            if ((0, import_cosmokit5.isNullable)(service)) return service;
-            const value = Reflect.get(service, key);
-            if (typeof value !== "function") return value;
-            return value.bind(service);
-          },
-          set(value) {
-            return Reflect.set(this[name], key, value);
-          }
-        });
-      }
-    }
-    extend(meta = {}) {
-      return Object.assign(Object.create(this), meta);
-    }
-    isolate(name, label) {
-      const shadow = Object.create(this[symbols$1.isolate]);
-      shadow[name] = label ?? Symbol(name);
-      return this.extend({
-        [symbols$1.isolate]: shadow
-      });
-    }
-    intercept(name, config) {
-      const intercept = Object.create(this[symbols$1.intercept]);
-      intercept[name] = config;
-      return this.extend({
-        [symbols$1.intercept]: intercept
-      });
-    }
-  }, __name$g(_Context2, "Context"), _defineProperty(_Context2, "origin", symbols$1.origin), _defineProperty(_Context2, "events", symbols$1.events), _defineProperty(_Context2, "static", symbols$1.static), _defineProperty(_Context2, "filter", symbols$1.filter), _defineProperty(_Context2, "expose", symbols$1.expose), _defineProperty(_Context2, "isolate", symbols$1.isolate), _defineProperty(_Context2, "internal", symbols$1.internal), _defineProperty(_Context2, "intercept", symbols$1.intercept), _defineProperty(_Context2, "current", _Context2.origin), (() => {
-    _Context2.is[Symbol.toPrimitive] = () => Symbol.for("cordis.is");
-    _Context2.prototype[_Context2.is] = true;
-  })(), _defineProperty(_Context2, "handler", {
-    get(target, prop, ctx) {
-      if (typeof prop !== "string") return Reflect.get(target, prop, ctx);
-      const checkInject = /* @__PURE__ */__name$g(name2 => {
-        if (Reflect.has(target, name2)) return;
-        if (["prototype", "then", "registry", "lifecycle"].includes(name2)) return;
-        if (name2[0] === "$" || name2[0] === "_") return;
-        if (!ctx.runtime.plugin) return;
-        let parent = ctx;
-        while (parent.runtime.plugin) {
-          for (const key of parent.runtime.inject) {
-            if (name2 === _Context2.resolveInject(parent, key)[0]) return;
-          }
-          parent = parent.scope.parent;
-        }
-        ctx.emit("internal/warning", new Error(`property ${name2} is not registered, declare it as \`inject\` to suppress this warning`));
-      }, "checkInject");
-      const [name, internal] = _Context2.resolveInject(ctx, prop);
-      if (!internal) {
-        checkInject(name);
-        return Reflect.get(target, name, ctx);
-      }
-      if (internal.type === "accessor") {
-        return internal.get.call(ctx);
-      } else if (internal.type === "service") {
-        if (!internal.builtin) checkInject(name);
-        return ctx.get(name);
-      }
-    },
-    set(target, prop, value, ctx) {
-      if (typeof prop !== "string") return Reflect.set(target, prop, value, ctx);
-      const [name, internal] = _Context2.resolveInject(ctx, prop);
-      if (!internal) return Reflect.set(target, name, value, ctx);
-      if (internal.type === "accessor") {
-        if (!internal.set) return false;
-        return internal.set.call(ctx, value);
-      }
-      const key = ctx[symbols$1.isolate][name];
-      const oldValue = ctx.root[key];
-      if (oldValue === value) return true;
-      if (value && oldValue) {
-        throw new Error(`service ${name} has been registered`);
-      }
-      if (value) {
-        ctx.on("dispose", () => ctx[name] = void 0);
-      }
-      if (isUnproxyable$1(value)) {
-        ctx.emit("internal/warning", new Error(`service ${name} is an unproxyable object, which may lead to unexpected behavior`));
-      }
-      const self = /* @__PURE__ */Object.create(null);
-      self[symbols$1.filter] = ctx2 => {
-        return ctx[symbols$1.isolate][name] === ctx2[symbols$1.isolate][name];
-      };
-      ctx.root.emit(self, "internal/before-service", name, value);
-      ctx.root[key] = value;
-      if (value instanceof Object) {
-        (0, import_cosmokit5.defineProperty)(value, symbols$1.origin, ctx);
-      }
-      ctx.root.emit(self, "internal/service", name, oldValue);
-      return true;
-    }
-  }), _Context2));
-  Context$2.prototype[Context$2.internal] = /* @__PURE__ */Object.create(null);
-
-  // src/service.ts
-  var import_cosmokit6 = require$$1;
-  var Service$1 = (_symbols$1$origin = symbols$1.origin, _symbols$1$filter = symbols$1.filter, _symbols$1$setup = symbols$1.setup, _symbols$1$extend = symbols$1.extend, _Symbol$hasInstance = Symbol.hasInstance, (_Service2 = class _Service {
-    start() {}
-    stop() {}
-    constructor(...args) {
-      _defineProperty(this, "ctx", void 0);
-      _defineProperty(this, _symbols$1$origin, void 0);
-      _defineProperty(this, "name", void 0);
-      _defineProperty(this, "config", void 0);
-      let _ctx, name, immediate, config;
-      if (Context$2.is(args[0])) {
-        _ctx = args[0];
-        if (typeof args[1] === "string") {
-          name = args[1];
-          immediate = args[2];
-        } else {
-          config = args[1];
-        }
-      } else {
-        config = args[0];
-      }
-      name ??= this.constructor[symbols$1.provide];
-      immediate ??= this.constructor[symbols$1.immediate];
-      let self = this;
-      if (self[symbols$1.invoke]) {
-        self = createCallable$1(name, joinPrototype$1(Object.getPrototypeOf(this), Function.prototype));
-      }
-      if (_ctx) {
-        self.ctx = _ctx;
-      } else {
-        self[symbols$1.setup]();
-      }
-      self.name = name;
-      self.config = config;
-      (0, import_cosmokit6.defineProperty)(self, symbols$1.origin, self.ctx);
-      self.ctx.provide(name);
-      self.ctx.runtime.name = name;
-      if (immediate) {
-        if (_ctx) self[symbols$1.expose] = name;else self.ctx[name] = self;
-      }
-      self.ctx.on("ready", async () => {
-        await Promise.resolve();
-        await self.start();
-        if (!immediate) self.ctx[name] = self;
-      });
-      self.ctx.on("dispose", () => self.stop());
-      return Context$2.associate(self, name);
-    }
-    [_symbols$1$filter](ctx) {
-      return ctx[symbols$1.isolate][this.name] === this.ctx[symbols$1.isolate][this.name];
-    }
-    [_symbols$1$setup]() {
-      this.ctx = new Context$2();
-    }
-    [_symbols$1$extend](props) {
-      const caller = this[symbols$1.origin];
-      let self;
-      if (this[_Service.invoke]) {
-        self = createCallable$1(this.name, this);
-      } else {
-        self = Object.create(this);
-      }
-      (0, import_cosmokit6.defineProperty)(self, symbols$1.origin, caller);
-      return Context$2.associate(Object.assign(self, props), this.name);
-    }
-    static [_Symbol$hasInstance](instance) {
-      let constructor = instance.constructor;
-      while (constructor) {
-        if (constructor === this) return true;
-        constructor = Object.getPrototypeOf(constructor);
-      }
-      return false;
-    }
-  }, __name$g(_Service2, "Service"), _defineProperty(_Service2, "setup", symbols$1.setup), _defineProperty(_Service2, "invoke", symbols$1.invoke), _defineProperty(_Service2, "extend", symbols$1.extend), _defineProperty(_Service2, "provide", symbols$1.provide), _defineProperty(_Service2, "immediate", symbols$1.immediate), _Service2));
-  var __create = Object.create;
-  var __defProp$f = Object.defineProperty;
-  var __getOwnPropDesc$4 = Object.getOwnPropertyDescriptor;
-  var __getOwnPropNames$6 = Object.getOwnPropertyNames;
-  var __getProtoOf = Object.getPrototypeOf;
-  var __hasOwnProp$4 = Object.prototype.hasOwnProperty;
-  var __name$f = (target, value) => __defProp$f(target, "name", {
-    value,
-    configurable: true
-  });
-  var __export$4 = (target, all) => {
-    for (var name in all) __defProp$f(target, name, {
-      get: all[name],
-      enumerable: true
-    });
-  };
-  var __copyProps$4 = (to, from, except, desc) => {
-    if (from && typeof from === "object" || typeof from === "function") {
-      for (let key of __getOwnPropNames$6(from)) if (!__hasOwnProp$4.call(to, key) && key !== except) __defProp$f(to, key, {
-        get: () => from[key],
-        enumerable: !(desc = __getOwnPropDesc$4(from, key)) || desc.enumerable
-      });
-    }
-    return to;
-  };
-  var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps$4(
-  // If the importer is in node compatibility mode or this is not an ESM
-  // file that has been converted to a CommonJS file using a Babel-
-  // compatible transform (i.e. "__esModule" has not been set), then set
-  // "default" to the CommonJS "module.exports" for node compatibility.
-  isNodeMode || !mod || !mod.__esModule ? __defProp$f(target, "default", {
-    value: mod,
-    enumerable: true
-  }) : target, mod));
-  var __toCommonJS$4 = mod => __copyProps$4(__defProp$f({}, "__esModule", {
-    value: true
-  }), mod);
-
-  // src/index.ts
-  var src_exports$4 = {};
-  __export$4(src_exports$4, {
-    Logger: () => import_levi_reggol.default,
-    LoggerService: () => LoggerService$1,
-    default: () => src_default$4
-  });
-  var lib$6 = __toCommonJS$4(src_exports$4);
-  var import_core$1 = lib$7;
-  var import_levi_reggol = __toESM(lib$b, 1);
-  var LoggerService$1 = (_import_core$1$Servic = import_core$1.Service.provide, _import_core$1$Servic2 = import_core$1.Service.invoke, (_LoggerService2 = class _LoggerService extends import_core$1.Service {
-    constructor(ctx) {
-      super(ctx, "logger", true);
-      ctx.on("internal/info", function (format, ...args) {
-        this.logger("app").info(format, ...args);
-      });
-      ctx.on("internal/error", function (format, ...args) {
-        this.logger("app").error(format, ...args);
-      });
-      ctx.on("internal/warning", function (format, ...args) {
-        this.logger("app").warn(format, ...args);
-      });
-    }
-    [_import_core$1$Servic2](name) {
-      return new import_levi_reggol.default(name, {
-        [import_core$1.Context.origin]: this
-      });
-    }
-  }, __name$f(_LoggerService2, "LoggerService"), _defineProperty(_LoggerService2, _import_core$1$Servic, "logger"), (() => {
-    for (const type of ["success", "error", "info", "warn", "debug", "extend"]) {
-      _LoggerService2.prototype[type] = function (...args) {
-        const caller = this[import_core$1.Context.origin];
-        return this(caller.name)[type](...args);
-      };
-    }
-  })(), _LoggerService2));
-  var src_default$4 = LoggerService$1;
-  var __defProp$e = Object.defineProperty;
-  var __getOwnPropDesc$3 = Object.getOwnPropertyDescriptor;
-  var __getOwnPropNames$5 = Object.getOwnPropertyNames;
-  var __hasOwnProp$3 = Object.prototype.hasOwnProperty;
-  var __name$e = (target, value) => __defProp$e(target, "name", {
-    value,
-    configurable: true
-  });
-  var __export$3 = (target, all) => {
-    for (var name in all) __defProp$e(target, name, {
-      get: all[name],
-      enumerable: true
-    });
-  };
-  var __copyProps$3 = (to, from, except, desc) => {
-    if (from && typeof from === "object" || typeof from === "function") {
-      for (let key of __getOwnPropNames$5(from)) if (!__hasOwnProp$3.call(to, key) && key !== except) __defProp$e(to, key, {
-        get: () => from[key],
-        enumerable: !(desc = __getOwnPropDesc$3(from, key)) || desc.enumerable
-      });
-    }
-    return to;
-  };
-  var __toCommonJS$3 = mod => __copyProps$3(__defProp$e({}, "__esModule", {
-    value: true
-  }), mod);
-
-  // src/index.ts
-  var src_exports$3 = {};
-  __export$3(src_exports$3, {
-    TimerService: () => TimerService$1,
-    default: () => src_default$3
-  });
-  var lib$5 = __toCommonJS$3(src_exports$3);
-  var import_core = lib$7;
-  var import_cosmokit$2 = require$$1;
-  var TimerService$1 = (_TimerService = class TimerService extends import_core.Service {
-    constructor(ctx) {
-      super(ctx, "timer", true);
-      ctx.mixin("timer", ["setTimeout", "setInterval", "sleep", "throttle", "debounce"]);
-    }
-    setTimeout(callback, delay) {
-      const dispose = this[import_core.Context.origin].effect(() => {
-        const timer = setTimeout(() => {
-          dispose();
-          callback();
-        }, delay);
-        return () => clearTimeout(timer);
-      });
-      return dispose;
-    }
-    setInterval(callback, delay) {
-      return this[import_core.Context.origin].effect(() => {
-        const timer = setInterval(callback, delay);
-        return () => clearInterval(timer);
-      });
-    }
-    sleep(delay) {
-      const caller = this[import_core.Context.origin];
-      return new Promise((resolve, reject) => {
-        const dispose1 = this.setTimeout(() => {
-          dispose1();
-          dispose2();
-          resolve();
-        }, delay);
-        const dispose2 = caller.on("dispose", () => {
-          dispose1();
-          dispose2();
-          reject(new Error("Context has been disposed"));
-        });
-      });
-    }
-    createWrapper(callback, isDisposed = false) {
-      const caller = this[import_core.Context.origin];
-      caller.scope.assertActive();
-      let timer;
-      const dispose = /* @__PURE__ */__name$e(() => {
-        isDisposed = true;
-        (0, import_cosmokit$2.remove)(caller.scope.disposables, dispose);
-        clearTimeout(timer);
-      }, "dispose");
-      const wrapper = /* @__PURE__ */__name$e((...args) => {
-        clearTimeout(timer);
-        timer = callback(args, () => !isDisposed && caller.scope.isActive);
-      }, "wrapper");
-      wrapper.dispose = dispose;
-      caller.scope.disposables.push(dispose);
-      return wrapper;
-    }
-    throttle(callback, delay, noTrailing) {
-      let lastCall = -Infinity;
-      const execute = /* @__PURE__ */__name$e((...args) => {
-        lastCall = Date.now();
-        callback(...args);
-      }, "execute");
-      return this.createWrapper((args, isActive) => {
-        const now = Date.now();
-        const remaining = delay - (now - lastCall);
-        if (remaining <= 0) {
-          execute(...args);
-        } else if (isActive()) {
-          return setTimeout(execute, remaining, ...args);
-        }
-      }, noTrailing);
-    }
-    debounce(callback, delay) {
-      return this.createWrapper((args, isActive) => {
-        if (!isActive()) return;
-        return setTimeout(callback, delay, ...args);
-      });
-    }
-  }, __name$e(_TimerService, "TimerService"), _TimerService);
-  var src_default$3 = TimerService$1;
-  var __defProp$d = Object.defineProperty;
-  var __getOwnPropNames$4 = Object.getOwnPropertyNames;
-  var __name$d = (target, value) => __defProp$d(target, "name", {
-    value,
-    configurable: true
-  });
-  var __commonJS$1 = (cb, mod) => function __require() {
-    return mod || (0, cb[__getOwnPropNames$4(cb)[0]])((mod = {
-      exports: {}
-    }).exports, mod), mod.exports;
-  };
-  var require_src$1 = __commonJS$1({
-    "packages/schemastery/packages/core/src/index.ts"(exports, module) {
+  // ../../node_modules/schemastery/lib/index.cjs
+  var require_lib3 = __commonJS({
+    "../../node_modules/schemastery/lib/index.cjs"(exports, module) {
+      "use strict";
+      var __defProp11 = Object.defineProperty;
+      var __name10 = (target, value) => __defProp11(target, "name", { value, configurable: true });
+      var import_cosmokit16 = require_lib();
       var kSchema = Symbol.for("schemastery");
-      globalThis.__schemastery_index__ ??= 0;
-      var Schema = /* @__PURE__ */__name$d(function (options) {
-        const schema = /* @__PURE__ */__name$d(function (data, options2) {
-          return Schema.resolve(data, schema, options2)[0];
+      var _a25;
+      (_a25 = globalThis.__schemastery_index__) != null ? _a25 : globalThis.__schemastery_index__ = 0;
+      var Schema2 = /* @__PURE__ */ __name10(function(options) {
+        const schema2 = /* @__PURE__ */ __name10(function(data, options2) {
+          return Schema2.resolve(data, schema2, options2)[0];
         }, "schema");
         if (options.refs) {
-          const refs2 = mapValues(options.refs, options2 => new Schema(options2));
-          const getRef = /* @__PURE__ */__name$d(uid => refs2[uid], "getRef");
+          const refs2 = (0, import_cosmokit16.valueMap)(options.refs, (options2) => new Schema2(options2));
+          const getRef = /* @__PURE__ */ __name10((uid) => refs2[uid], "getRef");
           for (const key in refs2) {
             const options2 = refs2[key];
             options2.sKey = getRef(options2.sKey);
             options2.inner = getRef(options2.inner);
             options2.list = options2.list && options2.list.map(getRef);
-            options2.dict = options2.dict && mapValues(options2.dict, getRef);
+            options2.dict = options2.dict && (0, import_cosmokit16.valueMap)(options2.dict, getRef);
           }
           return refs2[options.uid];
         }
-        Object.assign(schema, options);
-        if (typeof schema.callback === "string") {
+        Object.assign(schema2, options);
+        if (typeof schema2.callback === "string") {
           try {
-            schema.callback = new Function("return " + schema.callback)();
-          } catch {}
+            schema2.callback = new Function("return " + schema2.callback)();
+          } catch {
+          }
         }
-        Object.defineProperty(schema, "uid", {
-          value: globalThis.__schemastery_index__++
-        });
-        Object.setPrototypeOf(schema, Schema.prototype);
-        schema.meta ||= {};
-        schema.toString = schema.toString.bind(schema);
-        return schema;
+        Object.defineProperty(schema2, "uid", { value: globalThis.__schemastery_index__++ });
+        Object.setPrototypeOf(schema2, Schema2.prototype);
+        schema2.meta || (schema2.meta = {});
+        schema2.toString = schema2.toString.bind(schema2);
+        return schema2;
       }, "Schema");
-      Schema.prototype = Object.create(Function.prototype);
-      Schema.prototype[kSchema] = true;
+      Schema2.prototype = Object.create(Function.prototype);
+      Schema2.prototype[kSchema] = true;
       var refs;
-      Schema.prototype.toJSON = /* @__PURE__ */__name$d(function toJSON() {
+      Schema2.prototype.toJSON = /* @__PURE__ */ __name10(function toJSON() {
+        var _a26, _b5;
         if (refs) {
-          refs[this.uid] ??= JSON.parse(JSON.stringify({
-            ...this
-          }));
+          (_b5 = refs[_a26 = this.uid]) != null ? _b5 : refs[_a26] = JSON.parse(JSON.stringify({ ...this }));
           return this.uid;
         }
-        refs = {
-          [this.uid]: {
-            ...this
-          }
-        };
-        refs[this.uid] = JSON.parse(JSON.stringify({
-          ...this
-        }));
-        const result = {
-          uid: this.uid,
-          refs
-        };
+        refs = { [this.uid]: { ...this } };
+        refs[this.uid] = JSON.parse(JSON.stringify({ ...this }));
+        const result = { uid: this.uid, refs };
         refs = void 0;
         return result;
       }, "toJSON");
-      Schema.prototype.set = /* @__PURE__ */__name$d(function set(key, value) {
+      Schema2.prototype.set = /* @__PURE__ */ __name10(function set2(key, value) {
         this.dict[key] = value;
         return this;
       }, "set");
-      Schema.prototype.push = /* @__PURE__ */__name$d(function push(value) {
+      Schema2.prototype.push = /* @__PURE__ */ __name10(function push(value) {
         this.list.push(value);
         return this;
       }, "push");
       function mergeDesc(original, messages) {
-        const result = typeof original === "string" ? {
-          "": original
-        } : {
-          ...original
-        };
+        const result = typeof original === "string" ? { "": original } : { ...original };
         for (const locale in messages) {
           const value = messages[locale];
-          if (value?.$description || value?.$desc) {
+          if ((value == null ? void 0 : value.$description) || (value == null ? void 0 : value.$desc)) {
             result[locale] = value.$description || value.$desc;
           } else if (typeof value === "string") {
             result[locale] = value;
@@ -2351,106 +1055,103 @@
         }
         return result;
       }
-      __name$d(mergeDesc, "mergeDesc");
+      __name10(mergeDesc, "mergeDesc");
       function getInner(value) {
-        return value?.$value ?? value?.$inner;
+        var _a26;
+        return (_a26 = value == null ? void 0 : value.$value) != null ? _a26 : value == null ? void 0 : value.$inner;
       }
-      __name$d(getInner, "getInner");
+      __name10(getInner, "getInner");
       function extractKeys(data) {
-        return Object.fromEntries(Object.entries(data ?? {}).filter(([key]) => !key.startsWith("$")));
+        return Object.fromEntries(Object.entries(data != null ? data : {}).filter(([key]) => !key.startsWith("$")));
       }
-      __name$d(extractKeys, "extractKeys");
-      Schema.prototype.i18n = /* @__PURE__ */__name$d(function i18n(messages) {
-        const schema = Schema(this);
-        schema.meta.description = mergeDesc(schema.meta.description, messages);
-        if (schema.dict) {
-          schema.dict = mapValues(schema.dict, (inner, key) => {
-            return inner.i18n(mapValues(messages, data => getInner(data)?.[key] ?? data?.[key]));
+      __name10(extractKeys, "extractKeys");
+      Schema2.prototype.i18n = /* @__PURE__ */ __name10(function i18n(messages) {
+        const schema2 = Schema2(this);
+        schema2.meta.description = mergeDesc(schema2.meta.description, messages);
+        if (schema2.dict) {
+          schema2.dict = (0, import_cosmokit16.valueMap)(schema2.dict, (inner, key) => {
+            return inner.i18n((0, import_cosmokit16.valueMap)(messages, (data) => {
+              var _a26, _b5;
+              return (_b5 = (_a26 = getInner(data)) == null ? void 0 : _a26[key]) != null ? _b5 : data == null ? void 0 : data[key];
+            }));
           });
         }
-        if (schema.list) {
-          schema.list = schema.list.map((inner, index) => {
-            return inner.i18n(mapValues(messages, (data = {}) => {
-              if (Array.isArray(getInner(data))) return getInner(data)[index];
-              if (Array.isArray(data)) return data[index];
+        if (schema2.list) {
+          schema2.list = schema2.list.map((inner, index) => {
+            return inner.i18n((0, import_cosmokit16.valueMap)(messages, (data = {}) => {
+              if (Array.isArray(getInner(data)))
+                return getInner(data)[index];
+              if (Array.isArray(data))
+                return data[index];
               return extractKeys(data);
             }));
           });
         }
-        if (schema.inner) {
-          schema.inner = schema.inner.i18n(mapValues(messages, data => {
-            if (getInner(data)) return getInner(data);
+        if (schema2.inner) {
+          schema2.inner = schema2.inner.i18n((0, import_cosmokit16.valueMap)(messages, (data) => {
+            if (getInner(data))
+              return getInner(data);
             return extractKeys(data);
           }));
         }
-        if (schema.sKey) {
-          schema.sKey = schema.sKey.i18n(mapValues(messages, data => data?.$key));
+        if (schema2.sKey) {
+          schema2.sKey = schema2.sKey.i18n((0, import_cosmokit16.valueMap)(messages, (data) => data == null ? void 0 : data.$key));
         }
-        return schema;
+        return schema2;
       }, "i18n");
-      Schema.prototype.extra = /* @__PURE__ */__name$d(function extra(key, value) {
-        const schema = Schema(this);
-        schema.meta = {
-          ...schema.meta,
-          [key]: value
-        };
-        return schema;
+      Schema2.prototype.extra = /* @__PURE__ */ __name10(function extra(key, value) {
+        const schema2 = Schema2(this);
+        schema2.meta = { ...schema2.meta, [key]: value };
+        return schema2;
       }, "extra");
       for (const key of ["required", "disabled", "collapse", "hidden", "loose"]) {
-        Object.assign(Schema.prototype, {
+        Object.assign(Schema2.prototype, {
           [key](value = true) {
-            const schema = Schema(this);
-            schema.meta = {
-              ...schema.meta,
-              [key]: value
-            };
-            return schema;
+            const schema2 = Schema2(this);
+            schema2.meta = { ...schema2.meta, [key]: value };
+            return schema2;
           }
         });
       }
-      Schema.prototype.deprecated = /* @__PURE__ */__name$d(function deprecated() {
-        const schema = Schema(this);
-        schema.meta.badges ||= [];
-        schema.meta.badges.push({
-          text: "deprecated",
-          type: "danger"
-        });
-        return schema;
+      Schema2.prototype.deprecated = /* @__PURE__ */ __name10(function deprecated() {
+        var _a26;
+        const schema2 = Schema2(this);
+        (_a26 = schema2.meta).badges || (_a26.badges = []);
+        schema2.meta.badges.push({ text: "deprecated", type: "danger" });
+        return schema2;
       }, "deprecated");
-      Schema.prototype.experimental = /* @__PURE__ */__name$d(function experimental() {
-        const schema = Schema(this);
-        schema.meta.badges ||= [];
-        schema.meta.badges.push({
-          text: "experimental",
-          type: "warning"
-        });
-        return schema;
+      Schema2.prototype.experimental = /* @__PURE__ */ __name10(function experimental() {
+        var _a26;
+        const schema2 = Schema2(this);
+        (_a26 = schema2.meta).badges || (_a26.badges = []);
+        schema2.meta.badges.push({ text: "experimental", type: "warning" });
+        return schema2;
       }, "experimental");
-      Schema.prototype.pattern = /* @__PURE__ */__name$d(function pattern(regexp) {
-        const schema = Schema(this);
-        const pattern2 = pick(regexp, ["source", "flags"]);
-        schema.meta = {
-          ...schema.meta,
-          pattern: pattern2
-        };
-        return schema;
+      Schema2.prototype.pattern = /* @__PURE__ */ __name10(function pattern(regexp) {
+        const schema2 = Schema2(this);
+        const pattern2 = (0, import_cosmokit16.pick)(regexp, ["source", "flags"]);
+        schema2.meta = { ...schema2.meta, pattern: pattern2 };
+        return schema2;
       }, "pattern");
-      Schema.prototype.simplify = /* @__PURE__ */__name$d(function simplify(value) {
-        if (deepEqual(value, this.meta.default)) return null;
-        if (isNullable(value)) return value;
+      Schema2.prototype.simplify = /* @__PURE__ */ __name10(function simplify(value) {
+        if ((0, import_cosmokit16.deepEqual)(value, this.meta.default))
+          return null;
+        if ((0, import_cosmokit16.isNullable)(value))
+          return value;
         if (this.type === "object" || this.type === "dict") {
           const result = {};
           for (const key in value) {
-            const schema = this.type === "object" ? this.dict[key] : this.inner;
-            const item = schema?.simplify(value[key]);
-            if (!isNullable(item)) result[key] = item;
+            const schema2 = this.type === "object" ? this.dict[key] : this.inner;
+            const item = schema2 == null ? void 0 : schema2.simplify(value[key]);
+            if (!(0, import_cosmokit16.isNullable)(item))
+              result[key] = item;
           }
           return result;
         } else if (this.type === "array" || this.type === "tuple") {
           const result = [];
           value.forEach((value2, index) => {
-            const schema = this.type === "array" ? this.inner : this.list[index];
-            const item = schema ? schema.simplify(value2) : value2;
+            const schema2 = this.type === "array" ? this.inner : this.list[index];
+            const item = schema2 ? schema2.simplify(value2) : value2;
             result.push(item);
           });
           return result;
@@ -2461,145 +1162,150 @@
           }
           return result;
         } else if (this.type === "union") {
-          for (const schema of this.list) {
+          for (const schema2 of this.list) {
             try {
-              Schema.resolve(value, schema);
-              return schema.simplify(value);
-            } catch {}
+              Schema2.resolve(value, schema2);
+              return schema2.simplify(value);
+            } catch {
+            }
           }
         }
         return value;
       }, "simplify");
-      Schema.prototype.toString = /* @__PURE__ */__name$d(function toString(inline) {
-        return formatters[this.type]?.(this, inline) ?? `Schema<${this.type}>`;
+      Schema2.prototype.toString = /* @__PURE__ */ __name10(function toString2(inline) {
+        var _a26, _b5;
+        return (_b5 = (_a26 = formatters[this.type]) == null ? void 0 : _a26.call(formatters, this, inline)) != null ? _b5 : `Schema<${this.type}>`;
       }, "toString");
-      Schema.prototype.role = /* @__PURE__ */__name$d(function role(role, extra) {
-        const schema = Schema(this);
-        schema.meta = {
-          ...schema.meta,
-          role,
-          extra
-        };
-        return schema;
+      Schema2.prototype.role = /* @__PURE__ */ __name10(function role(role, extra2) {
+        const schema2 = Schema2(this);
+        schema2.meta = { ...schema2.meta, role, extra: extra2 };
+        return schema2;
       }, "role");
       for (const key of ["default", "link", "comment", "description", "max", "min", "step"]) {
-        Object.assign(Schema.prototype, {
+        Object.assign(Schema2.prototype, {
           [key](value) {
-            const schema = Schema(this);
-            schema.meta = {
-              ...schema.meta,
-              [key]: value
-            };
-            return schema;
+            const schema2 = Schema2(this);
+            schema2.meta = { ...schema2.meta, [key]: value };
+            return schema2;
           }
         });
       }
       var resolvers = {};
-      Schema.extend = /* @__PURE__ */__name$d(function extend(type, resolve) {
-        resolvers[type] = resolve;
+      Schema2.extend = /* @__PURE__ */ __name10(function extend3(type2, resolve2) {
+        resolvers[type2] = resolve2;
       }, "extend");
-      Schema.resolve = /* @__PURE__ */__name$d(function resolve(data, schema, options = {}, strict = false) {
-        if (!schema) return [data];
-        if (isNullable(data)) {
-          if (schema.meta.required) throw new TypeError(`missing required value`);
-          let current = schema;
-          let fallback = schema.meta.default;
-          while (current?.type === "intersect" && isNullable(fallback)) {
+      Schema2.resolve = /* @__PURE__ */ __name10(function resolve(data, schema2, options = {}, strict = false) {
+        if (!schema2)
+          return [data];
+        if ((0, import_cosmokit16.isNullable)(data)) {
+          if (schema2.meta.required)
+            throw new TypeError(`missing required value`);
+          let current = schema2;
+          let fallback = schema2.meta.default;
+          while ((current == null ? void 0 : current.type) === "intersect" && (0, import_cosmokit16.isNullable)(fallback)) {
             current = current.list[0];
-            fallback = current?.meta.default;
+            fallback = current == null ? void 0 : current.meta.default;
           }
-          if (isNullable(fallback)) return [data];
-          data = clone(fallback);
+          if ((0, import_cosmokit16.isNullable)(fallback))
+            return [data];
+          data = (0, import_cosmokit16.clone)(fallback);
         }
-        const callback = resolvers[schema.type];
-        if (!callback) throw new TypeError(`unsupported type "${schema.type}"`);
+        const callback = resolvers[schema2.type];
+        if (!callback)
+          throw new TypeError(`unsupported type "${schema2.type}"`);
         try {
-          return callback(data, schema, options, strict);
+          return callback(data, schema2, options, strict);
         } catch (error) {
-          if (!schema.meta.loose) throw error;
-          return [schema.meta.default];
+          if (!schema2.meta.loose)
+            throw error;
+          return [schema2.meta.default];
         }
       }, "resolve");
-      Schema.from = /* @__PURE__ */__name$d(function from(source) {
-        if (isNullable(source)) {
-          return Schema.any();
+      Schema2.from = /* @__PURE__ */ __name10(function from(source) {
+        if ((0, import_cosmokit16.isNullable)(source)) {
+          return Schema2.any();
         } else if (["string", "number", "boolean"].includes(typeof source)) {
-          return Schema.const(source).required();
+          return Schema2.const(source).required();
         } else if (source[kSchema]) {
           return source;
         } else if (typeof source === "function") {
           switch (source) {
             case String:
-              return Schema.string().required();
+              return Schema2.string().required();
             case Number:
-              return Schema.number().required();
+              return Schema2.number().required();
             case Boolean:
-              return Schema.boolean().required();
+              return Schema2.boolean().required();
             case Function:
-              return Schema.function().required();
+              return Schema2.function().required();
             default:
-              return Schema.is(source).required();
+              return Schema2.is(source).required();
           }
         } else {
           throw new TypeError(`cannot infer schema from ${source}`);
         }
       }, "from");
-      Schema.natural = /* @__PURE__ */__name$d(function natural() {
-        return Schema.number().step(1).min(0);
+      Schema2.natural = /* @__PURE__ */ __name10(function natural() {
+        return Schema2.number().step(1).min(0);
       }, "natural");
-      Schema.percent = /* @__PURE__ */__name$d(function percent() {
-        return Schema.number().step(0.01).min(0).max(1).role("slider");
+      Schema2.percent = /* @__PURE__ */ __name10(function percent() {
+        return Schema2.number().step(0.01).min(0).max(1).role("slider");
       }, "percent");
-      Schema.date = /* @__PURE__ */__name$d(function date() {
-        return Schema.union([Schema.is(Date), Schema.transform(Schema.string().role("datetime"), value => {
-          const date2 = new Date(value);
-          if (isNaN(+date2)) throw new TypeError(`invalid date "${value}"`);
-          return date2;
-        }, true)]);
+      Schema2.date = /* @__PURE__ */ __name10(function date() {
+        return Schema2.union([
+          Schema2.is(Date),
+          Schema2.transform(Schema2.string().role("datetime"), (value) => {
+            const date2 = new Date(value);
+            if (isNaN(+date2))
+              throw new TypeError(`invalid date "${value}"`);
+            return date2;
+          }, true)
+        ]);
       }, "date");
-      Schema.extend("any", data => {
+      Schema2.extend("any", (data) => {
         return [data];
       });
-      Schema.extend("never", data => {
+      Schema2.extend("never", (data) => {
         throw new TypeError(`expected nullable but got ${data}`);
       });
-      Schema.extend("const", (data, {
-        value
-      }) => {
-        if (data === value) return [value];
+      Schema2.extend("const", (data, { value }) => {
+        if (data === value)
+          return [value];
         throw new TypeError(`expected ${value} but got ${data}`);
       });
       function checkWithinRange(data, meta, description) {
-        const {
-          max = Infinity,
-          min = -Infinity
-        } = meta;
-        if (data > max) throw new TypeError(`expected ${description} <= ${max} but got ${data}`);
-        if (data < min) throw new TypeError(`expected ${description} >= ${min} but got ${data}`);
+        const { max = Infinity, min = -Infinity } = meta;
+        if (data > max)
+          throw new TypeError(`expected ${description} <= ${max} but got ${data}`);
+        if (data < min)
+          throw new TypeError(`expected ${description} >= ${min} but got ${data}`);
       }
-      __name$d(checkWithinRange, "checkWithinRange");
-      Schema.extend("string", (data, {
-        meta
-      }) => {
-        if (typeof data !== "string") throw new TypeError(`expected string but got ${data}`);
+      __name10(checkWithinRange, "checkWithinRange");
+      Schema2.extend("string", (data, { meta }) => {
+        if (typeof data !== "string")
+          throw new TypeError(`expected string but got ${data}`);
         if (meta.pattern) {
           const regexp = new RegExp(meta.pattern.source, meta.pattern.flags);
-          if (!regexp.test(data)) throw new TypeError(`expect string to match regexp ${regexp}`);
+          if (!regexp.test(data))
+            throw new TypeError(`expect string to match regexp ${regexp}`);
         }
         checkWithinRange(data.length, meta, "string length");
         return [data];
       });
       function decimalShift(data, digits) {
-        const str = data.toString();
-        if (str.includes("e")) return data * Math.pow(10, digits);
-        const index = str.indexOf(".");
-        if (index === -1) return data * Math.pow(10, digits);
-        const frac = str.slice(index + 1);
-        const integer = str.slice(0, index);
-        if (frac.length <= digits) return +(integer + frac.padEnd(digits, "0"));
+        const str2 = data.toString();
+        if (str2.includes("e"))
+          return data * Math.pow(10, digits);
+        const index = str2.indexOf(".");
+        if (index === -1)
+          return data * Math.pow(10, digits);
+        const frac = str2.slice(index + 1);
+        const integer = str2.slice(0, index);
+        if (frac.length <= digits)
+          return +(integer + frac.padEnd(digits, "0"));
         return +(integer + frac.slice(0, digits) + "." + frac.slice(digits));
       }
-      __name$d(decimalShift, "decimalShift");
+      __name10(decimalShift, "decimalShift");
       function isMultipleOf(data, min, step) {
         step = Math.abs(step);
         if (!/^\d+\.\d+$/.test(step.toString())) {
@@ -2609,30 +1315,25 @@
         const digits = step.toString().slice(index + 1).length;
         return Math.abs(decimalShift(data, digits) - decimalShift(min, digits)) % decimalShift(step, digits) === 0;
       }
-      __name$d(isMultipleOf, "isMultipleOf");
-      Schema.extend("number", (data, {
-        meta
-      }) => {
-        if (typeof data !== "number") throw new TypeError(`expected number but got ${data}`);
+      __name10(isMultipleOf, "isMultipleOf");
+      Schema2.extend("number", (data, { meta }) => {
+        var _a26;
+        if (typeof data !== "number")
+          throw new TypeError(`expected number but got ${data}`);
         checkWithinRange(data, meta, "number");
-        const {
-          step
-        } = meta;
-        if (step && !isMultipleOf(data, meta.min ?? 0, step)) {
+        const { step } = meta;
+        if (step && !isMultipleOf(data, (_a26 = meta.min) != null ? _a26 : 0, step)) {
           throw new TypeError(`expected number multiple of ${step} but got ${data}`);
         }
         return [data];
       });
-      Schema.extend("boolean", data => {
-        if (typeof data === "boolean") return [data];
+      Schema2.extend("boolean", (data) => {
+        if (typeof data === "boolean")
+          return [data];
         throw new TypeError(`expected boolean but got ${data}`);
       });
-      Schema.extend("bitset", (data, {
-        bits,
-        meta
-      }) => {
-        let value = 0,
-          keys = [];
+      Schema2.extend("bitset", (data, { bits, meta }) => {
+        let value = 0, keys = [];
         if (typeof data === "number") {
           value = data;
           for (const key in bits) {
@@ -2643,133 +1344,132 @@
         } else if (Array.isArray(data)) {
           keys = data;
           for (const key of keys) {
-            if (typeof key !== "string") throw new TypeError(`expected string but got ${key}`);
-            if (key in bits) value |= bits[key];
+            if (typeof key !== "string")
+              throw new TypeError(`expected string but got ${key}`);
+            if (key in bits)
+              value |= bits[key];
           }
         } else {
           throw new TypeError(`expected number or array but got ${data}`);
         }
-        if (value === meta.default) return [value];
+        if (value === meta.default)
+          return [value];
         return [value, keys];
       });
-      Schema.extend("function", data => {
-        if (typeof data === "function") return [data];
+      Schema2.extend("function", (data) => {
+        if (typeof data === "function")
+          return [data];
         throw new TypeError(`expected function but got ${data}`);
       });
-      Schema.extend("is", (data, {
-        callback
-      }) => {
-        if (data instanceof callback) return [data];
+      Schema2.extend("is", (data, { callback }) => {
+        if (data instanceof callback)
+          return [data];
         throw new TypeError(`expected ${callback.name} but got ${data}`);
       });
-      function property(data, key, schema, options) {
+      function property(data, key, schema2, options) {
         try {
-          const [value, adapted] = Schema.resolve(data[key], schema, options);
-          if (adapted !== void 0) data[key] = adapted;
+          const [value, adapted] = Schema2.resolve(data[key], schema2, options);
+          if (adapted !== void 0)
+            data[key] = adapted;
           return value;
         } catch (e) {
-          if (!options?.autofix) throw e;
+          if (!(options == null ? void 0 : options.autofix))
+            throw e;
           delete data[key];
-          return schema.meta.default;
+          return schema2.meta.default;
         }
       }
-      __name$d(property, "property");
-      Schema.extend("array", (data, {
-        inner,
-        meta
-      }, options) => {
-        if (!Array.isArray(data)) throw new TypeError(`expected array but got ${data}`);
+      __name10(property, "property");
+      Schema2.extend("array", (data, { inner, meta }, options) => {
+        if (!Array.isArray(data))
+          throw new TypeError(`expected array but got ${data}`);
         checkWithinRange(data.length, meta, "array length");
         return [data.map((_, index) => property(data, index, inner, options))];
       });
-      Schema.extend("dict", (data, {
-        inner,
-        sKey
-      }, options, strict) => {
-        if (!isPlainObject(data)) throw new TypeError(`expected object but got ${data}`);
+      Schema2.extend("dict", (data, { inner, sKey }, options, strict) => {
+        if (!(0, import_cosmokit16.isPlainObject)(data))
+          throw new TypeError(`expected object but got ${data}`);
         const result = {};
         for (const key in data) {
           let rKey;
           try {
-            rKey = Schema.resolve(key, sKey)[0];
+            rKey = Schema2.resolve(key, sKey)[0];
           } catch (error) {
-            if (strict) continue;
+            if (strict)
+              continue;
             throw error;
           }
           result[rKey] = property(data, key, inner, options);
           data[rKey] = data[key];
-          if (key !== rKey) delete data[key];
+          if (key !== rKey)
+            delete data[key];
         }
         return [result];
       });
-      Schema.extend("tuple", (data, {
-        list
-      }, options, strict) => {
-        if (!Array.isArray(data)) throw new TypeError(`expected array but got ${data}`);
+      Schema2.extend("tuple", (data, { list }, options, strict) => {
+        if (!Array.isArray(data))
+          throw new TypeError(`expected array but got ${data}`);
         const result = list.map((inner, index) => property(data, index, inner, options));
-        if (strict) return [result];
+        if (strict)
+          return [result];
         result.push(...data.slice(list.length));
         return [result];
       });
-      function merge(result, data) {
+      function merge2(result, data) {
         for (const key in data) {
-          if (key in result) continue;
+          if (key in result)
+            continue;
           result[key] = data[key];
         }
       }
-      __name$d(merge, "merge");
-      Schema.extend("object", (data, {
-        dict
-      }, options, strict) => {
-        if (!isPlainObject(data)) throw new TypeError(`expected object but got ${data}`);
+      __name10(merge2, "merge");
+      Schema2.extend("object", (data, { dict }, options, strict) => {
+        if (!(0, import_cosmokit16.isPlainObject)(data))
+          throw new TypeError(`expected object but got ${data}`);
         const result = {};
         for (const key in dict) {
           const value = property(data, key, dict[key], options);
-          if (!isNullable(value) || key in data) {
+          if (!(0, import_cosmokit16.isNullable)(value) || key in data) {
             result[key] = value;
           }
         }
-        if (!strict) merge(result, data);
+        if (!strict)
+          merge2(result, data);
         return [result];
       });
-      Schema.extend("union", (data, {
-        list,
-        toString
-      }, options, strict) => {
+      Schema2.extend("union", (data, { list, toString: toString2 }, options, strict) => {
+        const messages = [];
         for (const inner of list) {
           try {
-            return Schema.resolve(data, inner, options, strict);
-          } catch (error) {}
-        }
-        throw new TypeError(`expected ${toString()} but got ${JSON.stringify(data)}`);
-      });
-      Schema.extend("intersect", (data, {
-        list,
-        toString
-      }, options, strict) => {
-        let result;
-        for (const inner of list) {
-          const value = Schema.resolve(data, inner, options, true)[0];
-          if (isNullable(value)) continue;
-          if (isNullable(result)) {
-            result = value;
-          } else if (typeof result !== typeof value) {
-            throw new TypeError(`expected ${toString()} but got ${JSON.stringify(data)}`);
-          } else if (typeof value === "object") {
-            merge(result ??= {}, value);
-          } else if (result !== value) {
-            throw new TypeError(`expected ${toString()} but got ${JSON.stringify(data)}`);
+            return Schema2.resolve(data, inner, options, strict);
+          } catch (error) {
+            messages.push(error);
           }
         }
-        if (!strict && isPlainObject(data)) merge(result, data);
+        throw new TypeError(`expected ${toString2()} but got ${JSON.stringify(data)}`);
+      });
+      Schema2.extend("intersect", (data, { list, toString: toString2 }, options, strict) => {
+        let result;
+        for (const inner of list) {
+          const value = Schema2.resolve(data, inner, options, true)[0];
+          if ((0, import_cosmokit16.isNullable)(value))
+            continue;
+          if ((0, import_cosmokit16.isNullable)(result)) {
+            result = value;
+          } else if (typeof result !== typeof value) {
+            throw new TypeError(`expected ${toString2()} but got ${JSON.stringify(data)}`);
+          } else if (typeof value === "object") {
+            merge2(result != null ? result : result = {}, value);
+          } else if (result !== value) {
+            throw new TypeError(`expected ${toString2()} but got ${JSON.stringify(data)}`);
+          }
+        }
+        if (!strict && (0, import_cosmokit16.isPlainObject)(data))
+          merge2(result, data);
         return [result];
       });
-      Schema.extend("transform", (data, {
-        inner,
-        callback,
-        preserve
-      }, options) => {
-        const [result, adapted = data] = Schema.resolve(data, inner, options, true);
+      Schema2.extend("transform", (data, { inner, callback, preserve }, options) => {
+        const [result, adapted = data] = Schema2.resolve(data, inner, options, true);
         if (preserve) {
           return [callback(result)];
         } else {
@@ -2777,2042 +1477,3321 @@
         }
       });
       var formatters = {};
-      function defineMethod(name, keys, format) {
-        formatters[name] = format;
-        Object.assign(Schema, {
-          [name](...args) {
-            const schema = new Schema({
-              type: name
-            });
+      function defineMethod(name2, keys, format) {
+        formatters[name2] = format;
+        Object.assign(Schema2, {
+          [name2](...args) {
+            const schema2 = new Schema2({ type: name2 });
             keys.forEach((key, index) => {
+              var _a26, _b5;
               switch (key) {
                 case "sKey":
-                  schema.sKey = args[index] ?? Schema.string();
+                  schema2.sKey = (_a26 = args[index]) != null ? _a26 : Schema2.string();
                   break;
                 case "inner":
-                  schema.inner = Schema.from(args[index]);
+                  schema2.inner = Schema2.from(args[index]);
                   break;
                 case "list":
-                  schema.list = args[index].map(Schema.from);
+                  schema2.list = args[index].map(Schema2.from);
                   break;
                 case "dict":
-                  schema.dict = mapValues(args[index], Schema.from);
+                  schema2.dict = (0, import_cosmokit16.valueMap)(args[index], Schema2.from);
                   break;
-                case "bits":
-                  {
-                    schema.bits = {};
-                    for (const key2 in args[index]) {
-                      if (typeof args[index][key2] !== "number") continue;
-                      schema.bits[key2] = args[index][key2];
-                    }
-                    break;
+                case "bits": {
+                  schema2.bits = {};
+                  for (const key2 in args[index]) {
+                    if (typeof args[index][key2] !== "number")
+                      continue;
+                    schema2.bits[key2] = args[index][key2];
                   }
-                case "callback":
-                  {
-                    schema.callback = args[index];
-                    schema.callback["toJSON"] ||= () => schema.callback.toString();
-                    break;
-                  }
+                  break;
+                }
+                case "callback": {
+                  schema2.callback = args[index];
+                  (_b5 = schema2.callback)["toJSON"] || (_b5["toJSON"] = () => schema2.callback.toString());
+                  break;
+                }
                 default:
-                  schema[key] = args[index];
+                  schema2[key] = args[index];
               }
             });
-            if (name === "object" || name === "dict") {
-              schema.meta.default = {};
-            } else if (name === "array" || name === "tuple") {
-              schema.meta.default = [];
-            } else if (name === "bitset") {
-              schema.meta.default = 0;
+            if (name2 === "object" || name2 === "dict") {
+              schema2.meta.default = {};
+            } else if (name2 === "array" || name2 === "tuple") {
+              schema2.meta.default = [];
+            } else if (name2 === "bitset") {
+              schema2.meta.default = 0;
             }
-            return schema;
+            return schema2;
           }
         });
       }
-      __name$d(defineMethod, "defineMethod");
-      defineMethod("is", ["callback"], ({
-        callback
-      }) => callback.name);
+      __name10(defineMethod, "defineMethod");
+      defineMethod("is", ["callback"], ({ callback }) => callback.name);
       defineMethod("any", [], () => "any");
       defineMethod("never", [], () => "never");
-      defineMethod("const", ["value"], ({
-        value
-      }) => typeof value === "string" ? JSON.stringify(value) : value);
+      defineMethod("const", ["value"], ({ value }) => typeof value === "string" ? JSON.stringify(value) : value);
       defineMethod("string", [], () => "string");
       defineMethod("number", [], () => "number");
       defineMethod("boolean", [], () => "boolean");
       defineMethod("bitset", ["bits"], () => "bitset");
       defineMethod("function", [], () => "function");
-      defineMethod("array", ["inner"], ({
-        inner
-      }) => `${inner.toString(true)}[]`);
-      defineMethod("dict", ["inner", "sKey"], ({
-        inner,
-        sKey
-      }) => `{ [key: ${sKey.toString()}]: ${inner.toString()} }`);
-      defineMethod("tuple", ["list"], ({
-        list
-      }) => `[${list.map(inner => inner.toString()).join(", ")}]`);
-      defineMethod("object", ["dict"], ({
-        dict
-      }) => {
-        if (Object.keys(dict).length === 0) return "{}";
+      defineMethod("array", ["inner"], ({ inner }) => `${inner.toString(true)}[]`);
+      defineMethod("dict", ["inner", "sKey"], ({ inner, sKey }) => `{ [key: ${sKey.toString()}]: ${inner.toString()} }`);
+      defineMethod("tuple", ["list"], ({ list }) => `[${list.map((inner) => inner.toString()).join(", ")}]`);
+      defineMethod("object", ["dict"], ({ dict }) => {
+        if (Object.keys(dict).length === 0)
+          return "{}";
         return `{ ${Object.entries(dict).map(([key, inner]) => {
           return `${key}${inner.meta.required ? "" : "?"}: ${inner.toString()}`;
         }).join(", ")} }`;
       });
-      defineMethod("union", ["list"], ({
-        list
-      }, inline) => {
-        const result = list.map(({
-          toString: format
-        }) => format()).join(" | ");
+      defineMethod("union", ["list"], ({ list }, inline) => {
+        const result = list.map(({ toString: format }) => format()).join(" | ");
         return inline ? `(${result})` : result;
       });
-      defineMethod("intersect", ["list"], ({
-        list
-      }) => {
-        return `${list.map(inner => inner.toString(true)).join(" & ")}`;
+      defineMethod("intersect", ["list"], ({ list }) => {
+        return `${list.map((inner) => inner.toString(true)).join(" & ")}`;
       });
-      defineMethod("transform", ["inner", "callback", "preserve"], ({
-        inner
-      }, isInner) => inner.toString(isInner));
-      module.exports = Schema;
+      defineMethod("transform", ["inner", "callback", "preserve"], ({ inner }, isInner) => inner.toString(isInner));
+      module.exports = Schema2;
     }
   });
-  var z2 = _exports.z = _exports.Schema = require_src$1();
-  var lib$4 = /*#__PURE__*/Object.freeze({
-    __proto__: null,
-    default: z2
-  });
-  var require$$3 = /*@__PURE__*/getAugmentedNamespace(lib$4);
-  (function (module, _Class, _core$Service$setup, _Class2) {
-    var __create = Object.create;
-    var __defProp = Object.defineProperty;
-    var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
-    var __getOwnPropNames = Object.getOwnPropertyNames;
-    var __getProtoOf = Object.getPrototypeOf;
-    var __hasOwnProp = Object.prototype.hasOwnProperty;
-    var __name = (target, value) => __defProp(target, "name", {
-      value,
-      configurable: true
-    });
-    var __export = (target, all) => {
-      for (var name in all) __defProp(target, name, {
-        get: all[name],
-        enumerable: true
-      });
-    };
-    var __copyProps = (to, from, except, desc) => {
-      if (from && typeof from === "object" || typeof from === "function") {
-        for (let key of __getOwnPropNames(from)) if (!__hasOwnProp.call(to, key) && key !== except) __defProp(to, key, {
-          get: () => from[key],
-          enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable
-        });
-      }
-      return to;
-    };
-    var __reExport = (target, mod, secondTarget) => (__copyProps(target, mod, "default"), secondTarget && __copyProps(secondTarget, mod, "default"));
-    var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(
-    // If the importer is in node compatibility mode or this is not an ESM
-    // file that has been converted to a CommonJS file using a Babel-
-    // compatible transform (i.e. "__esModule" has not been set), then set
-    // "default" to the CommonJS "module.exports" for node compatibility.
-    isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", {
-      value: mod,
-      enumerable: true
-    }) : target, mod));
-    var __toCommonJS = mod => __copyProps(__defProp({}, "__esModule", {
-      value: true
-    }), mod);
 
-    // src/index.ts
-    var src_exports = {};
-    __export(src_exports, {
-      Context: () => Context2,
-      Logger: () => import_logger2.Logger,
-      Schema: () => import_schemastery.default,
-      Service: () => Service2,
-      TimerService: () => import_timer2.TimerService,
-      default: () => src_default,
-      z: () => import_schemastery.default
-    });
-    module.exports = __toCommonJS(src_exports);
-    __reExport(src_exports, lib$7, module.exports);
-    var import_logger2 = lib$6;
-    var import_timer2 = lib$5;
-    var import_schemastery = __toESM(require$$3, 1);
-
-    // src/base.ts
-    var core = __toESM(lib$7, 1);
-    var import_logger = lib$6;
-    var import_timer = lib$5;
-    var Context2 = (_Class = class Context2 extends core.Context {
-      constructor(config) {
-        super(config);
-        _defineProperty(this, "baseDir", void 0);
-        this.baseDir = globalThis.process?.cwd() || "";
-        this.provide("logger", void 0, true);
-        this.provide("timer", void 0, true);
-        this.plugin(import_logger.LoggerService);
-        this.plugin(import_timer.TimerService);
-      }
-    }, __name(_Class, "Context"), _Class);
-    var Service2 = (_core$Service$setup = core.Service.setup, (_Class2 = class Service2 extends core.Service {
-      constructor(...args) {
-        super(...args);
-        /** @deprecated use `this.ctx.logger` instead */
-        _defineProperty(this, "logger", void 0);
-        this.logger = this.ctx.logger(this.name);
-      }
-      [_core$Service$setup]() {
-        this.ctx = new Context2();
-      }
-    }, __name(_Class2, "Service"), _Class2));
-
-    // src/index.ts
-    function src_default() {}
-    __name(src_default, "default");
-  })(lib$8);
-  var libExports$2 = lib$8.exports;
-  var __defProp$c = Object.defineProperty;
-  var __getOwnPropDesc$2 = Object.getOwnPropertyDescriptor;
-  var __getOwnPropNames$3 = Object.getOwnPropertyNames;
-  var __hasOwnProp$2 = Object.prototype.hasOwnProperty;
-  var __name$c = (target, value) => __defProp$c(target, "name", {
-    value,
-    configurable: true
-  });
-  var __export$2 = (target, all) => {
-    for (var name in all) __defProp$c(target, name, {
-      get: all[name],
-      enumerable: true
-    });
-  };
-  var __copyProps$2 = (to, from, except, desc) => {
-    if (from && typeof from === "object" || typeof from === "function") {
-      for (let key of __getOwnPropNames$3(from)) if (!__hasOwnProp$2.call(to, key) && key !== except) __defProp$c(to, key, {
-        get: () => from[key],
-        enumerable: !(desc = __getOwnPropDesc$2(from, key)) || desc.enumerable
-      });
-    }
-    return to;
-  };
-  var __toCommonJS$2 = mod => __copyProps$2(__defProp$c({}, "__esModule", {
-    value: true
-  }), mod);
-
-  // src/index.ts
-  var src_exports$2 = {};
-  __export$2(src_exports$2, {
-    Channel: () => Channel$1,
-    Methods: () => Methods$1,
-    Opcode: () => Opcode$1,
-    Status: () => Status$1,
-    WebSocket: () => WebSocket$3
-  });
-  var lib$3 = __toCommonJS$2(src_exports$2);
-  function Field$1(name) {
-    return {
-      name
-    };
-  }
-  __name$c(Field$1, "Field");
-  function Method$1(name, fields) {
-    return {
-      name,
-      fields: fields.map(Field$1)
-    };
-  }
-  __name$c(Method$1, "Method");
-  var Methods$1 = {
-    "channel.get": Method$1("getChannel", ["channel_id", "guild_id"]),
-    "channel.list": Method$1("getChannelList", ["guild_id", "next"]),
-    "channel.create": Method$1("createChannel", ["guild_id", "data"]),
-    "channel.update": Method$1("updateChannel", ["channel_id", "data"]),
-    "channel.delete": Method$1("deleteChannel", ["channel_id"]),
-    "channel.mute": Method$1("muteChannel", ["channel_id", "guild_id", "enable"]),
-    "message.create": Method$1("createMessage", ["channel_id", "content"]),
-    "message.update": Method$1("editMessage", ["channel_id", "message_id", "content"]),
-    "message.delete": Method$1("deleteMessage", ["channel_id", "message_id"]),
-    "message.get": Method$1("getMessage", ["channel_id", "message_id"]),
-    "message.list": Method$1("getMessageList", ["channel_id", "next"]),
-    "reaction.create": Method$1("createReaction", ["channel_id", "message_id", "emoji"]),
-    "reaction.delete": Method$1("deleteReaction", ["channel_id", "message_id", "emoji", "user_id"]),
-    "reaction.clear": Method$1("clearReaction", ["channel_id", "message_id", "emoji"]),
-    "reaction.list": Method$1("getReactionList", ["channel_id", "message_id", "emoji", "next"]),
-    "guild.get": Method$1("getGuild", ["guild_id"]),
-    "guild.list": Method$1("getGuildList", ["next"]),
-    "guild.member.get": Method$1("getGuildMember", ["guild_id", "user_id"]),
-    "guild.member.list": Method$1("getGuildMemberList", ["guild_id", "next"]),
-    "guild.member.kick": Method$1("kickGuildMember", ["guild_id", "user_id", "permanent"]),
-    "guild.member.mute": Method$1("muteGuildMember", ["guild_id", "user_id", "duration", "reason"]),
-    "guild.member.role.set": Method$1("setGuildMemberRole", ["guild_id", "user_id", "role_id"]),
-    "guild.member.role.unset": Method$1("unsetGuildMemberRole", ["guild_id", "user_id", "role_id"]),
-    "guild.role.list": Method$1("getGuildRoleList", ["guild_id", "next"]),
-    "guild.role.create": Method$1("createGuildRole", ["guild_id", "data"]),
-    "guild.role.update": Method$1("updateGuildRole", ["guild_id", "role_id", "data"]),
-    "guild.role.delete": Method$1("deleteGuildRole", ["guild_id", "role_id"]),
-    "login.get": Method$1("getLogin", []),
-    "user.get": Method$1("getUser", ["user_id"]),
-    "user.channel.create": Method$1("createDirectChannel", ["user_id", "guild_id"]),
-    "friend.list": Method$1("getFriendList", ["next"]),
-    "friend.delete": Method$1("deleteFriend", ["user_id"]),
-    "friend.approve": Method$1("handleFriendRequest", ["message_id", "approve", "comment"]),
-    "guild.approve": Method$1("handleGuildRequest", ["message_id", "approve", "comment"]),
-    "guild.member.approve": Method$1("handleGuildMemberRequest", ["message_id", "approve", "comment"])
-  };
-  var Channel$1;
-  (Channel2 => {
-    (Type2 => {
-      Type2[Type2["TEXT"] = 0] = "TEXT";
-      Type2[Type2["DIRECT"] = 1] = "DIRECT";
-      Type2[Type2["VOICE"] = 2] = "VOICE";
-      Type2[Type2["CATEGORY"] = 3] = "CATEGORY";
-    })(Channel2.Type || (Channel2.Type = {}));
-  })(Channel$1 || (Channel$1 = {}));
-  var Status$1 = /* @__PURE__ */(Status2 => {
-    Status2[Status2["OFFLINE"] = 0] = "OFFLINE";
-    Status2[Status2["ONLINE"] = 1] = "ONLINE";
-    Status2[Status2["CONNECT"] = 2] = "CONNECT";
-    Status2[Status2["DISCONNECT"] = 3] = "DISCONNECT";
-    Status2[Status2["RECONNECT"] = 4] = "RECONNECT";
-    return Status2;
-  })(Status$1 || {});
-  var Opcode$1 = /* @__PURE__ */(Opcode2 => {
-    Opcode2[Opcode2["EVENT"] = 0] = "EVENT";
-    Opcode2[Opcode2["PING"] = 1] = "PING";
-    Opcode2[Opcode2["PONG"] = 2] = "PONG";
-    Opcode2[Opcode2["IDENTIFY"] = 3] = "IDENTIFY";
-    Opcode2[Opcode2["READY"] = 4] = "READY";
-    return Opcode2;
-  })(Opcode$1 || {});
-  var WebSocket$3;
-  (WebSocket2 => {
-    WebSocket2.CONNECTING = 0;
-    WebSocket2.OPEN = 1;
-    WebSocket2.CLOSING = 2;
-    WebSocket2.CLOSED = 3;
-  })(WebSocket$3 || (WebSocket$3 = {}));
-  var __defProp$b = Object.defineProperty;
-  var __name$b = (target, value) => __defProp$b(target, "name", {
-    value,
-    configurable: true
-  });
-
-  // src/index.ts
-  var import_cosmokit$1 = require$$1;
-  var kElement = Symbol.for("satori.element");
-  var ElementConstructor = (_Class3 = class ElementConstructor {
-    get data() {
-      return this.attrs;
-    }
-    getTagName() {
-      if (this.type === "component") {
-        return this.attrs.is?.name ?? "component";
-      } else {
-        return this.type;
-      }
-    }
-    toAttrString() {
-      return Object.entries(this.attrs).map(([key, value]) => {
-        if ((0, import_cosmokit$1.isNullable)(value)) return "";
-        key = (0, import_cosmokit$1.hyphenate)(key);
-        if (value === true) return ` ${key}`;
-        if (value === false) return ` no-${key}`;
-        return ` ${key}="${Element.escape("" + value, true)}"`;
-      }).join("");
-    }
-    toString(strip = false) {
-      if (this.type === "text" && "content" in this.attrs) {
-        return strip ? this.attrs.content : Element.escape(this.attrs.content);
-      }
-      const inner = this.children.map(child => child.toString(strip)).join("");
-      if (strip) return inner;
-      const attrs = this.toAttrString();
-      const tag = this.getTagName();
-      if (!this.children.length) return `<${tag}${attrs}/>`;
-      return `<${tag}${attrs}>${inner}</${tag}>`;
-    }
-  }, __name$b(_Class3, "ElementConstructor"), _Class3);
-  (0, import_cosmokit$1.defineProperty)(ElementConstructor, "name", "Element");
-  (0, import_cosmokit$1.defineProperty)(ElementConstructor.prototype, kElement, true);
-  function Element(type, ...args) {
-    const el = Object.create(ElementConstructor.prototype);
-    const attrs = {},
-      children = [];
-    if (args[0] && typeof args[0] === "object" && !Element.isElement(args[0]) && !Array.isArray(args[0])) {
-      const props = args.shift();
-      for (const [key, value] of Object.entries(props)) {
-        if ((0, import_cosmokit$1.isNullable)(value)) continue;
-        if (key === "children") {
-          args.push(...(0, import_cosmokit$1.makeArray)(value));
-        } else {
-          attrs[(0, import_cosmokit$1.camelize)(key)] = value;
+  // ../cordis/packages/core/lib/index.cjs
+  var require_lib4 = __commonJS({
+    "../cordis/packages/core/lib/index.cjs"(exports, module) {
+      "use strict";
+      var __defProp11 = Object.defineProperty;
+      var __getOwnPropDesc2 = Object.getOwnPropertyDescriptor;
+      var __getOwnPropNames3 = Object.getOwnPropertyNames;
+      var __hasOwnProp2 = Object.prototype.hasOwnProperty;
+      var __name10 = (target, value) => __defProp11(target, "name", { value, configurable: true });
+      var __export2 = (target, all) => {
+        for (var name2 in all)
+          __defProp11(target, name2, { get: all[name2], enumerable: true });
+      };
+      var __copyProps2 = (to, from, except, desc) => {
+        if (from && typeof from === "object" || typeof from === "function") {
+          for (let key of __getOwnPropNames3(from))
+            if (!__hasOwnProp2.call(to, key) && key !== except)
+              __defProp11(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc2(from, key)) || desc.enumerable });
         }
+        return to;
+      };
+      var __toCommonJS2 = (mod) => __copyProps2(__defProp11({}, "__esModule", { value: true }), mod);
+      var src_exports2 = {};
+      __export2(src_exports2, {
+        Context: () => Context4,
+        CordisError: () => CordisError2,
+        EffectScope: () => EffectScope2,
+        ForkScope: () => ForkScope2,
+        Lifecycle: () => Lifecycle2,
+        MainScope: () => MainScope2,
+        Registry: () => Registry2,
+        ScopeStatus: () => ScopeStatus2,
+        Service: () => Service3,
+        applyTraceable: () => applyTraceable2,
+        createCallable: () => createCallable2,
+        createTraceable: () => createTraceable2,
+        isApplicable: () => isApplicable2,
+        isBailed: () => isBailed2,
+        isConstructor: () => isConstructor2,
+        isUnproxyable: () => isUnproxyable2,
+        joinPrototype: () => joinPrototype2,
+        resolveConfig: () => resolveConfig2,
+        symbols: () => symbols2
+      });
+      module.exports = __toCommonJS2(src_exports2);
+      var import_cosmokit52 = require_lib();
+      var import_cosmokit16 = require_lib();
+      function isBailed2(value) {
+        return value !== null && value !== false && value !== void 0;
       }
+      __name10(isBailed2, "isBailed");
+      var _a25;
+      var Lifecycle2 = (_a25 = class {
+        constructor(root2) {
+          __publicField(this, "isActive", false);
+          __publicField(this, "_tasks", /* @__PURE__ */ new Set());
+          __publicField(this, "_hooks", {});
+          this.root = root2;
+          (0, import_cosmokit16.defineProperty)(this, Context4.origin, root2);
+          (0, import_cosmokit16.defineProperty)(this.on("internal/listener", function(name2, listener, prepend) {
+            const method = prepend ? "unshift" : "push";
+            if (name2 === "ready") {
+              if (!this.lifecycle.isActive)
+                return;
+              this.scope.ensure(async () => listener());
+              return () => false;
+            } else if (name2 === "dispose") {
+              this.scope.disposables[method](listener);
+              (0, import_cosmokit16.defineProperty)(listener, "name", "event <dispose>");
+              return () => (0, import_cosmokit16.remove)(this.scope.disposables, listener);
+            } else if (name2 === "fork") {
+              this.scope.runtime.forkables[method](listener);
+              return this.scope.collect("event <fork>", () => (0, import_cosmokit16.remove)(this.scope.runtime.forkables, listener));
+            }
+          }), Context4.static, root2.scope);
+          for (const level of ["info", "error", "warning"]) {
+            (0, import_cosmokit16.defineProperty)(this.on(`internal/${level}`, (format, ...param) => {
+              if (this._hooks[`internal/${level}`].length > 1)
+                return;
+              console.info(format, ...param);
+            }), Context4.static, root2.scope);
+          }
+        }
+        async flush() {
+          while (this._tasks.size) {
+            await Promise.all(Array.from(this._tasks));
+          }
+        }
+        getHooks(name2, thisArg) {
+          const hooks = this._hooks[name2] || [];
+          return hooks.slice().filter(([context]) => {
+            const filter = thisArg?.[Context4.filter];
+            return !filter || filter.call(thisArg, context);
+          }).map(([, callback]) => callback);
+        }
+        prepareEvent(type2, args) {
+          const thisArg = typeof args[0] === "object" ? args.shift() : null;
+          const name2 = args.shift();
+          if (name2 !== "internal/event") {
+            this.emit("internal/event", type2, name2, args, thisArg);
+          }
+          return [this.getHooks(name2, thisArg), thisArg ?? this[Context4.origin]];
+        }
+        async parallel(...args) {
+          const [hooks, thisArg] = this.prepareEvent("parallel", args);
+          await Promise.all(hooks.map(async (callback) => {
+            await callback.apply(thisArg, args);
+          }));
+        }
+        emit(...args) {
+          const [hooks, thisArg] = this.prepareEvent("emit", args);
+          for (const callback of hooks) {
+            callback.apply(thisArg, args);
+          }
+        }
+        async serial(...args) {
+          const [hooks, thisArg] = this.prepareEvent("serial", args);
+          for (const callback of hooks) {
+            const result = await callback.apply(thisArg, args);
+            if (isBailed2(result))
+              return result;
+          }
+        }
+        bail(...args) {
+          const [hooks, thisArg] = this.prepareEvent("bail", args);
+          for (const callback of hooks) {
+            const result = callback.apply(thisArg, args);
+            if (isBailed2(result))
+              return result;
+          }
+        }
+        register(label, hooks, listener, prepend) {
+          const caller = this[Context4.origin];
+          const method = prepend ? "unshift" : "push";
+          hooks[method]([caller, listener]);
+          return caller.state.collect(label, () => this.unregister(hooks, listener));
+        }
+        unregister(hooks, listener) {
+          const index = hooks.findIndex(([context, callback]) => callback === listener);
+          if (index >= 0) {
+            hooks.splice(index, 1);
+            return true;
+          }
+        }
+        on(name2, listener, prepend = false) {
+          var _a33;
+          const caller = this[Context4.origin];
+          caller.scope.assertActive();
+          const result = this.bail(caller, "internal/listener", name2, listener, prepend);
+          if (result)
+            return result;
+          const hooks = (_a33 = this._hooks)[name2] || (_a33[name2] = []);
+          const label = typeof name2 === "string" ? `event <${name2}>` : "event (Symbol)";
+          return this.register(label, hooks, listener, prepend);
+        }
+        once(name2, listener, prepend = false) {
+          const dispose = this.on(name2, function(...args) {
+            dispose();
+            return listener.apply(this, args);
+          }, prepend);
+          return dispose;
+        }
+        off(name2, listener) {
+          return this.unregister(this._hooks[name2] || [], listener);
+        }
+        async start() {
+          this.isActive = true;
+          const hooks = this._hooks.ready || [];
+          while (hooks.length) {
+            const [context, callback] = hooks.shift();
+            context.scope.ensure(async () => callback());
+          }
+          await this.flush();
+        }
+        async stop() {
+          this.isActive = false;
+          this.root.scope.reset();
+        }
+      }, __name10(_a25, "Lifecycle"), _a25);
+      var import_cosmokit42 = require_lib();
+      var import_cosmokit32 = require_lib();
+      var import_cosmokit22 = require_lib();
+      var symbols2 = {
+        // context symbols
+        origin: Symbol.for("cordis.origin"),
+        events: Symbol.for("cordis.events"),
+        static: Symbol.for("cordis.static"),
+        filter: Symbol.for("cordis.filter"),
+        expose: Symbol.for("cordis.expose"),
+        isolate: Symbol.for("cordis.isolate"),
+        internal: Symbol.for("cordis.internal"),
+        intercept: Symbol.for("cordis.intercept"),
+        // service symbols
+        setup: Symbol.for("cordis.setup"),
+        invoke: Symbol.for("cordis.invoke"),
+        extend: Symbol.for("cordis.extend"),
+        provide: Symbol.for("cordis.provide"),
+        immediate: Symbol.for("cordis.immediate")
+      };
+      function isConstructor2(func) {
+        if (!func.prototype)
+          return false;
+        if (func.prototype.constructor !== func)
+          return false;
+        return true;
+      }
+      __name10(isConstructor2, "isConstructor");
+      function resolveConfig2(plugin, config) {
+        const schema2 = plugin["Config"] || plugin["schema"];
+        if (schema2 && plugin["schema"] !== false)
+          config = schema2(config);
+        return config ?? {};
+      }
+      __name10(resolveConfig2, "resolveConfig");
+      function isUnproxyable2(value) {
+        return [Map, Set, Date, Promise].some((constructor) => value instanceof constructor);
+      }
+      __name10(isUnproxyable2, "isUnproxyable");
+      function joinPrototype2(proto1, proto2) {
+        if (proto1 === Object.prototype)
+          return proto2;
+        const result = Object.create(joinPrototype2(Object.getPrototypeOf(proto1), proto2));
+        for (const key of Reflect.ownKeys(proto1)) {
+          Object.defineProperty(result, key, Object.getOwnPropertyDescriptor(proto1, key));
+        }
+        return result;
+      }
+      __name10(joinPrototype2, "joinPrototype");
+      function createTraceable2(ctx, value) {
+        const proxy = new Proxy(value, {
+          get: (target, name2, receiver) => {
+            if (name2 === symbols2.origin || name2 === "caller")
+              return ctx;
+            return Reflect.get(target, name2, receiver);
+          },
+          apply: (target, thisArg, args) => {
+            return applyTraceable2(proxy, target, thisArg, args);
+          }
+        });
+        return proxy;
+      }
+      __name10(createTraceable2, "createTraceable");
+      function applyTraceable2(proxy, value, thisArg, args) {
+        if (!value[symbols2.invoke])
+          return Reflect.apply(value, thisArg, args);
+        return value[symbols2.invoke].apply(proxy, args);
+      }
+      __name10(applyTraceable2, "applyTraceable");
+      function createCallable2(name2, proto) {
+        const self2 = /* @__PURE__ */ __name10(function(...args) {
+          const proxy = createTraceable2(self2[symbols2.origin], self2);
+          return applyTraceable2(proxy, self2, this, args);
+        }, "self");
+        (0, import_cosmokit22.defineProperty)(self2, "name", name2);
+        return Object.setPrototypeOf(self2, proto);
+      }
+      __name10(createCallable2, "createCallable");
+      var ScopeStatus2 = /* @__PURE__ */ ((ScopeStatus22) => {
+        ScopeStatus22[ScopeStatus22["PENDING"] = 0] = "PENDING";
+        ScopeStatus22[ScopeStatus22["LOADING"] = 1] = "LOADING";
+        ScopeStatus22[ScopeStatus22["ACTIVE"] = 2] = "ACTIVE";
+        ScopeStatus22[ScopeStatus22["FAILED"] = 3] = "FAILED";
+        ScopeStatus22[ScopeStatus22["DISPOSED"] = 4] = "DISPOSED";
+        return ScopeStatus22;
+      })(ScopeStatus2 || {});
+      var _a26;
+      var CordisError2 = (_a26 = class extends Error {
+        constructor(code, message) {
+          super(message ?? _a26.Code[code]);
+          this.code = code;
+        }
+      }, __name10(_a26, "CordisError"), _a26);
+      ((CordisError22) => {
+        CordisError22.Code = {
+          INACTIVE_EFFECT: "cannot create effect on inactive context"
+        };
+      })(CordisError2 || (CordisError2 = {}));
+      var _a27;
+      var EffectScope2 = (_a27 = class {
+        constructor(parent, config) {
+          __publicField(this, "uid");
+          __publicField(this, "ctx");
+          __publicField(this, "disposables", []);
+          __publicField(this, "error");
+          __publicField(this, "status", 0);
+          __publicField(this, "isActive", false);
+          // Same as `this.ctx`, but with a more specific type.
+          __publicField(this, "context");
+          __publicField(this, "proxy");
+          __publicField(this, "acceptors", []);
+          __publicField(this, "tasks", /* @__PURE__ */ new Set());
+          __publicField(this, "hasError", false);
+          this.parent = parent;
+          this.config = config;
+          this.uid = parent.registry ? parent.registry.counter : 0;
+          this.ctx = this.context = parent.extend({ scope: this });
+          this.proxy = new Proxy({}, {
+            get: (target, key) => Reflect.get(this.config, key)
+          });
+        }
+        get _config() {
+          return this.runtime.isReactive ? this.proxy : this.config;
+        }
+        assertActive() {
+          if (this.uid !== null || this.isActive)
+            return;
+          throw new CordisError2("INACTIVE_EFFECT");
+        }
+        effect(callback, config) {
+          this.assertActive();
+          const result = isConstructor2(callback) ? new callback(this.ctx, config) : callback(this.ctx, config);
+          let disposed = false;
+          const original = typeof result === "function" ? result : result.dispose.bind(result);
+          const wrapped = /* @__PURE__ */ __name10(() => {
+            if (disposed)
+              return;
+            disposed = true;
+            (0, import_cosmokit32.remove)(this.disposables, wrapped);
+            return original();
+          }, "wrapped");
+          this.disposables.push(wrapped);
+          if (typeof result === "function")
+            return wrapped;
+          result.dispose = wrapped;
+          return result;
+        }
+        collect(label, callback) {
+          const dispose = (0, import_cosmokit32.defineProperty)(() => {
+            (0, import_cosmokit32.remove)(this.disposables, dispose);
+            return callback();
+          }, "name", label);
+          this.disposables.push(dispose);
+          return dispose;
+        }
+        restart() {
+          this.reset();
+          this.error = null;
+          this.hasError = false;
+          this.status = 0;
+          this.start();
+        }
+        _getStatus() {
+          if (this.uid === null)
+            return 4;
+          if (this.hasError)
+            return 3;
+          if (this.tasks.size)
+            return 1;
+          if (this.ready)
+            return 2;
+          return 0;
+        }
+        _updateStatus(callback) {
+          const oldValue = this.status;
+          callback?.();
+          this.status = this._getStatus();
+          if (oldValue !== this.status) {
+            this.context.emit("internal/status", this, oldValue);
+          }
+        }
+        ensure(callback) {
+          const task = callback().catch((reason) => {
+            this.context.emit("internal/error", reason);
+            this.cancel(reason);
+          }).finally(() => {
+            this._updateStatus(() => this.tasks.delete(task));
+            this.context.events._tasks.delete(task);
+          });
+          this._updateStatus(() => this.tasks.add(task));
+          this.context.events._tasks.add(task);
+        }
+        cancel(reason) {
+          this.error = reason;
+          this._updateStatus(() => this.hasError = true);
+          this.reset();
+        }
+        setupInject() {
+          if (!this.runtime.using.length)
+            return;
+          (0, import_cosmokit32.defineProperty)(this.context.on("internal/before-service", (name2) => {
+            if (!this.runtime.using.includes(name2))
+              return;
+            this._updateStatus();
+            this.reset();
+          }), Context4.static, this);
+          (0, import_cosmokit32.defineProperty)(this.context.on("internal/service", (name2) => {
+            if (!this.runtime.using.includes(name2))
+              return;
+            this.start();
+          }), Context4.static, this);
+        }
+        get ready() {
+          return this.runtime.using.every((name2) => !(0, import_cosmokit32.isNullable)(this.ctx[name2]));
+        }
+        reset() {
+          this.isActive = false;
+          this.disposables = this.disposables.splice(0).filter((dispose) => {
+            if (this.uid !== null && dispose[Context4.static] === this)
+              return true;
+            (async () => dispose())().catch((reason) => {
+              this.context.emit("internal/error", reason);
+            });
+          });
+        }
+        init(error) {
+          if (!this.config) {
+            this.cancel(error);
+          } else {
+            this.start();
+          }
+        }
+        start() {
+          if (!this.ready || this.isActive || this.uid === null)
+            return true;
+          this.isActive = true;
+          this._updateStatus(() => this.hasError = false);
+        }
+        accept(...args) {
+          const keys = Array.isArray(args[0]) ? args.shift() : null;
+          const acceptor = { keys, callback: args[0], ...args[1] };
+          return this.effect(() => {
+            this.acceptors.push(acceptor);
+            if (acceptor.immediate)
+              acceptor.callback?.(this.config);
+            return () => (0, import_cosmokit32.remove)(this.acceptors, acceptor);
+          });
+        }
+        decline(keys) {
+          return this.accept(keys, () => true);
+        }
+        checkUpdate(resolved, forced) {
+          if (forced || !this.config)
+            return [true, true];
+          if (forced === false)
+            return [false, false];
+          const modified = /* @__PURE__ */ Object.create(null);
+          const checkPropertyUpdate = /* @__PURE__ */ __name10((key) => {
+            const result = modified[key] ?? (modified[key] = !(0, import_cosmokit32.deepEqual)(this.config[key], resolved[key]));
+            hasUpdate || (hasUpdate = result);
+            return result;
+          }, "checkPropertyUpdate");
+          const ignored = /* @__PURE__ */ new Set();
+          let hasUpdate = false, shouldRestart = false;
+          let fallback = this.runtime.isReactive || null;
+          for (const { keys, callback, passive } of this.acceptors) {
+            if (!keys) {
+              fallback || (fallback = !passive);
+            } else if (passive) {
+              keys?.forEach((key) => ignored.add(key));
+            } else {
+              let hasUpdate2 = false;
+              for (const key of keys) {
+                hasUpdate2 || (hasUpdate2 = checkPropertyUpdate(key));
+              }
+              if (!hasUpdate2)
+                continue;
+            }
+            const result = callback?.(resolved);
+            if (result)
+              shouldRestart = true;
+          }
+          for (const key in { ...this.config, ...resolved }) {
+            if (fallback === false)
+              continue;
+            if (!(key in modified) && !ignored.has(key)) {
+              const hasUpdate2 = checkPropertyUpdate(key);
+              if (fallback === null)
+                shouldRestart || (shouldRestart = hasUpdate2);
+            }
+          }
+          return [hasUpdate, shouldRestart];
+        }
+      }, __name10(_a27, "EffectScope"), _a27);
+      var _a28;
+      var ForkScope2 = (_a28 = class extends EffectScope2 {
+        constructor(parent, runtime, config, error) {
+          super(parent, config);
+          __publicField(this, "dispose");
+          this.runtime = runtime;
+          this.dispose = (0, import_cosmokit32.defineProperty)(parent.scope.collect(`fork <${parent.runtime.name}>`, () => {
+            this.uid = null;
+            this.reset();
+            this.context.emit("internal/fork", this);
+            const result = (0, import_cosmokit32.remove)(runtime.disposables, this.dispose);
+            if ((0, import_cosmokit32.remove)(runtime.children, this) && !runtime.children.length) {
+              parent.registry.delete(runtime.plugin);
+            }
+            return result;
+          }), Context4.static, runtime);
+          runtime.children.push(this);
+          runtime.disposables.push(this.dispose);
+          this.context.emit("internal/fork", this);
+          if (runtime.isReusable) {
+            this.setupInject();
+          }
+          this.init(error);
+        }
+        start() {
+          if (super.start())
+            return true;
+          for (const fork of this.runtime.forkables) {
+            this.ensure(async () => fork(this.context, this._config));
+          }
+        }
+        update(config, forced) {
+          const oldConfig = this.config;
+          const state = this.runtime.isForkable ? this : this.runtime;
+          if (state.config !== oldConfig)
+            return;
+          const resolved = resolveConfig2(this.runtime.plugin, config);
+          const [hasUpdate, shouldRestart] = state.checkUpdate(resolved, forced);
+          this.context.emit("internal/before-update", this, config);
+          this.config = resolved;
+          state.config = resolved;
+          if (hasUpdate) {
+            this.context.emit("internal/update", this, oldConfig);
+          }
+          if (shouldRestart)
+            state.restart();
+        }
+      }, __name10(_a28, "ForkScope"), _a28);
+      var _a29;
+      var MainScope2 = (_a29 = class extends EffectScope2 {
+        constructor(registry, plugin, config, error) {
+          super(registry[Context4.origin], config);
+          __publicField(this, "value");
+          __publicField(this, "runtime", this);
+          __publicField(this, "schema");
+          __publicField(this, "name");
+          __publicField(this, "using", []);
+          __publicField(this, "inject", /* @__PURE__ */ new Set());
+          __publicField(this, "forkables", []);
+          __publicField(this, "children", []);
+          __publicField(this, "isReusable", false);
+          __publicField(this, "isReactive", false);
+          __publicField(this, "apply", (context, config) => {
+            if (typeof this.plugin !== "function") {
+              return this.plugin.apply(context, config);
+            } else if (isConstructor2(this.plugin)) {
+              const instance = new this.plugin(context, config);
+              const name2 = instance[Context4.expose];
+              if (name2) {
+                context[name2] = instance;
+              }
+              if (instance["fork"]) {
+                this.forkables.push(instance["fork"].bind(instance));
+              }
+              return instance;
+            } else {
+              return this.plugin(context, config);
+            }
+          });
+          this.plugin = plugin;
+          registry.set(plugin, this);
+          if (!plugin) {
+            this.name = "root";
+            this.isActive = true;
+          } else {
+            this.setup();
+            this.init(error);
+          }
+        }
+        get isForkable() {
+          return this.forkables.length > 0;
+        }
+        fork(parent, config, error) {
+          return new ForkScope2(parent, this, config, error);
+        }
+        dispose() {
+          this.uid = null;
+          this.reset();
+          this.context.emit("internal/runtime", this);
+          return true;
+        }
+        setup() {
+          const { name: name2 } = this.plugin;
+          if (name2 && name2 !== "apply")
+            this.name = name2;
+          this.schema = this.plugin["Config"] || this.plugin["schema"];
+          const inject2 = this.plugin["using"] || this.plugin["inject"] || [];
+          if (Array.isArray(inject2)) {
+            this.using = inject2;
+            this.inject = new Set(inject2);
+          } else {
+            this.using = inject2.required || [];
+            this.inject = /* @__PURE__ */ new Set([...this.using, ...inject2.optional || []]);
+          }
+          this.isReusable = this.plugin["reusable"];
+          this.isReactive = this.plugin["reactive"];
+          this.context.emit("internal/runtime", this);
+          if (this.isReusable) {
+            this.forkables.push(this.apply);
+          } else {
+            super.setupInject();
+          }
+        }
+        reset() {
+          super.reset();
+          for (const fork of this.children) {
+            fork.reset();
+          }
+        }
+        start() {
+          if (super.start())
+            return true;
+          if (!this.isReusable && this.plugin) {
+            this.ensure(async () => this.value = this.apply(this.ctx, this._config));
+          }
+          for (const fork of this.children) {
+            fork.start();
+          }
+        }
+        update(config, forced) {
+          if (this.isForkable) {
+            this.context.emit("internal/warning", new Error(`attempting to update forkable plugin "${this.plugin.name}", which may lead to unexpected behavior`));
+          }
+          const oldConfig = this.config;
+          const resolved = resolveConfig2(this.runtime.plugin || this.context.constructor, config);
+          const [hasUpdate, shouldRestart] = this.checkUpdate(resolved, forced);
+          const state = this.children.find((fork) => fork.config === oldConfig);
+          this.config = resolved;
+          if (state) {
+            this.context.emit("internal/before-update", state, config);
+            state.config = resolved;
+            if (hasUpdate) {
+              this.context.emit("internal/update", state, oldConfig);
+            }
+          }
+          if (shouldRestart)
+            this.restart();
+        }
+      }, __name10(_a29, "MainScope"), _a29);
+      function isApplicable2(object) {
+        return object && typeof object === "object" && typeof object.apply === "function";
+      }
+      __name10(isApplicable2, "isApplicable");
+      var _a30;
+      var Registry2 = (_a30 = class {
+        constructor(root2, config) {
+          __publicField(this, "_counter", 0);
+          __publicField(this, "_internal", /* @__PURE__ */ new Map());
+          this.root = root2;
+          (0, import_cosmokit42.defineProperty)(this, Context4.origin, root2);
+          root2.scope = new MainScope2(this, null, config);
+          root2.scope.runtime.isReactive = true;
+        }
+        get counter() {
+          return ++this._counter;
+        }
+        get size() {
+          return this._internal.size;
+        }
+        resolve(plugin) {
+          if (plugin === null)
+            return plugin;
+          if (typeof plugin === "function")
+            return plugin;
+          if (isApplicable2(plugin))
+            return plugin.apply;
+          throw new Error('invalid plugin, expect function or object with an "apply" method, received ' + typeof plugin);
+        }
+        get(plugin) {
+          return this._internal.get(this.resolve(plugin));
+        }
+        has(plugin) {
+          return this._internal.has(this.resolve(plugin));
+        }
+        set(plugin, state) {
+          const oldValue = this._internal.get(this.resolve(plugin));
+          this._internal.set(this.resolve(plugin), state);
+          return oldValue;
+        }
+        delete(plugin) {
+          plugin = this.resolve(plugin);
+          const runtime = this.get(plugin);
+          if (!runtime)
+            return;
+          this._internal.delete(plugin);
+          runtime.dispose();
+          return runtime;
+        }
+        keys() {
+          return this._internal.keys();
+        }
+        values() {
+          return this._internal.values();
+        }
+        entries() {
+          return this._internal.entries();
+        }
+        forEach(callback) {
+          return this._internal.forEach(callback);
+        }
+        using(inject2, callback) {
+          return this.inject(inject2, callback);
+        }
+        inject(inject2, callback) {
+          return this.plugin({ inject: inject2, apply: callback, name: callback.name });
+        }
+        plugin(plugin, config) {
+          this.resolve(plugin);
+          const context = this[Context4.origin];
+          context.scope.assertActive();
+          let error;
+          try {
+            config = resolveConfig2(plugin, config);
+          } catch (reason) {
+            context.emit("internal/error", reason);
+            error = reason;
+            config = null;
+          }
+          let runtime = this.get(plugin);
+          if (runtime) {
+            if (!runtime.isForkable) {
+              context.emit("internal/warning", new Error(`duplicate plugin detected: ${plugin.name}`));
+            }
+            return runtime.fork(context, config, error);
+          }
+          runtime = new MainScope2(this, plugin, config, error);
+          return runtime.fork(context, config, error);
+        }
+      }, __name10(_a30, "Registry"), _a30);
+      var _a31;
+      var Context4 = (_a31 = class {
+        static is(value) {
+          return !!value?.[_a31.is];
+        }
+        static ensureInternal() {
+          const ctx = this.prototype || this;
+          if (Object.prototype.hasOwnProperty.call(ctx, symbols2.internal)) {
+            return ctx[symbols2.internal];
+          }
+          const parent = _a31.ensureInternal.call(Object.getPrototypeOf(this));
+          return ctx[symbols2.internal] = Object.create(parent);
+        }
+        static resolveInject(ctx, name2) {
+          let internal = ctx[symbols2.internal][name2];
+          while (internal?.type === "alias") {
+            name2 = internal.name;
+            internal = ctx[symbols2.internal][name2];
+          }
+          return [name2, internal];
+        }
+        static associate(object, name2) {
+          return new Proxy(object, {
+            get(target, key, receiver) {
+              if (typeof key === "symbol" || key in target)
+                return Reflect.get(target, key, receiver);
+              const caller = receiver[symbols2.origin];
+              if (!caller?.[symbols2.internal][`${name2}.${key}`])
+                return Reflect.get(target, key, receiver);
+              return caller.get(`${name2}.${key}`);
+            },
+            set(target, key, value, receiver) {
+              if (typeof key === "symbol" || key in target)
+                return Reflect.set(target, key, value, receiver);
+              const caller = receiver[symbols2.origin];
+              if (!caller?.[symbols2.internal][`${name2}.${key}`])
+                return Reflect.set(target, key, value, receiver);
+              caller[`${name2}.${key}`] = value;
+              return true;
+            }
+          });
+        }
+        constructor(config) {
+          const self2 = new Proxy(this, _a31.handler);
+          config = resolveConfig2(this.constructor, config);
+          self2[symbols2.isolate] = /* @__PURE__ */ Object.create(null);
+          self2[symbols2.intercept] = /* @__PURE__ */ Object.create(null);
+          self2.root = self2;
+          self2.mixin("scope", ["config", "runtime", "effect", "collect", "accept", "decline"]);
+          self2.mixin("registry", ["using", "inject", "plugin", "dispose"]);
+          self2.mixin("lifecycle", ["on", "once", "off", "after", "parallel", "emit", "serial", "bail", "start", "stop"]);
+          self2.provide("registry", new Registry2(self2, config), true);
+          self2.provide("lifecycle", new Lifecycle2(self2), true);
+          const attach = /* @__PURE__ */ __name10((internal) => {
+            if (!internal)
+              return;
+            attach(Object.getPrototypeOf(internal));
+            for (const key of Object.getOwnPropertyNames(internal)) {
+              const constructor = internal[key]["prototype"]?.constructor;
+              if (!constructor)
+                continue;
+              self2[internal[key]["key"]] = new constructor(self2, config);
+              (0, import_cosmokit52.defineProperty)(self2[internal[key]["key"]], symbols2.origin, self2);
+            }
+          }, "attach");
+          attach(this[symbols2.internal]);
+          return self2;
+        }
+        [Symbol.for("nodejs.util.inspect.custom")]() {
+          return `Context <${this.name}>`;
+        }
+        get name() {
+          let runtime = this.runtime;
+          while (runtime && !runtime.name) {
+            runtime = runtime.parent.runtime;
+          }
+          return runtime?.name;
+        }
+        get events() {
+          return this.lifecycle;
+        }
+        /** @deprecated */
+        get state() {
+          return this.scope;
+        }
+        get(name2) {
+          const internal = this[symbols2.internal][name2];
+          if (internal?.type !== "service")
+            return;
+          const value = this.root[this[symbols2.isolate][name2]];
+          if (!value || typeof value !== "object" && typeof value !== "function")
+            return value;
+          if (isUnproxyable2(value)) {
+            (0, import_cosmokit52.defineProperty)(value, symbols2.origin, this);
+            return value;
+          }
+          return createTraceable2(this, value);
+        }
+        provide(name2, value, builtin) {
+          const internal = _a31.ensureInternal.call(this.root);
+          if (name2 in internal)
+            return;
+          const key = Symbol(name2);
+          internal[name2] = { type: "service", builtin };
+          this.root[key] = value;
+          this.root[_a31.isolate][name2] = key;
+        }
+        accessor(name2, options) {
+          const internal = _a31.ensureInternal.call(this.root);
+          internal[name2] || (internal[name2] = { type: "accessor", ...options });
+        }
+        alias(name2, aliases) {
+          const internal = _a31.ensureInternal.call(this.root);
+          for (const key of aliases) {
+            internal[key] || (internal[key] = { type: "alias", name: name2 });
+          }
+        }
+        mixin(name2, mixins) {
+          for (const key of mixins) {
+            this.accessor(key, {
+              get() {
+                const service = this[name2];
+                if ((0, import_cosmokit52.isNullable)(service))
+                  return service;
+                const value = Reflect.get(service, key);
+                if (typeof value !== "function")
+                  return value;
+                return value.bind(service);
+              },
+              set(value) {
+                return Reflect.set(this[name2], key, value);
+              }
+            });
+          }
+        }
+        extend(meta = {}) {
+          return Object.assign(Object.create(this), meta);
+        }
+        isolate(name2, label) {
+          const shadow = Object.create(this[symbols2.isolate]);
+          shadow[name2] = label ?? Symbol(name2);
+          return this.extend({ [symbols2.isolate]: shadow });
+        }
+        intercept(name2, config) {
+          const intercept = Object.create(this[symbols2.intercept]);
+          intercept[name2] = config;
+          return this.extend({ [symbols2.intercept]: intercept });
+        }
+      }, __name10(_a31, "Context"), __publicField(_a31, "origin", symbols2.origin), __publicField(_a31, "events", symbols2.events), __publicField(_a31, "static", symbols2.static), __publicField(_a31, "filter", symbols2.filter), __publicField(_a31, "expose", symbols2.expose), __publicField(_a31, "isolate", symbols2.isolate), __publicField(_a31, "internal", symbols2.internal), __publicField(_a31, "intercept", symbols2.intercept), /** @deprecated use `Context.trace` instead */
+      __publicField(_a31, "current", _a31.origin), _a31.is[Symbol.toPrimitive] = () => Symbol.for("cordis.is"), _a31.prototype[_a31.is] = true, __publicField(_a31, "handler", {
+        get(target, prop, ctx) {
+          if (typeof prop !== "string")
+            return Reflect.get(target, prop, ctx);
+          const checkInject = /* @__PURE__ */ __name10((name22) => {
+            if (Reflect.has(target, name22))
+              return;
+            if (["prototype", "then", "registry", "lifecycle"].includes(name22))
+              return;
+            if (name22[0] === "$" || name22[0] === "_")
+              return;
+            if (!ctx.runtime.plugin)
+              return;
+            let parent = ctx;
+            while (parent.runtime.plugin) {
+              for (const key of parent.runtime.inject) {
+                if (name22 === _a31.resolveInject(parent, key)[0])
+                  return;
+              }
+              parent = parent.scope.parent;
+            }
+            ctx.emit("internal/warning", new Error(`property ${name22} is not registered, declare it as \`inject\` to suppress this warning`));
+          }, "checkInject");
+          const [name2, internal] = _a31.resolveInject(ctx, prop);
+          if (!internal) {
+            checkInject(name2);
+            return Reflect.get(target, name2, ctx);
+          }
+          if (internal.type === "accessor") {
+            return internal.get.call(ctx);
+          } else if (internal.type === "service") {
+            if (!internal.builtin)
+              checkInject(name2);
+            return ctx.get(name2);
+          }
+        },
+        set(target, prop, value, ctx) {
+          if (typeof prop !== "string")
+            return Reflect.set(target, prop, value, ctx);
+          const [name2, internal] = _a31.resolveInject(ctx, prop);
+          if (!internal)
+            return Reflect.set(target, name2, value, ctx);
+          if (internal.type === "accessor") {
+            if (!internal.set)
+              return false;
+            return internal.set.call(ctx, value);
+          }
+          const key = ctx[symbols2.isolate][name2];
+          const oldValue = ctx.root[key];
+          if (oldValue === value)
+            return true;
+          if (value && oldValue) {
+            throw new Error(`service ${name2} has been registered`);
+          }
+          if (value) {
+            ctx.on("dispose", () => ctx[name2] = void 0);
+          }
+          if (isUnproxyable2(value)) {
+            ctx.emit("internal/warning", new Error(`service ${name2} is an unproxyable object, which may lead to unexpected behavior`));
+          }
+          const self2 = /* @__PURE__ */ Object.create(null);
+          self2[symbols2.filter] = (ctx2) => {
+            return ctx[symbols2.isolate][name2] === ctx2[symbols2.isolate][name2];
+          };
+          ctx.root.emit(self2, "internal/before-service", name2, value);
+          ctx.root[key] = value;
+          if (value instanceof Object) {
+            (0, import_cosmokit52.defineProperty)(value, symbols2.origin, ctx);
+          }
+          ctx.root.emit(self2, "internal/service", name2, oldValue);
+          return true;
+        }
+      }), _a31);
+      Context4.prototype[Context4.internal] = /* @__PURE__ */ Object.create(null);
+      var import_cosmokit62 = require_lib();
+      var _a32, _b5;
+      var Service3 = (_a32 = class {
+        constructor(...args) {
+          __publicField(this, "ctx");
+          __publicField(this, _b5);
+          __publicField(this, "name");
+          __publicField(this, "config");
+          let _ctx, name2, immediate, config;
+          if (Context4.is(args[0])) {
+            _ctx = args[0];
+            if (typeof args[1] === "string") {
+              name2 = args[1];
+              immediate = args[2];
+            } else {
+              config = args[1];
+            }
+          } else {
+            config = args[0];
+          }
+          name2 ?? (name2 = this.constructor[symbols2.provide]);
+          immediate ?? (immediate = this.constructor[symbols2.immediate]);
+          let self2 = this;
+          if (self2[symbols2.invoke]) {
+            self2 = createCallable2(name2, joinPrototype2(Object.getPrototypeOf(this), Function.prototype));
+          }
+          if (_ctx) {
+            self2.ctx = _ctx;
+          } else {
+            self2[symbols2.setup]();
+          }
+          self2.name = name2;
+          self2.config = config;
+          (0, import_cosmokit62.defineProperty)(self2, symbols2.origin, self2.ctx);
+          self2.ctx.provide(name2);
+          self2.ctx.runtime.name = name2;
+          if (immediate) {
+            if (_ctx)
+              self2[symbols2.expose] = name2;
+            else
+              self2.ctx[name2] = self2;
+          }
+          self2.ctx.on("ready", async () => {
+            await Promise.resolve();
+            await self2.start();
+            if (!immediate)
+              self2.ctx[name2] = self2;
+          });
+          self2.ctx.on("dispose", () => self2.stop());
+          return Context4.associate(self2, name2);
+        }
+        start() {
+        }
+        stop() {
+        }
+        [(_b5 = symbols2.origin, symbols2.filter)](ctx) {
+          return ctx[symbols2.isolate][this.name] === this.ctx[symbols2.isolate][this.name];
+        }
+        [symbols2.setup]() {
+          this.ctx = new Context4();
+        }
+        [symbols2.extend](props) {
+          const caller = this[symbols2.origin];
+          let self2;
+          if (this[_a32.invoke]) {
+            self2 = createCallable2(this.name, this);
+          } else {
+            self2 = Object.create(this);
+          }
+          (0, import_cosmokit62.defineProperty)(self2, symbols2.origin, caller);
+          return Context4.associate(Object.assign(self2, props), this.name);
+        }
+        static [Symbol.hasInstance](instance) {
+          let constructor = instance.constructor;
+          while (constructor) {
+            if (constructor === this)
+              return true;
+            constructor = Object.getPrototypeOf(constructor);
+          }
+          return false;
+        }
+      }, __name10(_a32, "Service"), __publicField(_a32, "setup", symbols2.setup), __publicField(_a32, "invoke", symbols2.invoke), __publicField(_a32, "extend", symbols2.extend), __publicField(_a32, "provide", symbols2.provide), __publicField(_a32, "immediate", symbols2.immediate), _a32);
     }
-    for (const child of args) {
-      children.push(...Element.toElementArray(child));
+  });
+
+  // ../cordis/packages/logger/lib/index.cjs
+  var require_lib5 = __commonJS({
+    "../cordis/packages/logger/lib/index.cjs"(exports, module) {
+      "use strict";
+      var __create2 = Object.create;
+      var __defProp11 = Object.defineProperty;
+      var __getOwnPropDesc2 = Object.getOwnPropertyDescriptor;
+      var __getOwnPropNames3 = Object.getOwnPropertyNames;
+      var __getProtoOf2 = Object.getPrototypeOf;
+      var __hasOwnProp2 = Object.prototype.hasOwnProperty;
+      var __name10 = (target, value) => __defProp11(target, "name", { value, configurable: true });
+      var __export2 = (target, all) => {
+        for (var name2 in all)
+          __defProp11(target, name2, { get: all[name2], enumerable: true });
+      };
+      var __copyProps2 = (to, from, except, desc) => {
+        if (from && typeof from === "object" || typeof from === "function") {
+          for (let key of __getOwnPropNames3(from))
+            if (!__hasOwnProp2.call(to, key) && key !== except)
+              __defProp11(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc2(from, key)) || desc.enumerable });
+        }
+        return to;
+      };
+      var __toESM2 = (mod, isNodeMode, target) => (target = mod != null ? __create2(__getProtoOf2(mod)) : {}, __copyProps2(
+        // If the importer is in node compatibility mode or this is not an ESM
+        // file that has been converted to a CommonJS file using a Babel-
+        // compatible transform (i.e. "__esModule" has not been set), then set
+        // "default" to the CommonJS "module.exports" for node compatibility.
+        isNodeMode || !mod || !mod.__esModule ? __defProp11(target, "default", { value: mod, enumerable: true }) : target,
+        mod
+      ));
+      var __toCommonJS2 = (mod) => __copyProps2(__defProp11({}, "__esModule", { value: true }), mod);
+      var src_exports2 = {};
+      __export2(src_exports2, {
+        Logger: () => import_levi_reggol3.default,
+        LoggerService: () => LoggerService2,
+        default: () => src_default2
+      });
+      module.exports = __toCommonJS2(src_exports2);
+      var import_core4 = require_lib4();
+      var import_levi_reggol3 = __toESM2(require_lib2(), 1);
+      var _a25, _b5;
+      var LoggerService2 = (_b5 = class extends import_core4.Service {
+        constructor(ctx) {
+          super(ctx, "logger", true);
+          ctx.on("internal/info", function(format, ...args) {
+            this.logger("app").info(format, ...args);
+          });
+          ctx.on("internal/error", function(format, ...args) {
+            this.logger("app").error(format, ...args);
+          });
+          ctx.on("internal/warning", function(format, ...args) {
+            this.logger("app").warn(format, ...args);
+          });
+        }
+        [(_a25 = import_core4.Service.provide, import_core4.Service.invoke)](name2) {
+          return new import_levi_reggol3.default(name2, { [import_core4.Context.origin]: this });
+        }
+      }, __name10(_b5, "LoggerService"), __publicField(_b5, _a25, "logger"), (() => {
+        for (const type2 of [
+          "success",
+          "error",
+          "info",
+          "warn",
+          "debug",
+          "extend"
+        ]) {
+          _b5.prototype[type2] = function(...args) {
+            const caller = this[import_core4.Context.origin];
+            return this(caller.name)[type2](...args);
+          };
+        }
+      })(), _b5);
+      var src_default2 = LoggerService2;
     }
-    if (typeof type === "function") {
-      attrs.is = type;
-      type = "component";
+  });
+
+  // ../cordis/packages/timer/lib/index.cjs
+  var require_lib6 = __commonJS({
+    "../cordis/packages/timer/lib/index.cjs"(exports, module) {
+      "use strict";
+      var __defProp11 = Object.defineProperty;
+      var __getOwnPropDesc2 = Object.getOwnPropertyDescriptor;
+      var __getOwnPropNames3 = Object.getOwnPropertyNames;
+      var __hasOwnProp2 = Object.prototype.hasOwnProperty;
+      var __name10 = (target, value) => __defProp11(target, "name", { value, configurable: true });
+      var __export2 = (target, all) => {
+        for (var name2 in all)
+          __defProp11(target, name2, { get: all[name2], enumerable: true });
+      };
+      var __copyProps2 = (to, from, except, desc) => {
+        if (from && typeof from === "object" || typeof from === "function") {
+          for (let key of __getOwnPropNames3(from))
+            if (!__hasOwnProp2.call(to, key) && key !== except)
+              __defProp11(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc2(from, key)) || desc.enumerable });
+        }
+        return to;
+      };
+      var __toCommonJS2 = (mod) => __copyProps2(__defProp11({}, "__esModule", { value: true }), mod);
+      var src_exports2 = {};
+      __export2(src_exports2, {
+        TimerService: () => TimerService3,
+        default: () => src_default2
+      });
+      module.exports = __toCommonJS2(src_exports2);
+      var import_core4 = require_lib4();
+      var import_cosmokit16 = require_lib();
+      var _a25;
+      var TimerService3 = (_a25 = class extends import_core4.Service {
+        constructor(ctx) {
+          super(ctx, "timer", true);
+          ctx.mixin("timer", ["setTimeout", "setInterval", "sleep", "throttle", "debounce"]);
+        }
+        setTimeout(callback, delay) {
+          const dispose = this[import_core4.Context.origin].effect(() => {
+            const timer = setTimeout(() => {
+              dispose();
+              callback();
+            }, delay);
+            return () => clearTimeout(timer);
+          });
+          return dispose;
+        }
+        setInterval(callback, delay) {
+          return this[import_core4.Context.origin].effect(() => {
+            const timer = setInterval(callback, delay);
+            return () => clearInterval(timer);
+          });
+        }
+        sleep(delay) {
+          const caller = this[import_core4.Context.origin];
+          return new Promise((resolve, reject) => {
+            const dispose1 = this.setTimeout(() => {
+              dispose1();
+              dispose2();
+              resolve();
+            }, delay);
+            const dispose2 = caller.on("dispose", () => {
+              dispose1();
+              dispose2();
+              reject(new Error("Context has been disposed"));
+            });
+          });
+        }
+        createWrapper(callback, isDisposed = false) {
+          const caller = this[import_core4.Context.origin];
+          caller.scope.assertActive();
+          let timer;
+          const dispose = /* @__PURE__ */ __name10(() => {
+            isDisposed = true;
+            (0, import_cosmokit16.remove)(caller.scope.disposables, dispose);
+            clearTimeout(timer);
+          }, "dispose");
+          const wrapper = /* @__PURE__ */ __name10((...args) => {
+            clearTimeout(timer);
+            timer = callback(args, () => !isDisposed && caller.scope.isActive);
+          }, "wrapper");
+          wrapper.dispose = dispose;
+          caller.scope.disposables.push(dispose);
+          return wrapper;
+        }
+        throttle(callback, delay, noTrailing) {
+          let lastCall = -Infinity;
+          const execute = /* @__PURE__ */ __name10((...args) => {
+            lastCall = Date.now();
+            callback(...args);
+          }, "execute");
+          return this.createWrapper((args, isActive) => {
+            const now = Date.now();
+            const remaining = delay - (now - lastCall);
+            if (remaining <= 0) {
+              execute(...args);
+            } else if (isActive()) {
+              return setTimeout(execute, remaining, ...args);
+            }
+          }, noTrailing);
+        }
+        debounce(callback, delay) {
+          return this.createWrapper((args, isActive) => {
+            if (!isActive())
+              return;
+            return setTimeout(callback, delay, ...args);
+          });
+        }
+      }, __name10(_a25, "TimerService"), _a25);
+      var src_default2 = TimerService3;
     }
-    return Object.assign(el, {
-      type,
-      attrs,
-      children
-    });
-  }
-  __name$b(Element, "Element");
-  var evaluate$1 = new Function("expr", "context", `
+  });
+
+  // ../cordis/packages/cordis/lib/index.cjs
+  var require_lib7 = __commonJS({
+    "../cordis/packages/cordis/lib/index.cjs"(exports, module) {
+      "use strict";
+      var __create2 = Object.create;
+      var __defProp11 = Object.defineProperty;
+      var __getOwnPropDesc2 = Object.getOwnPropertyDescriptor;
+      var __getOwnPropNames3 = Object.getOwnPropertyNames;
+      var __getProtoOf2 = Object.getPrototypeOf;
+      var __hasOwnProp2 = Object.prototype.hasOwnProperty;
+      var __name10 = (target, value) => __defProp11(target, "name", { value, configurable: true });
+      var __export2 = (target, all) => {
+        for (var name2 in all)
+          __defProp11(target, name2, { get: all[name2], enumerable: true });
+      };
+      var __copyProps2 = (to, from, except, desc) => {
+        if (from && typeof from === "object" || typeof from === "function") {
+          for (let key of __getOwnPropNames3(from))
+            if (!__hasOwnProp2.call(to, key) && key !== except)
+              __defProp11(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc2(from, key)) || desc.enumerable });
+        }
+        return to;
+      };
+      var __reExport2 = (target, mod, secondTarget) => (__copyProps2(target, mod, "default"), secondTarget && __copyProps2(secondTarget, mod, "default"));
+      var __toESM2 = (mod, isNodeMode, target) => (target = mod != null ? __create2(__getProtoOf2(mod)) : {}, __copyProps2(
+        // If the importer is in node compatibility mode or this is not an ESM
+        // file that has been converted to a CommonJS file using a Babel-
+        // compatible transform (i.e. "__esModule" has not been set), then set
+        // "default" to the CommonJS "module.exports" for node compatibility.
+        isNodeMode || !mod || !mod.__esModule ? __defProp11(target, "default", { value: mod, enumerable: true }) : target,
+        mod
+      ));
+      var __toCommonJS2 = (mod) => __copyProps2(__defProp11({}, "__esModule", { value: true }), mod);
+      var src_exports2 = {};
+      __export2(src_exports2, {
+        Context: () => Context23,
+        Logger: () => import_logger22.Logger,
+        Schema: () => import_schemastery2.default,
+        Service: () => Service24,
+        TimerService: () => import_timer22.TimerService,
+        default: () => src_default2,
+        z: () => import_schemastery2.default
+      });
+      module.exports = __toCommonJS2(src_exports2);
+      var import_schemastery2 = __toESM2(require_lib3(), 1);
+      __reExport2(src_exports2, require_lib4(), module.exports);
+      var import_logger22 = require_lib5();
+      var import_timer22 = require_lib6();
+      var core2 = __toESM2(require_lib4(), 1);
+      var import_logger4 = require_lib5();
+      var import_timer3 = require_lib6();
+      var _a25;
+      var Context23 = (_a25 = class extends core2.Context {
+        constructor(config) {
+          super(config);
+          __publicField(this, "baseDir");
+          this.baseDir = globalThis.process?.cwd() || "";
+          this.provide("logger", void 0, true);
+          this.provide("timer", void 0, true);
+          this.plugin(import_logger4.LoggerService);
+          this.plugin(import_timer3.TimerService);
+        }
+      }, __name10(_a25, "Context"), _a25);
+      var _a26;
+      var Service24 = (_a26 = class extends core2.Service {
+        constructor(...args) {
+          super(...args);
+          /** @deprecated use `this.ctx.logger` instead */
+          __publicField(this, "logger");
+          this.logger = this.ctx.logger(this.name);
+        }
+        [core2.Service.setup]() {
+          this.ctx = new Context23();
+        }
+      }, __name10(_a26, "Service"), _a26);
+      function src_default2() {
+      }
+      __name10(src_default2, "default");
+    }
+  });
+
+  // ../satori/packages/protocol/lib/index.cjs
+  var require_lib8 = __commonJS({
+    "../satori/packages/protocol/lib/index.cjs"(exports, module) {
+      "use strict";
+      var __defProp11 = Object.defineProperty;
+      var __getOwnPropDesc2 = Object.getOwnPropertyDescriptor;
+      var __getOwnPropNames3 = Object.getOwnPropertyNames;
+      var __hasOwnProp2 = Object.prototype.hasOwnProperty;
+      var __name10 = (target, value) => __defProp11(target, "name", { value, configurable: true });
+      var __export2 = (target, all) => {
+        for (var name2 in all)
+          __defProp11(target, name2, { get: all[name2], enumerable: true });
+      };
+      var __copyProps2 = (to, from, except, desc) => {
+        if (from && typeof from === "object" || typeof from === "function") {
+          for (let key of __getOwnPropNames3(from))
+            if (!__hasOwnProp2.call(to, key) && key !== except)
+              __defProp11(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc2(from, key)) || desc.enumerable });
+        }
+        return to;
+      };
+      var __toCommonJS2 = (mod) => __copyProps2(__defProp11({}, "__esModule", { value: true }), mod);
+      var src_exports2 = {};
+      __export2(src_exports2, {
+        Channel: () => Channel2,
+        Methods: () => Methods2,
+        Opcode: () => Opcode2,
+        Status: () => Status2,
+        WebSocket: () => WebSocket3
+      });
+      module.exports = __toCommonJS2(src_exports2);
+      function Field2(name2) {
+        return { name: name2 };
+      }
+      __name10(Field2, "Field");
+      function Method2(name2, fields) {
+        return { name: name2, fields: fields.map(Field2) };
+      }
+      __name10(Method2, "Method");
+      var Methods2 = {
+        "channel.get": Method2("getChannel", ["channel_id", "guild_id"]),
+        "channel.list": Method2("getChannelList", ["guild_id", "next"]),
+        "channel.create": Method2("createChannel", ["guild_id", "data"]),
+        "channel.update": Method2("updateChannel", ["channel_id", "data"]),
+        "channel.delete": Method2("deleteChannel", ["channel_id"]),
+        "channel.mute": Method2("muteChannel", ["channel_id", "guild_id", "enable"]),
+        "message.create": Method2("createMessage", ["channel_id", "content"]),
+        "message.update": Method2("editMessage", ["channel_id", "message_id", "content"]),
+        "message.delete": Method2("deleteMessage", ["channel_id", "message_id"]),
+        "message.get": Method2("getMessage", ["channel_id", "message_id"]),
+        "message.list": Method2("getMessageList", ["channel_id", "next"]),
+        "reaction.create": Method2("createReaction", ["channel_id", "message_id", "emoji"]),
+        "reaction.delete": Method2("deleteReaction", ["channel_id", "message_id", "emoji", "user_id"]),
+        "reaction.clear": Method2("clearReaction", ["channel_id", "message_id", "emoji"]),
+        "reaction.list": Method2("getReactionList", ["channel_id", "message_id", "emoji", "next"]),
+        "guild.get": Method2("getGuild", ["guild_id"]),
+        "guild.list": Method2("getGuildList", ["next"]),
+        "guild.member.get": Method2("getGuildMember", ["guild_id", "user_id"]),
+        "guild.member.list": Method2("getGuildMemberList", ["guild_id", "next"]),
+        "guild.member.kick": Method2("kickGuildMember", ["guild_id", "user_id", "permanent"]),
+        "guild.member.mute": Method2("muteGuildMember", ["guild_id", "user_id", "duration", "reason"]),
+        "guild.member.role.set": Method2("setGuildMemberRole", ["guild_id", "user_id", "role_id"]),
+        "guild.member.role.unset": Method2("unsetGuildMemberRole", ["guild_id", "user_id", "role_id"]),
+        "guild.role.list": Method2("getGuildRoleList", ["guild_id", "next"]),
+        "guild.role.create": Method2("createGuildRole", ["guild_id", "data"]),
+        "guild.role.update": Method2("updateGuildRole", ["guild_id", "role_id", "data"]),
+        "guild.role.delete": Method2("deleteGuildRole", ["guild_id", "role_id"]),
+        "login.get": Method2("getLogin", []),
+        "user.get": Method2("getUser", ["user_id"]),
+        "user.channel.create": Method2("createDirectChannel", ["user_id", "guild_id"]),
+        "friend.list": Method2("getFriendList", ["next"]),
+        "friend.delete": Method2("deleteFriend", ["user_id"]),
+        "friend.approve": Method2("handleFriendRequest", ["message_id", "approve", "comment"]),
+        "guild.approve": Method2("handleGuildRequest", ["message_id", "approve", "comment"]),
+        "guild.member.approve": Method2("handleGuildMemberRequest", ["message_id", "approve", "comment"])
+      };
+      var Channel2;
+      ((Channel22) => {
+        let Type;
+        ((Type2) => {
+          Type2[Type2["TEXT"] = 0] = "TEXT";
+          Type2[Type2["DIRECT"] = 1] = "DIRECT";
+          Type2[Type2["VOICE"] = 2] = "VOICE";
+          Type2[Type2["CATEGORY"] = 3] = "CATEGORY";
+        })(Type = Channel22.Type || (Channel22.Type = {}));
+      })(Channel2 || (Channel2 = {}));
+      var Status2 = /* @__PURE__ */ ((Status22) => {
+        Status22[Status22["OFFLINE"] = 0] = "OFFLINE";
+        Status22[Status22["ONLINE"] = 1] = "ONLINE";
+        Status22[Status22["CONNECT"] = 2] = "CONNECT";
+        Status22[Status22["DISCONNECT"] = 3] = "DISCONNECT";
+        Status22[Status22["RECONNECT"] = 4] = "RECONNECT";
+        return Status22;
+      })(Status2 || {});
+      var Opcode2 = /* @__PURE__ */ ((Opcode22) => {
+        Opcode22[Opcode22["EVENT"] = 0] = "EVENT";
+        Opcode22[Opcode22["PING"] = 1] = "PING";
+        Opcode22[Opcode22["PONG"] = 2] = "PONG";
+        Opcode22[Opcode22["IDENTIFY"] = 3] = "IDENTIFY";
+        Opcode22[Opcode22["READY"] = 4] = "READY";
+        return Opcode22;
+      })(Opcode2 || {});
+      var WebSocket3;
+      ((WebSocket22) => {
+        WebSocket22.CONNECTING = 0;
+        WebSocket22.OPEN = 1;
+        WebSocket22.CLOSING = 2;
+        WebSocket22.CLOSED = 3;
+      })(WebSocket3 || (WebSocket3 = {}));
+    }
+  });
+
+  // ../satori/packages/element/lib/index.cjs
+  var require_lib9 = __commonJS({
+    "../satori/packages/element/lib/index.cjs"(exports, module) {
+      var __defProp11 = Object.defineProperty;
+      var __name10 = (target, value) => __defProp11(target, "name", { value, configurable: true });
+      var import_cosmokit16 = require_lib();
+      var kElement = Symbol.for("satori.element");
+      var _a25;
+      var ElementConstructor = (_a25 = class {
+        get data() {
+          return this.attrs;
+        }
+        getTagName() {
+          if (this.type === "component") {
+            return this.attrs.is?.name ?? "component";
+          } else {
+            return this.type;
+          }
+        }
+        toAttrString() {
+          return Object.entries(this.attrs).map(([key, value]) => {
+            if ((0, import_cosmokit16.isNullable)(value))
+              return "";
+            key = (0, import_cosmokit16.hyphenate)(key);
+            if (value === true)
+              return ` ${key}`;
+            if (value === false)
+              return ` no-${key}`;
+            return ` ${key}="${Element2.escape("" + value, true)}"`;
+          }).join("");
+        }
+        toString(strip = false) {
+          if (this.type === "text" && "content" in this.attrs) {
+            return strip ? this.attrs.content : Element2.escape(this.attrs.content);
+          }
+          const inner = this.children.map((child) => child.toString(strip)).join("");
+          if (strip)
+            return inner;
+          const attrs = this.toAttrString();
+          const tag = this.getTagName();
+          if (!this.children.length)
+            return `<${tag}${attrs}/>`;
+          return `<${tag}${attrs}>${inner}</${tag}>`;
+        }
+      }, __name10(_a25, "ElementConstructor"), _a25);
+      (0, import_cosmokit16.defineProperty)(ElementConstructor, "name", "Element");
+      (0, import_cosmokit16.defineProperty)(ElementConstructor.prototype, kElement, true);
+      function Element2(type2, ...args) {
+        const el = Object.create(ElementConstructor.prototype);
+        const attrs = {}, children = [];
+        if (args[0] && typeof args[0] === "object" && !Element2.isElement(args[0]) && !Array.isArray(args[0])) {
+          const props = args.shift();
+          for (const [key, value] of Object.entries(props)) {
+            if ((0, import_cosmokit16.isNullable)(value))
+              continue;
+            if (key === "children") {
+              args.push(...(0, import_cosmokit16.makeArray)(value));
+            } else {
+              attrs[(0, import_cosmokit16.camelize)(key)] = value;
+            }
+          }
+        }
+        for (const child of args) {
+          children.push(...Element2.toElementArray(child));
+        }
+        if (typeof type2 === "function") {
+          attrs.is = type2;
+          type2 = "component";
+        }
+        return Object.assign(el, { type: type2, attrs, children });
+      }
+      __name10(Element2, "Element");
+      var evaluate2 = new Function("expr", "context", `
   try {
     with (context) {
       return eval(expr)
     }
   } catch {}
 `);
-  (Element2 => {
-    Element2.jsx = Element2;
-    Element2.jsxs = Element2;
-    Element2.jsxDEV = Element2;
-    Element2.Fragment = "template";
-    function isElement(source) {
-      return source && typeof source === "object" && source[kElement];
-    }
-    Element2.isElement = isElement;
-    __name$b(isElement, "isElement");
-    function toElement(content) {
-      if (typeof content === "string" || typeof content === "number" || typeof content === "boolean") {
-        content = "" + content;
-        if (content) return Element2("text", {
-          content
-        });
-      } else if (isElement(content)) {
-        return content;
-      } else if (!(0, import_cosmokit$1.isNullable)(content)) {
-        throw new TypeError(`Invalid content: ${content}`);
-      }
-    }
-    Element2.toElement = toElement;
-    __name$b(toElement, "toElement");
-    function toElementArray(content) {
-      if (Array.isArray(content)) {
-        return content.map(toElement).filter(x => x);
-      } else {
-        return [toElement(content)].filter(x => x);
-      }
-    }
-    Element2.toElementArray = toElementArray;
-    __name$b(toElementArray, "toElementArray");
-    function normalize(source, context) {
-      return typeof source === "string" ? parse(source, context) : toElementArray(source);
-    }
-    Element2.normalize = normalize;
-    __name$b(normalize, "normalize");
-    function escape(source, inline = false) {
-      const result = source.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
-      return inline ? result.replace(/"/g, "&quot;") : result;
-    }
-    Element2.escape = escape;
-    __name$b(escape, "escape");
-    function unescape(source) {
-      return source.replace(/&lt;/g, "<").replace(/&gt;/g, ">").replace(/&quot;/g, '"').replace(/&#(\d+);/g, (_, code) => code === "38" ? _ : String.fromCharCode(+code)).replace(/&#x([0-9a-f]+);/gi, (_, code) => code === "26" ? _ : String.fromCharCode(parseInt(code, 16))).replace(/&(amp|#38|#x26);/g, "&");
-    }
-    Element2.unescape = unescape;
-    __name$b(unescape, "unescape");
-    function from(source, options = {}) {
-      const elements = parse(source);
-      if (options.caret) {
-        if (options.type && elements[0]?.type !== options.type) return;
-        return elements[0];
-      }
-      return select(elements, options.type || "*")[0];
-    }
-    Element2.from = from;
-    __name$b(from, "from");
-    const combRegExp = / *([ >+~]) */g;
-    function parseSelector(input) {
-      return input.split(",").map(query => {
-        const selectors = [];
-        query = query.trim();
-        let combCap,
-          combinator = " ";
-        while (combCap = combRegExp.exec(query)) {
-          selectors.push({
-            type: query.slice(0, combCap.index),
-            combinator
-          });
-          combinator = combCap[1];
-          query = query.slice(combCap.index + combCap[0].length);
+      ((Element22) => {
+        Element22.jsx = Element22;
+        Element22.jsxs = Element22;
+        Element22.jsxDEV = Element22;
+        Element22.Fragment = "template";
+        function isElement(source) {
+          return source && typeof source === "object" && source[kElement];
         }
-        selectors.push({
-          type: query,
-          combinator
-        });
-        return selectors;
-      });
-    }
-    Element2.parseSelector = parseSelector;
-    __name$b(parseSelector, "parseSelector");
-    function select(source, query) {
-      if (!source || !query) return [];
-      if (typeof source === "string") source = parse(source);
-      if (typeof query === "string") query = parseSelector(query);
-      if (!query.length) return [];
-      let adjacent = [];
-      const results = [];
-      for (const [index, element] of source.entries()) {
-        const inner = [];
-        const local = [...query, ...adjacent];
-        adjacent = [];
-        let matched = false;
-        for (const group of local) {
-          const {
-            type,
-            combinator
-          } = group[0];
-          if (type === element.type || type === "*") {
-            if (group.length === 1) {
-              matched = true;
-            } else if ([" ", ">"].includes(group[1].combinator)) {
-              inner.push(group.slice(1));
-            } else if (group[1].combinator === "+") {
-              adjacent.push(group.slice(1));
-            } else {
-              query.push(group.slice(1));
-            }
-          }
-          if (combinator === " ") {
-            inner.push(group);
+        Element22.isElement = isElement;
+        __name10(isElement, "isElement");
+        function toElement(content) {
+          if (typeof content === "string" || typeof content === "number" || typeof content === "boolean") {
+            content = "" + content;
+            if (content)
+              return Element22("text", { content });
+          } else if (isElement(content)) {
+            return content;
+          } else if (!(0, import_cosmokit16.isNullable)(content)) {
+            throw new TypeError(`Invalid content: ${content}`);
           }
         }
-        if (matched) results.push(source[index]);
-        results.push(...select(element.children, inner));
-      }
-      return results;
-    }
-    Element2.select = select;
-    __name$b(select, "select");
-    function interpolate(expr, context) {
-      expr = expr.trim();
-      if (!/^[\w.]+$/.test(expr)) {
-        return evaluate$1(expr, context) ?? "";
-      }
-      let value = context;
-      for (const part of expr.split(".")) {
-        value = value[part];
-        if ((0, import_cosmokit$1.isNullable)(value)) return "";
-      }
-      return value ?? "";
-    }
-    Element2.interpolate = interpolate;
-    __name$b(interpolate, "interpolate");
-    const tagRegExp1 = /(?<comment><!--[\s\S]*?-->)|(?<tag><(\/?)([^!\s>/]*)([^>]*?)\s*(\/?)>)/;
-    const tagRegExp2 = /(?<comment><!--[\s\S]*?-->)|(?<tag><(\/?)([^!\s>/]*)([^>]*?)\s*(\/?)>)|(?<curly>\{(?<derivative>[@:/#][^\s}]*)?[\s\S]*?\})/;
-    const attrRegExp1 = /([^\s=]+)(?:="(?<value1>[^"]*)"|='(?<value2>[^']*)')?/g;
-    const attrRegExp2 = /([^\s=]+)(?:="(?<value1>[^"]*)"|='(?<value2>[^']*)'|=(?<curly>\{([^}]+)\}))?/g;
-    let Position;
-    (Position2 => {
-      Position2[Position2["OPEN"] = 0] = "OPEN";
-      Position2[Position2["CLOSE"] = 1] = "CLOSE";
-      Position2[Position2["EMPTY"] = 2] = "EMPTY";
-      Position2[Position2["CONTINUE"] = 3] = "CONTINUE";
-    })(Position || (Position = {}));
-    function parse(source, context) {
-      const tokens = [];
-      function pushText(content) {
-        if (content) tokens.push(content);
-      }
-      __name$b(pushText, "pushText");
-      const tagRegExp = context ? tagRegExp2 : tagRegExp1;
-      let tagCap;
-      let trimStart = true;
-      while (tagCap = tagRegExp.exec(source)) {
-        const trimEnd = !tagCap.groups.curly;
-        parseContent(source.slice(0, tagCap.index), trimStart, trimEnd);
-        trimStart = trimEnd;
-        source = source.slice(tagCap.index + tagCap[0].length);
-        const [_,,, close, type, extra, empty] = tagCap;
-        if (tagCap.groups.comment) continue;
-        if (tagCap.groups.curly) {
-          let name = "",
-            position = 2 /* EMPTY */;
-          if (tagCap.groups.derivative) {
-            name = tagCap.groups.derivative.slice(1);
-            position = {
-              "@": 2 /* EMPTY */,
-              "#": 0 /* OPEN */,
-              "/": 1 /* CLOSE */,
-              ":": 3 /* CONTINUE */
-            }[tagCap.groups.derivative[0]];
-          }
-          tokens.push({
-            type: "curly",
-            name,
-            position,
-            source: tagCap.groups.curly,
-            extra: tagCap.groups.curly.slice(1 + (tagCap.groups.derivative ?? "").length, -1)
-          });
-          continue;
-        }
-        tokens.push({
-          type: "angle",
-          source: _,
-          name: type || Element2.Fragment,
-          position: close ? 1 /* CLOSE */ : empty ? 2 /* EMPTY */ : 0 /* OPEN */,
-          extra
-        });
-      }
-      parseContent(source, trimStart, true);
-      function parseContent(source2, trimStart2, trimEnd) {
-        source2 = unescape(source2);
-        if (trimStart2) source2 = source2.replace(/^\s*\n\s*/, "");
-        if (trimEnd) source2 = source2.replace(/\s*\n\s*$/, "");
-        pushText(source2);
-      }
-      __name$b(parseContent, "parseContent");
-      return parseTokens(foldTokens(tokens), context);
-    }
-    Element2.parse = parse;
-    __name$b(parse, "parse");
-    function foldTokens(tokens) {
-      const stack = [[{
-        type: "angle",
-        name: Element2.Fragment,
-        position: 0 /* OPEN */,
-        source: "",
-        extra: "",
-        children: {
-          default: []
-        }
-      }, "default"]];
-      function pushToken(...tokens2) {
-        const [token, slot] = stack[0];
-        token.children[slot].push(...tokens2);
-      }
-      __name$b(pushToken, "pushToken");
-      for (const token of tokens) {
-        if (typeof token === "string") {
-          pushToken(token);
-          continue;
-        }
-        const {
-          name,
-          position
-        } = token;
-        if (position === 1 /* CLOSE */) {
-          if (stack[0][0].name === name) {
-            stack.shift();
-          }
-        } else if (position === 3 /* CONTINUE */) {
-          stack[0][0].children[name] = [];
-          stack[0][1] = name;
-        } else if (position === 0 /* OPEN */) {
-          pushToken(token);
-          token.children = {
-            default: []
-          };
-          stack.unshift([token, "default"]);
-        } else {
-          pushToken(token);
-        }
-      }
-      return stack[stack.length - 1][0].children.default;
-    }
-    __name$b(foldTokens, "foldTokens");
-    function parseTokens(tokens, context) {
-      const result = [];
-      for (const token of tokens) {
-        if (typeof token === "string") {
-          result.push(Element2("text", {
-            content: token
-          }));
-        } else if (token.type === "angle") {
-          const attrs = {};
-          const attrRegExp = context ? attrRegExp2 : attrRegExp1;
-          let attrCap;
-          while (attrCap = attrRegExp.exec(token.extra)) {
-            const [, key, v1, v2 = v1, v3] = attrCap;
-            if (v3) {
-              attrs[key] = interpolate(v3, context);
-            } else if (!(0, import_cosmokit$1.isNullable)(v2)) {
-              attrs[key] = unescape(v2);
-            } else if (key.startsWith("no-")) {
-              attrs[key.slice(3)] = false;
-            } else {
-              attrs[key] = true;
-            }
-          }
-          result.push(Element2(token.name, attrs, token.children && parseTokens(token.children.default, context)));
-        } else if (!token.name) {
-          result.push(...toElementArray(interpolate(token.extra, context)));
-        } else if (token.name === "if") {
-          if (evaluate$1(token.extra, context)) {
-            result.push(...parseTokens(token.children.default, context));
+        Element22.toElement = toElement;
+        __name10(toElement, "toElement");
+        function toElementArray(content) {
+          if (Array.isArray(content)) {
+            return content.map(toElement).filter((x) => x);
           } else {
-            result.push(...parseTokens(token.children.else || [], context));
-          }
-        } else if (token.name === "each") {
-          const [expr, ident] = token.extra.split(/\s+as\s+/);
-          const items = interpolate(expr, context);
-          if (!items || !items[Symbol.iterator]) continue;
-          for (const item of items) {
-            result.push(...parseTokens(token.children.default, {
-              ...context,
-              [ident]: item
-            }));
+            return [toElement(content)].filter((x) => x);
           }
         }
-      }
-      return result;
-    }
-    __name$b(parseTokens, "parseTokens");
-    function visit(element, rules, session) {
-      const {
-        type,
-        attrs,
-        children
-      } = element;
-      if (typeof rules === "function") {
-        return rules(element, session);
-      } else {
-        let result = rules[typeof type === "string" ? type : ""] ?? rules.default ?? true;
-        if (typeof result === "function") {
-          result = result(attrs, children, session);
+        Element22.toElementArray = toElementArray;
+        __name10(toElementArray, "toElementArray");
+        function normalize(source, context) {
+          return typeof source === "string" ? parse(source, context) : toElementArray(source);
         }
-        return result;
-      }
-    }
-    __name$b(visit, "visit");
-    function transform(source, rules, session) {
-      const elements = typeof source === "string" ? parse(source) : source;
-      const output = [];
-      elements.forEach(element => {
-        const {
-          type,
-          attrs,
-          children
-        } = element;
-        const result = visit(element, rules, session);
-        if (result === true) {
-          output.push(Element2(type, attrs, transform(children, rules, session)));
-        } else if (result !== false) {
-          output.push(...toElementArray(result));
+        Element22.normalize = normalize;
+        __name10(normalize, "normalize");
+        function escape(source, inline = false) {
+          const result = source.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+          return inline ? result.replace(/"/g, "&quot;") : result;
         }
-      });
-      return typeof source === "string" ? output.join("") : output;
-    }
-    Element2.transform = transform;
-    __name$b(transform, "transform");
-    async function transformAsync(source, rules, session) {
-      const elements = typeof source === "string" ? parse(source) : source;
-      const children = (await Promise.all(elements.map(async element => {
-        const {
-          type,
-          attrs,
-          children: children2
-        } = element;
-        const result = await visit(element, rules, session);
-        if (result === true) {
-          return [Element2(type, attrs, await transformAsync(children2, rules, session))];
-        } else if (result !== false) {
-          return toElementArray(result);
-        } else {
-          return [];
+        Element22.escape = escape;
+        __name10(escape, "escape");
+        function unescape(source) {
+          return source.replace(/&lt;/g, "<").replace(/&gt;/g, ">").replace(/&quot;/g, '"').replace(/&#(\d+);/g, (_, code) => code === "38" ? _ : String.fromCharCode(+code)).replace(/&#x([0-9a-f]+);/gi, (_, code) => code === "26" ? _ : String.fromCharCode(parseInt(code, 16))).replace(/&(amp|#38|#x26);/g, "&");
         }
-      }))).flat(1);
-      return typeof source === "string" ? children.join("") : children;
-    }
-    Element2.transformAsync = transformAsync;
-    __name$b(transformAsync, "transformAsync");
-    function createFactory(type, ...keys) {
-      return (...args) => {
-        const element = Element2(type);
-        keys.forEach((key, index) => {
-          if (!(0, import_cosmokit$1.isNullable)(args[index])) {
-            element.attrs[key] = args[index];
+        Element22.unescape = unescape;
+        __name10(unescape, "unescape");
+        function from(source, options = {}) {
+          const elements = parse(source);
+          if (options.caret) {
+            if (options.type && elements[0]?.type !== options.type)
+              return;
+            return elements[0];
           }
-        });
-        if (args[keys.length]) {
-          Object.assign(element.attrs, args[keys.length]);
+          return select(elements, options.type || "*")[0];
         }
-        return element;
-      };
-    }
-    __name$b(createFactory, "createFactory");
-    Element2.warn = /* @__PURE__ */__name$b(() => {}, "warn");
-    function createAssetFactory(type) {
-      return (src, ...args) => {
-        let prefix = "base64://";
-        if (typeof args[0] === "string") {
-          prefix = `data:${args.shift()};base64,`;
-        }
-        if ((0, import_cosmokit$1.is)("ArrayBuffer", src)) {
-          src = prefix + (0, import_cosmokit$1.arrayBufferToBase64)(src);
-        } else if (ArrayBuffer.isView(src)) {
-          src = prefix + (0, import_cosmokit$1.arrayBufferToBase64)(src.buffer);
-        }
-        if (src.startsWith("base64://")) {
-          (0, Element2.warn)(`protocol "base64:" is deprecated and will be removed in the future, please use "data:" instead`);
-        }
-        return Element2(type, {
-          ...args[0],
-          src
-        });
-      };
-    }
-    __name$b(createAssetFactory, "createAssetFactory");
-    Element2.text = createFactory("text", "content");
-    Element2.at = createFactory("at", "id");
-    Element2.sharp = createFactory("sharp", "id");
-    Element2.quote = createFactory("quote", "id");
-    Element2.image = createAssetFactory("img");
-    Element2.img = createAssetFactory("img");
-    Element2.video = createAssetFactory("video");
-    Element2.audio = createAssetFactory("audio");
-    Element2.file = createAssetFactory("file");
-    function i18n(path, children) {
-      return Element2("i18n", typeof path === "string" ? {
-        path
-      } : path, children);
-    }
-    Element2.i18n = i18n;
-    __name$b(i18n, "i18n");
-  })(Element || (Element = {}));
-  var lib$2 = Element;
-  var __defProp$a = Object.defineProperty;
-  var __getOwnPropDesc$1 = Object.getOwnPropertyDescriptor;
-  var __getOwnPropNames$2 = Object.getOwnPropertyNames;
-  var __hasOwnProp$1 = Object.prototype.hasOwnProperty;
-  var __name$a = (target, value) => __defProp$a(target, "name", {
-    value,
-    configurable: true
-  });
-  var __export$1 = (target, all) => {
-    for (var name in all) __defProp$a(target, name, {
-      get: all[name],
-      enumerable: true
-    });
-  };
-  var __copyProps$1 = (to, from, except, desc) => {
-    if (from && typeof from === "object" || typeof from === "function") {
-      for (let key of __getOwnPropNames$2(from)) if (!__hasOwnProp$1.call(to, key) && key !== except) __defProp$a(to, key, {
-        get: () => from[key],
-        enumerable: !(desc = __getOwnPropDesc$1(from, key)) || desc.enumerable
-      });
-    }
-    return to;
-  };
-  var __toCommonJS$1 = mod => __copyProps$1(__defProp$a({}, "__esModule", {
-    value: true
-  }), mod);
-
-  // src/index.ts
-  var src_exports$1 = {};
-  __export$1(src_exports$1, {
-    HTTP: () => HTTP$1,
-    WebSocket: () => WebSocket$2,
-    default: () => src_default$2
-  });
-  var lib$1 = __toCommonJS$1(src_exports$1);
-  var import_levi_cordis = libExports$2;
-  var import_cosmokit = require$$1;
-
-  // src/ws.ts
-  function sleep$1(ms) {
-    return new Promise(resolve => setTimeout(resolve, ms));
-  }
-  __name$a(sleep$1, "sleep");
-  var WebSocket$2 = (_WebSocket = class WebSocket extends EventTarget {
-    constructor(url, config) {
-      super();
-      _defineProperty(this, "ws", void 0);
-      _defineProperty(this, "_connected", false);
-      _defineProperty(this, "_closed", true);
-      _defineProperty(this, "timeout", void 0);
-      this.url = url;
-      this.timeout = config?.timeout ?? 3e3;
-    }
-    get protocol() {
-      return this.url.split("://")[0];
-    }
-    get readyState() {
-      if (this._closed) return this._connected ? 2 /* CLOSING */ : 3 /* CLOSED */;
-      return this._connected ? 1 /* OPEN */ : 0 /* CONNECTING */;
-    }
-    dispatchEvent(event) {
-      return super.dispatchEvent(event);
-    }
-    // @ts-ignore
-    addEventListener(type, listener) {
-      super.addEventListener(type, listener);
-    }
-    // @ts-ignore
-    removeEventListener(type, listener) {
-      super.removeEventListener(type, listener);
-    }
-    async connect() {
-      if (this.ws) {
-        this.ws.shutdown();
-        this.ws.close();
-      }
-      this._closed = false;
-      this.ws = new WSClient();
-      try {
-        await new Promise((resolve, reject) => {
-          const fail = /* @__PURE__ */__name$a(() => reject(new Error("Failed to connect")), "fail");
-          const okPre = this.ws.connectAsync(this.url, ok => {
-            if (ok) resolve(ok);else fail();
+        Element22.from = from;
+        __name10(from, "from");
+        const combRegExp = / *([ >+~]) */g;
+        function parseSelector(input) {
+          return input.split(",").map((query) => {
+            const selectors = [];
+            query = query.trim();
+            let combCap, combinator = " ";
+            while (combCap = combRegExp.exec(query)) {
+              selectors.push({ type: query.slice(0, combCap.index), combinator });
+              combinator = combCap[1];
+              query = query.slice(combCap.index + combCap[0].length);
+            }
+            selectors.push({ type: query, combinator });
+            return selectors;
           });
-          if (!okPre) fail();
-        });
-      } finally {
-        this._closed = true;
-      }
-      this._connected = true;
-      this.dispatchEvent(new Event("open"));
-      this.ws.listen("onTextReceived", data => {
-        const ev = new Event("message");
-        ev.data = data;
-        this.dispatchEvent(ev);
-      });
-      this.ws.listen("onBinaryReceived", () => {
-        const ev = new Event("error");
-        ev.message = `Unexpected binary data received from ${this.url}`;
-        this.dispatchEvent(ev);
-      });
-      this.ws.listen("onError", msg => {
-        const ev = new Event("error");
-        ev.message = msg;
-        this.dispatchEvent(ev);
-      });
-      this.ws.listen("onLostConnection", code => {
-        this.ws = void 0;
-        this._closed = true;
-        this._connected = false;
-        const ev = new Event("close");
-        ev.code = code;
-        ev.reason = "";
-        this.dispatchEvent(ev);
-      });
-      (async () => {
-        for (;;) {
-          if (this._closed) break;
-          await sleep$1(1);
         }
-        const {
-          ws
-        } = this;
-        if (!ws) return;
-        this.ws = void 0;
-        this._connected = false;
-        ws?.shutdown();
-        ws?.close();
-      })();
-    }
-    close(code, reason) {
-      this._closed = true;
-    }
-    send(data) {
-      if (!this.ws) throw new Error("Connection Closed");
-      this.ws.send(data);
-    }
-  }, __name$a(_WebSocket, "WebSocket"), _WebSocket);
-
-  // src/index.ts
-  var kHTTPError$1 = Symbol.for("undios.error");
-  var HTTPError$1 = (_HTTPError = class HTTPError extends Error {
-    constructor(...args) {
-      super(...args);
-      _defineProperty(this, kHTTPError$1, true);
-      _defineProperty(this, "response", void 0);
-    }
-    static fromResp(response) {
-      const error = new this(`Request failed with status code ${response.status}`);
-      error.response = response;
-      return error;
-    }
-    static is(error) {
-      return !!error?.[kHTTPError$1];
-    }
-  }, __name$a(_HTTPError, "HTTPError"), _HTTPError);
-  var HTTP$1 = (_import_levi_cordis$S = import_levi_cordis.Service.provide, _import_levi_cordis$S2 = import_levi_cordis.Service.immediate, _import_levi_cordis$S3 = import_levi_cordis.Service.invoke, (_HTTP2 = class _HTTP extends import_levi_cordis.Service {
-    constructor(...args) {
-      super(args[0], args[1]);
-      _defineProperty(this, "_decoders", /* @__PURE__ */Object.create(null));
-      this.decoder("json", raw => JSON.parse(raw));
-      this.decoder("text", raw => raw);
-    }
-    decoder(type, decoder) {
-      return this[import_levi_cordis.Context.current].effect(() => {
-        this._decoders[type] = decoder;
-        return () => delete this._decoders[type];
-      });
-    }
-    extend(config = {}) {
-      return this[import_levi_cordis.Service.extend]({
-        config: _HTTP.mergeConfig(this.config, config)
-      });
-    }
-    resolveConfig(init) {
-      const caller = this[import_levi_cordis.Context.current];
-      let result = {
-        headers: {},
-        ...this.config
-      };
-      caller.emit("http/config", result);
-      let intercept = caller[import_levi_cordis.Context.intercept];
-      while (intercept) {
-        result = _HTTP.mergeConfig(result, intercept.http);
-        intercept = Object.getPrototypeOf(intercept);
-      }
-      result = _HTTP.mergeConfig(result, init);
-      return result;
-    }
-    resolveURL(url, config) {
-      if (config.baseURL) {
-        url = `${(0, import_cosmokit.trimSlash)(config.baseURL)}/${url}`;
-      }
-      if (config.params) {
-        const params = Object.entries(config.params).map(([key, value]) => `${encodeURIComponent(key)}=${encodeURIComponent(value)}`).join("&");
-        url = `${url}${url.includes("?") ? "&" : "?"}${params}`;
-      }
-      return url;
-    }
-    async [_import_levi_cordis$S3](...args) {
-      const caller = this[import_levi_cordis.Context.current];
-      let method;
-      if (typeof args[1] === "string") {
-        method = args.shift();
-      }
-      const config = this.resolveConfig(args[1]);
-      const url = this.resolveURL(args[0], config);
-      method ??= config.method ?? "GET";
-      const controller = new AbortController();
-      let timer;
-      const dispose = caller.on("dispose", () => {
-        clearTimeout(timer);
-        controller.abort(new Error("context disposed"));
-      });
-      if (config.timeout) {
-        timer = setTimeout(() => {
-          controller.abort(new Error("timeout"));
-        }, config.timeout);
-      }
-      try {
-        const init = {
-          method,
-          url,
-          headers: config.headers ?? {},
-          data: config.data
-        };
-        if (config.data && typeof config.data === "object") {
-          ;
-          init.data = JSON.stringify(config.data);
-        }
-        caller.emit("http/fetch-init", init.url, init, config);
-        const rawResp = await this.fetch(init);
-        const validateStatus = config.validateStatus ?? (status => Math.floor(status / 100) === 2);
-        if (!validateStatus(rawResp.status)) {
-          const error = _HTTP.Error.fromResp(rawResp);
-          throw error;
-        }
-        if (config.responseType) {
-          if (!(config.responseType in this._decoders)) {
-            throw new TypeError(`Unknown responseType: ${config.responseType}`);
-          }
-          const decoder = this._decoders[config.responseType];
-          const response = {
-            url,
-            status: rawResp.status,
-            data: await decoder(rawResp.data)
-          };
-          return response;
-        }
-        return rawResp;
-      } finally {
-        dispose();
-      }
-    }
-    fetch(init) {
-      switch (init.method) {
-        case "get":
-        case "GET":
-          {
-            return new Promise(resolve => {
-              network.httpGet(init.url, init.headers, (status, result) => {
-                resolve({
-                  url: init.url,
-                  status,
-                  data: result
-                });
-              });
-            });
-          }
-        case "post":
-        case "POST":
-          {
-            return new Promise(resolve => {
-              network.httpPost(init.url, init.headers, init.data, init.headers["Content-Type"] ?? "text/plain", (status, result) => {
-                resolve({
-                  url: init.url,
-                  status,
-                  data: result
-                });
-              });
-            });
-          }
-      }
-    }
-    ws(url, init) {
-      if (init?.headers) this.ctx.logger.warn("headers is not supported in ws");
-      const caller = this[import_levi_cordis.Context.current];
-      const config = this.resolveConfig(init);
-      url = this.resolveURL(url, config);
-      init = {
-        timeout: config.timeout
-      };
-      caller.emit("http/websocket-init", url, init, config);
-      const socket = new WebSocket$2(url, init);
-      const dispose = caller.on("dispose", () => {
-        socket.close(1001, "context disposed");
-      });
-      socket.addEventListener("close", () => {
-        dispose();
-      });
-      return socket;
-    }
-  }, __name$a(_HTTP2, "HTTP"), _defineProperty(_HTTP2, "Error", HTTPError$1), _defineProperty(_HTTP2, _import_levi_cordis$S, "http"), _defineProperty(_HTTP2, _import_levi_cordis$S2, true), (() => {
-    for (const method of ["get"]) {
-      (0, import_cosmokit.defineProperty)(_HTTP2.prototype, method, async function (url, config) {
-        const response = await this(url, {
-          method,
-          ...config
-        });
-        return response.data;
-      });
-    }
-    for (const method of ["post"]) {
-      (0, import_cosmokit.defineProperty)(_HTTP2.prototype, method, async function (url, data, config) {
-        const response = await this(url, {
-          method,
-          data,
-          ...config
-        });
-        return response.data;
-      });
-    }
-  })(), _defineProperty(_HTTP2, "mergeConfig", (target, source) => ({
-    ...target,
-    ...source,
-    headers: {
-      ...target?.headers,
-      ...source?.headers
-    }
-  })), _HTTP2));
-  var src_default$2 = HTTP$1;
-  (function (module, _Session2, _Class4, _Class5, _Class6, _Class7, _Class8, _cordis$Service$setup, _Class9) {
-    var __create = Object.create;
-    var __defProp = Object.defineProperty;
-    var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
-    var __getOwnPropNames = Object.getOwnPropertyNames;
-    var __getProtoOf = Object.getPrototypeOf;
-    var __hasOwnProp = Object.prototype.hasOwnProperty;
-    var __name = (target, value) => __defProp(target, "name", {
-      value,
-      configurable: true
-    });
-    var __export = (target, all) => {
-      for (var name in all) __defProp(target, name, {
-        get: all[name],
-        enumerable: true
-      });
-    };
-    var __copyProps = (to, from, except, desc) => {
-      if (from && typeof from === "object" || typeof from === "function") {
-        for (let key of __getOwnPropNames(from)) if (!__hasOwnProp.call(to, key) && key !== except) __defProp(to, key, {
-          get: () => from[key],
-          enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable
-        });
-      }
-      return to;
-    };
-    var __reExport = (target, mod, secondTarget) => (__copyProps(target, mod, "default"), secondTarget && __copyProps(secondTarget, mod, "default"));
-    var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(
-    // If the importer is in node compatibility mode or this is not an ESM
-    // file that has been converted to a CommonJS file using a Babel-
-    // compatible transform (i.e. "__esModule" has not been set), then set
-    // "default" to the CommonJS "module.exports" for node compatibility.
-    isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", {
-      value: mod,
-      enumerable: true
-    }) : target, mod));
-    var __toCommonJS = mod => __copyProps(__defProp({}, "__esModule", {
-      value: true
-    }), mod);
-
-    // src/index.ts
-    var src_exports = {};
-    __export(src_exports, {
-      Adapter: () => Adapter,
-      Bot: () => Bot,
-      Context: () => Context,
-      Element: () => import_element3.default,
-      MessageEncoder: () => MessageEncoder,
-      Messenger: () => MessageEncoder,
-      Modulator: () => MessageEncoder,
-      Service: () => Service2,
-      Session: () => Session,
-      Universal: () => Universal,
-      defineAccessor: () => defineAccessor,
-      h: () => import_element3.default,
-      segment: () => import_element3.default
-    });
-    module.exports = __toCommonJS(src_exports);
-    var cordis = __toESM(libExports$2, 1);
-    var import_cosmokit4 = require$$1;
-
-    // src/session.ts
-    var import_cosmokit = require$$1;
-    var import_protocol = lib$3;
-    var import_element = __toESM(lib$2, 1);
-    var Session = (_Session2 = class _Session {
-      constructor(bot, event) {
-        _defineProperty(this, "id", void 0);
-        _defineProperty(this, "bot", void 0);
-        _defineProperty(this, "app", void 0);
-        _defineProperty(this, "event", void 0);
-        _defineProperty(this, "locales", []);
-        event.selfId ??= bot.selfId;
-        event.platform ??= bot.platform;
-        event.timestamp ??= Date.now();
-        this.event = event;
-        this.id = ++_Session.counter;
-        (0, import_cosmokit.defineProperty)(this, "bot", bot);
-        (0, import_cosmokit.defineProperty)(this, "app", bot.ctx.root);
-        (0, import_cosmokit.defineProperty)(this, Context.current, bot.ctx);
-        return Context.associate(this, "session");
-      }
-      /** @deprecated */
-      get data() {
-        return this.event;
-      }
-      get isDirect() {
-        return this.event.channel.type === import_protocol.Channel.Type.DIRECT;
-      }
-      set isDirect(value) {
-        (this.event.channel ??= {}).type = value ? import_protocol.Channel.Type.DIRECT : import_protocol.Channel.Type.TEXT;
-      }
-      get author() {
-        return {
-          ...this.event.user,
-          ...this.event.member,
-          userId: this.event.user?.id,
-          username: this.event.user?.name,
-          nickname: this.event.member?.name
-        };
-      }
-      get uid() {
-        return `${this.platform}:${this.userId}`;
-      }
-      get gid() {
-        return `${this.platform}:${this.guildId}`;
-      }
-      get cid() {
-        return `${this.platform}:${this.channelId}`;
-      }
-      get fid() {
-        return `${this.platform}:${this.channelId}:${this.userId}`;
-      }
-      get sid() {
-        return `${this.platform}:${this.selfId}`;
-      }
-      get elements() {
-        return this.event.message?.elements;
-      }
-      set elements(value) {
-        this.event.message ??= {};
-        this.event.message.elements = value;
-      }
-      get content() {
-        return this.event.message?.elements?.join("");
-      }
-      set content(value) {
-        (this.event.message ??= {}).elements = (0, import_cosmokit.isNullable)(value) ? value : import_element.default.parse(value);
-      }
-      setInternal(type, data) {
-        this.event._type = type;
-        this.event._data = data;
-        const internal = Object.create(this.bot.internal);
-        (0, import_cosmokit.defineProperty)(this, type, Object.assign(internal, data));
-      }
-      async transform(elements) {
-        return await import_element.default.transformAsync(elements, ({
-          type,
-          attrs,
-          children
-        }, session) => {
-          const render = type === "component" ? attrs.is : this.app.get("component:" + type);
-          return render?.(attrs, children, session) ?? true;
-        }, this);
-      }
-      toJSON() {
-        return {
-          ...this.event,
-          id: this.id
-        };
-      }
-    }, __name(_Session2, "Session"), _defineProperty(_Session2, "counter", 0), _Session2);
-    function defineAccessor(prototype, name, keys) {
-      Object.defineProperty(prototype, name, {
-        get() {
-          return keys.reduce((data, key) => data?.[key], this);
-        },
-        set(value) {
-          if (value === void 0) return;
-          const _keys = keys.slice();
-          const last = _keys.pop();
-          const data = _keys.reduce((data2, key) => data2[key] ??= {}, this);
-          data[last] = value;
-        }
-      });
-    }
-    __name(defineAccessor, "defineAccessor");
-    defineAccessor(Session.prototype, "type", ["event", "type"]);
-    defineAccessor(Session.prototype, "subtype", ["event", "subtype"]);
-    defineAccessor(Session.prototype, "subsubtype", ["event", "subsubtype"]);
-    defineAccessor(Session.prototype, "selfId", ["event", "selfId"]);
-    defineAccessor(Session.prototype, "platform", ["event", "platform"]);
-    defineAccessor(Session.prototype, "timestamp", ["event", "timestamp"]);
-    defineAccessor(Session.prototype, "userId", ["event", "user", "id"]);
-    defineAccessor(Session.prototype, "channelId", ["event", "channel", "id"]);
-    defineAccessor(Session.prototype, "channelName", ["event", "channel", "name"]);
-    defineAccessor(Session.prototype, "guildId", ["event", "guild", "id"]);
-    defineAccessor(Session.prototype, "guildName", ["event", "guild", "name"]);
-    defineAccessor(Session.prototype, "messageId", ["event", "message", "id"]);
-    defineAccessor(Session.prototype, "operatorId", ["event", "operator", "id"]);
-    defineAccessor(Session.prototype, "roleId", ["event", "role", "id"]);
-    defineAccessor(Session.prototype, "quote", ["event", "message", "quote"]);
-
-    // src/index.ts
-    var import_levi_cordis2 = libExports$2;
-    var import_levi_undios = lib$1;
-    var import_element3 = __toESM(lib$2, 1);
-    __reExport(src_exports, libExports$2, module.exports);
-    var Universal = __toESM(lib$3, 1);
-
-    // src/bot.ts
-    var import_cosmokit2 = require$$1;
-    var import_protocol2 = lib$3;
-    var eventAliases = [["message-created", "message"]];
-    var Bot = (_Class4 = class Bot {
-      constructor(ctx, config, platform) {
-        _defineProperty(this, "user", {});
-        _defineProperty(this, "isBot", true);
-        _defineProperty(this, "hidden", false);
-        _defineProperty(this, "platform", void 0);
-        _defineProperty(this, "adapter", void 0);
-        _defineProperty(this, "error", void 0);
-        _defineProperty(this, "callbacks", {});
-        _defineProperty(this, "logger", void 0);
-        // Same as `this.ctx`, but with a more specific type.
-        _defineProperty(this, "context", void 0);
-        _defineProperty(this, "_status", import_protocol2.Status.OFFLINE);
-        this.ctx = ctx;
-        this.config = config;
-        this.internal = null;
-        this.context = ctx;
-        ctx.bots.push(this);
-        this.context.emit("bot-added", this);
-        if (platform) {
-          this.logger = ctx.logger(platform);
-          this.platform = platform;
-        }
-        ctx.on("ready", async () => {
-          await Promise.resolve();
-          this.dispatchLoginEvent("login-added");
-          return this.start();
-        });
-        ctx.on("dispose", () => this.dispose());
-        ctx.on("interaction/button", session => {
-          const cb = this.callbacks[session.event.button.id];
-          if (cb) cb(session);
-        });
-      }
-      update(login) {
-        const {
-          status,
-          ...rest
-        } = login;
-        Object.assign(this, rest);
-        this.status = status;
-      }
-      dispose() {
-        (0, import_cosmokit2.remove)(this.ctx.bots, this);
-        this.context.emit("bot-removed", this);
-        this.dispatchLoginEvent("login-removed");
-        return this.stop();
-      }
-      dispatchLoginEvent(type) {
-        const session = this.session();
-        session.type = type;
-        session.event.login = this.toJSON();
-        this.dispatch(session);
-      }
-      get status() {
-        return this._status;
-      }
-      set status(value) {
-        if (value === this._status) return;
-        this._status = value;
-        if (this.ctx.bots.includes(this)) {
-          this.context.emit("bot-status-updated", this);
-          this.dispatchLoginEvent("login-updated");
-        }
-      }
-      get isActive() {
-        return this._status !== import_protocol2.Status.OFFLINE && this._status !== import_protocol2.Status.DISCONNECT;
-      }
-      online() {
-        this.status = import_protocol2.Status.ONLINE;
-        this.error = null;
-      }
-      offline(error) {
-        this.status = import_protocol2.Status.OFFLINE;
-        this.error = error;
-      }
-      async start() {
-        if (this.isActive) return;
-        this.status = import_protocol2.Status.CONNECT;
-        try {
-          await this.context.parallel("bot-connect", this);
-          await this.adapter?.connect(this);
-        } catch (error) {
-          this.offline(error);
-        }
-      }
-      async stop() {
-        if (!this.isActive) return;
-        this.status = import_protocol2.Status.DISCONNECT;
-        try {
-          await this.context.parallel("bot-disconnect", this);
-          await this.adapter?.disconnect(this);
-        } catch (error) {
-          this.context.emit("internal/error", error);
-        } finally {
-          this.offline();
-        }
-      }
-      get sid() {
-        return `${this.platform}:${this.selfId}`;
-      }
-      session(event = {}) {
-        const {
-          Session: Session2
-        } = this.ctx.constructor;
-        return new Session2(this, event);
-      }
-      dispatch(session) {
-        if (!this.ctx.lifecycle.isActive) return;
-        let events = [session.type];
-        for (const aliases of eventAliases) {
-          if (aliases.includes(session.type)) {
-            events = aliases;
-            session.type = aliases[0];
-            break;
-          }
-        }
-        this.context.emit("internal/session", session);
-        if (session.type === "internal") {
-          this.context.emit(session.event._type, session.event._data, session.bot);
-          return;
-        }
-        for (const event of events) {
-          this.context.emit(session, event, session);
-        }
-      }
-      async createMessage(channelId, content, guildId, options) {
-        const {
-          MessageEncoder: MessageEncoder2
-        } = this.constructor;
-        return new MessageEncoder2(this, channelId, guildId, options).send(content);
-      }
-      async sendMessage(channelId, content, guildId, options) {
-        const messages = await this.createMessage(channelId, content, guildId, options);
-        return messages.map(message => message.id);
-      }
-      async sendPrivateMessage(userId, content, guildId, options) {
-        const {
-          id
-        } = await this.createDirectChannel(userId, guildId ?? options?.session?.guildId);
-        return this.sendMessage(id, content, null, options);
-      }
-      async supports(name, session = {}) {
-        return !!this[import_protocol2.Methods[name]?.name];
-      }
-      async checkPermission(name, session) {
-        if (name.startsWith("bot.")) {
-          return this.supports(name.slice(4), session);
-        }
-      }
-      toJSON() {
-        return (0, import_cosmokit2.clone)((0, import_cosmokit2.pick)(this, ["platform", "selfId", "status", "user", "hidden"]));
-      }
-      async getLogin() {
-        return this.toJSON();
-      }
-      /** @deprecated use `bot.getLogin()` instead */
-      async getSelf() {
-        const {
-          user
-        } = await this.getLogin();
-        return user;
-      }
-    }, __name(_Class4, "Bot"), _defineProperty(_Class4, "reusable", true), _defineProperty(_Class4, "MessageEncoder", void 0), _Class4);
-    var iterableMethods = ["getMessage", "getReaction", "getFriend", "getGuild", "getGuildMember", "getGuildRole", "getChannel"];
-    for (const name of iterableMethods) {
-      Bot.prototype[name + "Iter"] = function (...args) {
-        let list;
-        if (!this[name + "List"]) throw new Error(`not implemented: ${name}List`);
-        const getList = /* @__PURE__ */__name(async () => {
-          list = await this[name + "List"](...args, list?.next);
-        }, "getList");
-        return {
-          async next() {
-            if (list?.data.length) return {
-              done: false,
-              value: list.data.shift()
-            };
-            if (list && !list?.next) return {
-              done: true,
-              value: void 0
-            };
-            await getList();
-            return this.next();
-          },
-          [Symbol.asyncIterator]() {
-            return this;
-          }
-        };
-      };
-    }
-    defineAccessor(Bot.prototype, "selfId", ["user", "id"]);
-    defineAccessor(Bot.prototype, "userId", ["user", "id"]);
-
-    // src/adapter.ts
-    var import_cosmokit3 = require$$1;
-    var import_protocol3 = lib$3;
-    var import_levi_cordis = libExports$2;
-    var Adapter = (_Class5 = class Adapter {
-      constructor(ctx) {
-        _defineProperty(this, "bots", []);
-        this.ctx = ctx;
-      }
-      async connect(bot) {}
-      async disconnect(bot) {}
-      fork(ctx, bot) {
-        bot.adapter = this;
-        this.bots.push(bot);
-        ctx.on("dispose", () => {
-          (0, import_cosmokit3.remove)(this.bots, bot);
-        });
-      }
-    }, __name(_Class5, "Adapter"), _defineProperty(_Class5, "schema", false), _Class5);
-    ((Adapter2, _WsClientBase, _WsClient) => {
-      Adapter2.WsClientConfig = import_levi_cordis.z.object({
-        retryTimes: import_levi_cordis.z.natural().description("初次连接时的最大重试次数。").default(6),
-        retryInterval: import_levi_cordis.z.natural().role("ms").description("初次连接时的重试时间间隔。").default(5 * import_cosmokit3.Time.second),
-        retryLazy: import_levi_cordis.z.natural().role("ms").description("连接关闭后的重试时间间隔。").default(import_cosmokit3.Time.minute)
-      }).description("连接设置");
-      class WsClientBase extends Adapter2 {
-        constructor(ctx, config) {
-          super(ctx);
-          _defineProperty(this, "socket", void 0);
-          this.config = config;
-        }
-        async start() {
-          let _retryCount = 0;
-          const logger = this.ctx.logger("adapter");
-          const {
-            retryTimes,
-            retryInterval,
-            retryLazy
-          } = this.config;
-          const reconnect = /* @__PURE__ */__name(async (initial = false) => {
-            logger.debug("websocket client opening");
-            const socket = await this.prepare();
-            const url = socket.url.replace(/\?.+/, "");
-            socket.addEventListener("error", event => {
-              if (event.message) logger.warn(event.message);
-            });
-            socket.addEventListener("close", ({
-              code,
-              reason
-            }) => {
-              this.socket = null;
-              logger.debug(`websocket closed with ${code}`);
-              if (!this.getActive()) return;
-              const message = reason.toString() || `failed to connect to ${url}, code: ${code}`;
-              let timeout = retryInterval;
-              if (_retryCount >= retryTimes) {
-                if (initial) {
-                  return this.setStatus(import_protocol3.Status.OFFLINE, new Error(message));
+        Element22.parseSelector = parseSelector;
+        __name10(parseSelector, "parseSelector");
+        function select(source, query) {
+          if (!source || !query)
+            return [];
+          if (typeof source === "string")
+            source = parse(source);
+          if (typeof query === "string")
+            query = parseSelector(query);
+          if (!query.length)
+            return [];
+          let adjacent = [];
+          const results = [];
+          for (const [index, element] of source.entries()) {
+            const inner = [];
+            const local = [...query, ...adjacent];
+            adjacent = [];
+            let matched = false;
+            for (const group2 of local) {
+              const { type: type2, combinator } = group2[0];
+              if (type2 === element.type || type2 === "*") {
+                if (group2.length === 1) {
+                  matched = true;
+                } else if ([" ", ">"].includes(group2[1].combinator)) {
+                  inner.push(group2.slice(1));
+                } else if (group2[1].combinator === "+") {
+                  adjacent.push(group2.slice(1));
                 } else {
-                  timeout = retryLazy;
+                  query.push(group2.slice(1));
                 }
               }
-              _retryCount++;
-              this.setStatus(import_protocol3.Status.RECONNECT);
-              logger.warn(`${message}, will retry in ${import_cosmokit3.Time.format(timeout)}...`);
-              setTimeout(() => {
-                if (this.getActive()) reconnect();
-              }, timeout);
+              if (combinator === " ") {
+                inner.push(group2);
+              }
+            }
+            if (matched)
+              results.push(source[index]);
+            results.push(...select(element.children, inner));
+          }
+          return results;
+        }
+        Element22.select = select;
+        __name10(select, "select");
+        function interpolate2(expr, context) {
+          expr = expr.trim();
+          if (!/^[\w.]+$/.test(expr)) {
+            return evaluate2(expr, context) ?? "";
+          }
+          let value = context;
+          for (const part of expr.split(".")) {
+            value = value[part];
+            if ((0, import_cosmokit16.isNullable)(value))
+              return "";
+          }
+          return value ?? "";
+        }
+        Element22.interpolate = interpolate2;
+        __name10(interpolate2, "interpolate");
+        const tagRegExp1 = /(?<comment><!--[\s\S]*?-->)|(?<tag><(\/?)([^!\s>/]*)([^>]*?)\s*(\/?)>)/;
+        const tagRegExp2 = /(?<comment><!--[\s\S]*?-->)|(?<tag><(\/?)([^!\s>/]*)([^>]*?)\s*(\/?)>)|(?<curly>\{(?<derivative>[@:/#][^\s}]*)?[\s\S]*?\})/;
+        const attrRegExp1 = /([^\s=]+)(?:="(?<value1>[^"]*)"|='(?<value2>[^']*)')?/g;
+        const attrRegExp2 = /([^\s=]+)(?:="(?<value1>[^"]*)"|='(?<value2>[^']*)'|=(?<curly>\{([^}]+)\}))?/g;
+        let Position;
+        ((Position2) => {
+          Position2[Position2["OPEN"] = 0] = "OPEN";
+          Position2[Position2["CLOSE"] = 1] = "CLOSE";
+          Position2[Position2["EMPTY"] = 2] = "EMPTY";
+          Position2[Position2["CONTINUE"] = 3] = "CONTINUE";
+        })(Position || (Position = {}));
+        function parse(source, context) {
+          const tokens = [];
+          function pushText(content) {
+            if (content)
+              tokens.push(content);
+          }
+          __name10(pushText, "pushText");
+          const tagRegExp = context ? tagRegExp2 : tagRegExp1;
+          let tagCap;
+          let trimStart = true;
+          while (tagCap = tagRegExp.exec(source)) {
+            const trimEnd = !tagCap.groups.curly;
+            parseContent(source.slice(0, tagCap.index), trimStart, trimEnd);
+            trimStart = trimEnd;
+            source = source.slice(tagCap.index + tagCap[0].length);
+            const [_, , , close, type2, extra, empty] = tagCap;
+            if (tagCap.groups.comment)
+              continue;
+            if (tagCap.groups.curly) {
+              let name2 = "", position = 2;
+              if (tagCap.groups.derivative) {
+                name2 = tagCap.groups.derivative.slice(1);
+                position = {
+                  "@": 2,
+                  "#": 0,
+                  "/": 1,
+                  ":": 3
+                  /* CONTINUE */
+                }[tagCap.groups.derivative[0]];
+              }
+              tokens.push({
+                type: "curly",
+                name: name2,
+                position,
+                source: tagCap.groups.curly,
+                extra: tagCap.groups.curly.slice(1 + (tagCap.groups.derivative ?? "").length, -1)
+              });
+              continue;
+            }
+            tokens.push({
+              type: "angle",
+              source: _,
+              name: type2 || Element22.Fragment,
+              position: close ? 1 : empty ? 2 : 0,
+              extra
             });
-            socket.addEventListener("open", () => {
-              _retryCount = 0;
-              this.socket = socket;
-              logger.info("connect to server: %c", url);
-              this.accept(socket);
+          }
+          parseContent(source, trimStart, true);
+          function parseContent(source2, trimStart2, trimEnd) {
+            source2 = unescape(source2);
+            if (trimStart2)
+              source2 = source2.replace(/^\s*\n\s*/, "");
+            if (trimEnd)
+              source2 = source2.replace(/\s*\n\s*$/, "");
+            pushText(source2);
+          }
+          __name10(parseContent, "parseContent");
+          return parseTokens(foldTokens(tokens), context);
+        }
+        Element22.parse = parse;
+        __name10(parse, "parse");
+        function foldTokens(tokens) {
+          const stack = [[{
+            type: "angle",
+            name: Element22.Fragment,
+            position: 0,
+            source: "",
+            extra: "",
+            children: { default: [] }
+          }, "default"]];
+          function pushToken(...tokens2) {
+            const [token, slot] = stack[0];
+            token.children[slot].push(...tokens2);
+          }
+          __name10(pushToken, "pushToken");
+          for (const token of tokens) {
+            if (typeof token === "string") {
+              pushToken(token);
+              continue;
+            }
+            const { name: name2, position } = token;
+            if (position === 1) {
+              if (stack[0][0].name === name2) {
+                stack.shift();
+              }
+            } else if (position === 3) {
+              stack[0][0].children[name2] = [];
+              stack[0][1] = name2;
+            } else if (position === 0) {
+              pushToken(token);
+              token.children = { default: [] };
+              stack.unshift([token, "default"]);
+            } else {
+              pushToken(token);
+            }
+          }
+          return stack[stack.length - 1][0].children.default;
+        }
+        __name10(foldTokens, "foldTokens");
+        function parseTokens(tokens, context) {
+          const result = [];
+          for (const token of tokens) {
+            if (typeof token === "string") {
+              result.push(Element22("text", { content: token }));
+            } else if (token.type === "angle") {
+              const attrs = {};
+              const attrRegExp = context ? attrRegExp2 : attrRegExp1;
+              let attrCap;
+              while (attrCap = attrRegExp.exec(token.extra)) {
+                const [, key, v1, v2 = v1, v3] = attrCap;
+                if (v3) {
+                  attrs[key] = interpolate2(v3, context);
+                } else if (!(0, import_cosmokit16.isNullable)(v2)) {
+                  attrs[key] = unescape(v2);
+                } else if (key.startsWith("no-")) {
+                  attrs[key.slice(3)] = false;
+                } else {
+                  attrs[key] = true;
+                }
+              }
+              result.push(Element22(token.name, attrs, token.children && parseTokens(token.children.default, context)));
+            } else if (!token.name) {
+              result.push(...toElementArray(interpolate2(token.extra, context)));
+            } else if (token.name === "if") {
+              if (evaluate2(token.extra, context)) {
+                result.push(...parseTokens(token.children.default, context));
+              } else {
+                result.push(...parseTokens(token.children.else || [], context));
+              }
+            } else if (token.name === "each") {
+              const [expr, ident] = token.extra.split(/\s+as\s+/);
+              const items = interpolate2(expr, context);
+              if (!items || !items[Symbol.iterator])
+                continue;
+              for (const item of items) {
+                result.push(...parseTokens(token.children.default, { ...context, [ident]: item }));
+              }
+            }
+          }
+          return result;
+        }
+        __name10(parseTokens, "parseTokens");
+        function visit(element, rules, session) {
+          const { type: type2, attrs, children } = element;
+          if (typeof rules === "function") {
+            return rules(element, session);
+          } else {
+            let result = rules[typeof type2 === "string" ? type2 : ""] ?? rules.default ?? true;
+            if (typeof result === "function") {
+              result = result(attrs, children, session);
+            }
+            return result;
+          }
+        }
+        __name10(visit, "visit");
+        function transform(source, rules, session) {
+          const elements = typeof source === "string" ? parse(source) : source;
+          const output = [];
+          elements.forEach((element) => {
+            const { type: type2, attrs, children } = element;
+            const result = visit(element, rules, session);
+            if (result === true) {
+              output.push(Element22(type2, attrs, transform(children, rules, session)));
+            } else if (result !== false) {
+              output.push(...toElementArray(result));
+            }
+          });
+          return typeof source === "string" ? output.join("") : output;
+        }
+        Element22.transform = transform;
+        __name10(transform, "transform");
+        async function transformAsync(source, rules, session) {
+          const elements = typeof source === "string" ? parse(source) : source;
+          const children = (await Promise.all(elements.map(async (element) => {
+            const { type: type2, attrs, children: children2 } = element;
+            const result = await visit(element, rules, session);
+            if (result === true) {
+              return [Element22(type2, attrs, await transformAsync(children2, rules, session))];
+            } else if (result !== false) {
+              return toElementArray(result);
+            } else {
+              return [];
+            }
+          }))).flat(1);
+          return typeof source === "string" ? children.join("") : children;
+        }
+        Element22.transformAsync = transformAsync;
+        __name10(transformAsync, "transformAsync");
+        function createFactory(type2, ...keys) {
+          return (...args) => {
+            const element = Element22(type2);
+            keys.forEach((key, index) => {
+              if (!(0, import_cosmokit16.isNullable)(args[index])) {
+                element.attrs[key] = args[index];
+              }
             });
-          }, "reconnect");
-          reconnect(true);
+            if (args[keys.length]) {
+              Object.assign(element.attrs, args[keys.length]);
+            }
+            return element;
+          };
+        }
+        __name10(createFactory, "createFactory");
+        Element22.warn = /* @__PURE__ */ __name10(() => {
+        }, "warn");
+        function createAssetFactory(type2) {
+          return (src, ...args) => {
+            let prefix = "base64://";
+            if (typeof args[0] === "string") {
+              prefix = `data:${args.shift()};base64,`;
+            }
+            if ((0, import_cosmokit16.is)("ArrayBuffer", src)) {
+              src = prefix + (0, import_cosmokit16.arrayBufferToBase64)(src);
+            } else if (ArrayBuffer.isView(src)) {
+              src = prefix + (0, import_cosmokit16.arrayBufferToBase64)(src.buffer);
+            }
+            if (src.startsWith("base64://")) {
+              (0, Element22.warn)(`protocol "base64:" is deprecated and will be removed in the future, please use "data:" instead`);
+            }
+            return Element22(type2, { ...args[0], src });
+          };
+        }
+        __name10(createAssetFactory, "createAssetFactory");
+        Element22.text = createFactory("text", "content");
+        Element22.at = createFactory("at", "id");
+        Element22.sharp = createFactory("sharp", "id");
+        Element22.quote = createFactory("quote", "id");
+        Element22.image = createAssetFactory("img");
+        Element22.img = createAssetFactory("img");
+        Element22.video = createAssetFactory("video");
+        Element22.audio = createAssetFactory("audio");
+        Element22.file = createAssetFactory("file");
+        function i18n(path, children) {
+          return Element22("i18n", typeof path === "string" ? { path } : path, children);
+        }
+        Element22.i18n = i18n;
+        __name10(i18n, "i18n");
+      })(Element2 || (Element2 = {}));
+      module.exports = Element2;
+    }
+  });
+
+  // ../undios/packages/core/lib/index.cjs
+  var require_lib10 = __commonJS({
+    "../undios/packages/core/lib/index.cjs"(exports, module) {
+      "use strict";
+      var __defProp11 = Object.defineProperty;
+      var __getOwnPropDesc2 = Object.getOwnPropertyDescriptor;
+      var __getOwnPropNames3 = Object.getOwnPropertyNames;
+      var __hasOwnProp2 = Object.prototype.hasOwnProperty;
+      var __name10 = (target, value) => __defProp11(target, "name", { value, configurable: true });
+      var __export2 = (target, all) => {
+        for (var name2 in all)
+          __defProp11(target, name2, { get: all[name2], enumerable: true });
+      };
+      var __copyProps2 = (to, from, except, desc) => {
+        if (from && typeof from === "object" || typeof from === "function") {
+          for (let key of __getOwnPropNames3(from))
+            if (!__hasOwnProp2.call(to, key) && key !== except)
+              __defProp11(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc2(from, key)) || desc.enumerable });
+        }
+        return to;
+      };
+      var __toCommonJS2 = (mod) => __copyProps2(__defProp11({}, "__esModule", { value: true }), mod);
+      var src_exports2 = {};
+      __export2(src_exports2, {
+        HTTP: () => HTTP2,
+        WebSocket: () => WebSocket3,
+        default: () => src_default2
+      });
+      module.exports = __toCommonJS2(src_exports2);
+      var import_levi_cordis5 = require_lib7();
+      var import_cosmokit16 = require_lib();
+      function sleep2(ms) {
+        return new Promise((resolve) => setTimeout(resolve, ms));
+      }
+      __name10(sleep2, "sleep");
+      var _a25;
+      var WebSocket3 = (_a25 = class extends EventTarget {
+        constructor(url, config) {
+          super();
+          __publicField(this, "ws");
+          __publicField(this, "_connected", false);
+          __publicField(this, "_closed", true);
+          __publicField(this, "timeout");
+          this.url = url;
+          this.timeout = config?.timeout ?? 3e3;
+        }
+        get protocol() {
+          return this.url.split("://")[0];
+        }
+        get readyState() {
+          if (this._closed)
+            return this._connected ? 2 : 3;
+          return this._connected ? 1 : 0;
+        }
+        dispatchEvent(event) {
+          return super.dispatchEvent(event);
+        }
+        // @ts-ignore
+        addEventListener(type2, listener) {
+          super.addEventListener(type2, listener);
+        }
+        // @ts-ignore
+        removeEventListener(type2, listener) {
+          super.removeEventListener(type2, listener);
+        }
+        async connect() {
+          if (this.ws) {
+            this.ws.shutdown();
+            this.ws.close();
+          }
+          this._closed = false;
+          this.ws = new WSClient();
+          try {
+            await new Promise((resolve, reject) => {
+              const fail = /* @__PURE__ */ __name10(() => reject(new Error("Failed to connect")), "fail");
+              const okPre = this.ws.connectAsync(this.url, (ok) => {
+                if (ok)
+                  resolve(ok);
+                else
+                  fail();
+              });
+              if (!okPre)
+                fail();
+            });
+          } finally {
+            this._closed = true;
+          }
+          this._connected = true;
+          this.dispatchEvent(new Event("open"));
+          this.ws.listen("onTextReceived", (data) => {
+            const ev = new Event("message");
+            ev.data = data;
+            this.dispatchEvent(ev);
+          });
+          this.ws.listen("onBinaryReceived", () => {
+            const ev = new Event("error");
+            ev.message = `Unexpected binary data received from ${this.url}`;
+            this.dispatchEvent(ev);
+          });
+          this.ws.listen("onError", (msg) => {
+            const ev = new Event("error");
+            ev.message = msg;
+            this.dispatchEvent(ev);
+          });
+          this.ws.listen("onLostConnection", (code) => {
+            this.ws = void 0;
+            this._closed = true;
+            this._connected = false;
+            const ev = new Event("close");
+            ev.code = code;
+            ev.reason = "";
+            this.dispatchEvent(ev);
+          });
+          (async () => {
+            for (; ; ) {
+              if (this._closed)
+                break;
+              await sleep2(1);
+            }
+            const { ws } = this;
+            if (!ws)
+              return;
+            this.ws = void 0;
+            this._connected = false;
+            ws?.shutdown();
+            ws?.close();
+          })();
+        }
+        close(code, reason) {
+          this._closed = true;
+        }
+        send(data) {
+          if (!this.ws)
+            throw new Error("Connection Closed");
+          this.ws.send(data);
+        }
+      }, __name10(_a25, "WebSocket"), _a25);
+      var kHTTPError2 = Symbol.for("undios.error");
+      var _a26, _b5;
+      var HTTPError2 = (_b5 = class extends Error {
+        constructor() {
+          super(...arguments);
+          __publicField(this, _a26, true);
+          __publicField(this, "response");
+        }
+        static fromResp(response) {
+          const error = new this(`Request failed with status code ${response.status}`);
+          error.response = response;
+          return error;
+        }
+        static is(error) {
+          return !!error?.[kHTTPError2];
+        }
+      }, _a26 = kHTTPError2, __name10(_b5, "HTTPError"), _b5);
+      var _a27, _b6, _c2;
+      var HTTP2 = (_a27 = class extends import_levi_cordis5.Service {
+        constructor(...args) {
+          super(args[0], args[1]);
+          __publicField(this, "_decoders", /* @__PURE__ */ Object.create(null));
+          this.decoder("json", (raw) => JSON.parse(raw));
+          this.decoder("text", (raw) => raw);
+        }
+        decoder(type2, decoder) {
+          return this[import_levi_cordis5.Context.current].effect(() => {
+            this._decoders[type2] = decoder;
+            return () => delete this._decoders[type2];
+          });
+        }
+        extend(config = {}) {
+          return this[import_levi_cordis5.Service.extend]({
+            config: _a27.mergeConfig(this.config, config)
+          });
+        }
+        resolveConfig(init) {
+          const caller = this[import_levi_cordis5.Context.current];
+          let result = { headers: {}, ...this.config };
+          caller.emit("http/config", result);
+          let intercept = caller[import_levi_cordis5.Context.intercept];
+          while (intercept) {
+            result = _a27.mergeConfig(result, intercept.http);
+            intercept = Object.getPrototypeOf(intercept);
+          }
+          result = _a27.mergeConfig(result, init);
+          return result;
+        }
+        resolveURL(url, config) {
+          if (config.baseURL) {
+            url = `${(0, import_cosmokit16.trimSlash)(config.baseURL)}/${url}`;
+          }
+          if (config.params) {
+            const params = Object.entries(config.params).map(
+              ([key, value]) => `${encodeURIComponent(key)}=${encodeURIComponent(value)}`
+            ).join("&");
+            url = `${url}${url.includes("?") ? "&" : "?"}${params}`;
+          }
+          return url;
+        }
+        async [(_b6 = import_levi_cordis5.Service.provide, _c2 = import_levi_cordis5.Service.immediate, import_levi_cordis5.Service.invoke)](...args) {
+          const caller = this[import_levi_cordis5.Context.current];
+          let method;
+          if (typeof args[1] === "string") {
+            method = args.shift();
+          }
+          const config = this.resolveConfig(args[1]);
+          const url = this.resolveURL(args[0], config);
+          method ?? (method = config.method ?? "GET");
+          const controller = new AbortController();
+          let timer;
+          const dispose = caller.on("dispose", () => {
+            clearTimeout(timer);
+            controller.abort(new Error("context disposed"));
+          });
+          if (config.timeout) {
+            timer = setTimeout(() => {
+              controller.abort(new Error("timeout"));
+            }, config.timeout);
+          }
+          try {
+            const init = {
+              method,
+              url,
+              headers: config.headers ?? {},
+              data: config.data
+            };
+            if (config.data && typeof config.data === "object") {
+              ;
+              init.data = JSON.stringify(config.data);
+            }
+            caller.emit("http/fetch-init", init.url, init, config);
+            const rawResp = await this.fetch(init);
+            const validateStatus = config.validateStatus ?? ((status) => Math.floor(status / 100) === 2);
+            if (!validateStatus(rawResp.status)) {
+              const error = _a27.Error.fromResp(rawResp);
+              throw error;
+            }
+            if (config.responseType) {
+              if (!(config.responseType in this._decoders)) {
+                throw new TypeError(`Unknown responseType: ${config.responseType}`);
+              }
+              const decoder = this._decoders[config.responseType];
+              const response = {
+                url,
+                status: rawResp.status,
+                data: await decoder(rawResp.data)
+              };
+              return response;
+            }
+            return rawResp;
+          } finally {
+            dispose();
+          }
+        }
+        fetch(init) {
+          switch (init.method) {
+            case "get":
+            case "GET": {
+              return new Promise((resolve) => {
+                network.httpGet(init.url, init.headers, (status, result) => {
+                  resolve({ url: init.url, status, data: result });
+                });
+              });
+            }
+            case "post":
+            case "POST": {
+              return new Promise((resolve) => {
+                network.httpPost(
+                  init.url,
+                  init.headers,
+                  init.data,
+                  init.headers["Content-Type"] ?? "text/plain",
+                  (status, result) => {
+                    resolve({ url: init.url, status, data: result });
+                  }
+                );
+              });
+            }
+          }
+        }
+        ws(url, init) {
+          if (init?.headers)
+            this.ctx.logger.warn("headers is not supported in ws");
+          const caller = this[import_levi_cordis5.Context.current];
+          const config = this.resolveConfig(init);
+          url = this.resolveURL(url, config);
+          init = {
+            timeout: config.timeout
+          };
+          caller.emit("http/websocket-init", url, init, config);
+          const socket = new WebSocket3(url, init);
+          const dispose = caller.on("dispose", () => {
+            socket.close(1001, "context disposed");
+          });
+          socket.addEventListener("close", () => {
+            dispose();
+          });
+          return socket;
+        }
+      }, __name10(_a27, "HTTP"), __publicField(_a27, "Error", HTTPError2), __publicField(_a27, _b6, "http"), __publicField(_a27, _c2, true), (() => {
+        for (const method of ["get"]) {
+          (0, import_cosmokit16.defineProperty)(
+            _a27.prototype,
+            method,
+            async function(url, config) {
+              const response = await this(url, { method, ...config });
+              return response.data;
+            }
+          );
+        }
+        for (const method of ["post"]) {
+          (0, import_cosmokit16.defineProperty)(
+            _a27.prototype,
+            method,
+            async function(url, data, config) {
+              const response = await this(url, { method, data, ...config });
+              return response.data;
+            }
+          );
+        }
+      })(), __publicField(_a27, "mergeConfig", (target, source) => ({
+        ...target,
+        ...source,
+        headers: {
+          ...target?.headers,
+          ...source?.headers
+        }
+      })), _a27);
+      var src_default2 = HTTP2;
+    }
+  });
+
+  // ../satori/packages/core/lib/index.cjs
+  var require_lib11 = __commonJS({
+    "../satori/packages/core/lib/index.cjs"(exports, module) {
+      var __create2 = Object.create;
+      var __defProp11 = Object.defineProperty;
+      var __getOwnPropDesc2 = Object.getOwnPropertyDescriptor;
+      var __getOwnPropNames3 = Object.getOwnPropertyNames;
+      var __getProtoOf2 = Object.getPrototypeOf;
+      var __hasOwnProp2 = Object.prototype.hasOwnProperty;
+      var __name10 = (target, value) => __defProp11(target, "name", { value, configurable: true });
+      var __export2 = (target, all) => {
+        for (var name2 in all)
+          __defProp11(target, name2, { get: all[name2], enumerable: true });
+      };
+      var __copyProps2 = (to, from, except, desc) => {
+        if (from && typeof from === "object" || typeof from === "function") {
+          for (let key of __getOwnPropNames3(from))
+            if (!__hasOwnProp2.call(to, key) && key !== except)
+              __defProp11(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc2(from, key)) || desc.enumerable });
+        }
+        return to;
+      };
+      var __reExport2 = (target, mod, secondTarget) => (__copyProps2(target, mod, "default"), secondTarget && __copyProps2(secondTarget, mod, "default"));
+      var __toESM2 = (mod, isNodeMode, target) => (target = mod != null ? __create2(__getProtoOf2(mod)) : {}, __copyProps2(
+        // If the importer is in node compatibility mode or this is not an ESM
+        // file that has been converted to a CommonJS file using a Babel-
+        // compatible transform (i.e. "__esModule" has not been set), then set
+        // "default" to the CommonJS "module.exports" for node compatibility.
+        isNodeMode || !mod || !mod.__esModule ? __defProp11(target, "default", { value: mod, enumerable: true }) : target,
+        mod
+      ));
+      var __toCommonJS2 = (mod) => __copyProps2(__defProp11({}, "__esModule", { value: true }), mod);
+      var src_exports2 = {};
+      __export2(src_exports2, {
+        Adapter: () => Adapter2,
+        Bot: () => Bot2,
+        Context: () => Context4,
+        Element: () => import_element32.default,
+        MessageEncoder: () => MessageEncoder2,
+        Messenger: () => MessageEncoder2,
+        Modulator: () => MessageEncoder2,
+        Service: () => Service24,
+        Session: () => Session2,
+        Universal: () => Universal,
+        defineAccessor: () => defineAccessor2,
+        h: () => import_element32.default,
+        segment: () => import_element32.default
+      });
+      module.exports = __toCommonJS2(src_exports2);
+      var cordis = __toESM2(require_lib7(), 1);
+      var import_cosmokit42 = require_lib();
+      var import_cosmokit16 = require_lib();
+      var import_protocol4 = require_lib8();
+      var import_element4 = __toESM2(require_lib9(), 1);
+      var _a25;
+      var Session2 = (_a25 = class {
+        constructor(bot, event) {
+          __publicField(this, "id");
+          __publicField(this, "bot");
+          __publicField(this, "app");
+          __publicField(this, "event");
+          __publicField(this, "locales", []);
+          event.selfId ?? (event.selfId = bot.selfId);
+          event.platform ?? (event.platform = bot.platform);
+          event.timestamp ?? (event.timestamp = Date.now());
+          this.event = event;
+          this.id = ++_a25.counter;
+          (0, import_cosmokit16.defineProperty)(this, "bot", bot);
+          (0, import_cosmokit16.defineProperty)(this, "app", bot.ctx.root);
+          (0, import_cosmokit16.defineProperty)(this, Context4.current, bot.ctx);
+          return Context4.associate(this, "session");
+        }
+        /** @deprecated */
+        get data() {
+          return this.event;
+        }
+        get isDirect() {
+          return this.event.channel.type === import_protocol4.Channel.Type.DIRECT;
+        }
+        set isDirect(value) {
+          var _a32;
+          ((_a32 = this.event).channel ?? (_a32.channel = {})).type = value ? import_protocol4.Channel.Type.DIRECT : import_protocol4.Channel.Type.TEXT;
+        }
+        get author() {
+          return {
+            ...this.event.user,
+            ...this.event.member,
+            userId: this.event.user?.id,
+            username: this.event.user?.name,
+            nickname: this.event.member?.name
+          };
+        }
+        get uid() {
+          return `${this.platform}:${this.userId}`;
+        }
+        get gid() {
+          return `${this.platform}:${this.guildId}`;
+        }
+        get cid() {
+          return `${this.platform}:${this.channelId}`;
+        }
+        get fid() {
+          return `${this.platform}:${this.channelId}:${this.userId}`;
+        }
+        get sid() {
+          return `${this.platform}:${this.selfId}`;
+        }
+        get elements() {
+          return this.event.message?.elements;
+        }
+        set elements(value) {
+          var _a32;
+          (_a32 = this.event).message ?? (_a32.message = {});
+          this.event.message.elements = value;
+        }
+        get content() {
+          return this.event.message?.elements?.join("");
+        }
+        set content(value) {
+          var _a32;
+          ((_a32 = this.event).message ?? (_a32.message = {})).elements = (0, import_cosmokit16.isNullable)(value) ? value : import_element4.default.parse(value);
+        }
+        setInternal(type2, data) {
+          this.event._type = type2;
+          this.event._data = data;
+          const internal = Object.create(this.bot.internal);
+          (0, import_cosmokit16.defineProperty)(this, type2, Object.assign(internal, data));
+        }
+        async transform(elements) {
+          return await import_element4.default.transformAsync(elements, ({ type: type2, attrs, children }, session) => {
+            const render = type2 === "component" ? attrs.is : this.app.get("component:" + type2);
+            return render?.(attrs, children, session) ?? true;
+          }, this);
+        }
+        toJSON() {
+          return { ...this.event, id: this.id };
+        }
+      }, __name10(_a25, "Session"), __publicField(_a25, "counter", 0), _a25);
+      function defineAccessor2(prototype, name2, keys) {
+        Object.defineProperty(prototype, name2, {
+          get() {
+            return keys.reduce((data, key) => data?.[key], this);
+          },
+          set(value) {
+            if (value === void 0)
+              return;
+            const _keys = keys.slice();
+            const last = _keys.pop();
+            const data = _keys.reduce((data2, key) => data2[key] ?? (data2[key] = {}), this);
+            data[last] = value;
+          }
+        });
+      }
+      __name10(defineAccessor2, "defineAccessor");
+      defineAccessor2(Session2.prototype, "type", ["event", "type"]);
+      defineAccessor2(Session2.prototype, "subtype", ["event", "subtype"]);
+      defineAccessor2(Session2.prototype, "subsubtype", ["event", "subsubtype"]);
+      defineAccessor2(Session2.prototype, "selfId", ["event", "selfId"]);
+      defineAccessor2(Session2.prototype, "platform", ["event", "platform"]);
+      defineAccessor2(Session2.prototype, "timestamp", ["event", "timestamp"]);
+      defineAccessor2(Session2.prototype, "userId", ["event", "user", "id"]);
+      defineAccessor2(Session2.prototype, "channelId", ["event", "channel", "id"]);
+      defineAccessor2(Session2.prototype, "channelName", ["event", "channel", "name"]);
+      defineAccessor2(Session2.prototype, "guildId", ["event", "guild", "id"]);
+      defineAccessor2(Session2.prototype, "guildName", ["event", "guild", "name"]);
+      defineAccessor2(Session2.prototype, "messageId", ["event", "message", "id"]);
+      defineAccessor2(Session2.prototype, "operatorId", ["event", "operator", "id"]);
+      defineAccessor2(Session2.prototype, "roleId", ["event", "role", "id"]);
+      defineAccessor2(Session2.prototype, "quote", ["event", "message", "quote"]);
+      var import_levi_cordis22 = require_lib7();
+      var import_levi_undios2 = require_lib10();
+      var import_element32 = __toESM2(require_lib9(), 1);
+      __reExport2(src_exports2, require_lib7(), module.exports);
+      var Universal = __toESM2(require_lib8(), 1);
+      var import_cosmokit22 = require_lib();
+      var import_protocol22 = require_lib8();
+      var eventAliases2 = [
+        ["message-created", "message"]
+      ];
+      var _a26;
+      var Bot2 = (_a26 = class {
+        constructor(ctx, config, platform) {
+          __publicField(this, "user", {});
+          __publicField(this, "isBot", true);
+          __publicField(this, "hidden", false);
+          __publicField(this, "platform");
+          __publicField(this, "adapter");
+          __publicField(this, "error");
+          __publicField(this, "callbacks", {});
+          __publicField(this, "logger");
+          // Same as `this.ctx`, but with a more specific type.
+          __publicField(this, "context");
+          __publicField(this, "_status", import_protocol22.Status.OFFLINE);
+          this.ctx = ctx;
+          this.config = config;
+          this.internal = null;
+          this.context = ctx;
+          ctx.bots.push(this);
+          this.context.emit("bot-added", this);
+          if (platform) {
+            this.logger = ctx.logger(platform);
+            this.platform = platform;
+          }
+          ctx.on("ready", async () => {
+            await Promise.resolve();
+            this.dispatchLoginEvent("login-added");
+            return this.start();
+          });
+          ctx.on("dispose", () => this.dispose());
+          ctx.on("interaction/button", (session) => {
+            const cb = this.callbacks[session.event.button.id];
+            if (cb)
+              cb(session);
+          });
+        }
+        update(login) {
+          const { status, ...rest } = login;
+          Object.assign(this, rest);
+          this.status = status;
+        }
+        dispose() {
+          (0, import_cosmokit22.remove)(this.ctx.bots, this);
+          this.context.emit("bot-removed", this);
+          this.dispatchLoginEvent("login-removed");
+          return this.stop();
+        }
+        dispatchLoginEvent(type2) {
+          const session = this.session();
+          session.type = type2;
+          session.event.login = this.toJSON();
+          this.dispatch(session);
+        }
+        get status() {
+          return this._status;
+        }
+        set status(value) {
+          if (value === this._status)
+            return;
+          this._status = value;
+          if (this.ctx.bots.includes(this)) {
+            this.context.emit("bot-status-updated", this);
+            this.dispatchLoginEvent("login-updated");
+          }
+        }
+        get isActive() {
+          return this._status !== import_protocol22.Status.OFFLINE && this._status !== import_protocol22.Status.DISCONNECT;
+        }
+        online() {
+          this.status = import_protocol22.Status.ONLINE;
+          this.error = null;
+        }
+        offline(error) {
+          this.status = import_protocol22.Status.OFFLINE;
+          this.error = error;
+        }
+        async start() {
+          if (this.isActive)
+            return;
+          this.status = import_protocol22.Status.CONNECT;
+          try {
+            await this.context.parallel("bot-connect", this);
+            await this.adapter?.connect(this);
+          } catch (error) {
+            this.offline(error);
+          }
         }
         async stop() {
-          this.socket?.close();
+          if (!this.isActive)
+            return;
+          this.status = import_protocol22.Status.DISCONNECT;
+          try {
+            await this.context.parallel("bot-disconnect", this);
+            await this.adapter?.disconnect(this);
+          } catch (error) {
+            this.context.emit("internal/error", error);
+          } finally {
+            this.offline();
+          }
         }
+        get sid() {
+          return `${this.platform}:${this.selfId}`;
+        }
+        session(event = {}) {
+          const { Session: Session22 } = this.ctx.constructor;
+          return new Session22(this, event);
+        }
+        dispatch(session) {
+          if (!this.ctx.lifecycle.isActive)
+            return;
+          let events = [session.type];
+          for (const aliases of eventAliases2) {
+            if (aliases.includes(session.type)) {
+              events = aliases;
+              session.type = aliases[0];
+              break;
+            }
+          }
+          this.context.emit("internal/session", session);
+          if (session.type === "internal") {
+            this.context.emit(session.event._type, session.event._data, session.bot);
+            return;
+          }
+          for (const event of events) {
+            this.context.emit(session, event, session);
+          }
+        }
+        async createMessage(channelId, content, guildId, options) {
+          const { MessageEncoder: MessageEncoder22 } = this.constructor;
+          return new MessageEncoder22(this, channelId, guildId, options).send(content);
+        }
+        async sendMessage(channelId, content, guildId, options) {
+          const messages = await this.createMessage(channelId, content, guildId, options);
+          return messages.map((message) => message.id);
+        }
+        async sendPrivateMessage(userId, content, guildId, options) {
+          const { id } = await this.createDirectChannel(userId, guildId ?? options?.session?.guildId);
+          return this.sendMessage(id, content, null, options);
+        }
+        async supports(name2, session = {}) {
+          return !!this[import_protocol22.Methods[name2]?.name];
+        }
+        async checkPermission(name2, session) {
+          if (name2.startsWith("bot.")) {
+            return this.supports(name2.slice(4), session);
+          }
+        }
+        toJSON() {
+          return (0, import_cosmokit22.clone)((0, import_cosmokit22.pick)(this, ["platform", "selfId", "status", "user", "hidden"]));
+        }
+        async getLogin() {
+          return this.toJSON();
+        }
+        /** @deprecated use `bot.getLogin()` instead */
+        async getSelf() {
+          const { user } = await this.getLogin();
+          return user;
+        }
+      }, __name10(_a26, "Bot"), __publicField(_a26, "reusable", true), __publicField(_a26, "MessageEncoder"), _a26);
+      var iterableMethods2 = [
+        "getMessage",
+        "getReaction",
+        "getFriend",
+        "getGuild",
+        "getGuildMember",
+        "getGuildRole",
+        "getChannel"
+      ];
+      for (const name2 of iterableMethods2) {
+        Bot2.prototype[name2 + "Iter"] = function(...args) {
+          let list;
+          if (!this[name2 + "List"])
+            throw new Error(`not implemented: ${name2}List`);
+          const getList = /* @__PURE__ */ __name10(async () => {
+            list = await this[name2 + "List"](...args, list?.next);
+          }, "getList");
+          return {
+            async next() {
+              if (list?.data.length)
+                return { done: false, value: list.data.shift() };
+              if (list && !list?.next)
+                return { done: true, value: void 0 };
+              await getList();
+              return this.next();
+            },
+            [Symbol.asyncIterator]() {
+              return this;
+            }
+          };
+        };
       }
-      _WsClientBase = WsClientBase;
-      __name(_WsClientBase, "WsClientBase");
-      Adapter2.WsClientBase = WsClientBase;
-      class WsClient extends WsClientBase {
-        constructor(ctx, bot) {
-          super(ctx, bot.config);
-          this.bot = bot;
-          bot.adapter = this;
-        }
-        getActive() {
-          return this.bot.isActive;
-        }
-        setStatus(status, error = null) {
-          this.bot.status = status;
-          this.bot.error = error;
+      defineAccessor2(Bot2.prototype, "selfId", ["user", "id"]);
+      defineAccessor2(Bot2.prototype, "userId", ["user", "id"]);
+      var import_cosmokit32 = require_lib();
+      var import_protocol32 = require_lib8();
+      var import_levi_cordis5 = require_lib7();
+      var _a27;
+      var Adapter2 = (_a27 = class {
+        constructor(ctx) {
+          __publicField(this, "bots", []);
+          this.ctx = ctx;
         }
         async connect(bot) {
-          this.start();
         }
         async disconnect(bot) {
-          this.stop();
         }
-      }
-      _WsClient = WsClient;
-      __name(_WsClient, "WsClient");
-      _defineProperty(WsClient, "reusable", true);
-      Adapter2.WsClient = WsClient;
-    })(Adapter || (Adapter = {}));
-
-    // src/message.ts
-    var import_element2 = __toESM(lib$2, 1);
-    var AggregateError = (_Class6 = class AggregateError extends Error {
-      constructor(errors, message = "") {
-        super(message);
-        this.errors = errors;
-      }
-    }, __name(_Class6, "AggregateError"), _Class6);
-    var MessageEncoder = (_Class7 = class MessageEncoder {
-      constructor(bot, channelId, guildId, options = {}) {
-        _defineProperty(this, "errors", []);
-        _defineProperty(this, "results", []);
-        _defineProperty(this, "session", void 0);
-        this.bot = bot;
-        this.channelId = channelId;
-        this.guildId = guildId;
-        this.options = options;
-      }
-      async prepare() {}
-      async render(elements, flush) {
-        for (const element of elements) {
-          await this.visit(element);
+        fork(ctx, bot) {
+          bot.adapter = this;
+          this.bots.push(bot);
+          ctx.on("dispose", () => {
+            (0, import_cosmokit32.remove)(this.bots, bot);
+          });
         }
-        if (flush) {
+      }, __name10(_a27, "Adapter"), __publicField(_a27, "schema", false), _a27);
+      ((Adapter22) => {
+        Adapter22.WsClientConfig = import_levi_cordis5.z.object({
+          retryTimes: import_levi_cordis5.z.natural().description("\u521D\u6B21\u8FDE\u63A5\u65F6\u7684\u6700\u5927\u91CD\u8BD5\u6B21\u6570\u3002").default(6),
+          retryInterval: import_levi_cordis5.z.natural().role("ms").description("\u521D\u6B21\u8FDE\u63A5\u65F6\u7684\u91CD\u8BD5\u65F6\u95F4\u95F4\u9694\u3002").default(5 * import_cosmokit32.Time.second),
+          retryLazy: import_levi_cordis5.z.natural().role("ms").description("\u8FDE\u63A5\u5173\u95ED\u540E\u7684\u91CD\u8BD5\u65F6\u95F4\u95F4\u9694\u3002").default(import_cosmokit32.Time.minute)
+        }).description("\u8FDE\u63A5\u8BBE\u7F6E");
+        const _WsClientBase = class _WsClientBase extends Adapter22 {
+          constructor(ctx, config) {
+            super(ctx);
+            __publicField(this, "socket");
+            this.config = config;
+          }
+          async start() {
+            let _retryCount = 0;
+            const logger2 = this.ctx.logger("adapter");
+            const { retryTimes, retryInterval, retryLazy } = this.config;
+            const reconnect = /* @__PURE__ */ __name10(async (initial = false) => {
+              logger2.debug("websocket client opening");
+              const socket = await this.prepare();
+              const url = socket.url.replace(/\?.+/, "");
+              socket.addEventListener("error", (event) => {
+                if (event.message)
+                  logger2.warn(event.message);
+              });
+              socket.addEventListener("close", ({ code, reason }) => {
+                this.socket = null;
+                logger2.debug(`websocket closed with ${code}`);
+                if (!this.getActive())
+                  return;
+                const message = reason.toString() || `failed to connect to ${url}, code: ${code}`;
+                let timeout = retryInterval;
+                if (_retryCount >= retryTimes) {
+                  if (initial) {
+                    return this.setStatus(import_protocol32.Status.OFFLINE, new Error(message));
+                  } else {
+                    timeout = retryLazy;
+                  }
+                }
+                _retryCount++;
+                this.setStatus(import_protocol32.Status.RECONNECT);
+                logger2.warn(`${message}, will retry in ${import_cosmokit32.Time.format(timeout)}...`);
+                setTimeout(() => {
+                  if (this.getActive())
+                    reconnect();
+                }, timeout);
+              });
+              socket.addEventListener("open", () => {
+                _retryCount = 0;
+                this.socket = socket;
+                logger2.info("connect to server: %c", url);
+                this.accept(socket);
+              });
+            }, "reconnect");
+            reconnect(true);
+          }
+          async stop() {
+            this.socket?.close();
+          }
+        };
+        __name10(_WsClientBase, "WsClientBase");
+        let WsClientBase = _WsClientBase;
+        Adapter22.WsClientBase = WsClientBase;
+        const _WsClient = class _WsClient extends WsClientBase {
+          constructor(ctx, bot) {
+            super(ctx, bot.config);
+            this.bot = bot;
+            bot.adapter = this;
+          }
+          getActive() {
+            return this.bot.isActive;
+          }
+          setStatus(status, error = null) {
+            this.bot.status = status;
+            this.bot.error = error;
+          }
+          async connect(bot) {
+            this.start();
+          }
+          async disconnect(bot) {
+            this.stop();
+          }
+        };
+        __name10(_WsClient, "WsClient");
+        __publicField(_WsClient, "reusable", true);
+        let WsClient = _WsClient;
+        Adapter22.WsClient = WsClient;
+      })(Adapter2 || (Adapter2 = {}));
+      var import_element22 = __toESM2(require_lib9(), 1);
+      var _a28;
+      var AggregateError2 = (_a28 = class extends Error {
+        constructor(errors, message = "") {
+          super(message);
+          this.errors = errors;
+        }
+      }, __name10(_a28, "AggregateError"), _a28);
+      var _a29;
+      var MessageEncoder2 = (_a29 = class {
+        constructor(bot, channelId, guildId, options = {}) {
+          __publicField(this, "errors", []);
+          __publicField(this, "results", []);
+          __publicField(this, "session");
+          this.bot = bot;
+          this.channelId = channelId;
+          this.guildId = guildId;
+          this.options = options;
+        }
+        async prepare() {
+        }
+        async render(elements, flush) {
+          for (const element of elements) {
+            await this.visit(element);
+          }
+          if (flush) {
+            await this.flush();
+          }
+        }
+        async send(content) {
+          var _a32;
+          this.session = this.bot.session({
+            type: "send",
+            channel: { id: this.channelId, ...this.options.session?.event.channel },
+            guild: this.options.session?.event.guild
+          });
+          for (const key in this.options.session || {}) {
+            if (key === "id" || key === "event")
+              continue;
+            this.session[key] = this.options.session[key];
+          }
+          await this.prepare();
+          const session = this.options.session ?? this.session;
+          this.session.elements = await session.transform(import_element22.default.normalize(content));
+          const btns = import_element22.default.select(this.session.elements, "button").filter((v) => v.attrs.type !== "link" && !v.attrs.id);
+          for (const btn of btns) {
+            const r = Math.random().toString(36).slice(2);
+            (_a32 = btn.attrs).id || (_a32.id = r);
+            if (typeof btn.attrs.action === "function")
+              this.bot.callbacks[btn.attrs.id] = btn.attrs.action;
+          }
+          if (await this.session.app.serial(this.session, "before-send", this.session, this.options))
+            return;
+          await this.render(this.session.elements);
           await this.flush();
-        }
-      }
-      async send(content) {
-        this.session = this.bot.session({
-          type: "send",
-          channel: {
-            id: this.channelId,
-            ...this.options.session?.event.channel
-          },
-          guild: this.options.session?.event.guild
-        });
-        for (const key in this.options.session || {}) {
-          if (key === "id" || key === "event") continue;
-          this.session[key] = this.options.session[key];
-        }
-        await this.prepare();
-        const session = this.options.session ?? this.session;
-        this.session.elements = await session.transform(import_element2.default.normalize(content));
-        const btns = import_element2.default.select(this.session.elements, "button").filter(v => v.attrs.type !== "link" && !v.attrs.id);
-        for (const btn of btns) {
-          const r = Math.random().toString(36).slice(2);
-          btn.attrs.id ||= r;
-          if (typeof btn.attrs.action === "function") this.bot.callbacks[btn.attrs.id] = btn.attrs.action;
-        }
-        if (await this.session.app.serial(this.session, "before-send", this.session, this.options)) return;
-        await this.render(this.session.elements);
-        await this.flush();
-        if (this.errors.length) {
-          throw new AggregateError(this.errors);
-        } else {
-          return this.results;
-        }
-      }
-    }, __name(_Class7, "MessageEncoder"), _Class7);
-
-    // src/index.ts
-    import_element3.default.warn = new cordis.Logger("element").warn;
-    (0, import_cosmokit4.defineProperty)(import_levi_undios.HTTP, "Config", import_levi_cordis2.z.object({
-      timeout: import_levi_cordis2.z.natural().role("ms").description("等待连接建立的最长时间。")
-    }).description("请求设置"));
-    import_levi_undios.HTTP.createConfig = /* @__PURE__ */__name(function createConfig(endpoint) {
-      return import_levi_cordis2.z.object({
-        baseURL: import_levi_cordis2.z.string().role("link").description("要连接的服务器地址。").default(typeof endpoint === "string" ? endpoint : null).required(typeof endpoint === "boolean" ? endpoint : false),
-        headers: import_levi_cordis2.z.dict(String).role("table").description("要附加的额外请求头。"),
-        ...this.Config.dict
-      }).description("请求设置");
-    }, "createConfig");
-    var Context = (_Class8 = class Context extends cordis.Context {
-      constructor(config = {}) {
-        super(config);
-        _defineProperty(this, "bots", new Proxy([], {
-          get(target, prop) {
-            if (prop in target || typeof prop === "symbol") {
-              return Reflect.get(target, prop);
-            }
-            return target.find(bot => bot.sid === prop);
-          },
-          deleteProperty(target, prop) {
-            if (prop in target || typeof prop === "symbol") {
-              return Reflect.deleteProperty(target, prop);
-            }
-            const bot = target.findIndex(bot2 => bot2.sid === prop);
-            if (bot < 0) return true;
-            target.splice(bot, 1);
-            return true;
+          if (this.errors.length) {
+            throw new AggregateError2(this.errors);
+          } else {
+            return this.results;
           }
-        }));
-        this.provide("http", void 0, true);
-        this.plugin(import_levi_undios.HTTP, config.request);
-      }
-      component(name, component, options = {}) {
-        const render = /* @__PURE__ */__name(async (attrs, children, session) => {
-          if (options.session && session.type === "send") {
-            throw new Error("interactive components is not available outside sessions");
-          }
-          const result = await component(attrs, children, session);
-          return session.transform(import_element3.default.normalize(result));
-        }, "render");
-        const service = "component:" + name;
-        this.provide(service);
-        return this.effect(() => {
-          this[service] = render;
-          return () => this[service] = null;
-        });
-      }
-    }, __name(_Class8, "Context"), _defineProperty(_Class8, "session", Symbol("session")), _defineProperty(_Class8, "Session", Session), _Class8);
-    (Context3 => {
-      Context3.Config = import_levi_cordis2.z.intersect([import_levi_cordis2.z.object({})]);
-    })(Context || (Context = {}));
-    var Service2 = (_cordis$Service$setup = cordis.Service.setup, (_Class9 = class Service2 extends cordis.Service {
-      [_cordis$Service$setup]() {
-        this.ctx = new Context();
-      }
-    }, __name(_Class9, "Service"), _Class9));
-  })(lib$9);
-  var libExports$1 = lib$9.exports;
-  (function (module) {
-    var __defProp = Object.defineProperty;
-    var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
-    var __getOwnPropNames = Object.getOwnPropertyNames;
-    var __hasOwnProp = Object.prototype.hasOwnProperty;
-    var __copyProps = (to, from, except, desc) => {
-      if (from && typeof from === "object" || typeof from === "function") {
-        for (let key of __getOwnPropNames(from)) if (!__hasOwnProp.call(to, key) && key !== except) __defProp(to, key, {
-          get: () => from[key],
-          enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable
-        });
-      }
-      return to;
-    };
-    var __reExport = (target, mod, secondTarget) => (__copyProps(target, mod, "default"), secondTarget && __copyProps(secondTarget, mod, "default"));
-    var __toCommonJS = mod => __copyProps(__defProp({}, "__esModule", {
-      value: true
-    }), mod);
-
-    // src/index.ts
-    var src_exports = {};
-    module.exports = __toCommonJS(src_exports);
-    __reExport(src_exports, libExports$1, module.exports);
-    __reExport(src_exports, require$$1, module.exports);
-  })(lib$a);
-  var libExports = lib$a.exports;
-  var __defProp$9 = Object.defineProperty;
-  var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
-  var __getOwnPropNames$1 = Object.getOwnPropertyNames;
-  var __hasOwnProp = Object.prototype.hasOwnProperty;
-  var __name$9 = (target, value) => __defProp$9(target, "name", {
-    value,
-    configurable: true
-  });
-  var __export = (target, all) => {
-    for (var name in all) __defProp$9(target, name, {
-      get: all[name],
-      enumerable: true
-    });
-  };
-  var __copyProps = (to, from, except, desc) => {
-    if (from && typeof from === "object" || typeof from === "function") {
-      for (let key of __getOwnPropNames$1(from)) if (!__hasOwnProp.call(to, key) && key !== except) __defProp$9(to, key, {
-        get: () => from[key],
-        enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable
-      });
+        }
+      }, __name10(_a29, "MessageEncoder"), _a29);
+      import_element32.default.warn = new cordis.Logger("element").warn;
+      (0, import_cosmokit42.defineProperty)(import_levi_undios2.HTTP, "Config", import_levi_cordis22.z.object({
+        timeout: import_levi_cordis22.z.natural().role("ms").description("\u7B49\u5F85\u8FDE\u63A5\u5EFA\u7ACB\u7684\u6700\u957F\u65F6\u95F4\u3002")
+      }).description("\u8BF7\u6C42\u8BBE\u7F6E"));
+      import_levi_undios2.HTTP.createConfig = /* @__PURE__ */ __name10(function createConfig2(endpoint) {
+        return import_levi_cordis22.z.object({
+          baseURL: import_levi_cordis22.z.string().role("link").description("\u8981\u8FDE\u63A5\u7684\u670D\u52A1\u5668\u5730\u5740\u3002").default(typeof endpoint === "string" ? endpoint : null).required(typeof endpoint === "boolean" ? endpoint : false),
+          headers: import_levi_cordis22.z.dict(String).role("table").description("\u8981\u9644\u52A0\u7684\u989D\u5916\u8BF7\u6C42\u5934\u3002"),
+          ...this.Config.dict
+        }).description("\u8BF7\u6C42\u8BBE\u7F6E");
+      }, "createConfig");
+      var _a30;
+      var Context4 = (_a30 = class extends cordis.Context {
+        constructor(config = {}) {
+          super(config);
+          __publicField(this, "bots", new Proxy([], {
+            get(target, prop) {
+              if (prop in target || typeof prop === "symbol") {
+                return Reflect.get(target, prop);
+              }
+              return target.find((bot) => bot.sid === prop);
+            },
+            deleteProperty(target, prop) {
+              if (prop in target || typeof prop === "symbol") {
+                return Reflect.deleteProperty(target, prop);
+              }
+              const bot = target.findIndex((bot2) => bot2.sid === prop);
+              if (bot < 0)
+                return true;
+              target.splice(bot, 1);
+              return true;
+            }
+          }));
+          this.provide("http", void 0, true);
+          this.plugin(import_levi_undios2.HTTP, config.request);
+        }
+        component(name2, component, options = {}) {
+          const render = /* @__PURE__ */ __name10(async (attrs, children, session) => {
+            if (options.session && session.type === "send") {
+              throw new Error("interactive components is not available outside sessions");
+            }
+            const result = await component(attrs, children, session);
+            return session.transform(import_element32.default.normalize(result));
+          }, "render");
+          const service = "component:" + name2;
+          this.provide(service);
+          return this.effect(() => {
+            this[service] = render;
+            return () => this[service] = null;
+          });
+        }
+      }, __name10(_a30, "Context"), __publicField(_a30, "session", Symbol("session")), // remove generic type to loosen the constraint
+      __publicField(_a30, "Session", Session2), _a30);
+      ((Context32) => {
+        Context32.Config = import_levi_cordis22.z.intersect([
+          import_levi_cordis22.z.object({})
+        ]);
+      })(Context4 || (Context4 = {}));
+      var _a31;
+      var Service24 = (_a31 = class extends cordis.Service {
+        [cordis.Service.setup]() {
+          this.ctx = new Context4();
+        }
+      }, __name10(_a31, "Service"), _a31);
     }
-    return to;
-  };
-  var __toCommonJS = mod => __copyProps(__defProp$9({}, "__esModule", {
-    value: true
-  }), mod);
+  });
+
+  // ../satori/packages/satori/lib/index.cjs
+  var require_lib12 = __commonJS({
+    "../satori/packages/satori/lib/index.cjs"(exports, module) {
+      var __defProp11 = Object.defineProperty;
+      var __getOwnPropDesc2 = Object.getOwnPropertyDescriptor;
+      var __getOwnPropNames3 = Object.getOwnPropertyNames;
+      var __hasOwnProp2 = Object.prototype.hasOwnProperty;
+      var __copyProps2 = (to, from, except, desc) => {
+        if (from && typeof from === "object" || typeof from === "function") {
+          for (let key of __getOwnPropNames3(from))
+            if (!__hasOwnProp2.call(to, key) && key !== except)
+              __defProp11(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc2(from, key)) || desc.enumerable });
+        }
+        return to;
+      };
+      var __reExport2 = (target, mod, secondTarget) => (__copyProps2(target, mod, "default"), secondTarget && __copyProps2(secondTarget, mod, "default"));
+      var __toCommonJS2 = (mod) => __copyProps2(__defProp11({}, "__esModule", { value: true }), mod);
+      var src_exports2 = {};
+      module.exports = __toCommonJS2(src_exports2);
+      __reExport2(src_exports2, require_lib11(), module.exports);
+      __reExport2(src_exports2, require_lib(), module.exports);
+    }
+  });
+
+  // ../satori/adapters/satori/lib/index.js
+  var require_lib13 = __commonJS({
+    "../satori/adapters/satori/lib/index.js"(exports, module) {
+      var __defProp11 = Object.defineProperty;
+      var __getOwnPropDesc2 = Object.getOwnPropertyDescriptor;
+      var __getOwnPropNames3 = Object.getOwnPropertyNames;
+      var __hasOwnProp2 = Object.prototype.hasOwnProperty;
+      var __name10 = (target, value) => __defProp11(target, "name", { value, configurable: true });
+      var __export2 = (target, all) => {
+        for (var name2 in all)
+          __defProp11(target, name2, { get: all[name2], enumerable: true });
+      };
+      var __copyProps2 = (to, from, except, desc) => {
+        if (from && typeof from === "object" || typeof from === "function") {
+          for (let key of __getOwnPropNames3(from))
+            if (!__hasOwnProp2.call(to, key) && key !== except)
+              __defProp11(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc2(from, key)) || desc.enumerable });
+        }
+        return to;
+      };
+      var __toCommonJS2 = (mod) => __copyProps2(__defProp11({}, "__esModule", { value: true }), mod);
+      var src_exports2 = {};
+      __export2(src_exports2, {
+        SatoriAdapter: () => SatoriAdapter2,
+        SatoriBot: () => SatoriBot,
+        default: () => src_default2,
+        transformKey: () => transformKey
+      });
+      module.exports = __toCommonJS2(src_exports2);
+      var import_satori2 = require_lib12();
+      var import_satori = require_lib12();
+      function transformKey(source, callback) {
+        if (!source || typeof source !== "object")
+          return source;
+        if (Array.isArray(source))
+          return source.map((value) => transformKey(value, callback));
+        return Object.fromEntries(Object.entries(source).map(([key, value]) => {
+          if (key.startsWith("_"))
+            return [key, value];
+          return [callback(key), transformKey(value, callback)];
+        }));
+      }
+      __name10(transformKey, "transformKey");
+      function createInternal(bot, prefix = "") {
+        return new Proxy(() => {
+        }, {
+          apply(target, thisArg, args) {
+            return bot.http.post("/internal/" + (0, import_satori.snakeCase)(prefix.slice(1)), args);
+          },
+          get(target, key, receiver) {
+            if (typeof key === "symbol" || key in target) {
+              return Reflect.get(target, key, receiver);
+            }
+            return createInternal(bot, prefix + "." + key);
+          }
+        });
+      }
+      __name10(createInternal, "createInternal");
+      var _a25;
+      var SatoriBot = (_a25 = class extends import_satori.Bot {
+        constructor(ctx, config) {
+          super(ctx, config, "satori");
+          __publicField(this, "http");
+          __publicField(this, "internal", createInternal(this));
+          Object.assign(this, config);
+        }
+      }, __name10(_a25, "SatoriBot"), _a25);
+      for (const [key, method] of Object.entries(import_satori.Universal.Methods)) {
+        SatoriBot.prototype[method.name] = function(...args) {
+          const payload = {};
+          for (const { name: name2 } of method.fields) {
+            if (name2 === "content") {
+              payload[name2] = import_satori.h.normalize(args.shift()).join("");
+            } else {
+              payload[name2] = transformKey(args.shift(), import_satori.snakeCase);
+            }
+          }
+          this.logger.debug("[request]", key, payload);
+          return this.http.post("/v1/" + key, payload);
+        };
+      }
+      var _a26;
+      var SatoriAdapter2 = (_a26 = class extends import_satori2.Adapter.WsClientBase {
+        // NodeJS.Timeout
+        constructor(ctx, config) {
+          super(ctx, config);
+          __publicField(this, "http");
+          __publicField(this, "logger");
+          __publicField(this, "_status", import_satori2.Universal.Status.OFFLINE);
+          __publicField(this, "sequence");
+          __publicField(this, "timeout");
+          this.ctx = ctx;
+          this.config = config;
+          this.logger = ctx.logger("satori");
+          this.http = ctx.http.extend({
+            baseURL: config.endpoint,
+            headers: {
+              "Authorization": `Bearer ${config.token}`
+            }
+          });
+          ctx.on("ready", () => this.start());
+          ctx.on("dispose", () => this.stop());
+        }
+        getActive() {
+          return this._status !== import_satori2.Universal.Status.OFFLINE && this._status !== import_satori2.Universal.Status.DISCONNECT;
+        }
+        setStatus(status, error) {
+          this._status = status;
+          if (status === import_satori2.Universal.Status.ONLINE)
+            return;
+          for (const bot of this.bots) {
+            bot.status = status;
+            bot.error = error;
+          }
+        }
+        async prepare() {
+          return this.http.ws("/v1/events");
+        }
+        getBot(platform, selfId, login) {
+          let bot = this.bots.find((bot2) => bot2.selfId === selfId && bot2.platform === platform);
+          if (bot) {
+            bot.update(login);
+            return this.bots.includes(bot) ? bot : void 0;
+          }
+          if (!login) {
+            this.logger.error("cannot find bot for", platform, selfId);
+            return;
+          }
+          bot = new SatoriBot(this.ctx, login);
+          bot.adapter = this;
+          bot.http = this.http;
+          this.bots.push(bot);
+        }
+        accept() {
+          this.socket.send(JSON.stringify({
+            op: import_satori2.Universal.Opcode.IDENTIFY,
+            body: {
+              token: this.config.token,
+              sequence: this.sequence
+            }
+          }));
+          this.timeout = setInterval(() => {
+            this.socket.send(JSON.stringify({
+              op: import_satori2.Universal.Opcode.PING,
+              body: {}
+            }));
+          }, import_satori2.Time.second * 10);
+          this.socket.addEventListener("message", async ({ data }) => {
+            let parsed;
+            data = data.toString();
+            try {
+              parsed = transformKey(JSON.parse(data), import_satori2.camelize);
+            } catch (error) {
+              return this.logger.warn("cannot parse message", data);
+            }
+            if (parsed.op === import_satori2.Universal.Opcode.READY) {
+              this.logger.debug("ready");
+              for (const login of parsed.body.logins) {
+                this.getBot(login.platform, login.selfId, login);
+              }
+            }
+            if (parsed.op === import_satori2.Universal.Opcode.EVENT) {
+              const { id, type: type2, selfId, platform, login } = parsed.body;
+              this.sequence = id;
+              const bot = this.getBot(platform, selfId, type2 === "login-added" && login);
+              if (!bot)
+                return;
+              if (type2 === "login-updated") {
+                return bot.update(login);
+              } else if (type2 === "login-removed") {
+                return bot.dispose();
+              }
+              const session = bot.session(parsed.body);
+              if (parsed.body.message?.content) {
+                session.content = parsed.body.message.content;
+              }
+              if (parsed.body._type && parsed.body.type !== "internal") {
+                session.setInternal(parsed.body._type, parsed.body._data);
+              }
+              bot.dispatch(session);
+            }
+          });
+          this.socket.addEventListener("close", () => {
+            clearInterval(this.timeout);
+          });
+        }
+        async start() {
+          this.setStatus(import_satori2.Universal.Status.CONNECT);
+          await super.start();
+        }
+        async stop() {
+          this.setStatus(import_satori2.Universal.Status.DISCONNECT);
+          await super.stop();
+        }
+      }, __name10(_a26, "SatoriAdapter"), __publicField(_a26, "schema", true), __publicField(_a26, "reusable", true), __publicField(_a26, "inject", ["http"]), _a26);
+      ((SatoriAdapter22) => {
+        SatoriAdapter22.Config = import_satori2.Schema.intersect([
+          import_satori2.Schema.object({
+            endpoint: import_satori2.Schema.string().description("API \u7EC8\u7ED3\u70B9\u3002").required(),
+            token: import_satori2.Schema.string().description("API \u8BBF\u95EE\u4EE4\u724C\u3002")
+          }),
+          import_satori2.Adapter.WsClientConfig
+        ]);
+      })(SatoriAdapter2 || (SatoriAdapter2 = {}));
+      var src_default2 = SatoriAdapter2;
+    }
+  });
 
   // src/index.ts
   var src_exports = {};
   __export(src_exports, {
-    SatoriAdapter: () => SatoriAdapter,
-    SatoriBot: () => SatoriBot,
-    default: () => src_default$1,
-    transformKey: () => transformKey
+    Adapter: () => Adapter,
+    Bot: () => Bot,
+    Context: () => Context3,
+    CordisError: () => CordisError,
+    EffectScope: () => EffectScope,
+    Element: () => lib_default,
+    ForkScope: () => ForkScope,
+    Lifecycle: () => Lifecycle,
+    Logger: () => import_levi_reggol2.default,
+    MainScope: () => MainScope,
+    MessageEncoder: () => MessageEncoder,
+    Messenger: () => MessageEncoder,
+    Modulator: () => MessageEncoder,
+    Registry: () => Registry,
+    Schema: () => import_schemastery.default,
+    ScopeStatus: () => ScopeStatus,
+    Service: () => Service23,
+    Session: () => Session,
+    TimerService: () => TimerService2,
+    Universal: () => lib_exports2,
+    applyTraceable: () => applyTraceable,
+    createCallable: () => createCallable,
+    createTraceable: () => createTraceable,
+    defineAccessor: () => defineAccessor,
+    h: () => lib_default,
+    isApplicable: () => isApplicable,
+    isBailed: () => isBailed,
+    isConstructor: () => isConstructor,
+    isUnproxyable: () => isUnproxyable,
+    joinPrototype: () => joinPrototype,
+    resolveConfig: () => resolveConfig,
+    segment: () => lib_default,
+    symbols: () => symbols,
+    z: () => import_schemastery.default
   });
-  var lib = __toCommonJS(src_exports);
 
-  // src/ws.ts
-  var import_satori2 = libExports;
-
-  // src/bot.ts
-  var import_satori = libExports;
-  function transformKey(source, callback) {
-    if (!source || typeof source !== "object") return source;
-    if (Array.isArray(source)) return source.map(value => transformKey(value, callback));
-    return Object.fromEntries(Object.entries(source).map(([key, value]) => {
-      if (key.startsWith("_")) return [key, value];
-      return [callback(key), transformKey(value, callback)];
-    }));
+  // ../../node_modules/event-target-polyfill/index.js
+  var root = typeof globalThis !== "undefined" && globalThis || typeof self !== "undefined" && self || typeof global !== "undefined" && global;
+  var shouldPolyfillEvent = function() {
+    try {
+      new root.Event("");
+    } catch (error) {
+      return true;
+    }
+    return false;
+  }();
+  var shouldPolyfillEventTarget = function() {
+    try {
+      new root.EventTarget();
+    } catch (error) {
+      return true;
+    }
+    return false;
+  }();
+  if (shouldPolyfillEvent) {
+    root.Event = function() {
+      function Event2(type2, options) {
+        this.bubbles = !!options && !!options.bubbles;
+        this.cancelable = !!options && !!options.cancelable;
+        this.composed = !!options && !!options.composed;
+        this.type = type2;
+      }
+      return Event2;
+    }();
   }
-  __name$9(transformKey, "transformKey");
-  function createInternal(bot, prefix = "") {
-    return new Proxy(() => {}, {
-      apply(target, thisArg, args) {
-        return bot.http.post("/internal/" + (0, import_satori.snakeCase)(prefix.slice(1)), args);
-      },
-      get(target, key, receiver) {
-        if (typeof key === "symbol" || key in target) {
-          return Reflect.get(target, key, receiver);
-        }
-        return createInternal(bot, prefix + "." + key);
+  if (shouldPolyfillEventTarget) {
+    root.EventTarget = function() {
+      function EventTarget2() {
+        this.__listeners = /* @__PURE__ */ new Map();
       }
-    });
+      EventTarget2.prototype = Object.create(Object.prototype);
+      EventTarget2.prototype.addEventListener = function(type2, listener, options) {
+        if (arguments.length < 2) {
+          throw new TypeError(
+            "TypeError: Failed to execute 'addEventListener' on 'EventTarget': 2 arguments required, but only " + arguments.length + " present."
+          );
+        }
+        const __listeners = this.__listeners;
+        const actualType = type2.toString();
+        if (!__listeners.has(actualType)) {
+          __listeners.set(actualType, /* @__PURE__ */ new Map());
+        }
+        const listenersForType = __listeners.get(actualType);
+        if (!listenersForType.has(listener)) {
+          listenersForType.set(listener, options);
+        }
+      };
+      EventTarget2.prototype.removeEventListener = function(type2, listener, _options) {
+        if (arguments.length < 2) {
+          throw new TypeError(
+            "TypeError: Failed to execute 'addEventListener' on 'EventTarget': 2 arguments required, but only " + arguments.length + " present."
+          );
+        }
+        const __listeners = this.__listeners;
+        const actualType = type2.toString();
+        if (__listeners.has(actualType)) {
+          const listenersForType = __listeners.get(actualType);
+          if (listenersForType.has(listener)) {
+            listenersForType.delete(listener);
+          }
+        }
+      };
+      EventTarget2.prototype.dispatchEvent = function(event) {
+        if (!(event instanceof Event)) {
+          throw new TypeError(
+            "Failed to execute 'dispatchEvent' on 'EventTarget': parameter 1 is not of type 'Event'."
+          );
+        }
+        const type2 = event.type;
+        const __listeners = this.__listeners;
+        const listenersForType = __listeners.get(type2);
+        if (listenersForType) {
+          for (var listnerEntry of listenersForType.entries()) {
+            const listener = listnerEntry[0];
+            const options = listnerEntry[1];
+            try {
+              if (typeof listener === "function") {
+                listener.call(this, event);
+              } else if (listener && typeof listener.handleEvent === "function") {
+                listener.handleEvent(event);
+              }
+            } catch (err) {
+              setTimeout(() => {
+                throw err;
+              });
+            }
+            if (options && options.once) {
+              listenersForType.delete(listener);
+            }
+          }
+        }
+        return true;
+      };
+      return EventTarget2;
+    }();
   }
-  __name$9(createInternal, "createInternal");
-  var SatoriBot = (_Class10 = class SatoriBot extends import_satori.Bot {
-    constructor(ctx, config) {
-      super(ctx, config, "satori");
-      _defineProperty(this, "http", void 0);
-      _defineProperty(this, "internal", createInternal(this));
-      Object.assign(this, config);
-    }
-  }, __name$9(_Class10, "SatoriBot"), _Class10);
-  for (const [key, method] of Object.entries(import_satori.Universal.Methods)) {
-    SatoriBot.prototype[method.name] = function (...args) {
-      const payload = {};
-      for (const {
-        name
-      } of method.fields) {
-        if (name === "content") {
-          payload[name] = import_satori.h.normalize(args.shift()).join("");
-        } else {
-          payload[name] = transformKey(args.shift(), import_satori.snakeCase);
-        }
-      }
-      this.logger.debug("[request]", key, payload);
-      return this.http.post("/v1/" + key, payload);
-    };
-  }
-
-  // src/ws.ts
-  var SatoriAdapter = (_Class11 = class SatoriAdapter extends import_satori2.Adapter.WsClientBase {
-    // NodeJS.Timeout
-    constructor(ctx, config) {
-      super(ctx, config);
-      _defineProperty(this, "http", void 0);
-      _defineProperty(this, "logger", void 0);
-      _defineProperty(this, "_status", import_satori2.Universal.Status.OFFLINE);
-      _defineProperty(this, "sequence", void 0);
-      _defineProperty(this, "timeout", void 0);
-      this.ctx = ctx;
-      this.config = config;
-      this.logger = ctx.logger("satori");
-      this.http = ctx.http.extend({
-        baseURL: config.endpoint,
-        headers: {
-          "Authorization": `Bearer ${config.token}`
-        }
-      });
-      ctx.on("ready", () => this.start());
-      ctx.on("dispose", () => this.stop());
-    }
-    getActive() {
-      return this._status !== import_satori2.Universal.Status.OFFLINE && this._status !== import_satori2.Universal.Status.DISCONNECT;
-    }
-    setStatus(status, error) {
-      this._status = status;
-      if (status === import_satori2.Universal.Status.ONLINE) return;
-      for (const bot of this.bots) {
-        bot.status = status;
-        bot.error = error;
-      }
-    }
-    async prepare() {
-      return this.http.ws("/v1/events");
-    }
-    getBot(platform, selfId, login) {
-      let bot = this.bots.find(bot2 => bot2.selfId === selfId && bot2.platform === platform);
-      if (bot) {
-        bot.update(login);
-        return this.bots.includes(bot) ? bot : void 0;
-      }
-      if (!login) {
-        this.logger.error("cannot find bot for", platform, selfId);
-        return;
-      }
-      bot = new SatoriBot(this.ctx, login);
-      bot.adapter = this;
-      bot.http = this.http;
-      this.bots.push(bot);
-    }
-    accept() {
-      this.socket.send(JSON.stringify({
-        op: import_satori2.Universal.Opcode.IDENTIFY,
-        body: {
-          token: this.config.token,
-          sequence: this.sequence
-        }
-      }));
-      this.timeout = setInterval(() => {
-        this.socket.send(JSON.stringify({
-          op: import_satori2.Universal.Opcode.PING,
-          body: {}
-        }));
-      }, import_satori2.Time.second * 10);
-      this.socket.addEventListener("message", async ({
-        data
-      }) => {
-        let parsed;
-        data = data.toString();
-        try {
-          parsed = transformKey(JSON.parse(data), import_satori2.camelize);
-        } catch (error) {
-          return this.logger.warn("cannot parse message", data);
-        }
-        if (parsed.op === import_satori2.Universal.Opcode.READY) {
-          this.logger.debug("ready");
-          for (const login of parsed.body.logins) {
-            this.getBot(login.platform, login.selfId, login);
-          }
-        }
-        if (parsed.op === import_satori2.Universal.Opcode.EVENT) {
-          const {
-            id,
-            type,
-            selfId,
-            platform,
-            login
-          } = parsed.body;
-          this.sequence = id;
-          const bot = this.getBot(platform, selfId, type === "login-added" && login);
-          if (!bot) return;
-          if (type === "login-updated") {
-            return bot.update(login);
-          } else if (type === "login-removed") {
-            return bot.dispose();
-          }
-          const session = bot.session(parsed.body);
-          if (parsed.body.message?.content) {
-            session.content = parsed.body.message.content;
-          }
-          if (parsed.body._type && parsed.body.type !== "internal") {
-            session.setInternal(parsed.body._type, parsed.body._data);
-          }
-          bot.dispatch(session);
-        }
-      });
-      this.socket.addEventListener("close", () => {
-        clearInterval(this.timeout);
-      });
-    }
-    async start() {
-      this.setStatus(import_satori2.Universal.Status.CONNECT);
-      await super.start();
-    }
-    async stop() {
-      this.setStatus(import_satori2.Universal.Status.DISCONNECT);
-      await super.stop();
-    }
-  }, __name$9(_Class11, "SatoriAdapter"), _defineProperty(_Class11, "schema", true), _defineProperty(_Class11, "reusable", true), _defineProperty(_Class11, "inject", ["http"]), _Class11);
-  (SatoriAdapter2 => {
-    SatoriAdapter2.Config = import_satori2.Schema.intersect([import_satori2.Schema.object({
-      endpoint: import_satori2.Schema.string().description("API 终结点。").required(),
-      token: import_satori2.Schema.string().description("API 访问令牌。")
-    }), import_satori2.Adapter.WsClientConfig]);
-  })(SatoriAdapter || (SatoriAdapter = {}));
 
   // src/index.ts
-  var src_default$1 = SatoriAdapter;
-  var __defProp$8 = Object.defineProperty;
-  var __name$8 = (target, value) => __defProp$8(target, "name", {
-    value,
-    configurable: true
-  });
+  var import_levi_reggol2 = __toESM(require_lib2());
+  var import_adapter_satori = __toESM(require_lib13());
+
+  // ../cordis/packages/core/lib/index.mjs
+  var import_cosmokit = __toESM(require_lib(), 1);
+  var import_cosmokit2 = __toESM(require_lib(), 1);
+  var import_cosmokit3 = __toESM(require_lib(), 1);
+  var import_cosmokit4 = __toESM(require_lib(), 1);
+  var import_cosmokit5 = __toESM(require_lib(), 1);
+  var import_cosmokit6 = __toESM(require_lib(), 1);
+  var __defProp2 = Object.defineProperty;
+  var __name = (target, value) => __defProp2(target, "name", { value, configurable: true });
   function isBailed(value) {
     return value !== null && value !== false && value !== void 0;
   }
-  __name$8(isBailed, "isBailed");
-  var Lifecycle = _exports.Lifecycle = (_Class12 = class Lifecycle {
-    constructor(root) {
-      _defineProperty(this, "isActive", false);
-      _defineProperty(this, "_tasks", /* @__PURE__ */new Set());
-      _defineProperty(this, "_hooks", {});
-      this.root = root;
-      defineProperty(this, Context$1.origin, root);
-      defineProperty(this.on("internal/listener", function (name, listener, prepend) {
+  __name(isBailed, "isBailed");
+  var _a;
+  var Lifecycle = (_a = class {
+    constructor(root2) {
+      __publicField(this, "isActive", false);
+      __publicField(this, "_tasks", /* @__PURE__ */ new Set());
+      __publicField(this, "_hooks", {});
+      this.root = root2;
+      (0, import_cosmokit2.defineProperty)(this, Context2.origin, root2);
+      (0, import_cosmokit2.defineProperty)(this.on("internal/listener", function(name2, listener, prepend) {
         const method = prepend ? "unshift" : "push";
-        if (name === "ready") {
-          if (!this.lifecycle.isActive) return;
+        if (name2 === "ready") {
+          if (!this.lifecycle.isActive)
+            return;
           this.scope.ensure(async () => listener());
           return () => false;
-        } else if (name === "dispose") {
+        } else if (name2 === "dispose") {
           this.scope.disposables[method](listener);
-          defineProperty(listener, "name", "event <dispose>");
-          return () => remove(this.scope.disposables, listener);
-        } else if (name === "fork") {
+          (0, import_cosmokit2.defineProperty)(listener, "name", "event <dispose>");
+          return () => (0, import_cosmokit2.remove)(this.scope.disposables, listener);
+        } else if (name2 === "fork") {
           this.scope.runtime.forkables[method](listener);
-          return this.scope.collect("event <fork>", () => remove(this.scope.runtime.forkables, listener));
+          return this.scope.collect("event <fork>", () => (0, import_cosmokit2.remove)(this.scope.runtime.forkables, listener));
         }
-      }), Context$1.static, root.scope);
+      }), Context2.static, root2.scope);
       for (const level of ["info", "error", "warning"]) {
-        defineProperty(this.on(`internal/${level}`, (format, ...param) => {
-          if (this._hooks[`internal/${level}`].length > 1) return;
+        (0, import_cosmokit2.defineProperty)(this.on(`internal/${level}`, (format, ...param) => {
+          if (this._hooks[`internal/${level}`].length > 1)
+            return;
           console.info(format, ...param);
-        }), Context$1.static, root.scope);
+        }), Context2.static, root2.scope);
       }
     }
     async flush() {
@@ -4820,24 +4799,24 @@
         await Promise.all(Array.from(this._tasks));
       }
     }
-    getHooks(name, thisArg) {
-      const hooks = this._hooks[name] || [];
+    getHooks(name2, thisArg) {
+      const hooks = this._hooks[name2] || [];
       return hooks.slice().filter(([context]) => {
-        const filter = thisArg?.[Context$1.filter];
+        const filter = thisArg?.[Context2.filter];
         return !filter || filter.call(thisArg, context);
       }).map(([, callback]) => callback);
     }
-    prepareEvent(type, args) {
+    prepareEvent(type2, args) {
       const thisArg = typeof args[0] === "object" ? args.shift() : null;
-      const name = args.shift();
-      if (name !== "internal/event") {
-        this.emit("internal/event", type, name, args, thisArg);
+      const name2 = args.shift();
+      if (name2 !== "internal/event") {
+        this.emit("internal/event", type2, name2, args, thisArg);
       }
-      return [this.getHooks(name, thisArg), thisArg ?? this[Context$1.origin]];
+      return [this.getHooks(name2, thisArg), thisArg ?? this[Context2.origin]];
     }
     async parallel(...args) {
       const [hooks, thisArg] = this.prepareEvent("parallel", args);
-      await Promise.all(hooks.map(async callback => {
+      await Promise.all(hooks.map(async (callback) => {
         await callback.apply(thisArg, args);
       }));
     }
@@ -4851,18 +4830,20 @@
       const [hooks, thisArg] = this.prepareEvent("serial", args);
       for (const callback of hooks) {
         const result = await callback.apply(thisArg, args);
-        if (isBailed(result)) return result;
+        if (isBailed(result))
+          return result;
       }
     }
     bail(...args) {
       const [hooks, thisArg] = this.prepareEvent("bail", args);
       for (const callback of hooks) {
         const result = callback.apply(thisArg, args);
-        if (isBailed(result)) return result;
+        if (isBailed(result))
+          return result;
       }
     }
     register(label, hooks, listener, prepend) {
-      const caller = this[Context$1.origin];
+      const caller = this[Context2.origin];
       const method = prepend ? "unshift" : "push";
       hooks[method]([caller, listener]);
       return caller.state.collect(label, () => this.unregister(hooks, listener));
@@ -4874,24 +4855,26 @@
         return true;
       }
     }
-    on(name, listener, prepend = false) {
-      const caller = this[Context$1.origin];
+    on(name2, listener, prepend = false) {
+      var _a25;
+      const caller = this[Context2.origin];
       caller.scope.assertActive();
-      const result = this.bail(caller, "internal/listener", name, listener, prepend);
-      if (result) return result;
-      const hooks = this._hooks[name] ||= [];
-      const label = typeof name === "string" ? `event <${name}>` : "event (Symbol)";
+      const result = this.bail(caller, "internal/listener", name2, listener, prepend);
+      if (result)
+        return result;
+      const hooks = (_a25 = this._hooks)[name2] || (_a25[name2] = []);
+      const label = typeof name2 === "string" ? `event <${name2}>` : "event (Symbol)";
       return this.register(label, hooks, listener, prepend);
     }
-    once(name, listener, prepend = false) {
-      const dispose = this.on(name, function (...args) {
+    once(name2, listener, prepend = false) {
+      const dispose = this.on(name2, function(...args) {
         dispose();
         return listener.apply(this, args);
       }, prepend);
       return dispose;
     }
-    off(name, listener) {
-      return this.unregister(this._hooks[name] || [], listener);
+    off(name2, listener) {
+      return this.unregister(this._hooks[name2] || [], listener);
     }
     async start() {
       this.isActive = true;
@@ -4906,8 +4889,8 @@
       this.isActive = false;
       this.root.scope.reset();
     }
-  }, __name$8(_Class12, "Lifecycle"), _Class12);
-  var symbols = _exports.symbols = {
+  }, __name(_a, "Lifecycle"), _a);
+  var symbols = {
     // context symbols
     origin: Symbol.for("cordis.origin"),
     events: Symbol.for("cordis.events"),
@@ -4925,35 +4908,40 @@
     immediate: Symbol.for("cordis.immediate")
   };
   function isConstructor(func) {
-    if (!func.prototype) return false;
-    if (func.prototype.constructor !== func) return false;
+    if (!func.prototype)
+      return false;
+    if (func.prototype.constructor !== func)
+      return false;
     return true;
   }
-  __name$8(isConstructor, "isConstructor");
+  __name(isConstructor, "isConstructor");
   function resolveConfig(plugin, config) {
-    const schema = plugin["Config"] || plugin["schema"];
-    if (schema && plugin["schema"] !== false) config = schema(config);
+    const schema2 = plugin["Config"] || plugin["schema"];
+    if (schema2 && plugin["schema"] !== false)
+      config = schema2(config);
     return config ?? {};
   }
-  __name$8(resolveConfig, "resolveConfig");
+  __name(resolveConfig, "resolveConfig");
   function isUnproxyable(value) {
-    return [Map, Set, Date, Promise].some(constructor => value instanceof constructor);
+    return [Map, Set, Date, Promise].some((constructor) => value instanceof constructor);
   }
-  __name$8(isUnproxyable, "isUnproxyable");
+  __name(isUnproxyable, "isUnproxyable");
   function joinPrototype(proto1, proto2) {
-    if (proto1 === Object.prototype) return proto2;
+    if (proto1 === Object.prototype)
+      return proto2;
     const result = Object.create(joinPrototype(Object.getPrototypeOf(proto1), proto2));
     for (const key of Reflect.ownKeys(proto1)) {
       Object.defineProperty(result, key, Object.getOwnPropertyDescriptor(proto1, key));
     }
     return result;
   }
-  __name$8(joinPrototype, "joinPrototype");
+  __name(joinPrototype, "joinPrototype");
   function createTraceable(ctx, value) {
     const proxy = new Proxy(value, {
-      get: (target, name, receiver) => {
-        if (name === symbols.origin || name === "caller") return ctx;
-        return Reflect.get(target, name, receiver);
+      get: (target, name2, receiver) => {
+        if (name2 === symbols.origin || name2 === "caller")
+          return ctx;
+        return Reflect.get(target, name2, receiver);
       },
       apply: (target, thisArg, args) => {
         return applyTraceable(proxy, target, thisArg, args);
@@ -4961,24 +4949,23 @@
     });
     return proxy;
   }
-  __name$8(createTraceable, "createTraceable");
+  __name(createTraceable, "createTraceable");
   function applyTraceable(proxy, value, thisArg, args) {
-    if (!value[symbols.invoke]) return Reflect.apply(value, thisArg, args);
+    if (!value[symbols.invoke])
+      return Reflect.apply(value, thisArg, args);
     return value[symbols.invoke].apply(proxy, args);
   }
-  __name$8(applyTraceable, "applyTraceable");
-  function createCallable(name, proto) {
-    const self = /* @__PURE__ */__name$8(function (...args) {
-      const proxy = createTraceable(self[symbols.origin], self);
-      return applyTraceable(proxy, self, this, args);
+  __name(applyTraceable, "applyTraceable");
+  function createCallable(name2, proto) {
+    const self2 = /* @__PURE__ */ __name(function(...args) {
+      const proxy = createTraceable(self2[symbols.origin], self2);
+      return applyTraceable(proxy, self2, this, args);
     }, "self");
-    defineProperty(self, "name", name);
-    return Object.setPrototypeOf(self, proto);
+    (0, import_cosmokit5.defineProperty)(self2, "name", name2);
+    return Object.setPrototypeOf(self2, proto);
   }
-  __name$8(createCallable, "createCallable");
-
-  // src/scope.ts
-  var ScopeStatus = _exports.ScopeStatus = /* @__PURE__ */(ScopeStatus2 => {
+  __name(createCallable, "createCallable");
+  var ScopeStatus = /* @__PURE__ */ ((ScopeStatus2) => {
     ScopeStatus2[ScopeStatus2["PENDING"] = 0] = "PENDING";
     ScopeStatus2[ScopeStatus2["LOADING"] = 1] = "LOADING";
     ScopeStatus2[ScopeStatus2["ACTIVE"] = 2] = "ACTIVE";
@@ -4986,37 +4973,37 @@
     ScopeStatus2[ScopeStatus2["DISPOSED"] = 4] = "DISPOSED";
     return ScopeStatus2;
   })(ScopeStatus || {});
-  var CordisError = _exports.CordisError = (_CordisError3 = class _CordisError extends Error {
+  var _a2;
+  var CordisError = (_a2 = class extends Error {
     constructor(code, message) {
-      super(message ?? _CordisError.Code[code]);
+      super(message ?? _a2.Code[code]);
       this.code = code;
     }
-  }, __name$8(_CordisError3, "CordisError"), _CordisError3);
-  (CordisError2 => {
+  }, __name(_a2, "CordisError"), _a2);
+  ((CordisError2) => {
     CordisError2.Code = {
       INACTIVE_EFFECT: "cannot create effect on inactive context"
     };
-  })(CordisError || (_exports.CordisError = CordisError = {}));
-  var EffectScope = _exports.EffectScope = (_Class13 = class EffectScope {
+  })(CordisError || (CordisError = {}));
+  var _a3;
+  var EffectScope = (_a3 = class {
     constructor(parent, config) {
-      _defineProperty(this, "uid", void 0);
-      _defineProperty(this, "ctx", void 0);
-      _defineProperty(this, "disposables", []);
-      _defineProperty(this, "error", void 0);
-      _defineProperty(this, "status", 0 /* PENDING */);
-      _defineProperty(this, "isActive", false);
+      __publicField(this, "uid");
+      __publicField(this, "ctx");
+      __publicField(this, "disposables", []);
+      __publicField(this, "error");
+      __publicField(this, "status", 0);
+      __publicField(this, "isActive", false);
       // Same as `this.ctx`, but with a more specific type.
-      _defineProperty(this, "context", void 0);
-      _defineProperty(this, "proxy", void 0);
-      _defineProperty(this, "acceptors", []);
-      _defineProperty(this, "tasks", /* @__PURE__ */new Set());
-      _defineProperty(this, "hasError", false);
+      __publicField(this, "context");
+      __publicField(this, "proxy");
+      __publicField(this, "acceptors", []);
+      __publicField(this, "tasks", /* @__PURE__ */ new Set());
+      __publicField(this, "hasError", false);
       this.parent = parent;
       this.config = config;
       this.uid = parent.registry ? parent.registry.counter : 0;
-      this.ctx = this.context = parent.extend({
-        scope: this
-      });
+      this.ctx = this.context = parent.extend({ scope: this });
       this.proxy = new Proxy({}, {
         get: (target, key) => Reflect.get(this.config, key)
       });
@@ -5025,7 +5012,8 @@
       return this.runtime.isReactive ? this.proxy : this.config;
     }
     assertActive() {
-      if (this.uid !== null || this.isActive) return;
+      if (this.uid !== null || this.isActive)
+        return;
       throw new CordisError("INACTIVE_EFFECT");
     }
     effect(callback, config) {
@@ -5033,20 +5021,22 @@
       const result = isConstructor(callback) ? new callback(this.ctx, config) : callback(this.ctx, config);
       let disposed = false;
       const original = typeof result === "function" ? result : result.dispose.bind(result);
-      const wrapped = /* @__PURE__ */__name$8(() => {
-        if (disposed) return;
+      const wrapped = /* @__PURE__ */ __name(() => {
+        if (disposed)
+          return;
         disposed = true;
-        remove(this.disposables, wrapped);
+        (0, import_cosmokit4.remove)(this.disposables, wrapped);
         return original();
       }, "wrapped");
       this.disposables.push(wrapped);
-      if (typeof result === "function") return wrapped;
+      if (typeof result === "function")
+        return wrapped;
       result.dispose = wrapped;
       return result;
     }
     collect(label, callback) {
-      const dispose = defineProperty(() => {
-        remove(this.disposables, dispose);
+      const dispose = (0, import_cosmokit4.defineProperty)(() => {
+        (0, import_cosmokit4.remove)(this.disposables, dispose);
         return callback();
       }, "name", label);
       this.disposables.push(dispose);
@@ -5056,15 +5046,19 @@
       this.reset();
       this.error = null;
       this.hasError = false;
-      this.status = 0 /* PENDING */;
+      this.status = 0;
       this.start();
     }
     _getStatus() {
-      if (this.uid === null) return 4 /* DISPOSED */;
-      if (this.hasError) return 3 /* FAILED */;
-      if (this.tasks.size) return 1 /* LOADING */;
-      if (this.ready) return 2 /* ACTIVE */;
-      return 0 /* PENDING */;
+      if (this.uid === null)
+        return 4;
+      if (this.hasError)
+        return 3;
+      if (this.tasks.size)
+        return 1;
+      if (this.ready)
+        return 2;
+      return 0;
     }
     _updateStatus(callback) {
       const oldValue = this.status;
@@ -5075,7 +5069,7 @@
       }
     }
     ensure(callback) {
-      const task = callback().catch(reason => {
+      const task = callback().catch((reason) => {
         this.context.emit("internal/error", reason);
         this.cancel(reason);
       }).finally(() => {
@@ -5091,25 +5085,29 @@
       this.reset();
     }
     setupInject() {
-      if (!this.runtime.using.length) return;
-      defineProperty(this.context.on("internal/before-service", name => {
-        if (!this.runtime.using.includes(name)) return;
+      if (!this.runtime.using.length)
+        return;
+      (0, import_cosmokit4.defineProperty)(this.context.on("internal/before-service", (name2) => {
+        if (!this.runtime.using.includes(name2))
+          return;
         this._updateStatus();
         this.reset();
-      }), Context$1.static, this);
-      defineProperty(this.context.on("internal/service", name => {
-        if (!this.runtime.using.includes(name)) return;
+      }), Context2.static, this);
+      (0, import_cosmokit4.defineProperty)(this.context.on("internal/service", (name2) => {
+        if (!this.runtime.using.includes(name2))
+          return;
         this.start();
-      }), Context$1.static, this);
+      }), Context2.static, this);
     }
     get ready() {
-      return this.runtime.using.every(name => !isNullable(this.ctx[name]));
+      return this.runtime.using.every((name2) => !(0, import_cosmokit4.isNullable)(this.ctx[name2]));
     }
     reset() {
       this.isActive = false;
-      this.disposables = this.disposables.splice(0).filter(dispose => {
-        if (this.uid !== null && dispose[Context$1.static] === this) return true;
-        (async () => dispose())().catch(reason => {
+      this.disposables = this.disposables.splice(0).filter((dispose) => {
+        if (this.uid !== null && dispose[Context2.static] === this)
+          return true;
+        (async () => dispose())().catch((reason) => {
           this.context.emit("internal/error", reason);
         });
       });
@@ -5122,86 +5120,83 @@
       }
     }
     start() {
-      if (!this.ready || this.isActive || this.uid === null) return true;
+      if (!this.ready || this.isActive || this.uid === null)
+        return true;
       this.isActive = true;
       this._updateStatus(() => this.hasError = false);
     }
     accept(...args) {
       const keys = Array.isArray(args[0]) ? args.shift() : null;
-      const acceptor = {
-        keys,
-        callback: args[0],
-        ...args[1]
-      };
+      const acceptor = { keys, callback: args[0], ...args[1] };
       return this.effect(() => {
         this.acceptors.push(acceptor);
-        if (acceptor.immediate) acceptor.callback?.(this.config);
-        return () => remove(this.acceptors, acceptor);
+        if (acceptor.immediate)
+          acceptor.callback?.(this.config);
+        return () => (0, import_cosmokit4.remove)(this.acceptors, acceptor);
       });
     }
     decline(keys) {
       return this.accept(keys, () => true);
     }
     checkUpdate(resolved, forced) {
-      if (forced || !this.config) return [true, true];
-      if (forced === false) return [false, false];
-      const modified = /* @__PURE__ */Object.create(null);
-      const checkPropertyUpdate = /* @__PURE__ */__name$8(key => {
-        const result = modified[key] ??= !deepEqual(this.config[key], resolved[key]);
-        hasUpdate ||= result;
+      if (forced || !this.config)
+        return [true, true];
+      if (forced === false)
+        return [false, false];
+      const modified = /* @__PURE__ */ Object.create(null);
+      const checkPropertyUpdate = /* @__PURE__ */ __name((key) => {
+        const result = modified[key] ?? (modified[key] = !(0, import_cosmokit4.deepEqual)(this.config[key], resolved[key]));
+        hasUpdate || (hasUpdate = result);
         return result;
       }, "checkPropertyUpdate");
-      const ignored = /* @__PURE__ */new Set();
-      let hasUpdate = false,
-        shouldRestart = false;
+      const ignored = /* @__PURE__ */ new Set();
+      let hasUpdate = false, shouldRestart = false;
       let fallback = this.runtime.isReactive || null;
-      for (const {
-        keys,
-        callback,
-        passive
-      } of this.acceptors) {
+      for (const { keys, callback, passive } of this.acceptors) {
         if (!keys) {
-          fallback ||= !passive;
+          fallback || (fallback = !passive);
         } else if (passive) {
-          keys?.forEach(key => ignored.add(key));
+          keys?.forEach((key) => ignored.add(key));
         } else {
           let hasUpdate2 = false;
           for (const key of keys) {
-            hasUpdate2 ||= checkPropertyUpdate(key);
+            hasUpdate2 || (hasUpdate2 = checkPropertyUpdate(key));
           }
-          if (!hasUpdate2) continue;
+          if (!hasUpdate2)
+            continue;
         }
         const result = callback?.(resolved);
-        if (result) shouldRestart = true;
+        if (result)
+          shouldRestart = true;
       }
-      for (const key in {
-        ...this.config,
-        ...resolved
-      }) {
-        if (fallback === false) continue;
+      for (const key in { ...this.config, ...resolved }) {
+        if (fallback === false)
+          continue;
         if (!(key in modified) && !ignored.has(key)) {
           const hasUpdate2 = checkPropertyUpdate(key);
-          if (fallback === null) shouldRestart ||= hasUpdate2;
+          if (fallback === null)
+            shouldRestart || (shouldRestart = hasUpdate2);
         }
       }
       return [hasUpdate, shouldRestart];
     }
-  }, __name$8(_Class13, "EffectScope"), _Class13);
-  var ForkScope = _exports.ForkScope = (_Class14 = class ForkScope extends EffectScope {
+  }, __name(_a3, "EffectScope"), _a3);
+  var _a4;
+  var ForkScope = (_a4 = class extends EffectScope {
     constructor(parent, runtime, config, error) {
       super(parent, config);
-      _defineProperty(this, "dispose", void 0);
+      __publicField(this, "dispose");
       this.runtime = runtime;
-      this.dispose = defineProperty(parent.scope.collect(`fork <${parent.runtime.name}>`, () => {
+      this.dispose = (0, import_cosmokit4.defineProperty)(parent.scope.collect(`fork <${parent.runtime.name}>`, () => {
         this.uid = null;
         this.reset();
         this.context.emit("internal/fork", this);
-        const result = remove(runtime.disposables, this.dispose);
-        if (remove(runtime.children, this) && !runtime.children.length) {
+        const result = (0, import_cosmokit4.remove)(runtime.disposables, this.dispose);
+        if ((0, import_cosmokit4.remove)(runtime.children, this) && !runtime.children.length) {
           parent.registry.delete(runtime.plugin);
         }
         return result;
-      }), Context$1.static, runtime);
+      }), Context2.static, runtime);
       runtime.children.push(this);
       runtime.disposables.push(this.dispose);
       this.context.emit("internal/fork", this);
@@ -5211,7 +5206,8 @@
       this.init(error);
     }
     start() {
-      if (super.start()) return true;
+      if (super.start())
+        return true;
       for (const fork of this.runtime.forkables) {
         this.ensure(async () => fork(this.context, this._config));
       }
@@ -5219,7 +5215,8 @@
     update(config, forced) {
       const oldConfig = this.config;
       const state = this.runtime.isForkable ? this : this.runtime;
-      if (state.config !== oldConfig) return;
+      if (state.config !== oldConfig)
+        return;
       const resolved = resolveConfig(this.runtime.plugin, config);
       const [hasUpdate, shouldRestart] = state.checkUpdate(resolved, forced);
       this.context.emit("internal/before-update", this, config);
@@ -5228,30 +5225,32 @@
       if (hasUpdate) {
         this.context.emit("internal/update", this, oldConfig);
       }
-      if (shouldRestart) state.restart();
+      if (shouldRestart)
+        state.restart();
     }
-  }, __name$8(_Class14, "ForkScope"), _Class14);
-  var MainScope = _exports.MainScope = (_Class15 = class MainScope extends EffectScope {
-    constructor(registry, plugin, _config2, error) {
-      super(registry[Context$1.origin], _config2);
-      _defineProperty(this, "value", void 0);
-      _defineProperty(this, "runtime", this);
-      _defineProperty(this, "schema", void 0);
-      _defineProperty(this, "name", void 0);
-      _defineProperty(this, "using", []);
-      _defineProperty(this, "inject", /* @__PURE__ */new Set());
-      _defineProperty(this, "forkables", []);
-      _defineProperty(this, "children", []);
-      _defineProperty(this, "isReusable", false);
-      _defineProperty(this, "isReactive", false);
-      _defineProperty(this, "apply", (context, config) => {
+  }, __name(_a4, "ForkScope"), _a4);
+  var _a5;
+  var MainScope = (_a5 = class extends EffectScope {
+    constructor(registry, plugin, config, error) {
+      super(registry[Context2.origin], config);
+      __publicField(this, "value");
+      __publicField(this, "runtime", this);
+      __publicField(this, "schema");
+      __publicField(this, "name");
+      __publicField(this, "using", []);
+      __publicField(this, "inject", /* @__PURE__ */ new Set());
+      __publicField(this, "forkables", []);
+      __publicField(this, "children", []);
+      __publicField(this, "isReusable", false);
+      __publicField(this, "isReactive", false);
+      __publicField(this, "apply", (context, config) => {
         if (typeof this.plugin !== "function") {
           return this.plugin.apply(context, config);
         } else if (isConstructor(this.plugin)) {
           const instance = new this.plugin(context, config);
-          const name = instance[Context$1.expose];
-          if (name) {
-            context[name] = instance;
+          const name2 = instance[Context2.expose];
+          if (name2) {
+            context[name2] = instance;
           }
           if (instance["fork"]) {
             this.forkables.push(instance["fork"].bind(instance));
@@ -5284,18 +5283,17 @@
       return true;
     }
     setup() {
-      const {
-        name
-      } = this.plugin;
-      if (name && name !== "apply") this.name = name;
+      const { name: name2 } = this.plugin;
+      if (name2 && name2 !== "apply")
+        this.name = name2;
       this.schema = this.plugin["Config"] || this.plugin["schema"];
-      const inject = this.plugin["using"] || this.plugin["inject"] || [];
-      if (Array.isArray(inject)) {
-        this.using = inject;
-        this.inject = new Set(inject);
+      const inject2 = this.plugin["using"] || this.plugin["inject"] || [];
+      if (Array.isArray(inject2)) {
+        this.using = inject2;
+        this.inject = new Set(inject2);
       } else {
-        this.using = inject.required || [];
-        this.inject = /* @__PURE__ */new Set([...this.using, ...(inject.optional || [])]);
+        this.using = inject2.required || [];
+        this.inject = /* @__PURE__ */ new Set([...this.using, ...inject2.optional || []]);
       }
       this.isReusable = this.plugin["reusable"];
       this.isReactive = this.plugin["reactive"];
@@ -5313,7 +5311,8 @@
       }
     }
     start() {
-      if (super.start()) return true;
+      if (super.start())
+        return true;
       if (!this.isReusable && this.plugin) {
         this.ensure(async () => this.value = this.apply(this.ctx, this._config));
       }
@@ -5328,7 +5327,7 @@
       const oldConfig = this.config;
       const resolved = resolveConfig(this.runtime.plugin || this.context.constructor, config);
       const [hasUpdate, shouldRestart] = this.checkUpdate(resolved, forced);
-      const state = this.children.find(fork => fork.config === oldConfig);
+      const state = this.children.find((fork) => fork.config === oldConfig);
       this.config = resolved;
       if (state) {
         this.context.emit("internal/before-update", state, config);
@@ -5337,23 +5336,23 @@
           this.context.emit("internal/update", state, oldConfig);
         }
       }
-      if (shouldRestart) this.restart();
+      if (shouldRestart)
+        this.restart();
     }
-  }, __name$8(_Class15, "MainScope"), _Class15);
-
-  // src/registry.ts
+  }, __name(_a5, "MainScope"), _a5);
   function isApplicable(object) {
     return object && typeof object === "object" && typeof object.apply === "function";
   }
-  __name$8(isApplicable, "isApplicable");
-  var Registry = _exports.Registry = (_Class16 = class Registry {
-    constructor(root, config) {
-      _defineProperty(this, "_counter", 0);
-      _defineProperty(this, "_internal", /* @__PURE__ */new Map());
-      this.root = root;
-      defineProperty(this, Context$1.origin, root);
-      root.scope = new MainScope(this, null, config);
-      root.scope.runtime.isReactive = true;
+  __name(isApplicable, "isApplicable");
+  var _a6;
+  var Registry = (_a6 = class {
+    constructor(root2, config) {
+      __publicField(this, "_counter", 0);
+      __publicField(this, "_internal", /* @__PURE__ */ new Map());
+      this.root = root2;
+      (0, import_cosmokit3.defineProperty)(this, Context2.origin, root2);
+      root2.scope = new MainScope(this, null, config);
+      root2.scope.runtime.isReactive = true;
     }
     get counter() {
       return ++this._counter;
@@ -5362,9 +5361,12 @@
       return this._internal.size;
     }
     resolve(plugin) {
-      if (plugin === null) return plugin;
-      if (typeof plugin === "function") return plugin;
-      if (isApplicable(plugin)) return plugin.apply;
+      if (plugin === null)
+        return plugin;
+      if (typeof plugin === "function")
+        return plugin;
+      if (isApplicable(plugin))
+        return plugin.apply;
       throw new Error('invalid plugin, expect function or object with an "apply" method, received ' + typeof plugin);
     }
     get(plugin) {
@@ -5381,7 +5383,8 @@
     delete(plugin) {
       plugin = this.resolve(plugin);
       const runtime = this.get(plugin);
-      if (!runtime) return;
+      if (!runtime)
+        return;
       this._internal.delete(plugin);
       runtime.dispose();
       return runtime;
@@ -5398,19 +5401,15 @@
     forEach(callback) {
       return this._internal.forEach(callback);
     }
-    using(inject, callback) {
-      return this.inject(inject, callback);
+    using(inject2, callback) {
+      return this.inject(inject2, callback);
     }
-    inject(inject, callback) {
-      return this.plugin({
-        inject,
-        apply: callback,
-        name: callback.name
-      });
+    inject(inject2, callback) {
+      return this.plugin({ inject: inject2, apply: callback, name: callback.name });
     }
     plugin(plugin, config) {
       this.resolve(plugin);
-      const context = this[Context$1.origin];
+      const context = this[Context2.origin];
       context.scope.assertActive();
       let error;
       try {
@@ -5430,71 +5429,76 @@
       runtime = new MainScope(this, plugin, config, error);
       return runtime.fork(context, config, error);
     }
-  }, __name$8(_Class16, "Registry"), _Class16);
-
-  // src/context.ts
-  var Context$1 = (_Symbol$for2 = Symbol.for("nodejs.util.inspect.custom"), (_Context3 = class _Context {
+  }, __name(_a6, "Registry"), _a6);
+  var _a7;
+  var Context2 = (_a7 = class {
     static is(value) {
-      return !!value?.[_Context.is];
+      return !!value?.[_a7.is];
     }
     static ensureInternal() {
       const ctx = this.prototype || this;
       if (Object.prototype.hasOwnProperty.call(ctx, symbols.internal)) {
         return ctx[symbols.internal];
       }
-      const parent = _Context.ensureInternal.call(Object.getPrototypeOf(this));
+      const parent = _a7.ensureInternal.call(Object.getPrototypeOf(this));
       return ctx[symbols.internal] = Object.create(parent);
     }
-    static resolveInject(ctx, name) {
-      let internal = ctx[symbols.internal][name];
+    static resolveInject(ctx, name2) {
+      let internal = ctx[symbols.internal][name2];
       while (internal?.type === "alias") {
-        name = internal.name;
-        internal = ctx[symbols.internal][name];
+        name2 = internal.name;
+        internal = ctx[symbols.internal][name2];
       }
-      return [name, internal];
+      return [name2, internal];
     }
-    static associate(object, name) {
+    static associate(object, name2) {
       return new Proxy(object, {
         get(target, key, receiver) {
-          if (typeof key === "symbol" || key in target) return Reflect.get(target, key, receiver);
+          if (typeof key === "symbol" || key in target)
+            return Reflect.get(target, key, receiver);
           const caller = receiver[symbols.origin];
-          if (!caller?.[symbols.internal][`${name}.${key}`]) return Reflect.get(target, key, receiver);
-          return caller.get(`${name}.${key}`);
+          if (!caller?.[symbols.internal][`${name2}.${key}`])
+            return Reflect.get(target, key, receiver);
+          return caller.get(`${name2}.${key}`);
         },
         set(target, key, value, receiver) {
-          if (typeof key === "symbol" || key in target) return Reflect.set(target, key, value, receiver);
+          if (typeof key === "symbol" || key in target)
+            return Reflect.set(target, key, value, receiver);
           const caller = receiver[symbols.origin];
-          if (!caller?.[symbols.internal][`${name}.${key}`]) return Reflect.set(target, key, value, receiver);
-          caller[`${name}.${key}`] = value;
+          if (!caller?.[symbols.internal][`${name2}.${key}`])
+            return Reflect.set(target, key, value, receiver);
+          caller[`${name2}.${key}`] = value;
           return true;
         }
       });
     }
     constructor(config) {
-      const self = new Proxy(this, _Context.handler);
+      const self2 = new Proxy(this, _a7.handler);
       config = resolveConfig(this.constructor, config);
-      self[symbols.isolate] = /* @__PURE__ */Object.create(null);
-      self[symbols.intercept] = /* @__PURE__ */Object.create(null);
-      self.root = self;
-      self.mixin("scope", ["config", "runtime", "effect", "collect", "accept", "decline"]);
-      self.mixin("registry", ["using", "inject", "plugin", "dispose"]);
-      self.mixin("lifecycle", ["on", "once", "off", "after", "parallel", "emit", "serial", "bail", "start", "stop"]);
-      self.provide("registry", new Registry(self, config), true);
-      self.provide("lifecycle", new Lifecycle(self), true);
-      const attach = /* @__PURE__ */__name$8(internal => {
-        if (!internal) return;
+      self2[symbols.isolate] = /* @__PURE__ */ Object.create(null);
+      self2[symbols.intercept] = /* @__PURE__ */ Object.create(null);
+      self2.root = self2;
+      self2.mixin("scope", ["config", "runtime", "effect", "collect", "accept", "decline"]);
+      self2.mixin("registry", ["using", "inject", "plugin", "dispose"]);
+      self2.mixin("lifecycle", ["on", "once", "off", "after", "parallel", "emit", "serial", "bail", "start", "stop"]);
+      self2.provide("registry", new Registry(self2, config), true);
+      self2.provide("lifecycle", new Lifecycle(self2), true);
+      const attach = /* @__PURE__ */ __name((internal) => {
+        if (!internal)
+          return;
         attach(Object.getPrototypeOf(internal));
         for (const key of Object.getOwnPropertyNames(internal)) {
           const constructor = internal[key]["prototype"]?.constructor;
-          if (!constructor) continue;
-          self[internal[key]["key"]] = new constructor(self, config);
-          defineProperty(self[internal[key]["key"]], symbols.origin, self);
+          if (!constructor)
+            continue;
+          self2[internal[key]["key"]] = new constructor(self2, config);
+          (0, import_cosmokit.defineProperty)(self2[internal[key]["key"]], symbols.origin, self2);
         }
       }, "attach");
       attach(this[symbols.internal]);
-      return self;
+      return self2;
     }
-    [_Symbol$for2]() {
+    [Symbol.for("nodejs.util.inspect.custom")]() {
       return `Context <${this.name}>`;
     }
     get name() {
@@ -5511,56 +5515,52 @@
     get state() {
       return this.scope;
     }
-    get(name) {
-      const internal = this[symbols.internal][name];
-      if (internal?.type !== "service") return;
-      const value = this.root[this[symbols.isolate][name]];
-      if (!value || typeof value !== "object" && typeof value !== "function") return value;
+    get(name2) {
+      const internal = this[symbols.internal][name2];
+      if (internal?.type !== "service")
+        return;
+      const value = this.root[this[symbols.isolate][name2]];
+      if (!value || typeof value !== "object" && typeof value !== "function")
+        return value;
       if (isUnproxyable(value)) {
-        defineProperty(value, symbols.origin, this);
+        (0, import_cosmokit.defineProperty)(value, symbols.origin, this);
         return value;
       }
       return createTraceable(this, value);
     }
-    provide(name, value, builtin) {
-      const internal = _Context.ensureInternal.call(this.root);
-      if (name in internal) return;
-      const key = Symbol(name);
-      internal[name] = {
-        type: "service",
-        builtin
-      };
+    provide(name2, value, builtin) {
+      const internal = _a7.ensureInternal.call(this.root);
+      if (name2 in internal)
+        return;
+      const key = Symbol(name2);
+      internal[name2] = { type: "service", builtin };
       this.root[key] = value;
-      this.root[_Context.isolate][name] = key;
+      this.root[_a7.isolate][name2] = key;
     }
-    accessor(name, options) {
-      const internal = _Context.ensureInternal.call(this.root);
-      internal[name] ||= {
-        type: "accessor",
-        ...options
-      };
+    accessor(name2, options) {
+      const internal = _a7.ensureInternal.call(this.root);
+      internal[name2] || (internal[name2] = { type: "accessor", ...options });
     }
-    alias(name, aliases) {
-      const internal = _Context.ensureInternal.call(this.root);
+    alias(name2, aliases) {
+      const internal = _a7.ensureInternal.call(this.root);
       for (const key of aliases) {
-        internal[key] ||= {
-          type: "alias",
-          name
-        };
+        internal[key] || (internal[key] = { type: "alias", name: name2 });
       }
     }
-    mixin(name, mixins) {
+    mixin(name2, mixins) {
       for (const key of mixins) {
         this.accessor(key, {
           get() {
-            const service = this[name];
-            if (isNullable(service)) return service;
+            const service = this[name2];
+            if ((0, import_cosmokit.isNullable)(service))
+              return service;
             const value = Reflect.get(service, key);
-            if (typeof value !== "function") return value;
+            if (typeof value !== "function")
+              return value;
             return value.bind(service);
           },
           set(value) {
-            return Reflect.set(this[name], key, value);
+            return Reflect.set(this[name2], key, value);
           }
         });
       }
@@ -5568,99 +5568,103 @@
     extend(meta = {}) {
       return Object.assign(Object.create(this), meta);
     }
-    isolate(name, label) {
+    isolate(name2, label) {
       const shadow = Object.create(this[symbols.isolate]);
-      shadow[name] = label ?? Symbol(name);
-      return this.extend({
-        [symbols.isolate]: shadow
-      });
+      shadow[name2] = label ?? Symbol(name2);
+      return this.extend({ [symbols.isolate]: shadow });
     }
-    intercept(name, config) {
+    intercept(name2, config) {
       const intercept = Object.create(this[symbols.intercept]);
-      intercept[name] = config;
-      return this.extend({
-        [symbols.intercept]: intercept
-      });
+      intercept[name2] = config;
+      return this.extend({ [symbols.intercept]: intercept });
     }
-  }, __name$8(_Context3, "Context"), _defineProperty(_Context3, "origin", symbols.origin), _defineProperty(_Context3, "events", symbols.events), _defineProperty(_Context3, "static", symbols.static), _defineProperty(_Context3, "filter", symbols.filter), _defineProperty(_Context3, "expose", symbols.expose), _defineProperty(_Context3, "isolate", symbols.isolate), _defineProperty(_Context3, "internal", symbols.internal), _defineProperty(_Context3, "intercept", symbols.intercept), _defineProperty(_Context3, "current", _Context3.origin), (() => {
-    _Context3.is[Symbol.toPrimitive] = () => Symbol.for("cordis.is");
-    _Context3.prototype[_Context3.is] = true;
-  })(), _defineProperty(_Context3, "handler", {
+  }, __name(_a7, "Context"), __publicField(_a7, "origin", symbols.origin), __publicField(_a7, "events", symbols.events), __publicField(_a7, "static", symbols.static), __publicField(_a7, "filter", symbols.filter), __publicField(_a7, "expose", symbols.expose), __publicField(_a7, "isolate", symbols.isolate), __publicField(_a7, "internal", symbols.internal), __publicField(_a7, "intercept", symbols.intercept), /** @deprecated use `Context.trace` instead */
+  __publicField(_a7, "current", _a7.origin), _a7.is[Symbol.toPrimitive] = () => Symbol.for("cordis.is"), _a7.prototype[_a7.is] = true, __publicField(_a7, "handler", {
     get(target, prop, ctx) {
-      if (typeof prop !== "string") return Reflect.get(target, prop, ctx);
-      const checkInject = /* @__PURE__ */__name$8(name2 => {
-        if (Reflect.has(target, name2)) return;
-        if (["prototype", "then", "registry", "lifecycle"].includes(name2)) return;
-        if (name2[0] === "$" || name2[0] === "_") return;
-        if (!ctx.runtime.plugin) return;
+      if (typeof prop !== "string")
+        return Reflect.get(target, prop, ctx);
+      const checkInject = /* @__PURE__ */ __name((name22) => {
+        if (Reflect.has(target, name22))
+          return;
+        if (["prototype", "then", "registry", "lifecycle"].includes(name22))
+          return;
+        if (name22[0] === "$" || name22[0] === "_")
+          return;
+        if (!ctx.runtime.plugin)
+          return;
         let parent = ctx;
         while (parent.runtime.plugin) {
           for (const key of parent.runtime.inject) {
-            if (name2 === _Context3.resolveInject(parent, key)[0]) return;
+            if (name22 === _a7.resolveInject(parent, key)[0])
+              return;
           }
           parent = parent.scope.parent;
         }
-        ctx.emit("internal/warning", new Error(`property ${name2} is not registered, declare it as \`inject\` to suppress this warning`));
+        ctx.emit("internal/warning", new Error(`property ${name22} is not registered, declare it as \`inject\` to suppress this warning`));
       }, "checkInject");
-      const [name, internal] = _Context3.resolveInject(ctx, prop);
+      const [name2, internal] = _a7.resolveInject(ctx, prop);
       if (!internal) {
-        checkInject(name);
-        return Reflect.get(target, name, ctx);
+        checkInject(name2);
+        return Reflect.get(target, name2, ctx);
       }
       if (internal.type === "accessor") {
         return internal.get.call(ctx);
       } else if (internal.type === "service") {
-        if (!internal.builtin) checkInject(name);
-        return ctx.get(name);
+        if (!internal.builtin)
+          checkInject(name2);
+        return ctx.get(name2);
       }
     },
     set(target, prop, value, ctx) {
-      if (typeof prop !== "string") return Reflect.set(target, prop, value, ctx);
-      const [name, internal] = _Context3.resolveInject(ctx, prop);
-      if (!internal) return Reflect.set(target, name, value, ctx);
+      if (typeof prop !== "string")
+        return Reflect.set(target, prop, value, ctx);
+      const [name2, internal] = _a7.resolveInject(ctx, prop);
+      if (!internal)
+        return Reflect.set(target, name2, value, ctx);
       if (internal.type === "accessor") {
-        if (!internal.set) return false;
+        if (!internal.set)
+          return false;
         return internal.set.call(ctx, value);
       }
-      const key = ctx[symbols.isolate][name];
+      const key = ctx[symbols.isolate][name2];
       const oldValue = ctx.root[key];
-      if (oldValue === value) return true;
+      if (oldValue === value)
+        return true;
       if (value && oldValue) {
-        throw new Error(`service ${name} has been registered`);
+        throw new Error(`service ${name2} has been registered`);
       }
       if (value) {
-        ctx.on("dispose", () => ctx[name] = void 0);
+        ctx.on("dispose", () => ctx[name2] = void 0);
       }
       if (isUnproxyable(value)) {
-        ctx.emit("internal/warning", new Error(`service ${name} is an unproxyable object, which may lead to unexpected behavior`));
+        ctx.emit("internal/warning", new Error(`service ${name2} is an unproxyable object, which may lead to unexpected behavior`));
       }
-      const self = /* @__PURE__ */Object.create(null);
-      self[symbols.filter] = ctx2 => {
-        return ctx[symbols.isolate][name] === ctx2[symbols.isolate][name];
+      const self2 = /* @__PURE__ */ Object.create(null);
+      self2[symbols.filter] = (ctx2) => {
+        return ctx[symbols.isolate][name2] === ctx2[symbols.isolate][name2];
       };
-      ctx.root.emit(self, "internal/before-service", name, value);
+      ctx.root.emit(self2, "internal/before-service", name2, value);
       ctx.root[key] = value;
       if (value instanceof Object) {
-        defineProperty(value, symbols.origin, ctx);
+        (0, import_cosmokit.defineProperty)(value, symbols.origin, ctx);
       }
-      ctx.root.emit(self, "internal/service", name, oldValue);
+      ctx.root.emit(self2, "internal/service", name2, oldValue);
       return true;
     }
-  }), _Context3));
-  Context$1.prototype[Context$1.internal] = /* @__PURE__ */Object.create(null);
-  var Service = (_symbols$origin = symbols.origin, _symbols$filter = symbols.filter, _symbols$setup = symbols.setup, _symbols$extend = symbols.extend, _Symbol$hasInstance2 = Symbol.hasInstance, (_Service3 = class _Service {
-    start() {}
-    stop() {}
+  }), _a7);
+  Context2.prototype[Context2.internal] = /* @__PURE__ */ Object.create(null);
+  var _a8, _b;
+  var Service2 = (_a8 = class {
     constructor(...args) {
-      _defineProperty(this, "ctx", void 0);
-      _defineProperty(this, _symbols$origin, void 0);
-      _defineProperty(this, "name", void 0);
-      _defineProperty(this, "config", void 0);
-      let _ctx, name, immediate, config;
-      if (Context$1.is(args[0])) {
+      __publicField(this, "ctx");
+      __publicField(this, _b);
+      __publicField(this, "name");
+      __publicField(this, "config");
+      let _ctx, name2, immediate, config;
+      if (Context2.is(args[0])) {
         _ctx = args[0];
         if (typeof args[1] === "string") {
-          name = args[1];
+          name2 = args[1];
           immediate = args[2];
         } else {
           config = args[1];
@@ -5668,69 +5672,84 @@
       } else {
         config = args[0];
       }
-      name ??= this.constructor[symbols.provide];
-      immediate ??= this.constructor[symbols.immediate];
-      let self = this;
-      if (self[symbols.invoke]) {
-        self = createCallable(name, joinPrototype(Object.getPrototypeOf(this), Function.prototype));
+      name2 ?? (name2 = this.constructor[symbols.provide]);
+      immediate ?? (immediate = this.constructor[symbols.immediate]);
+      let self2 = this;
+      if (self2[symbols.invoke]) {
+        self2 = createCallable(name2, joinPrototype(Object.getPrototypeOf(this), Function.prototype));
       }
       if (_ctx) {
-        self.ctx = _ctx;
+        self2.ctx = _ctx;
       } else {
-        self[symbols.setup]();
+        self2[symbols.setup]();
       }
-      self.name = name;
-      self.config = config;
-      defineProperty(self, symbols.origin, self.ctx);
-      self.ctx.provide(name);
-      self.ctx.runtime.name = name;
+      self2.name = name2;
+      self2.config = config;
+      (0, import_cosmokit6.defineProperty)(self2, symbols.origin, self2.ctx);
+      self2.ctx.provide(name2);
+      self2.ctx.runtime.name = name2;
       if (immediate) {
-        if (_ctx) self[symbols.expose] = name;else self.ctx[name] = self;
+        if (_ctx)
+          self2[symbols.expose] = name2;
+        else
+          self2.ctx[name2] = self2;
       }
-      self.ctx.on("ready", async () => {
+      self2.ctx.on("ready", async () => {
         await Promise.resolve();
-        await self.start();
-        if (!immediate) self.ctx[name] = self;
+        await self2.start();
+        if (!immediate)
+          self2.ctx[name2] = self2;
       });
-      self.ctx.on("dispose", () => self.stop());
-      return Context$1.associate(self, name);
+      self2.ctx.on("dispose", () => self2.stop());
+      return Context2.associate(self2, name2);
     }
-    [_symbols$filter](ctx) {
+    start() {
+    }
+    stop() {
+    }
+    [(_b = symbols.origin, symbols.filter)](ctx) {
       return ctx[symbols.isolate][this.name] === this.ctx[symbols.isolate][this.name];
     }
-    [_symbols$setup]() {
-      this.ctx = new Context$1();
+    [symbols.setup]() {
+      this.ctx = new Context2();
     }
-    [_symbols$extend](props) {
+    [symbols.extend](props) {
       const caller = this[symbols.origin];
-      let self;
-      if (this[_Service.invoke]) {
-        self = createCallable(this.name, this);
+      let self2;
+      if (this[_a8.invoke]) {
+        self2 = createCallable(this.name, this);
       } else {
-        self = Object.create(this);
+        self2 = Object.create(this);
       }
-      defineProperty(self, symbols.origin, caller);
-      return Context$1.associate(Object.assign(self, props), this.name);
+      (0, import_cosmokit6.defineProperty)(self2, symbols.origin, caller);
+      return Context2.associate(Object.assign(self2, props), this.name);
     }
-    static [_Symbol$hasInstance2](instance) {
+    static [Symbol.hasInstance](instance) {
       let constructor = instance.constructor;
       while (constructor) {
-        if (constructor === this) return true;
+        if (constructor === this)
+          return true;
         constructor = Object.getPrototypeOf(constructor);
       }
       return false;
     }
-  }, __name$8(_Service3, "Service"), _defineProperty(_Service3, "setup", symbols.setup), _defineProperty(_Service3, "invoke", symbols.invoke), _defineProperty(_Service3, "extend", symbols.extend), _defineProperty(_Service3, "provide", symbols.provide), _defineProperty(_Service3, "immediate", symbols.immediate), _Service3));
+  }, __name(_a8, "Service"), __publicField(_a8, "setup", symbols.setup), __publicField(_a8, "invoke", symbols.invoke), __publicField(_a8, "extend", symbols.extend), __publicField(_a8, "provide", symbols.provide), __publicField(_a8, "immediate", symbols.immediate), _a8);
 
-  /*! js-yaml 4.1.0 https://github.com/nodeca/js-yaml @license MIT */
+  // ../cordis/packages/loader/lib/shared.js
+  var import_cosmokit7 = __toESM(require_lib(), 1);
+
+  // ../../node_modules/js-yaml/dist/js-yaml.mjs
   function isNothing(subject) {
-    return typeof subject === 'undefined' || subject === null;
+    return typeof subject === "undefined" || subject === null;
   }
   function isObject(subject) {
-    return typeof subject === 'object' && subject !== null;
+    return typeof subject === "object" && subject !== null;
   }
   function toArray(sequence) {
-    if (Array.isArray(sequence)) return sequence;else if (isNothing(sequence)) return [];
+    if (Array.isArray(sequence))
+      return sequence;
+    else if (isNothing(sequence))
+      return [];
     return [sequence];
   }
   function extend(target, source) {
@@ -5745,8 +5764,7 @@
     return target;
   }
   function repeat(string, count) {
-    var result = '',
-      cycle;
+    var result = "", cycle;
     for (cycle = 0; cycle < count; cycle += 1) {
       result += string;
     }
@@ -5769,76 +5787,70 @@
     isNegativeZero: isNegativeZero_1,
     extend: extend_1
   };
-
-  // YAML error class. http://stackoverflow.com/questions/8458984
-
-  function formatError(exception, compact) {
-    var where = '',
-      message = exception.reason || '(unknown reason)';
-    if (!exception.mark) return message;
-    if (exception.mark.name) {
-      where += 'in "' + exception.mark.name + '" ';
+  function formatError(exception2, compact) {
+    var where = "", message = exception2.reason || "(unknown reason)";
+    if (!exception2.mark)
+      return message;
+    if (exception2.mark.name) {
+      where += 'in "' + exception2.mark.name + '" ';
     }
-    where += '(' + (exception.mark.line + 1) + ':' + (exception.mark.column + 1) + ')';
-    if (!compact && exception.mark.snippet) {
-      where += '\n\n' + exception.mark.snippet;
+    where += "(" + (exception2.mark.line + 1) + ":" + (exception2.mark.column + 1) + ")";
+    if (!compact && exception2.mark.snippet) {
+      where += "\n\n" + exception2.mark.snippet;
     }
-    return message + ' ' + where;
+    return message + " " + where;
   }
   function YAMLException$1(reason, mark) {
-    // Super constructor
     Error.call(this);
-    this.name = 'YAMLException';
+    this.name = "YAMLException";
     this.reason = reason;
     this.mark = mark;
     this.message = formatError(this, false);
-
-    // Include stack trace in error object
     if (Error.captureStackTrace) {
-      // Chrome and NodeJS
       Error.captureStackTrace(this, this.constructor);
     } else {
-      // FF, IE 10+ and Safari 6+. Fallback for others
-      this.stack = new Error().stack || '';
+      this.stack = new Error().stack || "";
     }
   }
-
-  // Inherit from Error
   YAMLException$1.prototype = Object.create(Error.prototype);
   YAMLException$1.prototype.constructor = YAMLException$1;
   YAMLException$1.prototype.toString = function toString(compact) {
-    return this.name + ': ' + formatError(this, compact);
+    return this.name + ": " + formatError(this, compact);
   };
   var exception = YAMLException$1;
-
-  // get snippet for a single line, respecting maxLength
   function getLine(buffer, lineStart, lineEnd, position, maxLineLength) {
-    var head = '';
-    var tail = '';
+    var head = "";
+    var tail = "";
     var maxHalfLength = Math.floor(maxLineLength / 2) - 1;
     if (position - lineStart > maxHalfLength) {
-      head = ' ... ';
+      head = " ... ";
       lineStart = position - maxHalfLength + head.length;
     }
     if (lineEnd - position > maxHalfLength) {
-      tail = ' ...';
+      tail = " ...";
       lineEnd = position + maxHalfLength - tail.length;
     }
     return {
-      str: head + buffer.slice(lineStart, lineEnd).replace(/\t/g, '→') + tail,
-      pos: position - lineStart + head.length // relative position
+      str: head + buffer.slice(lineStart, lineEnd).replace(/\t/g, "\u2192") + tail,
+      pos: position - lineStart + head.length
+      // relative position
     };
   }
   function padStart(string, max) {
-    return common.repeat(' ', max - string.length) + string;
+    return common.repeat(" ", max - string.length) + string;
   }
   function makeSnippet(mark, options) {
     options = Object.create(options || null);
-    if (!mark.buffer) return null;
-    if (!options.maxLength) options.maxLength = 79;
-    if (typeof options.indent !== 'number') options.indent = 1;
-    if (typeof options.linesBefore !== 'number') options.linesBefore = 3;
-    if (typeof options.linesAfter !== 'number') options.linesAfter = 2;
+    if (!mark.buffer)
+      return null;
+    if (!options.maxLength)
+      options.maxLength = 79;
+    if (typeof options.indent !== "number")
+      options.indent = 1;
+    if (typeof options.linesBefore !== "number")
+      options.linesBefore = 3;
+    if (typeof options.linesAfter !== "number")
+      options.linesAfter = 2;
     var re = /\r?\n|\r|\0/g;
     var lineStarts = [0];
     var lineEnds = [];
@@ -5851,35 +5863,63 @@
         foundLineNo = lineStarts.length - 2;
       }
     }
-    if (foundLineNo < 0) foundLineNo = lineStarts.length - 1;
-    var result = '',
-      i,
-      line;
+    if (foundLineNo < 0)
+      foundLineNo = lineStarts.length - 1;
+    var result = "", i, line;
     var lineNoLength = Math.min(mark.line + options.linesAfter, lineEnds.length).toString().length;
     var maxLineLength = options.maxLength - (options.indent + lineNoLength + 3);
     for (i = 1; i <= options.linesBefore; i++) {
-      if (foundLineNo - i < 0) break;
-      line = getLine(mark.buffer, lineStarts[foundLineNo - i], lineEnds[foundLineNo - i], mark.position - (lineStarts[foundLineNo] - lineStarts[foundLineNo - i]), maxLineLength);
-      result = common.repeat(' ', options.indent) + padStart((mark.line - i + 1).toString(), lineNoLength) + ' | ' + line.str + '\n' + result;
+      if (foundLineNo - i < 0)
+        break;
+      line = getLine(
+        mark.buffer,
+        lineStarts[foundLineNo - i],
+        lineEnds[foundLineNo - i],
+        mark.position - (lineStarts[foundLineNo] - lineStarts[foundLineNo - i]),
+        maxLineLength
+      );
+      result = common.repeat(" ", options.indent) + padStart((mark.line - i + 1).toString(), lineNoLength) + " | " + line.str + "\n" + result;
     }
     line = getLine(mark.buffer, lineStarts[foundLineNo], lineEnds[foundLineNo], mark.position, maxLineLength);
-    result += common.repeat(' ', options.indent) + padStart((mark.line + 1).toString(), lineNoLength) + ' | ' + line.str + '\n';
-    result += common.repeat('-', options.indent + lineNoLength + 3 + line.pos) + '^' + '\n';
+    result += common.repeat(" ", options.indent) + padStart((mark.line + 1).toString(), lineNoLength) + " | " + line.str + "\n";
+    result += common.repeat("-", options.indent + lineNoLength + 3 + line.pos) + "^\n";
     for (i = 1; i <= options.linesAfter; i++) {
-      if (foundLineNo + i >= lineEnds.length) break;
-      line = getLine(mark.buffer, lineStarts[foundLineNo + i], lineEnds[foundLineNo + i], mark.position - (lineStarts[foundLineNo] - lineStarts[foundLineNo + i]), maxLineLength);
-      result += common.repeat(' ', options.indent) + padStart((mark.line + i + 1).toString(), lineNoLength) + ' | ' + line.str + '\n';
+      if (foundLineNo + i >= lineEnds.length)
+        break;
+      line = getLine(
+        mark.buffer,
+        lineStarts[foundLineNo + i],
+        lineEnds[foundLineNo + i],
+        mark.position - (lineStarts[foundLineNo] - lineStarts[foundLineNo + i]),
+        maxLineLength
+      );
+      result += common.repeat(" ", options.indent) + padStart((mark.line + i + 1).toString(), lineNoLength) + " | " + line.str + "\n";
     }
-    return result.replace(/\n$/, '');
+    return result.replace(/\n$/, "");
   }
   var snippet = makeSnippet;
-  var TYPE_CONSTRUCTOR_OPTIONS = ['kind', 'multi', 'resolve', 'construct', 'instanceOf', 'predicate', 'represent', 'representName', 'defaultStyle', 'styleAliases'];
-  var YAML_NODE_KINDS = ['scalar', 'sequence', 'mapping'];
-  function compileStyleAliases(map) {
+  var TYPE_CONSTRUCTOR_OPTIONS = [
+    "kind",
+    "multi",
+    "resolve",
+    "construct",
+    "instanceOf",
+    "predicate",
+    "represent",
+    "representName",
+    "defaultStyle",
+    "styleAliases"
+  ];
+  var YAML_NODE_KINDS = [
+    "scalar",
+    "sequence",
+    "mapping"
+  ];
+  function compileStyleAliases(map2) {
     var result = {};
-    if (map !== null) {
-      Object.keys(map).forEach(function (style) {
-        map[style].forEach(function (alias) {
+    if (map2 !== null) {
+      Object.keys(map2).forEach(function(style) {
+        map2[style].forEach(function(alias) {
           result[String(alias)] = style;
         });
       });
@@ -5888,42 +5928,37 @@
   }
   function Type$1(tag, options) {
     options = options || {};
-    Object.keys(options).forEach(function (name) {
-      if (TYPE_CONSTRUCTOR_OPTIONS.indexOf(name) === -1) {
-        throw new exception('Unknown option "' + name + '" is met in definition of "' + tag + '" YAML type.');
+    Object.keys(options).forEach(function(name2) {
+      if (TYPE_CONSTRUCTOR_OPTIONS.indexOf(name2) === -1) {
+        throw new exception('Unknown option "' + name2 + '" is met in definition of "' + tag + '" YAML type.');
       }
     });
-
-    // TODO: Add tag format check.
-    this.options = options; // keep original options in case user wants to extend this type later
+    this.options = options;
     this.tag = tag;
-    this.kind = options['kind'] || null;
-    this.resolve = options['resolve'] || function () {
+    this.kind = options["kind"] || null;
+    this.resolve = options["resolve"] || function() {
       return true;
     };
-    this.construct = options['construct'] || function (data) {
+    this.construct = options["construct"] || function(data) {
       return data;
     };
-    this.instanceOf = options['instanceOf'] || null;
-    this.predicate = options['predicate'] || null;
-    this.represent = options['represent'] || null;
-    this.representName = options['representName'] || null;
-    this.defaultStyle = options['defaultStyle'] || null;
-    this.multi = options['multi'] || false;
-    this.styleAliases = compileStyleAliases(options['styleAliases'] || null);
+    this.instanceOf = options["instanceOf"] || null;
+    this.predicate = options["predicate"] || null;
+    this.represent = options["represent"] || null;
+    this.representName = options["representName"] || null;
+    this.defaultStyle = options["defaultStyle"] || null;
+    this.multi = options["multi"] || false;
+    this.styleAliases = compileStyleAliases(options["styleAliases"] || null);
     if (YAML_NODE_KINDS.indexOf(this.kind) === -1) {
       throw new exception('Unknown kind "' + this.kind + '" is specified for "' + tag + '" YAML type.');
     }
   }
   var type = Type$1;
-
-  /*eslint-disable max-len*/
-
-  function compileList(schema, name) {
+  function compileList(schema2, name2) {
     var result = [];
-    schema[name].forEach(function (currentType) {
+    schema2[name2].forEach(function(currentType) {
       var newIndex = result.length;
-      result.forEach(function (previousType, previousIndex) {
+      result.forEach(function(previousType, previousIndex) {
         if (previousType.tag === currentType.tag && previousType.kind === currentType.kind && previousType.multi === currentType.multi) {
           newIndex = previousIndex;
         }
@@ -5932,28 +5967,25 @@
     });
     return result;
   }
-  function compileMap( /* lists... */
-  ) {
+  function compileMap() {
     var result = {
-        scalar: {},
-        sequence: {},
-        mapping: {},
-        fallback: {},
-        multi: {
-          scalar: [],
-          sequence: [],
-          mapping: [],
-          fallback: []
-        }
-      },
-      index,
-      length;
-    function collectType(type) {
-      if (type.multi) {
-        result.multi[type.kind].push(type);
-        result.multi['fallback'].push(type);
+      scalar: {},
+      sequence: {},
+      mapping: {},
+      fallback: {},
+      multi: {
+        scalar: [],
+        sequence: [],
+        mapping: [],
+        fallback: []
+      }
+    }, index, length;
+    function collectType(type2) {
+      if (type2.multi) {
+        result.multi[type2.kind].push(type2);
+        result.multi["fallback"].push(type2);
       } else {
-        result[type.kind][type.tag] = result['fallback'][type.tag] = type;
+        result[type2.kind][type2.tag] = result["fallback"][type2.tag] = type2;
       }
     }
     for (index = 0, length = arguments.length; index < length; index += 1) {
@@ -5964,72 +5996,76 @@
   function Schema$1(definition) {
     return this.extend(definition);
   }
-  Schema$1.prototype.extend = function extend(definition) {
+  Schema$1.prototype.extend = function extend2(definition) {
     var implicit = [];
     var explicit = [];
     if (definition instanceof type) {
-      // Schema.extend(type)
       explicit.push(definition);
     } else if (Array.isArray(definition)) {
-      // Schema.extend([ type1, type2, ... ])
       explicit = explicit.concat(definition);
     } else if (definition && (Array.isArray(definition.implicit) || Array.isArray(definition.explicit))) {
-      // Schema.extend({ explicit: [ type1, type2, ... ], implicit: [ type1, type2, ... ] })
-      if (definition.implicit) implicit = implicit.concat(definition.implicit);
-      if (definition.explicit) explicit = explicit.concat(definition.explicit);
+      if (definition.implicit)
+        implicit = implicit.concat(definition.implicit);
+      if (definition.explicit)
+        explicit = explicit.concat(definition.explicit);
     } else {
-      throw new exception('Schema.extend argument should be a Type, [ Type ], ' + 'or a schema definition ({ implicit: [...], explicit: [...] })');
+      throw new exception("Schema.extend argument should be a Type, [ Type ], or a schema definition ({ implicit: [...], explicit: [...] })");
     }
-    implicit.forEach(function (type$1) {
+    implicit.forEach(function(type$1) {
       if (!(type$1 instanceof type)) {
-        throw new exception('Specified list of YAML types (or a single Type object) contains a non-Type object.');
+        throw new exception("Specified list of YAML types (or a single Type object) contains a non-Type object.");
       }
-      if (type$1.loadKind && type$1.loadKind !== 'scalar') {
-        throw new exception('There is a non-scalar type in the implicit list of a schema. Implicit resolving of such types is not supported.');
+      if (type$1.loadKind && type$1.loadKind !== "scalar") {
+        throw new exception("There is a non-scalar type in the implicit list of a schema. Implicit resolving of such types is not supported.");
       }
       if (type$1.multi) {
-        throw new exception('There is a multi type in the implicit list of a schema. Multi tags can only be listed as explicit.');
+        throw new exception("There is a multi type in the implicit list of a schema. Multi tags can only be listed as explicit.");
       }
     });
-    explicit.forEach(function (type$1) {
+    explicit.forEach(function(type$1) {
       if (!(type$1 instanceof type)) {
-        throw new exception('Specified list of YAML types (or a single Type object) contains a non-Type object.');
+        throw new exception("Specified list of YAML types (or a single Type object) contains a non-Type object.");
       }
     });
     var result = Object.create(Schema$1.prototype);
     result.implicit = (this.implicit || []).concat(implicit);
     result.explicit = (this.explicit || []).concat(explicit);
-    result.compiledImplicit = compileList(result, 'implicit');
-    result.compiledExplicit = compileList(result, 'explicit');
+    result.compiledImplicit = compileList(result, "implicit");
+    result.compiledExplicit = compileList(result, "explicit");
     result.compiledTypeMap = compileMap(result.compiledImplicit, result.compiledExplicit);
     return result;
   };
   var schema = Schema$1;
-  var str = new type('tag:yaml.org,2002:str', {
-    kind: 'scalar',
-    construct: function (data) {
-      return data !== null ? data : '';
+  var str = new type("tag:yaml.org,2002:str", {
+    kind: "scalar",
+    construct: function(data) {
+      return data !== null ? data : "";
     }
   });
-  var seq = new type('tag:yaml.org,2002:seq', {
-    kind: 'sequence',
-    construct: function (data) {
+  var seq = new type("tag:yaml.org,2002:seq", {
+    kind: "sequence",
+    construct: function(data) {
       return data !== null ? data : [];
     }
   });
-  var map = new type('tag:yaml.org,2002:map', {
-    kind: 'mapping',
-    construct: function (data) {
+  var map = new type("tag:yaml.org,2002:map", {
+    kind: "mapping",
+    construct: function(data) {
       return data !== null ? data : {};
     }
   });
   var failsafe = new schema({
-    explicit: [str, seq, map]
+    explicit: [
+      str,
+      seq,
+      map
+    ]
   });
   function resolveYamlNull(data) {
-    if (data === null) return true;
+    if (data === null)
+      return true;
     var max = data.length;
-    return max === 1 && data === '~' || max === 4 && (data === 'null' || data === 'Null' || data === 'NULL');
+    return max === 1 && data === "~" || max === 4 && (data === "null" || data === "Null" || data === "NULL");
   }
   function constructYamlNull() {
     return null;
@@ -6037,222 +6073,214 @@
   function isNull(object) {
     return object === null;
   }
-  var _null = new type('tag:yaml.org,2002:null', {
-    kind: 'scalar',
+  var _null = new type("tag:yaml.org,2002:null", {
+    kind: "scalar",
     resolve: resolveYamlNull,
     construct: constructYamlNull,
     predicate: isNull,
     represent: {
-      canonical: function () {
-        return '~';
+      canonical: function() {
+        return "~";
       },
-      lowercase: function () {
-        return 'null';
+      lowercase: function() {
+        return "null";
       },
-      uppercase: function () {
-        return 'NULL';
+      uppercase: function() {
+        return "NULL";
       },
-      camelcase: function () {
-        return 'Null';
+      camelcase: function() {
+        return "Null";
       },
-      empty: function () {
-        return '';
+      empty: function() {
+        return "";
       }
     },
-    defaultStyle: 'lowercase'
+    defaultStyle: "lowercase"
   });
   function resolveYamlBoolean(data) {
-    if (data === null) return false;
+    if (data === null)
+      return false;
     var max = data.length;
-    return max === 4 && (data === 'true' || data === 'True' || data === 'TRUE') || max === 5 && (data === 'false' || data === 'False' || data === 'FALSE');
+    return max === 4 && (data === "true" || data === "True" || data === "TRUE") || max === 5 && (data === "false" || data === "False" || data === "FALSE");
   }
   function constructYamlBoolean(data) {
-    return data === 'true' || data === 'True' || data === 'TRUE';
+    return data === "true" || data === "True" || data === "TRUE";
   }
   function isBoolean(object) {
-    return Object.prototype.toString.call(object) === '[object Boolean]';
+    return Object.prototype.toString.call(object) === "[object Boolean]";
   }
-  var bool = new type('tag:yaml.org,2002:bool', {
-    kind: 'scalar',
+  var bool = new type("tag:yaml.org,2002:bool", {
+    kind: "scalar",
     resolve: resolveYamlBoolean,
     construct: constructYamlBoolean,
     predicate: isBoolean,
     represent: {
-      lowercase: function (object) {
-        return object ? 'true' : 'false';
+      lowercase: function(object) {
+        return object ? "true" : "false";
       },
-      uppercase: function (object) {
-        return object ? 'TRUE' : 'FALSE';
+      uppercase: function(object) {
+        return object ? "TRUE" : "FALSE";
       },
-      camelcase: function (object) {
-        return object ? 'True' : 'False';
+      camelcase: function(object) {
+        return object ? "True" : "False";
       }
     },
-    defaultStyle: 'lowercase'
+    defaultStyle: "lowercase"
   });
   function isHexCode(c) {
-    return 0x30 /* 0 */ <= c && c <= 0x39 /* 9 */ || 0x41 /* A */ <= c && c <= 0x46 /* F */ || 0x61 /* a */ <= c && c <= 0x66 /* f */;
+    return 48 <= c && c <= 57 || 65 <= c && c <= 70 || 97 <= c && c <= 102;
   }
   function isOctCode(c) {
-    return 0x30 /* 0 */ <= c && c <= 0x37 /* 7 */;
+    return 48 <= c && c <= 55;
   }
   function isDecCode(c) {
-    return 0x30 /* 0 */ <= c && c <= 0x39 /* 9 */;
+    return 48 <= c && c <= 57;
   }
   function resolveYamlInteger(data) {
-    if (data === null) return false;
-    var max = data.length,
-      index = 0,
-      hasDigits = false,
-      ch;
-    if (!max) return false;
+    if (data === null)
+      return false;
+    var max = data.length, index = 0, hasDigits = false, ch;
+    if (!max)
+      return false;
     ch = data[index];
-
-    // sign
-    if (ch === '-' || ch === '+') {
+    if (ch === "-" || ch === "+") {
       ch = data[++index];
     }
-    if (ch === '0') {
-      // 0
-      if (index + 1 === max) return true;
+    if (ch === "0") {
+      if (index + 1 === max)
+        return true;
       ch = data[++index];
-
-      // base 2, base 8, base 16
-
-      if (ch === 'b') {
-        // base 2
+      if (ch === "b") {
         index++;
         for (; index < max; index++) {
           ch = data[index];
-          if (ch === '_') continue;
-          if (ch !== '0' && ch !== '1') return false;
+          if (ch === "_")
+            continue;
+          if (ch !== "0" && ch !== "1")
+            return false;
           hasDigits = true;
         }
-        return hasDigits && ch !== '_';
+        return hasDigits && ch !== "_";
       }
-      if (ch === 'x') {
-        // base 16
+      if (ch === "x") {
         index++;
         for (; index < max; index++) {
           ch = data[index];
-          if (ch === '_') continue;
-          if (!isHexCode(data.charCodeAt(index))) return false;
+          if (ch === "_")
+            continue;
+          if (!isHexCode(data.charCodeAt(index)))
+            return false;
           hasDigits = true;
         }
-        return hasDigits && ch !== '_';
+        return hasDigits && ch !== "_";
       }
-      if (ch === 'o') {
-        // base 8
+      if (ch === "o") {
         index++;
         for (; index < max; index++) {
           ch = data[index];
-          if (ch === '_') continue;
-          if (!isOctCode(data.charCodeAt(index))) return false;
+          if (ch === "_")
+            continue;
+          if (!isOctCode(data.charCodeAt(index)))
+            return false;
           hasDigits = true;
         }
-        return hasDigits && ch !== '_';
+        return hasDigits && ch !== "_";
       }
     }
-
-    // base 10 (except 0)
-
-    // value should not start with `_`;
-    if (ch === '_') return false;
+    if (ch === "_")
+      return false;
     for (; index < max; index++) {
       ch = data[index];
-      if (ch === '_') continue;
+      if (ch === "_")
+        continue;
       if (!isDecCode(data.charCodeAt(index))) {
         return false;
       }
       hasDigits = true;
     }
-
-    // Should have digits and should not end with `_`
-    if (!hasDigits || ch === '_') return false;
+    if (!hasDigits || ch === "_")
+      return false;
     return true;
   }
   function constructYamlInteger(data) {
-    var value = data,
-      sign = 1,
-      ch;
-    if (value.indexOf('_') !== -1) {
-      value = value.replace(/_/g, '');
+    var value = data, sign = 1, ch;
+    if (value.indexOf("_") !== -1) {
+      value = value.replace(/_/g, "");
     }
     ch = value[0];
-    if (ch === '-' || ch === '+') {
-      if (ch === '-') sign = -1;
+    if (ch === "-" || ch === "+") {
+      if (ch === "-")
+        sign = -1;
       value = value.slice(1);
       ch = value[0];
     }
-    if (value === '0') return 0;
-    if (ch === '0') {
-      if (value[1] === 'b') return sign * parseInt(value.slice(2), 2);
-      if (value[1] === 'x') return sign * parseInt(value.slice(2), 16);
-      if (value[1] === 'o') return sign * parseInt(value.slice(2), 8);
+    if (value === "0")
+      return 0;
+    if (ch === "0") {
+      if (value[1] === "b")
+        return sign * parseInt(value.slice(2), 2);
+      if (value[1] === "x")
+        return sign * parseInt(value.slice(2), 16);
+      if (value[1] === "o")
+        return sign * parseInt(value.slice(2), 8);
     }
     return sign * parseInt(value, 10);
   }
   function isInteger(object) {
-    return Object.prototype.toString.call(object) === '[object Number]' && object % 1 === 0 && !common.isNegativeZero(object);
+    return Object.prototype.toString.call(object) === "[object Number]" && (object % 1 === 0 && !common.isNegativeZero(object));
   }
-  var int = new type('tag:yaml.org,2002:int', {
-    kind: 'scalar',
+  var int = new type("tag:yaml.org,2002:int", {
+    kind: "scalar",
     resolve: resolveYamlInteger,
     construct: constructYamlInteger,
     predicate: isInteger,
     represent: {
-      binary: function (obj) {
-        return obj >= 0 ? '0b' + obj.toString(2) : '-0b' + obj.toString(2).slice(1);
+      binary: function(obj) {
+        return obj >= 0 ? "0b" + obj.toString(2) : "-0b" + obj.toString(2).slice(1);
       },
-      octal: function (obj) {
-        return obj >= 0 ? '0o' + obj.toString(8) : '-0o' + obj.toString(8).slice(1);
+      octal: function(obj) {
+        return obj >= 0 ? "0o" + obj.toString(8) : "-0o" + obj.toString(8).slice(1);
       },
-      decimal: function (obj) {
+      decimal: function(obj) {
         return obj.toString(10);
       },
       /* eslint-disable max-len */
-      hexadecimal: function (obj) {
-        return obj >= 0 ? '0x' + obj.toString(16).toUpperCase() : '-0x' + obj.toString(16).toUpperCase().slice(1);
+      hexadecimal: function(obj) {
+        return obj >= 0 ? "0x" + obj.toString(16).toUpperCase() : "-0x" + obj.toString(16).toUpperCase().slice(1);
       }
     },
-    defaultStyle: 'decimal',
+    defaultStyle: "decimal",
     styleAliases: {
-      binary: [2, 'bin'],
-      octal: [8, 'oct'],
-      decimal: [10, 'dec'],
-      hexadecimal: [16, 'hex']
+      binary: [2, "bin"],
+      octal: [8, "oct"],
+      decimal: [10, "dec"],
+      hexadecimal: [16, "hex"]
     }
   });
   var YAML_FLOAT_PATTERN = new RegExp(
-  // 2.5e4, 2.5 and integers
-  '^(?:[-+]?(?:[0-9][0-9_]*)(?:\\.[0-9_]*)?(?:[eE][-+]?[0-9]+)?' +
-  // .2e4, .2
-  // special case, seems not from spec
-  '|\\.[0-9_]+(?:[eE][-+]?[0-9]+)?' +
-  // .inf
-  '|[-+]?\\.(?:inf|Inf|INF)' +
-  // .nan
-  '|\\.(?:nan|NaN|NAN))$');
+    // 2.5e4, 2.5 and integers
+    "^(?:[-+]?(?:[0-9][0-9_]*)(?:\\.[0-9_]*)?(?:[eE][-+]?[0-9]+)?|\\.[0-9_]+(?:[eE][-+]?[0-9]+)?|[-+]?\\.(?:inf|Inf|INF)|\\.(?:nan|NaN|NAN))$"
+  );
   function resolveYamlFloat(data) {
-    if (data === null) return false;
-    if (!YAML_FLOAT_PATTERN.test(data) ||
-    // Quick hack to not allow integers end with `_`
+    if (data === null)
+      return false;
+    if (!YAML_FLOAT_PATTERN.test(data) || // Quick hack to not allow integers end with `_`
     // Probably should update regexp & check speed
-    data[data.length - 1] === '_') {
+    data[data.length - 1] === "_") {
       return false;
     }
     return true;
   }
   function constructYamlFloat(data) {
     var value, sign;
-    value = data.replace(/_/g, '').toLowerCase();
-    sign = value[0] === '-' ? -1 : 1;
-    if ('+-'.indexOf(value[0]) >= 0) {
+    value = data.replace(/_/g, "").toLowerCase();
+    sign = value[0] === "-" ? -1 : 1;
+    if ("+-".indexOf(value[0]) >= 0) {
       value = value.slice(1);
     }
-    if (value === '.inf') {
+    if (value === ".inf") {
       return sign === 1 ? Number.POSITIVE_INFINITY : Number.NEGATIVE_INFINITY;
-    } else if (value === '.nan') {
+    } else if (value === ".nan") {
       return NaN;
     }
     return sign * parseFloat(value, 10);
@@ -6262,268 +6290,197 @@
     var res;
     if (isNaN(object)) {
       switch (style) {
-        case 'lowercase':
-          return '.nan';
-        case 'uppercase':
-          return '.NAN';
-        case 'camelcase':
-          return '.NaN';
+        case "lowercase":
+          return ".nan";
+        case "uppercase":
+          return ".NAN";
+        case "camelcase":
+          return ".NaN";
       }
     } else if (Number.POSITIVE_INFINITY === object) {
       switch (style) {
-        case 'lowercase':
-          return '.inf';
-        case 'uppercase':
-          return '.INF';
-        case 'camelcase':
-          return '.Inf';
+        case "lowercase":
+          return ".inf";
+        case "uppercase":
+          return ".INF";
+        case "camelcase":
+          return ".Inf";
       }
     } else if (Number.NEGATIVE_INFINITY === object) {
       switch (style) {
-        case 'lowercase':
-          return '-.inf';
-        case 'uppercase':
-          return '-.INF';
-        case 'camelcase':
-          return '-.Inf';
+        case "lowercase":
+          return "-.inf";
+        case "uppercase":
+          return "-.INF";
+        case "camelcase":
+          return "-.Inf";
       }
     } else if (common.isNegativeZero(object)) {
-      return '-0.0';
+      return "-0.0";
     }
     res = object.toString(10);
-
-    // JS stringifier can build scientific format without dots: 5e-100,
-    // while YAML requres dot: 5.e-100. Fix it with simple hack
-
-    return SCIENTIFIC_WITHOUT_DOT.test(res) ? res.replace('e', '.e') : res;
+    return SCIENTIFIC_WITHOUT_DOT.test(res) ? res.replace("e", ".e") : res;
   }
   function isFloat(object) {
-    return Object.prototype.toString.call(object) === '[object Number]' && (object % 1 !== 0 || common.isNegativeZero(object));
+    return Object.prototype.toString.call(object) === "[object Number]" && (object % 1 !== 0 || common.isNegativeZero(object));
   }
-  var float = new type('tag:yaml.org,2002:float', {
-    kind: 'scalar',
+  var float = new type("tag:yaml.org,2002:float", {
+    kind: "scalar",
     resolve: resolveYamlFloat,
     construct: constructYamlFloat,
     predicate: isFloat,
     represent: representYamlFloat,
-    defaultStyle: 'lowercase'
+    defaultStyle: "lowercase"
   });
   var json = failsafe.extend({
-    implicit: [_null, bool, int, float]
+    implicit: [
+      _null,
+      bool,
+      int,
+      float
+    ]
   });
   var core = json;
-  var YAML_DATE_REGEXP = new RegExp('^([0-9][0-9][0-9][0-9])' +
-  // [1] year
-  '-([0-9][0-9])' +
-  // [2] month
-  '-([0-9][0-9])$'); // [3] day
-
-  var YAML_TIMESTAMP_REGEXP = new RegExp('^([0-9][0-9][0-9][0-9])' +
-  // [1] year
-  '-([0-9][0-9]?)' +
-  // [2] month
-  '-([0-9][0-9]?)' +
-  // [3] day
-  '(?:[Tt]|[ \\t]+)' +
-  // ...
-  '([0-9][0-9]?)' +
-  // [4] hour
-  ':([0-9][0-9])' +
-  // [5] minute
-  ':([0-9][0-9])' +
-  // [6] second
-  '(?:\\.([0-9]*))?' +
-  // [7] fraction
-  '(?:[ \\t]*(Z|([-+])([0-9][0-9]?)' +
-  // [8] tz [9] tz_sign [10] tz_hour
-  '(?::([0-9][0-9]))?))?$'); // [11] tz_minute
-
+  var YAML_DATE_REGEXP = new RegExp(
+    "^([0-9][0-9][0-9][0-9])-([0-9][0-9])-([0-9][0-9])$"
+  );
+  var YAML_TIMESTAMP_REGEXP = new RegExp(
+    "^([0-9][0-9][0-9][0-9])-([0-9][0-9]?)-([0-9][0-9]?)(?:[Tt]|[ \\t]+)([0-9][0-9]?):([0-9][0-9]):([0-9][0-9])(?:\\.([0-9]*))?(?:[ \\t]*(Z|([-+])([0-9][0-9]?)(?::([0-9][0-9]))?))?$"
+  );
   function resolveYamlTimestamp(data) {
-    if (data === null) return false;
-    if (YAML_DATE_REGEXP.exec(data) !== null) return true;
-    if (YAML_TIMESTAMP_REGEXP.exec(data) !== null) return true;
+    if (data === null)
+      return false;
+    if (YAML_DATE_REGEXP.exec(data) !== null)
+      return true;
+    if (YAML_TIMESTAMP_REGEXP.exec(data) !== null)
+      return true;
     return false;
   }
   function constructYamlTimestamp(data) {
-    var match,
-      year,
-      month,
-      day,
-      hour,
-      minute,
-      second,
-      fraction = 0,
-      delta = null,
-      tz_hour,
-      tz_minute,
-      date;
+    var match, year, month, day, hour, minute, second, fraction = 0, delta = null, tz_hour, tz_minute, date;
     match = YAML_DATE_REGEXP.exec(data);
-    if (match === null) match = YAML_TIMESTAMP_REGEXP.exec(data);
-    if (match === null) throw new Error('Date resolve error');
-
-    // match: [1] year [2] month [3] day
-
+    if (match === null)
+      match = YAML_TIMESTAMP_REGEXP.exec(data);
+    if (match === null)
+      throw new Error("Date resolve error");
     year = +match[1];
-    month = +match[2] - 1; // JS month starts with 0
+    month = +match[2] - 1;
     day = +match[3];
     if (!match[4]) {
-      // no hour
       return new Date(Date.UTC(year, month, day));
     }
-
-    // match: [4] hour [5] minute [6] second [7] fraction
-
     hour = +match[4];
     minute = +match[5];
     second = +match[6];
     if (match[7]) {
       fraction = match[7].slice(0, 3);
       while (fraction.length < 3) {
-        // milli-seconds
-        fraction += '0';
+        fraction += "0";
       }
       fraction = +fraction;
     }
-
-    // match: [8] tz [9] tz_sign [10] tz_hour [11] tz_minute
-
     if (match[9]) {
       tz_hour = +match[10];
       tz_minute = +(match[11] || 0);
-      delta = (tz_hour * 60 + tz_minute) * 60000; // delta in mili-seconds
-      if (match[9] === '-') delta = -delta;
+      delta = (tz_hour * 60 + tz_minute) * 6e4;
+      if (match[9] === "-")
+        delta = -delta;
     }
     date = new Date(Date.UTC(year, month, day, hour, minute, second, fraction));
-    if (delta) date.setTime(date.getTime() - delta);
+    if (delta)
+      date.setTime(date.getTime() - delta);
     return date;
   }
-  function representYamlTimestamp(object /*, style*/) {
+  function representYamlTimestamp(object) {
     return object.toISOString();
   }
-  var timestamp = new type('tag:yaml.org,2002:timestamp', {
-    kind: 'scalar',
+  var timestamp = new type("tag:yaml.org,2002:timestamp", {
+    kind: "scalar",
     resolve: resolveYamlTimestamp,
     construct: constructYamlTimestamp,
     instanceOf: Date,
     represent: representYamlTimestamp
   });
   function resolveYamlMerge(data) {
-    return data === '<<' || data === null;
+    return data === "<<" || data === null;
   }
-  var merge = new type('tag:yaml.org,2002:merge', {
-    kind: 'scalar',
+  var merge = new type("tag:yaml.org,2002:merge", {
+    kind: "scalar",
     resolve: resolveYamlMerge
   });
-
-  /*eslint-disable no-bitwise*/
-
-  // [ 64, 65, 66 ] -> [ padding, CR, LF ]
-  var BASE64_MAP = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=\n\r';
+  var BASE64_MAP = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=\n\r";
   function resolveYamlBinary(data) {
-    if (data === null) return false;
-    var code,
-      idx,
-      bitlen = 0,
-      max = data.length,
-      map = BASE64_MAP;
-
-    // Convert one by one.
+    if (data === null)
+      return false;
+    var code, idx, bitlen = 0, max = data.length, map2 = BASE64_MAP;
     for (idx = 0; idx < max; idx++) {
-      code = map.indexOf(data.charAt(idx));
-
-      // Skip CR/LF
-      if (code > 64) continue;
-
-      // Fail on illegal characters
-      if (code < 0) return false;
+      code = map2.indexOf(data.charAt(idx));
+      if (code > 64)
+        continue;
+      if (code < 0)
+        return false;
       bitlen += 6;
     }
-
-    // If there are any bits left, source was corrupted
     return bitlen % 8 === 0;
   }
   function constructYamlBinary(data) {
-    var idx,
-      tailbits,
-      input = data.replace(/[\r\n=]/g, ''),
-      // remove CR/LF & padding to simplify scan
-      max = input.length,
-      map = BASE64_MAP,
-      bits = 0,
-      result = [];
-
-    // Collect by 6*4 bits (3 bytes)
-
+    var idx, tailbits, input = data.replace(/[\r\n=]/g, ""), max = input.length, map2 = BASE64_MAP, bits = 0, result = [];
     for (idx = 0; idx < max; idx++) {
       if (idx % 4 === 0 && idx) {
-        result.push(bits >> 16 & 0xFF);
-        result.push(bits >> 8 & 0xFF);
-        result.push(bits & 0xFF);
+        result.push(bits >> 16 & 255);
+        result.push(bits >> 8 & 255);
+        result.push(bits & 255);
       }
-      bits = bits << 6 | map.indexOf(input.charAt(idx));
+      bits = bits << 6 | map2.indexOf(input.charAt(idx));
     }
-
-    // Dump tail
-
     tailbits = max % 4 * 6;
     if (tailbits === 0) {
-      result.push(bits >> 16 & 0xFF);
-      result.push(bits >> 8 & 0xFF);
-      result.push(bits & 0xFF);
+      result.push(bits >> 16 & 255);
+      result.push(bits >> 8 & 255);
+      result.push(bits & 255);
     } else if (tailbits === 18) {
-      result.push(bits >> 10 & 0xFF);
-      result.push(bits >> 2 & 0xFF);
+      result.push(bits >> 10 & 255);
+      result.push(bits >> 2 & 255);
     } else if (tailbits === 12) {
-      result.push(bits >> 4 & 0xFF);
+      result.push(bits >> 4 & 255);
     }
     return new Uint8Array(result);
   }
-  function representYamlBinary(object /*, style*/) {
-    var result = '',
-      bits = 0,
-      idx,
-      tail,
-      max = object.length,
-      map = BASE64_MAP;
-
-    // Convert every three bytes to 4 ASCII characters.
-
+  function representYamlBinary(object) {
+    var result = "", bits = 0, idx, tail, max = object.length, map2 = BASE64_MAP;
     for (idx = 0; idx < max; idx++) {
       if (idx % 3 === 0 && idx) {
-        result += map[bits >> 18 & 0x3F];
-        result += map[bits >> 12 & 0x3F];
-        result += map[bits >> 6 & 0x3F];
-        result += map[bits & 0x3F];
+        result += map2[bits >> 18 & 63];
+        result += map2[bits >> 12 & 63];
+        result += map2[bits >> 6 & 63];
+        result += map2[bits & 63];
       }
       bits = (bits << 8) + object[idx];
     }
-
-    // Dump tail
-
     tail = max % 3;
     if (tail === 0) {
-      result += map[bits >> 18 & 0x3F];
-      result += map[bits >> 12 & 0x3F];
-      result += map[bits >> 6 & 0x3F];
-      result += map[bits & 0x3F];
+      result += map2[bits >> 18 & 63];
+      result += map2[bits >> 12 & 63];
+      result += map2[bits >> 6 & 63];
+      result += map2[bits & 63];
     } else if (tail === 2) {
-      result += map[bits >> 10 & 0x3F];
-      result += map[bits >> 4 & 0x3F];
-      result += map[bits << 2 & 0x3F];
-      result += map[64];
+      result += map2[bits >> 10 & 63];
+      result += map2[bits >> 4 & 63];
+      result += map2[bits << 2 & 63];
+      result += map2[64];
     } else if (tail === 1) {
-      result += map[bits >> 2 & 0x3F];
-      result += map[bits << 4 & 0x3F];
-      result += map[64];
-      result += map[64];
+      result += map2[bits >> 2 & 63];
+      result += map2[bits << 4 & 63];
+      result += map2[64];
+      result += map2[64];
     }
     return result;
   }
   function isBinary(obj) {
-    return Object.prototype.toString.call(obj) === '[object Uint8Array]';
+    return Object.prototype.toString.call(obj) === "[object Uint8Array]";
   }
-  var binary = new type('tag:yaml.org,2002:binary', {
-    kind: 'scalar',
+  var binary = new type("tag:yaml.org,2002:binary", {
+    kind: "scalar",
     resolve: resolveYamlBinary,
     construct: constructYamlBinary,
     predicate: isBinary,
@@ -6532,63 +6489,60 @@
   var _hasOwnProperty$3 = Object.prototype.hasOwnProperty;
   var _toString$2 = Object.prototype.toString;
   function resolveYamlOmap(data) {
-    if (data === null) return true;
-    var objectKeys = [],
-      index,
-      length,
-      pair,
-      pairKey,
-      pairHasKey,
-      object = data;
+    if (data === null)
+      return true;
+    var objectKeys = [], index, length, pair, pairKey, pairHasKey, object = data;
     for (index = 0, length = object.length; index < length; index += 1) {
       pair = object[index];
       pairHasKey = false;
-      if (_toString$2.call(pair) !== '[object Object]') return false;
+      if (_toString$2.call(pair) !== "[object Object]")
+        return false;
       for (pairKey in pair) {
         if (_hasOwnProperty$3.call(pair, pairKey)) {
-          if (!pairHasKey) pairHasKey = true;else return false;
+          if (!pairHasKey)
+            pairHasKey = true;
+          else
+            return false;
         }
       }
-      if (!pairHasKey) return false;
-      if (objectKeys.indexOf(pairKey) === -1) objectKeys.push(pairKey);else return false;
+      if (!pairHasKey)
+        return false;
+      if (objectKeys.indexOf(pairKey) === -1)
+        objectKeys.push(pairKey);
+      else
+        return false;
     }
     return true;
   }
   function constructYamlOmap(data) {
     return data !== null ? data : [];
   }
-  var omap = new type('tag:yaml.org,2002:omap', {
-    kind: 'sequence',
+  var omap = new type("tag:yaml.org,2002:omap", {
+    kind: "sequence",
     resolve: resolveYamlOmap,
     construct: constructYamlOmap
   });
   var _toString$1 = Object.prototype.toString;
   function resolveYamlPairs(data) {
-    if (data === null) return true;
-    var index,
-      length,
-      pair,
-      keys,
-      result,
-      object = data;
+    if (data === null)
+      return true;
+    var index, length, pair, keys, result, object = data;
     result = new Array(object.length);
     for (index = 0, length = object.length; index < length; index += 1) {
       pair = object[index];
-      if (_toString$1.call(pair) !== '[object Object]') return false;
+      if (_toString$1.call(pair) !== "[object Object]")
+        return false;
       keys = Object.keys(pair);
-      if (keys.length !== 1) return false;
+      if (keys.length !== 1)
+        return false;
       result[index] = [keys[0], pair[keys[0]]];
     }
     return true;
   }
   function constructYamlPairs(data) {
-    if (data === null) return [];
-    var index,
-      length,
-      pair,
-      keys,
-      result,
-      object = data;
+    if (data === null)
+      return [];
+    var index, length, pair, keys, result, object = data;
     result = new Array(object.length);
     for (index = 0, length = object.length; index < length; index += 1) {
       pair = object[index];
@@ -6597,19 +6551,20 @@
     }
     return result;
   }
-  var pairs = new type('tag:yaml.org,2002:pairs', {
-    kind: 'sequence',
+  var pairs = new type("tag:yaml.org,2002:pairs", {
+    kind: "sequence",
     resolve: resolveYamlPairs,
     construct: constructYamlPairs
   });
   var _hasOwnProperty$2 = Object.prototype.hasOwnProperty;
   function resolveYamlSet(data) {
-    if (data === null) return true;
-    var key,
-      object = data;
+    if (data === null)
+      return true;
+    var key, object = data;
     for (key in object) {
       if (_hasOwnProperty$2.call(object, key)) {
-        if (object[key] !== null) return false;
+        if (object[key] !== null)
+          return false;
       }
     }
     return true;
@@ -6617,18 +6572,23 @@
   function constructYamlSet(data) {
     return data !== null ? data : {};
   }
-  var set = new type('tag:yaml.org,2002:set', {
-    kind: 'mapping',
+  var set = new type("tag:yaml.org,2002:set", {
+    kind: "mapping",
     resolve: resolveYamlSet,
     construct: constructYamlSet
   });
   var _default = core.extend({
-    implicit: [timestamp, merge],
-    explicit: [binary, omap, pairs, set]
+    implicit: [
+      timestamp,
+      merge
+    ],
+    explicit: [
+      binary,
+      omap,
+      pairs,
+      set
+    ]
   });
-
-  /*eslint-disable max-len,no-use-before-define*/
-
   var _hasOwnProperty$1 = Object.prototype.hasOwnProperty;
   var CONTEXT_FLOW_IN = 1;
   var CONTEXT_FLOW_OUT = 2;
@@ -6646,76 +6606,73 @@
     return Object.prototype.toString.call(obj);
   }
   function is_EOL(c) {
-    return c === 0x0A /* LF */ || c === 0x0D /* CR */;
+    return c === 10 || c === 13;
   }
   function is_WHITE_SPACE(c) {
-    return c === 0x09 /* Tab */ || c === 0x20 /* Space */;
+    return c === 9 || c === 32;
   }
   function is_WS_OR_EOL(c) {
-    return c === 0x09 /* Tab */ || c === 0x20 /* Space */ || c === 0x0A /* LF */ || c === 0x0D /* CR */;
+    return c === 9 || c === 32 || c === 10 || c === 13;
   }
   function is_FLOW_INDICATOR(c) {
-    return c === 0x2C /* , */ || c === 0x5B /* [ */ || c === 0x5D /* ] */ || c === 0x7B /* { */ || c === 0x7D /* } */;
+    return c === 44 || c === 91 || c === 93 || c === 123 || c === 125;
   }
   function fromHexCode(c) {
     var lc;
-    if (0x30 /* 0 */ <= c && c <= 0x39 /* 9 */) {
-      return c - 0x30;
+    if (48 <= c && c <= 57) {
+      return c - 48;
     }
-
-    /*eslint-disable no-bitwise*/
-    lc = c | 0x20;
-    if (0x61 /* a */ <= lc && lc <= 0x66 /* f */) {
-      return lc - 0x61 + 10;
+    lc = c | 32;
+    if (97 <= lc && lc <= 102) {
+      return lc - 97 + 10;
     }
     return -1;
   }
   function escapedHexLen(c) {
-    if (c === 0x78 /* x */) {
+    if (c === 120) {
       return 2;
     }
-    if (c === 0x75 /* u */) {
+    if (c === 117) {
       return 4;
     }
-    if (c === 0x55 /* U */) {
+    if (c === 85) {
       return 8;
     }
     return 0;
   }
   function fromDecimalCode(c) {
-    if (0x30 /* 0 */ <= c && c <= 0x39 /* 9 */) {
-      return c - 0x30;
+    if (48 <= c && c <= 57) {
+      return c - 48;
     }
     return -1;
   }
   function simpleEscapeSequence(c) {
-    /* eslint-disable indent */
-    return c === 0x30 /* 0 */ ? '\x00' : c === 0x61 /* a */ ? '\x07' : c === 0x62 /* b */ ? '\x08' : c === 0x74 /* t */ ? '\x09' : c === 0x09 /* Tab */ ? '\x09' : c === 0x6E /* n */ ? '\x0A' : c === 0x76 /* v */ ? '\x0B' : c === 0x66 /* f */ ? '\x0C' : c === 0x72 /* r */ ? '\x0D' : c === 0x65 /* e */ ? '\x1B' : c === 0x20 /* Space */ ? ' ' : c === 0x22 /* " */ ? '\x22' : c === 0x2F /* / */ ? '/' : c === 0x5C /* \ */ ? '\x5C' : c === 0x4E /* N */ ? '\x85' : c === 0x5F /* _ */ ? '\xA0' : c === 0x4C /* L */ ? '\u2028' : c === 0x50 /* P */ ? '\u2029' : '';
+    return c === 48 ? "\0" : c === 97 ? "\x07" : c === 98 ? "\b" : c === 116 ? "	" : c === 9 ? "	" : c === 110 ? "\n" : c === 118 ? "\v" : c === 102 ? "\f" : c === 114 ? "\r" : c === 101 ? "\x1B" : c === 32 ? " " : c === 34 ? '"' : c === 47 ? "/" : c === 92 ? "\\" : c === 78 ? "\x85" : c === 95 ? "\xA0" : c === 76 ? "\u2028" : c === 80 ? "\u2029" : "";
   }
   function charFromCodepoint(c) {
-    if (c <= 0xFFFF) {
+    if (c <= 65535) {
       return String.fromCharCode(c);
     }
-    // Encode UTF-16 surrogate pair
-    // https://en.wikipedia.org/wiki/UTF-16#Code_points_U.2B010000_to_U.2B10FFFF
-    return String.fromCharCode((c - 0x010000 >> 10) + 0xD800, (c - 0x010000 & 0x03FF) + 0xDC00);
+    return String.fromCharCode(
+      (c - 65536 >> 10) + 55296,
+      (c - 65536 & 1023) + 56320
+    );
   }
-  var simpleEscapeCheck = new Array(256); // integer, for fast access
+  var simpleEscapeCheck = new Array(256);
   var simpleEscapeMap = new Array(256);
-  for (var i = 0; i < 256; i++) {
+  for (i = 0; i < 256; i++) {
     simpleEscapeCheck[i] = simpleEscapeSequence(i) ? 1 : 0;
     simpleEscapeMap[i] = simpleEscapeSequence(i);
   }
+  var i;
   function State$1(input, options) {
     this.input = input;
-    this.filename = options['filename'] || null;
-    this.schema = options['schema'] || _default;
-    this.onWarning = options['onWarning'] || null;
-    // (Hidden) Remove? makes the loader to expect YAML 1.1 documents
-    // if such documents have no explicit %YAML directive
-    this.legacy = options['legacy'] || false;
-    this.json = options['json'] || false;
-    this.listener = options['listener'] || null;
+    this.filename = options["filename"] || null;
+    this.schema = options["schema"] || _default;
+    this.onWarning = options["onWarning"] || null;
+    this.legacy = options["legacy"] || false;
+    this.json = options["json"] || false;
+    this.listener = options["listener"] || null;
     this.implicitTypes = this.schema.compiledImplicit;
     this.typeMap = this.schema.compiledTypeMap;
     this.length = input.length;
@@ -6723,21 +6680,8 @@
     this.line = 0;
     this.lineStart = 0;
     this.lineIndent = 0;
-
-    // position of first leading tab in the current line,
-    // used to make sure there are no tabs in the indentation
     this.firstTabInLine = -1;
     this.documents = [];
-
-    /*
-    this.version;
-    this.checkLineBreaks;
-    this.tagMap;
-    this.anchorMap;
-    this.tag;
-    this.anchor;
-    this.kind;
-    this.result;*/
   }
   function generateError(state, message) {
     var mark = {
@@ -6760,66 +6704,66 @@
     }
   }
   var directiveHandlers = {
-    YAML: function handleYamlDirective(state, name, args) {
+    YAML: function handleYamlDirective(state, name2, args) {
       var match, major, minor;
       if (state.version !== null) {
-        throwError(state, 'duplication of %YAML directive');
+        throwError(state, "duplication of %YAML directive");
       }
       if (args.length !== 1) {
-        throwError(state, 'YAML directive accepts exactly one argument');
+        throwError(state, "YAML directive accepts exactly one argument");
       }
       match = /^([0-9]+)\.([0-9]+)$/.exec(args[0]);
       if (match === null) {
-        throwError(state, 'ill-formed argument of the YAML directive');
+        throwError(state, "ill-formed argument of the YAML directive");
       }
       major = parseInt(match[1], 10);
       minor = parseInt(match[2], 10);
       if (major !== 1) {
-        throwError(state, 'unacceptable YAML version of the document');
+        throwError(state, "unacceptable YAML version of the document");
       }
       state.version = args[0];
       state.checkLineBreaks = minor < 2;
       if (minor !== 1 && minor !== 2) {
-        throwWarning(state, 'unsupported YAML version of the document');
+        throwWarning(state, "unsupported YAML version of the document");
       }
     },
-    TAG: function handleTagDirective(state, name, args) {
+    TAG: function handleTagDirective(state, name2, args) {
       var handle, prefix;
       if (args.length !== 2) {
-        throwError(state, 'TAG directive accepts exactly two arguments');
+        throwError(state, "TAG directive accepts exactly two arguments");
       }
       handle = args[0];
       prefix = args[1];
       if (!PATTERN_TAG_HANDLE.test(handle)) {
-        throwError(state, 'ill-formed tag handle (first argument) of the TAG directive');
+        throwError(state, "ill-formed tag handle (first argument) of the TAG directive");
       }
       if (_hasOwnProperty$1.call(state.tagMap, handle)) {
         throwError(state, 'there is a previously declared suffix for "' + handle + '" tag handle');
       }
       if (!PATTERN_TAG_URI.test(prefix)) {
-        throwError(state, 'ill-formed tag prefix (second argument) of the TAG directive');
+        throwError(state, "ill-formed tag prefix (second argument) of the TAG directive");
       }
       try {
         prefix = decodeURIComponent(prefix);
       } catch (err) {
-        throwError(state, 'tag prefix is malformed: ' + prefix);
+        throwError(state, "tag prefix is malformed: " + prefix);
       }
       state.tagMap[handle] = prefix;
     }
   };
-  function captureSegment(state, start, end, checkJson) {
+  function captureSegment(state, start2, end, checkJson) {
     var _position, _length, _character, _result;
-    if (start < end) {
-      _result = state.input.slice(start, end);
+    if (start2 < end) {
+      _result = state.input.slice(start2, end);
       if (checkJson) {
         for (_position = 0, _length = _result.length; _position < _length; _position += 1) {
           _character = _result.charCodeAt(_position);
-          if (!(_character === 0x09 || 0x20 <= _character && _character <= 0x10FFFF)) {
-            throwError(state, 'expected valid JSON character');
+          if (!(_character === 9 || 32 <= _character && _character <= 1114111)) {
+            throwError(state, "expected valid JSON character");
           }
         }
       } else if (PATTERN_NON_PRINTABLE.test(_result)) {
-        throwError(state, 'the stream contains non-printable characters');
+        throwError(state, "the stream contains non-printable characters");
       }
       state.result += _result;
     }
@@ -6827,7 +6771,7 @@
   function mergeMappings(state, destination, source, overridableKeys) {
     var sourceKeys, key, index, quantity;
     if (!common.isObject(source)) {
-      throwError(state, 'cannot merge mappings; the provided source object is unacceptable');
+      throwError(state, "cannot merge mappings; the provided source object is unacceptable");
     }
     sourceKeys = Object.keys(source);
     for (index = 0, quantity = sourceKeys.length; index < quantity; index += 1) {
@@ -6840,33 +6784,25 @@
   }
   function storeMappingPair(state, _result, overridableKeys, keyTag, keyNode, valueNode, startLine, startLineStart, startPos) {
     var index, quantity;
-
-    // The output is a plain object here, so keys can only be strings.
-    // We need to convert keyNode to a string, but doing so can hang the process
-    // (deeply nested arrays that explode exponentially using aliases).
     if (Array.isArray(keyNode)) {
       keyNode = Array.prototype.slice.call(keyNode);
       for (index = 0, quantity = keyNode.length; index < quantity; index += 1) {
         if (Array.isArray(keyNode[index])) {
-          throwError(state, 'nested arrays are not supported inside keys');
+          throwError(state, "nested arrays are not supported inside keys");
         }
-        if (typeof keyNode === 'object' && _class(keyNode[index]) === '[object Object]') {
-          keyNode[index] = '[object Object]';
+        if (typeof keyNode === "object" && _class(keyNode[index]) === "[object Object]") {
+          keyNode[index] = "[object Object]";
         }
       }
     }
-
-    // Avoid code execution in load() via toString property
-    // (still use its own toString for arrays, timestamps,
-    // and whatever user schema extensions happen to have @@toStringTag)
-    if (typeof keyNode === 'object' && _class(keyNode) === '[object Object]') {
-      keyNode = '[object Object]';
+    if (typeof keyNode === "object" && _class(keyNode) === "[object Object]") {
+      keyNode = "[object Object]";
     }
     keyNode = String(keyNode);
     if (_result === null) {
       _result = {};
     }
-    if (keyTag === 'tag:yaml.org,2002:merge') {
+    if (keyTag === "tag:yaml.org,2002:merge") {
       if (Array.isArray(valueNode)) {
         for (index = 0, quantity = valueNode.length; index < quantity; index += 1) {
           mergeMappings(state, _result, valueNode[index], overridableKeys);
@@ -6879,11 +6815,9 @@
         state.line = startLine || state.line;
         state.lineStart = startLineStart || state.lineStart;
         state.position = startPos || state.position;
-        throwError(state, 'duplicated mapping key');
+        throwError(state, "duplicated mapping key");
       }
-
-      // used for this specific key only because Object.defineProperty is slow
-      if (keyNode === '__proto__') {
+      if (keyNode === "__proto__") {
         Object.defineProperty(_result, keyNode, {
           configurable: true,
           enumerable: true,
@@ -6900,41 +6834,40 @@
   function readLineBreak(state) {
     var ch;
     ch = state.input.charCodeAt(state.position);
-    if (ch === 0x0A /* LF */) {
+    if (ch === 10) {
       state.position++;
-    } else if (ch === 0x0D /* CR */) {
+    } else if (ch === 13) {
       state.position++;
-      if (state.input.charCodeAt(state.position) === 0x0A /* LF */) {
+      if (state.input.charCodeAt(state.position) === 10) {
         state.position++;
       }
     } else {
-      throwError(state, 'a line break is expected');
+      throwError(state, "a line break is expected");
     }
     state.line += 1;
     state.lineStart = state.position;
     state.firstTabInLine = -1;
   }
   function skipSeparationSpace(state, allowComments, checkIndent) {
-    var lineBreaks = 0,
-      ch = state.input.charCodeAt(state.position);
+    var lineBreaks = 0, ch = state.input.charCodeAt(state.position);
     while (ch !== 0) {
       while (is_WHITE_SPACE(ch)) {
-        if (ch === 0x09 /* Tab */ && state.firstTabInLine === -1) {
+        if (ch === 9 && state.firstTabInLine === -1) {
           state.firstTabInLine = state.position;
         }
         ch = state.input.charCodeAt(++state.position);
       }
-      if (allowComments && ch === 0x23 /* # */) {
+      if (allowComments && ch === 35) {
         do {
           ch = state.input.charCodeAt(++state.position);
-        } while (ch !== 0x0A /* LF */ && ch !== 0x0D /* CR */ && ch !== 0);
+        } while (ch !== 10 && ch !== 13 && ch !== 0);
       }
       if (is_EOL(ch)) {
         readLineBreak(state);
         ch = state.input.charCodeAt(state.position);
         lineBreaks++;
         state.lineIndent = 0;
-        while (ch === 0x20 /* Space */) {
+        while (ch === 32) {
           state.lineIndent++;
           ch = state.input.charCodeAt(++state.position);
         }
@@ -6943,18 +6876,14 @@
       }
     }
     if (checkIndent !== -1 && lineBreaks !== 0 && state.lineIndent < checkIndent) {
-      throwWarning(state, 'deficient indentation');
+      throwWarning(state, "deficient indentation");
     }
     return lineBreaks;
   }
   function testDocumentSeparator(state) {
-    var _position = state.position,
-      ch;
+    var _position = state.position, ch;
     ch = state.input.charCodeAt(_position);
-
-    // Condition state.position === state.lineStart is tested
-    // in parent on each call, for efficiency. No needs to test here again.
-    if ((ch === 0x2D /* - */ || ch === 0x2E /* . */) && ch === state.input.charCodeAt(_position + 1) && ch === state.input.charCodeAt(_position + 2)) {
+    if ((ch === 45 || ch === 46) && ch === state.input.charCodeAt(_position + 1) && ch === state.input.charCodeAt(_position + 2)) {
       _position += 3;
       ch = state.input.charCodeAt(_position);
       if (ch === 0 || is_WS_OR_EOL(ch)) {
@@ -6965,44 +6894,34 @@
   }
   function writeFoldedLines(state, count) {
     if (count === 1) {
-      state.result += ' ';
+      state.result += " ";
     } else if (count > 1) {
-      state.result += common.repeat('\n', count - 1);
+      state.result += common.repeat("\n", count - 1);
     }
   }
   function readPlainScalar(state, nodeIndent, withinFlowCollection) {
-    var preceding,
-      following,
-      captureStart,
-      captureEnd,
-      hasPendingContent,
-      _line,
-      _lineStart,
-      _lineIndent,
-      _kind = state.kind,
-      _result = state.result,
-      ch;
+    var preceding, following, captureStart, captureEnd, hasPendingContent, _line, _lineStart, _lineIndent, _kind = state.kind, _result = state.result, ch;
     ch = state.input.charCodeAt(state.position);
-    if (is_WS_OR_EOL(ch) || is_FLOW_INDICATOR(ch) || ch === 0x23 /* # */ || ch === 0x26 /* & */ || ch === 0x2A /* * */ || ch === 0x21 /* ! */ || ch === 0x7C /* | */ || ch === 0x3E /* > */ || ch === 0x27 /* ' */ || ch === 0x22 /* " */ || ch === 0x25 /* % */ || ch === 0x40 /* @ */ || ch === 0x60 /* ` */) {
+    if (is_WS_OR_EOL(ch) || is_FLOW_INDICATOR(ch) || ch === 35 || ch === 38 || ch === 42 || ch === 33 || ch === 124 || ch === 62 || ch === 39 || ch === 34 || ch === 37 || ch === 64 || ch === 96) {
       return false;
     }
-    if (ch === 0x3F /* ? */ || ch === 0x2D /* - */) {
+    if (ch === 63 || ch === 45) {
       following = state.input.charCodeAt(state.position + 1);
       if (is_WS_OR_EOL(following) || withinFlowCollection && is_FLOW_INDICATOR(following)) {
         return false;
       }
     }
-    state.kind = 'scalar';
-    state.result = '';
+    state.kind = "scalar";
+    state.result = "";
     captureStart = captureEnd = state.position;
     hasPendingContent = false;
     while (ch !== 0) {
-      if (ch === 0x3A /* : */) {
+      if (ch === 58) {
         following = state.input.charCodeAt(state.position + 1);
         if (is_WS_OR_EOL(following) || withinFlowCollection && is_FLOW_INDICATOR(following)) {
           break;
         }
-      } else if (ch === 0x23 /* # */) {
+      } else if (ch === 35) {
         preceding = state.input.charCodeAt(state.position - 1);
         if (is_WS_OR_EOL(preceding)) {
           break;
@@ -7048,18 +6967,18 @@
   function readSingleQuotedScalar(state, nodeIndent) {
     var ch, captureStart, captureEnd;
     ch = state.input.charCodeAt(state.position);
-    if (ch !== 0x27 /* ' */) {
+    if (ch !== 39) {
       return false;
     }
-    state.kind = 'scalar';
-    state.result = '';
+    state.kind = "scalar";
+    state.result = "";
     state.position++;
     captureStart = captureEnd = state.position;
     while ((ch = state.input.charCodeAt(state.position)) !== 0) {
-      if (ch === 0x27 /* ' */) {
+      if (ch === 39) {
         captureSegment(state, captureStart, state.position, true);
         ch = state.input.charCodeAt(++state.position);
-        if (ch === 0x27 /* ' */) {
+        if (ch === 39) {
           captureStart = state.position;
           state.position++;
           captureEnd = state.position;
@@ -7071,36 +6990,34 @@
         writeFoldedLines(state, skipSeparationSpace(state, false, nodeIndent));
         captureStart = captureEnd = state.position;
       } else if (state.position === state.lineStart && testDocumentSeparator(state)) {
-        throwError(state, 'unexpected end of the document within a single quoted scalar');
+        throwError(state, "unexpected end of the document within a single quoted scalar");
       } else {
         state.position++;
         captureEnd = state.position;
       }
     }
-    throwError(state, 'unexpected end of the stream within a single quoted scalar');
+    throwError(state, "unexpected end of the stream within a single quoted scalar");
   }
   function readDoubleQuotedScalar(state, nodeIndent) {
     var captureStart, captureEnd, hexLength, hexResult, tmp, ch;
     ch = state.input.charCodeAt(state.position);
-    if (ch !== 0x22 /* " */) {
+    if (ch !== 34) {
       return false;
     }
-    state.kind = 'scalar';
-    state.result = '';
+    state.kind = "scalar";
+    state.result = "";
     state.position++;
     captureStart = captureEnd = state.position;
     while ((ch = state.input.charCodeAt(state.position)) !== 0) {
-      if (ch === 0x22 /* " */) {
+      if (ch === 34) {
         captureSegment(state, captureStart, state.position, true);
         state.position++;
         return true;
-      } else if (ch === 0x5C /* \ */) {
+      } else if (ch === 92) {
         captureSegment(state, captureStart, state.position, true);
         ch = state.input.charCodeAt(++state.position);
         if (is_EOL(ch)) {
           skipSeparationSpace(state, false, nodeIndent);
-
-          // TODO: rework to inline fn with no type cast?
         } else if (ch < 256 && simpleEscapeCheck[ch]) {
           state.result += simpleEscapeMap[ch];
           state.position++;
@@ -7112,13 +7029,13 @@
             if ((tmp = fromHexCode(ch)) >= 0) {
               hexResult = (hexResult << 4) + tmp;
             } else {
-              throwError(state, 'expected hexadecimal character');
+              throwError(state, "expected hexadecimal character");
             }
           }
           state.result += charFromCodepoint(hexResult);
           state.position++;
         } else {
-          throwError(state, 'unknown escape sequence');
+          throwError(state, "unknown escape sequence");
         }
         captureStart = captureEnd = state.position;
       } else if (is_EOL(ch)) {
@@ -7126,39 +7043,23 @@
         writeFoldedLines(state, skipSeparationSpace(state, false, nodeIndent));
         captureStart = captureEnd = state.position;
       } else if (state.position === state.lineStart && testDocumentSeparator(state)) {
-        throwError(state, 'unexpected end of the document within a double quoted scalar');
+        throwError(state, "unexpected end of the document within a double quoted scalar");
       } else {
         state.position++;
         captureEnd = state.position;
       }
     }
-    throwError(state, 'unexpected end of the stream within a double quoted scalar');
+    throwError(state, "unexpected end of the stream within a double quoted scalar");
   }
   function readFlowCollection(state, nodeIndent) {
-    var readNext = true,
-      _line,
-      _lineStart,
-      _pos,
-      _tag = state.tag,
-      _result,
-      _anchor = state.anchor,
-      following,
-      terminator,
-      isPair,
-      isExplicitPair,
-      isMapping,
-      overridableKeys = Object.create(null),
-      keyNode,
-      keyTag,
-      valueNode,
-      ch;
+    var readNext = true, _line, _lineStart, _pos, _tag = state.tag, _result, _anchor = state.anchor, following, terminator, isPair, isExplicitPair, isMapping, overridableKeys = /* @__PURE__ */ Object.create(null), keyNode, keyTag, valueNode, ch;
     ch = state.input.charCodeAt(state.position);
-    if (ch === 0x5B /* [ */) {
-      terminator = 0x5D; /* ] */
+    if (ch === 91) {
+      terminator = 93;
       isMapping = false;
       _result = [];
-    } else if (ch === 0x7B /* { */) {
-      terminator = 0x7D; /* } */
+    } else if (ch === 123) {
+      terminator = 125;
       isMapping = true;
       _result = {};
     } else {
@@ -7175,18 +7076,17 @@
         state.position++;
         state.tag = _tag;
         state.anchor = _anchor;
-        state.kind = isMapping ? 'mapping' : 'sequence';
+        state.kind = isMapping ? "mapping" : "sequence";
         state.result = _result;
         return true;
       } else if (!readNext) {
-        throwError(state, 'missed comma between flow collection entries');
-      } else if (ch === 0x2C /* , */) {
-        // "flow collection entries can never be completely empty", as per YAML 1.2, section 7.4
+        throwError(state, "missed comma between flow collection entries");
+      } else if (ch === 44) {
         throwError(state, "expected the node content, but found ','");
       }
       keyTag = keyNode = valueNode = null;
       isPair = isExplicitPair = false;
-      if (ch === 0x3F /* ? */) {
+      if (ch === 63) {
         following = state.input.charCodeAt(state.position + 1);
         if (is_WS_OR_EOL(following)) {
           isPair = isExplicitPair = true;
@@ -7194,7 +7094,7 @@
           skipSeparationSpace(state, true, nodeIndent);
         }
       }
-      _line = state.line; // Save the current line.
+      _line = state.line;
       _lineStart = state.lineStart;
       _pos = state.position;
       composeNode(state, nodeIndent, CONTEXT_FLOW_IN, false, true);
@@ -7202,7 +7102,7 @@
       keyNode = state.result;
       skipSeparationSpace(state, true, nodeIndent);
       ch = state.input.charCodeAt(state.position);
-      if ((isExplicitPair || state.line === _line) && ch === 0x3A /* : */) {
+      if ((isExplicitPair || state.line === _line) && ch === 58) {
         isPair = true;
         ch = state.input.charCodeAt(++state.position);
         skipSeparationSpace(state, true, nodeIndent);
@@ -7218,52 +7118,43 @@
       }
       skipSeparationSpace(state, true, nodeIndent);
       ch = state.input.charCodeAt(state.position);
-      if (ch === 0x2C /* , */) {
+      if (ch === 44) {
         readNext = true;
         ch = state.input.charCodeAt(++state.position);
       } else {
         readNext = false;
       }
     }
-    throwError(state, 'unexpected end of the stream within a flow collection');
+    throwError(state, "unexpected end of the stream within a flow collection");
   }
   function readBlockScalar(state, nodeIndent) {
-    var captureStart,
-      folding,
-      chomping = CHOMPING_CLIP,
-      didReadContent = false,
-      detectedIndent = false,
-      textIndent = nodeIndent,
-      emptyLines = 0,
-      atMoreIndented = false,
-      tmp,
-      ch;
+    var captureStart, folding, chomping = CHOMPING_CLIP, didReadContent = false, detectedIndent = false, textIndent = nodeIndent, emptyLines = 0, atMoreIndented = false, tmp, ch;
     ch = state.input.charCodeAt(state.position);
-    if (ch === 0x7C /* | */) {
+    if (ch === 124) {
       folding = false;
-    } else if (ch === 0x3E /* > */) {
+    } else if (ch === 62) {
       folding = true;
     } else {
       return false;
     }
-    state.kind = 'scalar';
-    state.result = '';
+    state.kind = "scalar";
+    state.result = "";
     while (ch !== 0) {
       ch = state.input.charCodeAt(++state.position);
-      if (ch === 0x2B /* + */ || ch === 0x2D /* - */) {
+      if (ch === 43 || ch === 45) {
         if (CHOMPING_CLIP === chomping) {
-          chomping = ch === 0x2B /* + */ ? CHOMPING_KEEP : CHOMPING_STRIP;
+          chomping = ch === 43 ? CHOMPING_KEEP : CHOMPING_STRIP;
         } else {
-          throwError(state, 'repeat of a chomping mode identifier');
+          throwError(state, "repeat of a chomping mode identifier");
         }
       } else if ((tmp = fromDecimalCode(ch)) >= 0) {
         if (tmp === 0) {
-          throwError(state, 'bad explicit indentation width of a block scalar; it cannot be less than one');
+          throwError(state, "bad explicit indentation width of a block scalar; it cannot be less than one");
         } else if (!detectedIndent) {
           textIndent = nodeIndent + tmp - 1;
           detectedIndent = true;
         } else {
-          throwError(state, 'repeat of an indentation width identifier');
+          throwError(state, "repeat of an indentation width identifier");
         }
       } else {
         break;
@@ -7273,7 +7164,7 @@
       do {
         ch = state.input.charCodeAt(++state.position);
       } while (is_WHITE_SPACE(ch));
-      if (ch === 0x23 /* # */) {
+      if (ch === 35) {
         do {
           ch = state.input.charCodeAt(++state.position);
         } while (!is_EOL(ch) && ch !== 0);
@@ -7283,7 +7174,7 @@
       readLineBreak(state);
       state.lineIndent = 0;
       ch = state.input.charCodeAt(state.position);
-      while ((!detectedIndent || state.lineIndent < textIndent) && ch === 0x20 /* Space */) {
+      while ((!detectedIndent || state.lineIndent < textIndent) && ch === 32) {
         state.lineIndent++;
         ch = state.input.charCodeAt(++state.position);
       }
@@ -7294,52 +7185,32 @@
         emptyLines++;
         continue;
       }
-
-      // End of the scalar.
       if (state.lineIndent < textIndent) {
-        // Perform the chomping.
         if (chomping === CHOMPING_KEEP) {
-          state.result += common.repeat('\n', didReadContent ? 1 + emptyLines : emptyLines);
+          state.result += common.repeat("\n", didReadContent ? 1 + emptyLines : emptyLines);
         } else if (chomping === CHOMPING_CLIP) {
           if (didReadContent) {
-            // i.e. only if the scalar is not empty.
-            state.result += '\n';
+            state.result += "\n";
           }
         }
-
-        // Break this `while` cycle and go to the funciton's epilogue.
         break;
       }
-
-      // Folded style: use fancy rules to handle line breaks.
       if (folding) {
-        // Lines starting with white space characters (more-indented lines) are not folded.
         if (is_WHITE_SPACE(ch)) {
           atMoreIndented = true;
-          // except for the first content line (cf. Example 8.1)
-          state.result += common.repeat('\n', didReadContent ? 1 + emptyLines : emptyLines);
-
-          // End of more-indented block.
+          state.result += common.repeat("\n", didReadContent ? 1 + emptyLines : emptyLines);
         } else if (atMoreIndented) {
           atMoreIndented = false;
-          state.result += common.repeat('\n', emptyLines + 1);
-
-          // Just one line break - perceive as the same line.
+          state.result += common.repeat("\n", emptyLines + 1);
         } else if (emptyLines === 0) {
           if (didReadContent) {
-            // i.e. only if we have already read some scalar content.
-            state.result += ' ';
+            state.result += " ";
           }
-
-          // Several line breaks - perceive as different lines.
         } else {
-          state.result += common.repeat('\n', emptyLines);
+          state.result += common.repeat("\n", emptyLines);
         }
-
-        // Literal style: just add exact number of line breaks between content lines.
       } else {
-        // Keep all line breaks except the header line break.
-        state.result += common.repeat('\n', didReadContent ? 1 + emptyLines : emptyLines);
+        state.result += common.repeat("\n", didReadContent ? 1 + emptyLines : emptyLines);
       }
       didReadContent = true;
       detectedIndent = true;
@@ -7353,17 +7224,9 @@
     return true;
   }
   function readBlockSequence(state, nodeIndent) {
-    var _line,
-      _tag = state.tag,
-      _anchor = state.anchor,
-      _result = [],
-      following,
-      detected = false,
-      ch;
-
-    // there is a leading tab before this token, so it can't be a block sequence/mapping;
-    // it can still be flow sequence/mapping or a scalar
-    if (state.firstTabInLine !== -1) return false;
+    var _line, _tag = state.tag, _anchor = state.anchor, _result = [], following, detected = false, ch;
+    if (state.firstTabInLine !== -1)
+      return false;
     if (state.anchor !== null) {
       state.anchorMap[state.anchor] = _result;
     }
@@ -7371,9 +7234,9 @@
     while (ch !== 0) {
       if (state.firstTabInLine !== -1) {
         state.position = state.firstTabInLine;
-        throwError(state, 'tab characters must not be used in indentation');
+        throwError(state, "tab characters must not be used in indentation");
       }
-      if (ch !== 0x2D /* - */) {
+      if (ch !== 45) {
         break;
       }
       following = state.input.charCodeAt(state.position + 1);
@@ -7395,7 +7258,7 @@
       skipSeparationSpace(state, true, -1);
       ch = state.input.charCodeAt(state.position);
       if ((state.line === _line || state.lineIndent > nodeIndent) && ch !== 0) {
-        throwError(state, 'bad indentation of a sequence entry');
+        throwError(state, "bad indentation of a sequence entry");
       } else if (state.lineIndent < nodeIndent) {
         break;
       }
@@ -7403,33 +7266,16 @@
     if (detected) {
       state.tag = _tag;
       state.anchor = _anchor;
-      state.kind = 'sequence';
+      state.kind = "sequence";
       state.result = _result;
       return true;
     }
     return false;
   }
   function readBlockMapping(state, nodeIndent, flowIndent) {
-    var following,
-      allowCompact,
-      _line,
-      _keyLine,
-      _keyLineStart,
-      _keyPos,
-      _tag = state.tag,
-      _anchor = state.anchor,
-      _result = {},
-      overridableKeys = Object.create(null),
-      keyTag = null,
-      keyNode = null,
-      valueNode = null,
-      atExplicitKey = false,
-      detected = false,
-      ch;
-
-    // there is a leading tab before this token, so it can't be a block sequence/mapping;
-    // it can still be flow sequence/mapping or a scalar
-    if (state.firstTabInLine !== -1) return false;
+    var following, allowCompact, _line, _keyLine, _keyLineStart, _keyPos, _tag = state.tag, _anchor = state.anchor, _result = {}, overridableKeys = /* @__PURE__ */ Object.create(null), keyTag = null, keyNode = null, valueNode = null, atExplicitKey = false, detected = false, ch;
+    if (state.firstTabInLine !== -1)
+      return false;
     if (state.anchor !== null) {
       state.anchorMap[state.anchor] = _result;
     }
@@ -7437,17 +7283,12 @@
     while (ch !== 0) {
       if (!atExplicitKey && state.firstTabInLine !== -1) {
         state.position = state.firstTabInLine;
-        throwError(state, 'tab characters must not be used in indentation');
+        throwError(state, "tab characters must not be used in indentation");
       }
       following = state.input.charCodeAt(state.position + 1);
-      _line = state.line; // Save the current line.
-
-      //
-      // Explicit notation case. There are two separate blocks:
-      // first for the key (denoted by "?") and second for the value (denoted by ":")
-      //
-      if ((ch === 0x3F /* ? */ || ch === 0x3A /* : */) && is_WS_OR_EOL(following)) {
-        if (ch === 0x3F /* ? */) {
+      _line = state.line;
+      if ((ch === 63 || ch === 58) && is_WS_OR_EOL(following)) {
+        if (ch === 63) {
           if (atExplicitKey) {
             storeMappingPair(state, _result, overridableKeys, keyTag, keyNode, null, _keyLine, _keyLineStart, _keyPos);
             keyTag = keyNode = valueNode = null;
@@ -7456,25 +7297,18 @@
           atExplicitKey = true;
           allowCompact = true;
         } else if (atExplicitKey) {
-          // i.e. 0x3A/* : */ === character after the explicit key.
           atExplicitKey = false;
           allowCompact = true;
         } else {
-          throwError(state, 'incomplete explicit mapping pair; a key node is missed; or followed by a non-tabulated empty line');
+          throwError(state, "incomplete explicit mapping pair; a key node is missed; or followed by a non-tabulated empty line");
         }
         state.position += 1;
         ch = following;
-
-        //
-        // Implicit notation case. Flow-style node as the key first, then ":", and the value.
-        //
       } else {
         _keyLine = state.line;
         _keyLineStart = state.lineStart;
         _keyPos = state.position;
         if (!composeNode(state, flowIndent, CONTEXT_FLOW_OUT, false, true)) {
-          // Neither implicit nor explicit notation.
-          // Reading is done. Go to the epilogue.
           break;
         }
         if (state.line === _line) {
@@ -7482,10 +7316,10 @@
           while (is_WHITE_SPACE(ch)) {
             ch = state.input.charCodeAt(++state.position);
           }
-          if (ch === 0x3A /* : */) {
+          if (ch === 58) {
             ch = state.input.charCodeAt(++state.position);
             if (!is_WS_OR_EOL(ch)) {
-              throwError(state, 'a whitespace character is expected after the key-value separator within a block mapping');
+              throwError(state, "a whitespace character is expected after the key-value separator within a block mapping");
             }
             if (atExplicitKey) {
               storeMappingPair(state, _result, overridableKeys, keyTag, keyNode, null, _keyLine, _keyLineStart, _keyPos);
@@ -7497,24 +7331,20 @@
             keyTag = state.tag;
             keyNode = state.result;
           } else if (detected) {
-            throwError(state, 'can not read an implicit mapping pair; a colon is missed');
+            throwError(state, "can not read an implicit mapping pair; a colon is missed");
           } else {
             state.tag = _tag;
             state.anchor = _anchor;
-            return true; // Keep the result of `composeNode`.
+            return true;
           }
         } else if (detected) {
-          throwError(state, 'can not read a block mapping entry; a multiline key may not be an implicit key');
+          throwError(state, "can not read a block mapping entry; a multiline key may not be an implicit key");
         } else {
           state.tag = _tag;
           state.anchor = _anchor;
-          return true; // Keep the result of `composeNode`.
+          return true;
         }
       }
-
-      //
-      // Common reading code for both explicit and implicit notations.
-      //
       if (state.line === _line || state.lineIndent > nodeIndent) {
         if (atExplicitKey) {
           _keyLine = state.line;
@@ -7536,101 +7366,89 @@
         ch = state.input.charCodeAt(state.position);
       }
       if ((state.line === _line || state.lineIndent > nodeIndent) && ch !== 0) {
-        throwError(state, 'bad indentation of a mapping entry');
+        throwError(state, "bad indentation of a mapping entry");
       } else if (state.lineIndent < nodeIndent) {
         break;
       }
     }
-
-    //
-    // Epilogue.
-    //
-
-    // Special case: last mapping's node contains only the key in explicit notation.
     if (atExplicitKey) {
       storeMappingPair(state, _result, overridableKeys, keyTag, keyNode, null, _keyLine, _keyLineStart, _keyPos);
     }
-
-    // Expose the resulting mapping.
     if (detected) {
       state.tag = _tag;
       state.anchor = _anchor;
-      state.kind = 'mapping';
+      state.kind = "mapping";
       state.result = _result;
     }
     return detected;
   }
   function readTagProperty(state) {
-    var _position,
-      isVerbatim = false,
-      isNamed = false,
-      tagHandle,
-      tagName,
-      ch;
+    var _position, isVerbatim = false, isNamed = false, tagHandle, tagName, ch;
     ch = state.input.charCodeAt(state.position);
-    if (ch !== 0x21 /* ! */) return false;
+    if (ch !== 33)
+      return false;
     if (state.tag !== null) {
-      throwError(state, 'duplication of a tag property');
+      throwError(state, "duplication of a tag property");
     }
     ch = state.input.charCodeAt(++state.position);
-    if (ch === 0x3C /* < */) {
+    if (ch === 60) {
       isVerbatim = true;
       ch = state.input.charCodeAt(++state.position);
-    } else if (ch === 0x21 /* ! */) {
+    } else if (ch === 33) {
       isNamed = true;
-      tagHandle = '!!';
+      tagHandle = "!!";
       ch = state.input.charCodeAt(++state.position);
     } else {
-      tagHandle = '!';
+      tagHandle = "!";
     }
     _position = state.position;
     if (isVerbatim) {
       do {
         ch = state.input.charCodeAt(++state.position);
-      } while (ch !== 0 && ch !== 0x3E /* > */);
+      } while (ch !== 0 && ch !== 62);
       if (state.position < state.length) {
         tagName = state.input.slice(_position, state.position);
         ch = state.input.charCodeAt(++state.position);
       } else {
-        throwError(state, 'unexpected end of the stream within a verbatim tag');
+        throwError(state, "unexpected end of the stream within a verbatim tag");
       }
     } else {
       while (ch !== 0 && !is_WS_OR_EOL(ch)) {
-        if (ch === 0x21 /* ! */) {
+        if (ch === 33) {
           if (!isNamed) {
             tagHandle = state.input.slice(_position - 1, state.position + 1);
             if (!PATTERN_TAG_HANDLE.test(tagHandle)) {
-              throwError(state, 'named tag handle cannot contain such characters');
+              throwError(state, "named tag handle cannot contain such characters");
             }
             isNamed = true;
             _position = state.position + 1;
           } else {
-            throwError(state, 'tag suffix cannot contain exclamation marks');
+            throwError(state, "tag suffix cannot contain exclamation marks");
           }
         }
         ch = state.input.charCodeAt(++state.position);
       }
       tagName = state.input.slice(_position, state.position);
       if (PATTERN_FLOW_INDICATORS.test(tagName)) {
-        throwError(state, 'tag suffix cannot contain flow indicator characters');
+        throwError(state, "tag suffix cannot contain flow indicator characters");
       }
     }
     if (tagName && !PATTERN_TAG_URI.test(tagName)) {
-      throwError(state, 'tag name cannot contain such characters: ' + tagName);
+      throwError(state, "tag name cannot contain such characters: " + tagName);
     }
     try {
       tagName = decodeURIComponent(tagName);
     } catch (err) {
-      throwError(state, 'tag name is malformed: ' + tagName);
+      throwError(state, "tag name is malformed: " + tagName);
     }
     if (isVerbatim) {
       state.tag = tagName;
     } else if (_hasOwnProperty$1.call(state.tagMap, tagHandle)) {
       state.tag = state.tagMap[tagHandle] + tagName;
-    } else if (tagHandle === '!') {
-      state.tag = '!' + tagName;
-    } else if (tagHandle === '!!') {
-      state.tag = 'tag:yaml.org,2002:' + tagName;
+    } else if (tagHandle === "!") {
+      state.tag = "!" + tagName;
+    } else if (tagHandle === "!!") {
+      state.tag = "tag:yaml.org,2002:" + tagName;
     } else {
       throwError(state, 'undeclared tag handle "' + tagHandle + '"');
     }
@@ -7639,9 +7457,10 @@
   function readAnchorProperty(state) {
     var _position, ch;
     ch = state.input.charCodeAt(state.position);
-    if (ch !== 0x26 /* & */) return false;
+    if (ch !== 38)
+      return false;
     if (state.anchor !== null) {
-      throwError(state, 'duplication of an anchor property');
+      throwError(state, "duplication of an anchor property");
     }
     ch = state.input.charCodeAt(++state.position);
     _position = state.position;
@@ -7649,7 +7468,7 @@
       ch = state.input.charCodeAt(++state.position);
     }
     if (state.position === _position) {
-      throwError(state, 'name of an anchor node must contain at least one character');
+      throwError(state, "name of an anchor node must contain at least one character");
     }
     state.anchor = state.input.slice(_position, state.position);
     return true;
@@ -7657,14 +7476,15 @@
   function readAlias(state) {
     var _position, alias, ch;
     ch = state.input.charCodeAt(state.position);
-    if (ch !== 0x2A /* * */) return false;
+    if (ch !== 42)
+      return false;
     ch = state.input.charCodeAt(++state.position);
     _position = state.position;
     while (ch !== 0 && !is_WS_OR_EOL(ch) && !is_FLOW_INDICATOR(ch)) {
       ch = state.input.charCodeAt(++state.position);
     }
     if (state.position === _position) {
-      throwError(state, 'name of an alias node must contain at least one character');
+      throwError(state, "name of an alias node must contain at least one character");
     }
     alias = state.input.slice(_position, state.position);
     if (!_hasOwnProperty$1.call(state.anchorMap, alias)) {
@@ -7675,21 +7495,9 @@
     return true;
   }
   function composeNode(state, parentIndent, nodeContext, allowToSeek, allowCompact) {
-    var allowBlockStyles,
-      allowBlockScalars,
-      allowBlockCollections,
-      indentStatus = 1,
-      // 1: this>parent, 0: this=parent, -1: this<parent
-      atNewLine = false,
-      hasContent = false,
-      typeIndex,
-      typeQuantity,
-      typeList,
-      type,
-      flowIndent,
-      blockIndent;
+    var allowBlockStyles, allowBlockScalars, allowBlockCollections, indentStatus = 1, atNewLine = false, hasContent = false, typeIndex, typeQuantity, typeList, type2, flowIndent, blockIndent;
     if (state.listener !== null) {
-      state.listener('open', state);
+      state.listener("open", state);
     }
     state.tag = null;
     state.anchor = null;
@@ -7744,12 +7552,12 @@
           } else if (readAlias(state)) {
             hasContent = true;
             if (state.tag !== null || state.anchor !== null) {
-              throwError(state, 'alias node should not have any properties');
+              throwError(state, "alias node should not have any properties");
             }
           } else if (readPlainScalar(state, flowIndent, CONTEXT_FLOW_IN === nodeContext)) {
             hasContent = true;
             if (state.tag === null) {
-              state.tag = '?';
+              state.tag = "?";
             }
           }
           if (state.anchor !== null) {
@@ -7757,8 +7565,6 @@
           }
         }
       } else if (indentStatus === 0) {
-        // Special case: block sequences are allowed to have same indentation level as the parent.
-        // http://www.yaml.org/spec/1.2/spec.html#id2799784
         hasContent = allowBlockCollections && readBlockSequence(state, blockIndent);
       }
     }
@@ -7766,78 +7572,64 @@
       if (state.anchor !== null) {
         state.anchorMap[state.anchor] = state.result;
       }
-    } else if (state.tag === '?') {
-      // Implicit resolving is not allowed for non-scalar types, and '?'
-      // non-specific tag is only automatically assigned to plain scalars.
-      //
-      // We only need to check kind conformity in case user explicitly assigns '?'
-      // tag, for example like this: "!<?> [0]"
-      //
-      if (state.result !== null && state.kind !== 'scalar') {
+    } else if (state.tag === "?") {
+      if (state.result !== null && state.kind !== "scalar") {
         throwError(state, 'unacceptable node kind for !<?> tag; it should be "scalar", not "' + state.kind + '"');
       }
       for (typeIndex = 0, typeQuantity = state.implicitTypes.length; typeIndex < typeQuantity; typeIndex += 1) {
-        type = state.implicitTypes[typeIndex];
-        if (type.resolve(state.result)) {
-          // `state.result` updated in resolver if matched
-          state.result = type.construct(state.result);
-          state.tag = type.tag;
+        type2 = state.implicitTypes[typeIndex];
+        if (type2.resolve(state.result)) {
+          state.result = type2.construct(state.result);
+          state.tag = type2.tag;
           if (state.anchor !== null) {
             state.anchorMap[state.anchor] = state.result;
           }
           break;
         }
       }
-    } else if (state.tag !== '!') {
-      if (_hasOwnProperty$1.call(state.typeMap[state.kind || 'fallback'], state.tag)) {
-        type = state.typeMap[state.kind || 'fallback'][state.tag];
+    } else if (state.tag !== "!") {
+      if (_hasOwnProperty$1.call(state.typeMap[state.kind || "fallback"], state.tag)) {
+        type2 = state.typeMap[state.kind || "fallback"][state.tag];
       } else {
-        // looking for multi type
-        type = null;
-        typeList = state.typeMap.multi[state.kind || 'fallback'];
+        type2 = null;
+        typeList = state.typeMap.multi[state.kind || "fallback"];
         for (typeIndex = 0, typeQuantity = typeList.length; typeIndex < typeQuantity; typeIndex += 1) {
           if (state.tag.slice(0, typeList[typeIndex].tag.length) === typeList[typeIndex].tag) {
-            type = typeList[typeIndex];
+            type2 = typeList[typeIndex];
             break;
           }
         }
       }
-      if (!type) {
-        throwError(state, 'unknown tag !<' + state.tag + '>');
+      if (!type2) {
+        throwError(state, "unknown tag !<" + state.tag + ">");
       }
-      if (state.result !== null && type.kind !== state.kind) {
-        throwError(state, 'unacceptable node kind for !<' + state.tag + '> tag; it should be "' + type.kind + '", not "' + state.kind + '"');
+      if (state.result !== null && type2.kind !== state.kind) {
+        throwError(state, "unacceptable node kind for !<" + state.tag + '> tag; it should be "' + type2.kind + '", not "' + state.kind + '"');
       }
-      if (!type.resolve(state.result, state.tag)) {
-        // `state.result` updated in resolver if matched
-        throwError(state, 'cannot resolve a node with !<' + state.tag + '> explicit tag');
+      if (!type2.resolve(state.result, state.tag)) {
+        throwError(state, "cannot resolve a node with !<" + state.tag + "> explicit tag");
       } else {
-        state.result = type.construct(state.result, state.tag);
+        state.result = type2.construct(state.result, state.tag);
         if (state.anchor !== null) {
           state.anchorMap[state.anchor] = state.result;
         }
       }
     }
     if (state.listener !== null) {
-      state.listener('close', state);
+      state.listener("close", state);
     }
     return state.tag !== null || state.anchor !== null || hasContent;
   }
   function readDocument(state) {
-    var documentStart = state.position,
-      _position,
-      directiveName,
-      directiveArgs,
-      hasDirectives = false,
-      ch;
+    var documentStart = state.position, _position, directiveName, directiveArgs, hasDirectives = false, ch;
     state.version = null;
     state.checkLineBreaks = state.legacy;
-    state.tagMap = Object.create(null);
-    state.anchorMap = Object.create(null);
+    state.tagMap = /* @__PURE__ */ Object.create(null);
+    state.anchorMap = /* @__PURE__ */ Object.create(null);
     while ((ch = state.input.charCodeAt(state.position)) !== 0) {
       skipSeparationSpace(state, true, -1);
       ch = state.input.charCodeAt(state.position);
-      if (state.lineIndent > 0 || ch !== 0x25 /* % */) {
+      if (state.lineIndent > 0 || ch !== 37) {
         break;
       }
       hasDirectives = true;
@@ -7849,26 +7641,28 @@
       directiveName = state.input.slice(_position, state.position);
       directiveArgs = [];
       if (directiveName.length < 1) {
-        throwError(state, 'directive name must not be less than one character in length');
+        throwError(state, "directive name must not be less than one character in length");
       }
       while (ch !== 0) {
         while (is_WHITE_SPACE(ch)) {
           ch = state.input.charCodeAt(++state.position);
         }
-        if (ch === 0x23 /* # */) {
+        if (ch === 35) {
           do {
             ch = state.input.charCodeAt(++state.position);
           } while (ch !== 0 && !is_EOL(ch));
           break;
         }
-        if (is_EOL(ch)) break;
+        if (is_EOL(ch))
+          break;
         _position = state.position;
         while (ch !== 0 && !is_WS_OR_EOL(ch)) {
           ch = state.input.charCodeAt(++state.position);
         }
         directiveArgs.push(state.input.slice(_position, state.position));
       }
-      if (ch !== 0) readLineBreak(state);
+      if (ch !== 0)
+        readLineBreak(state);
       if (_hasOwnProperty$1.call(directiveHandlers, directiveName)) {
         directiveHandlers[directiveName](state, directiveName, directiveArgs);
       } else {
@@ -7876,27 +7670,27 @@
       }
     }
     skipSeparationSpace(state, true, -1);
-    if (state.lineIndent === 0 && state.input.charCodeAt(state.position) === 0x2D /* - */ && state.input.charCodeAt(state.position + 1) === 0x2D /* - */ && state.input.charCodeAt(state.position + 2) === 0x2D /* - */) {
+    if (state.lineIndent === 0 && state.input.charCodeAt(state.position) === 45 && state.input.charCodeAt(state.position + 1) === 45 && state.input.charCodeAt(state.position + 2) === 45) {
       state.position += 3;
       skipSeparationSpace(state, true, -1);
     } else if (hasDirectives) {
-      throwError(state, 'directives end mark is expected');
+      throwError(state, "directives end mark is expected");
     }
     composeNode(state, state.lineIndent - 1, CONTEXT_BLOCK_OUT, false, true);
     skipSeparationSpace(state, true, -1);
     if (state.checkLineBreaks && PATTERN_NON_ASCII_LINE_BREAKS.test(state.input.slice(documentStart, state.position))) {
-      throwWarning(state, 'non-ASCII line breaks are interpreted as content');
+      throwWarning(state, "non-ASCII line breaks are interpreted as content");
     }
     state.documents.push(state.result);
     if (state.position === state.lineStart && testDocumentSeparator(state)) {
-      if (state.input.charCodeAt(state.position) === 0x2E /* . */) {
+      if (state.input.charCodeAt(state.position) === 46) {
         state.position += 3;
         skipSeparationSpace(state, true, -1);
       }
       return;
     }
     if (state.position < state.length - 1) {
-      throwError(state, 'end of the stream or a document separator is expected');
+      throwError(state, "end of the stream or a document separator is expected");
     } else {
       return;
     }
@@ -7905,26 +7699,21 @@
     input = String(input);
     options = options || {};
     if (input.length !== 0) {
-      // Add tailing `\n` if not exists
-      if (input.charCodeAt(input.length - 1) !== 0x0A /* LF */ && input.charCodeAt(input.length - 1) !== 0x0D /* CR */) {
-        input += '\n';
+      if (input.charCodeAt(input.length - 1) !== 10 && input.charCodeAt(input.length - 1) !== 13) {
+        input += "\n";
       }
-
-      // Strip BOM
-      if (input.charCodeAt(0) === 0xFEFF) {
+      if (input.charCodeAt(0) === 65279) {
         input = input.slice(1);
       }
     }
     var state = new State$1(input, options);
-    var nullpos = input.indexOf('\0');
+    var nullpos = input.indexOf("\0");
     if (nullpos !== -1) {
       state.position = nullpos;
-      throwError(state, 'null byte is not allowed in input');
+      throwError(state, "null byte is not allowed in input");
     }
-
-    // Use 0 as string terminator. That significantly simplifies bounds check.
-    state.input += '\0';
-    while (state.input.charCodeAt(state.position) === 0x20 /* Space */) {
+    state.input += "\0";
+    while (state.input.charCodeAt(state.position) === 32) {
       state.lineIndent += 1;
       state.position += 1;
     }
@@ -7934,12 +7723,12 @@
     return state.documents;
   }
   function loadAll$1(input, iterator, options) {
-    if (iterator !== null && typeof iterator === 'object' && typeof options === 'undefined') {
+    if (iterator !== null && typeof iterator === "object" && typeof options === "undefined") {
       options = iterator;
       iterator = null;
     }
     var documents = loadDocuments(input, options);
-    if (typeof iterator !== 'function') {
+    if (typeof iterator !== "function") {
       return documents;
     }
     for (var index = 0, length = documents.length; index < length; index += 1) {
@@ -7949,12 +7738,11 @@
   function load$1(input, options) {
     var documents = loadDocuments(input, options);
     if (documents.length === 0) {
-      /*eslint-disable no-undefined*/
-      return undefined;
+      return void 0;
     } else if (documents.length === 1) {
       return documents[0];
     }
-    throw new exception('expected a single document in the stream, but found more');
+    throw new exception("expected a single document in the stream, but found more");
   }
   var loadAll_1 = loadAll$1;
   var load_1 = load$1;
@@ -7962,69 +7750,83 @@
     loadAll: loadAll_1,
     load: load_1
   };
-
-  /*eslint-disable no-use-before-define*/
-
   var _toString = Object.prototype.toString;
   var _hasOwnProperty = Object.prototype.hasOwnProperty;
-  var CHAR_BOM = 0xFEFF;
-  var CHAR_TAB = 0x09; /* Tab */
-  var CHAR_LINE_FEED = 0x0A; /* LF */
-  var CHAR_CARRIAGE_RETURN = 0x0D; /* CR */
-  var CHAR_SPACE = 0x20; /* Space */
-  var CHAR_EXCLAMATION = 0x21; /* ! */
-  var CHAR_DOUBLE_QUOTE = 0x22; /* " */
-  var CHAR_SHARP = 0x23; /* # */
-  var CHAR_PERCENT = 0x25; /* % */
-  var CHAR_AMPERSAND = 0x26; /* & */
-  var CHAR_SINGLE_QUOTE = 0x27; /* ' */
-  var CHAR_ASTERISK = 0x2A; /* * */
-  var CHAR_COMMA = 0x2C; /* , */
-  var CHAR_MINUS = 0x2D; /* - */
-  var CHAR_COLON = 0x3A; /* : */
-  var CHAR_EQUALS = 0x3D; /* = */
-  var CHAR_GREATER_THAN = 0x3E; /* > */
-  var CHAR_QUESTION = 0x3F; /* ? */
-  var CHAR_COMMERCIAL_AT = 0x40; /* @ */
-  var CHAR_LEFT_SQUARE_BRACKET = 0x5B; /* [ */
-  var CHAR_RIGHT_SQUARE_BRACKET = 0x5D; /* ] */
-  var CHAR_GRAVE_ACCENT = 0x60; /* ` */
-  var CHAR_LEFT_CURLY_BRACKET = 0x7B; /* { */
-  var CHAR_VERTICAL_LINE = 0x7C; /* | */
-  var CHAR_RIGHT_CURLY_BRACKET = 0x7D; /* } */
-
+  var CHAR_BOM = 65279;
+  var CHAR_TAB = 9;
+  var CHAR_LINE_FEED = 10;
+  var CHAR_CARRIAGE_RETURN = 13;
+  var CHAR_SPACE = 32;
+  var CHAR_EXCLAMATION = 33;
+  var CHAR_DOUBLE_QUOTE = 34;
+  var CHAR_SHARP = 35;
+  var CHAR_PERCENT = 37;
+  var CHAR_AMPERSAND = 38;
+  var CHAR_SINGLE_QUOTE = 39;
+  var CHAR_ASTERISK = 42;
+  var CHAR_COMMA = 44;
+  var CHAR_MINUS = 45;
+  var CHAR_COLON = 58;
+  var CHAR_EQUALS = 61;
+  var CHAR_GREATER_THAN = 62;
+  var CHAR_QUESTION = 63;
+  var CHAR_COMMERCIAL_AT = 64;
+  var CHAR_LEFT_SQUARE_BRACKET = 91;
+  var CHAR_RIGHT_SQUARE_BRACKET = 93;
+  var CHAR_GRAVE_ACCENT = 96;
+  var CHAR_LEFT_CURLY_BRACKET = 123;
+  var CHAR_VERTICAL_LINE = 124;
+  var CHAR_RIGHT_CURLY_BRACKET = 125;
   var ESCAPE_SEQUENCES = {};
-  ESCAPE_SEQUENCES[0x00] = '\\0';
-  ESCAPE_SEQUENCES[0x07] = '\\a';
-  ESCAPE_SEQUENCES[0x08] = '\\b';
-  ESCAPE_SEQUENCES[0x09] = '\\t';
-  ESCAPE_SEQUENCES[0x0A] = '\\n';
-  ESCAPE_SEQUENCES[0x0B] = '\\v';
-  ESCAPE_SEQUENCES[0x0C] = '\\f';
-  ESCAPE_SEQUENCES[0x0D] = '\\r';
-  ESCAPE_SEQUENCES[0x1B] = '\\e';
-  ESCAPE_SEQUENCES[0x22] = '\\"';
-  ESCAPE_SEQUENCES[0x5C] = '\\\\';
-  ESCAPE_SEQUENCES[0x85] = '\\N';
-  ESCAPE_SEQUENCES[0xA0] = '\\_';
-  ESCAPE_SEQUENCES[0x2028] = '\\L';
-  ESCAPE_SEQUENCES[0x2029] = '\\P';
-  var DEPRECATED_BOOLEANS_SYNTAX = ['y', 'Y', 'yes', 'Yes', 'YES', 'on', 'On', 'ON', 'n', 'N', 'no', 'No', 'NO', 'off', 'Off', 'OFF'];
+  ESCAPE_SEQUENCES[0] = "\\0";
+  ESCAPE_SEQUENCES[7] = "\\a";
+  ESCAPE_SEQUENCES[8] = "\\b";
+  ESCAPE_SEQUENCES[9] = "\\t";
+  ESCAPE_SEQUENCES[10] = "\\n";
+  ESCAPE_SEQUENCES[11] = "\\v";
+  ESCAPE_SEQUENCES[12] = "\\f";
+  ESCAPE_SEQUENCES[13] = "\\r";
+  ESCAPE_SEQUENCES[27] = "\\e";
+  ESCAPE_SEQUENCES[34] = '\\"';
+  ESCAPE_SEQUENCES[92] = "\\\\";
+  ESCAPE_SEQUENCES[133] = "\\N";
+  ESCAPE_SEQUENCES[160] = "\\_";
+  ESCAPE_SEQUENCES[8232] = "\\L";
+  ESCAPE_SEQUENCES[8233] = "\\P";
+  var DEPRECATED_BOOLEANS_SYNTAX = [
+    "y",
+    "Y",
+    "yes",
+    "Yes",
+    "YES",
+    "on",
+    "On",
+    "ON",
+    "n",
+    "N",
+    "no",
+    "No",
+    "NO",
+    "off",
+    "Off",
+    "OFF"
+  ];
   var DEPRECATED_BASE60_SYNTAX = /^[-+]?[0-9_]+(?::[0-9_]+)+(?:\.[0-9_]*)?$/;
-  function compileStyleMap(schema, map) {
-    var result, keys, index, length, tag, style, type;
-    if (map === null) return {};
+  function compileStyleMap(schema2, map2) {
+    var result, keys, index, length, tag, style, type2;
+    if (map2 === null)
+      return {};
     result = {};
-    keys = Object.keys(map);
+    keys = Object.keys(map2);
     for (index = 0, length = keys.length; index < length; index += 1) {
       tag = keys[index];
-      style = String(map[tag]);
-      if (tag.slice(0, 2) === '!!') {
-        tag = 'tag:yaml.org,2002:' + tag.slice(2);
+      style = String(map2[tag]);
+      if (tag.slice(0, 2) === "!!") {
+        tag = "tag:yaml.org,2002:" + tag.slice(2);
       }
-      type = schema.compiledTypeMap['fallback'][tag];
-      if (type && _hasOwnProperty.call(type.styleAliases, style)) {
-        style = type.styleAliases[style];
+      type2 = schema2.compiledTypeMap["fallback"][tag];
+      if (type2 && _hasOwnProperty.call(type2.styleAliases, style)) {
+        style = type2.styleAliases[style];
       }
       result[tag] = style;
     }
@@ -8033,55 +7835,48 @@
   function encodeHex(character) {
     var string, handle, length;
     string = character.toString(16).toUpperCase();
-    if (character <= 0xFF) {
-      handle = 'x';
+    if (character <= 255) {
+      handle = "x";
       length = 2;
-    } else if (character <= 0xFFFF) {
-      handle = 'u';
+    } else if (character <= 65535) {
+      handle = "u";
       length = 4;
-    } else if (character <= 0xFFFFFFFF) {
-      handle = 'U';
+    } else if (character <= 4294967295) {
+      handle = "U";
       length = 8;
     } else {
-      throw new exception('code point within a string may not be greater than 0xFFFFFFFF');
+      throw new exception("code point within a string may not be greater than 0xFFFFFFFF");
     }
-    return '\\' + handle + common.repeat('0', length - string.length) + string;
+    return "\\" + handle + common.repeat("0", length - string.length) + string;
   }
-  var QUOTING_TYPE_SINGLE = 1,
-    QUOTING_TYPE_DOUBLE = 2;
+  var QUOTING_TYPE_SINGLE = 1;
+  var QUOTING_TYPE_DOUBLE = 2;
   function State(options) {
-    this.schema = options['schema'] || _default;
-    this.indent = Math.max(1, options['indent'] || 2);
-    this.noArrayIndent = options['noArrayIndent'] || false;
-    this.skipInvalid = options['skipInvalid'] || false;
-    this.flowLevel = common.isNothing(options['flowLevel']) ? -1 : options['flowLevel'];
-    this.styleMap = compileStyleMap(this.schema, options['styles'] || null);
-    this.sortKeys = options['sortKeys'] || false;
-    this.lineWidth = options['lineWidth'] || 80;
-    this.noRefs = options['noRefs'] || false;
-    this.noCompatMode = options['noCompatMode'] || false;
-    this.condenseFlow = options['condenseFlow'] || false;
-    this.quotingType = options['quotingType'] === '"' ? QUOTING_TYPE_DOUBLE : QUOTING_TYPE_SINGLE;
-    this.forceQuotes = options['forceQuotes'] || false;
-    this.replacer = typeof options['replacer'] === 'function' ? options['replacer'] : null;
+    this.schema = options["schema"] || _default;
+    this.indent = Math.max(1, options["indent"] || 2);
+    this.noArrayIndent = options["noArrayIndent"] || false;
+    this.skipInvalid = options["skipInvalid"] || false;
+    this.flowLevel = common.isNothing(options["flowLevel"]) ? -1 : options["flowLevel"];
+    this.styleMap = compileStyleMap(this.schema, options["styles"] || null);
+    this.sortKeys = options["sortKeys"] || false;
+    this.lineWidth = options["lineWidth"] || 80;
+    this.noRefs = options["noRefs"] || false;
+    this.noCompatMode = options["noCompatMode"] || false;
+    this.condenseFlow = options["condenseFlow"] || false;
+    this.quotingType = options["quotingType"] === '"' ? QUOTING_TYPE_DOUBLE : QUOTING_TYPE_SINGLE;
+    this.forceQuotes = options["forceQuotes"] || false;
+    this.replacer = typeof options["replacer"] === "function" ? options["replacer"] : null;
     this.implicitTypes = this.schema.compiledImplicit;
     this.explicitTypes = this.schema.compiledExplicit;
     this.tag = null;
-    this.result = '';
+    this.result = "";
     this.duplicates = [];
     this.usedDuplicates = null;
   }
-
-  // Indents every line in a string. Empty lines (\n only) are not indented.
   function indentString(string, spaces) {
-    var ind = common.repeat(' ', spaces),
-      position = 0,
-      next = -1,
-      result = '',
-      line,
-      length = string.length;
+    var ind = common.repeat(" ", spaces), position = 0, next = -1, result = "", line, length = string.length;
     while (position < length) {
-      next = string.indexOf('\n', position);
+      next = string.indexOf("\n", position);
       if (next === -1) {
         line = string.slice(position);
         position = length;
@@ -8089,142 +7884,81 @@
         line = string.slice(position, next + 1);
         position = next + 1;
       }
-      if (line.length && line !== '\n') result += ind;
+      if (line.length && line !== "\n")
+        result += ind;
       result += line;
     }
     return result;
   }
   function generateNextLine(state, level) {
-    return '\n' + common.repeat(' ', state.indent * level);
+    return "\n" + common.repeat(" ", state.indent * level);
   }
-  function testImplicitResolving(state, str) {
-    var index, length, type;
+  function testImplicitResolving(state, str2) {
+    var index, length, type2;
     for (index = 0, length = state.implicitTypes.length; index < length; index += 1) {
-      type = state.implicitTypes[index];
-      if (type.resolve(str)) {
+      type2 = state.implicitTypes[index];
+      if (type2.resolve(str2)) {
         return true;
       }
     }
     return false;
   }
-
-  // [33] s-white ::= s-space | s-tab
   function isWhitespace(c) {
     return c === CHAR_SPACE || c === CHAR_TAB;
   }
-
-  // Returns true if the character can be printed without escaping.
-  // From YAML 1.2: "any allowed characters known to be non-printable
-  // should also be escaped. [However,] This isn’t mandatory"
-  // Derived from nb-char - \t - #x85 - #xA0 - #x2028 - #x2029.
   function isPrintable(c) {
-    return 0x00020 <= c && c <= 0x00007E || 0x000A1 <= c && c <= 0x00D7FF && c !== 0x2028 && c !== 0x2029 || 0x0E000 <= c && c <= 0x00FFFD && c !== CHAR_BOM || 0x10000 <= c && c <= 0x10FFFF;
+    return 32 <= c && c <= 126 || 161 <= c && c <= 55295 && c !== 8232 && c !== 8233 || 57344 <= c && c <= 65533 && c !== CHAR_BOM || 65536 <= c && c <= 1114111;
   }
-
-  // [34] ns-char ::= nb-char - s-white
-  // [27] nb-char ::= c-printable - b-char - c-byte-order-mark
-  // [26] b-char  ::= b-line-feed | b-carriage-return
-  // Including s-white (for some reason, examples doesn't match specs in this aspect)
-  // ns-char ::= c-printable - b-line-feed - b-carriage-return - c-byte-order-mark
   function isNsCharOrWhitespace(c) {
-    return isPrintable(c) && c !== CHAR_BOM
-    // - b-char
-    && c !== CHAR_CARRIAGE_RETURN && c !== CHAR_LINE_FEED;
+    return isPrintable(c) && c !== CHAR_BOM && c !== CHAR_CARRIAGE_RETURN && c !== CHAR_LINE_FEED;
   }
-
-  // [127]  ns-plain-safe(c) ::= c = flow-out  ⇒ ns-plain-safe-out
-  //                             c = flow-in   ⇒ ns-plain-safe-in
-  //                             c = block-key ⇒ ns-plain-safe-out
-  //                             c = flow-key  ⇒ ns-plain-safe-in
-  // [128] ns-plain-safe-out ::= ns-char
-  // [129]  ns-plain-safe-in ::= ns-char - c-flow-indicator
-  // [130]  ns-plain-char(c) ::=  ( ns-plain-safe(c) - “:” - “#” )
-  //                            | ( /* An ns-char preceding */ “#” )
-  //                            | ( “:” /* Followed by an ns-plain-safe(c) */ )
   function isPlainSafe(c, prev, inblock) {
     var cIsNsCharOrWhitespace = isNsCharOrWhitespace(c);
     var cIsNsChar = cIsNsCharOrWhitespace && !isWhitespace(c);
     return (
-    // ns-plain-safe
-    inblock ?
-    // c = flow-in
-    cIsNsCharOrWhitespace : cIsNsCharOrWhitespace
-    // - c-flow-indicator
-    && c !== CHAR_COMMA && c !== CHAR_LEFT_SQUARE_BRACKET && c !== CHAR_RIGHT_SQUARE_BRACKET && c !== CHAR_LEFT_CURLY_BRACKET && c !== CHAR_RIGHT_CURLY_BRACKET
-
-    // ns-plain-char
-    ) && c !== CHAR_SHARP // false on '#'
-    && !(prev === CHAR_COLON && !cIsNsChar) // false on ': '
-    || isNsCharOrWhitespace(prev) && !isWhitespace(prev) && c === CHAR_SHARP // change to true on '[^ ]#'
-    || prev === CHAR_COLON && cIsNsChar; // change to true on ':[^ ]'
+      // ns-plain-safe
+      (inblock ? (
+        // c = flow-in
+        cIsNsCharOrWhitespace
+      ) : cIsNsCharOrWhitespace && c !== CHAR_COMMA && c !== CHAR_LEFT_SQUARE_BRACKET && c !== CHAR_RIGHT_SQUARE_BRACKET && c !== CHAR_LEFT_CURLY_BRACKET && c !== CHAR_RIGHT_CURLY_BRACKET) && c !== CHAR_SHARP && !(prev === CHAR_COLON && !cIsNsChar) || isNsCharOrWhitespace(prev) && !isWhitespace(prev) && c === CHAR_SHARP || prev === CHAR_COLON && cIsNsChar
+    );
   }
-
-  // Simplified test for values allowed as the first character in plain style.
   function isPlainSafeFirst(c) {
-    // Uses a subset of ns-char - c-indicator
-    // where ns-char = nb-char - s-white.
-    // No support of ( ( “?” | “:” | “-” ) /* Followed by an ns-plain-safe(c)) */ ) part
-    return isPrintable(c) && c !== CHAR_BOM && !isWhitespace(c) // - s-white
-    // - (c-indicator ::=
-    // “-” | “?” | “:” | “,” | “[” | “]” | “{” | “}”
-    && c !== CHAR_MINUS && c !== CHAR_QUESTION && c !== CHAR_COLON && c !== CHAR_COMMA && c !== CHAR_LEFT_SQUARE_BRACKET && c !== CHAR_RIGHT_SQUARE_BRACKET && c !== CHAR_LEFT_CURLY_BRACKET && c !== CHAR_RIGHT_CURLY_BRACKET
-    // | “#” | “&” | “*” | “!” | “|” | “=” | “>” | “'” | “"”
-    && c !== CHAR_SHARP && c !== CHAR_AMPERSAND && c !== CHAR_ASTERISK && c !== CHAR_EXCLAMATION && c !== CHAR_VERTICAL_LINE && c !== CHAR_EQUALS && c !== CHAR_GREATER_THAN && c !== CHAR_SINGLE_QUOTE && c !== CHAR_DOUBLE_QUOTE
-    // | “%” | “@” | “`”)
-    && c !== CHAR_PERCENT && c !== CHAR_COMMERCIAL_AT && c !== CHAR_GRAVE_ACCENT;
+    return isPrintable(c) && c !== CHAR_BOM && !isWhitespace(c) && c !== CHAR_MINUS && c !== CHAR_QUESTION && c !== CHAR_COLON && c !== CHAR_COMMA && c !== CHAR_LEFT_SQUARE_BRACKET && c !== CHAR_RIGHT_SQUARE_BRACKET && c !== CHAR_LEFT_CURLY_BRACKET && c !== CHAR_RIGHT_CURLY_BRACKET && c !== CHAR_SHARP && c !== CHAR_AMPERSAND && c !== CHAR_ASTERISK && c !== CHAR_EXCLAMATION && c !== CHAR_VERTICAL_LINE && c !== CHAR_EQUALS && c !== CHAR_GREATER_THAN && c !== CHAR_SINGLE_QUOTE && c !== CHAR_DOUBLE_QUOTE && c !== CHAR_PERCENT && c !== CHAR_COMMERCIAL_AT && c !== CHAR_GRAVE_ACCENT;
   }
-
-  // Simplified test for values allowed as the last character in plain style.
   function isPlainSafeLast(c) {
-    // just not whitespace or colon, it will be checked to be plain character later
     return !isWhitespace(c) && c !== CHAR_COLON;
   }
-
-  // Same as 'string'.codePointAt(pos), but works in older browsers.
   function codePointAt(string, pos) {
-    var first = string.charCodeAt(pos),
-      second;
-    if (first >= 0xD800 && first <= 0xDBFF && pos + 1 < string.length) {
+    var first = string.charCodeAt(pos), second;
+    if (first >= 55296 && first <= 56319 && pos + 1 < string.length) {
       second = string.charCodeAt(pos + 1);
-      if (second >= 0xDC00 && second <= 0xDFFF) {
-        // https://mathiasbynens.be/notes/javascript-encoding#surrogate-formulae
-        return (first - 0xD800) * 0x400 + second - 0xDC00 + 0x10000;
+      if (second >= 56320 && second <= 57343) {
+        return (first - 55296) * 1024 + second - 56320 + 65536;
       }
     }
     return first;
   }
-
-  // Determines whether block indentation indicator is required.
   function needIndentIndicator(string) {
     var leadingSpaceRe = /^\n* /;
     return leadingSpaceRe.test(string);
   }
-  var STYLE_PLAIN = 1,
-    STYLE_SINGLE = 2,
-    STYLE_LITERAL = 3,
-    STYLE_FOLDED = 4,
-    STYLE_DOUBLE = 5;
-
-  // Determines which scalar styles are possible and returns the preferred style.
-  // lineWidth = -1 => no limit.
-  // Pre-conditions: str.length > 0.
-  // Post-conditions:
-  //    STYLE_PLAIN or STYLE_SINGLE => no \n are in the string.
-  //    STYLE_LITERAL => no lines are suitable for folding (or lineWidth is -1).
-  //    STYLE_FOLDED => a line > lineWidth and can be folded (and lineWidth != -1).
+  var STYLE_PLAIN = 1;
+  var STYLE_SINGLE = 2;
+  var STYLE_LITERAL = 3;
+  var STYLE_FOLDED = 4;
+  var STYLE_DOUBLE = 5;
   function chooseScalarStyle(string, singleLineOnly, indentPerLevel, lineWidth, testAmbiguousType, quotingType, forceQuotes, inblock) {
     var i;
     var char = 0;
     var prevChar = null;
     var hasLineBreak = false;
-    var hasFoldableLine = false; // only checked if shouldTrackWidth
+    var hasFoldableLine = false;
     var shouldTrackWidth = lineWidth !== -1;
-    var previousLineBreak = -1; // count the first line correctly
+    var previousLineBreak = -1;
     var plain = isPlainSafeFirst(codePointAt(string, 0)) && isPlainSafeLast(codePointAt(string, string.length - 1));
     if (singleLineOnly || forceQuotes) {
-      // Case: no block styles.
-      // Check for disallowed characters to rule out plain and single.
-      for (i = 0; i < string.length; char >= 0x10000 ? i += 2 : i++) {
+      for (i = 0; i < string.length; char >= 65536 ? i += 2 : i++) {
         char = codePointAt(string, i);
         if (!isPrintable(char)) {
           return STYLE_DOUBLE;
@@ -8233,16 +7967,13 @@
         prevChar = char;
       }
     } else {
-      // Case: block styles permitted.
-      for (i = 0; i < string.length; char >= 0x10000 ? i += 2 : i++) {
+      for (i = 0; i < string.length; char >= 65536 ? i += 2 : i++) {
         char = codePointAt(string, i);
         if (char === CHAR_LINE_FEED) {
           hasLineBreak = true;
-          // Check if any line can be folded.
           if (shouldTrackWidth) {
-            hasFoldableLine = hasFoldableLine ||
-            // Foldable line = too long, and not more-indented.
-            i - previousLineBreak - 1 > lineWidth && string[previousLineBreak + 1] !== ' ';
+            hasFoldableLine = hasFoldableLine || // Foldable line = too long, and not more-indented.
+            i - previousLineBreak - 1 > lineWidth && string[previousLineBreak + 1] !== " ";
             previousLineBreak = i;
           }
         } else if (!isPrintable(char)) {
@@ -8251,40 +7982,24 @@
         plain = plain && isPlainSafe(char, prevChar, inblock);
         prevChar = char;
       }
-      // in case the end is missing a \n
-      hasFoldableLine = hasFoldableLine || shouldTrackWidth && i - previousLineBreak - 1 > lineWidth && string[previousLineBreak + 1] !== ' ';
+      hasFoldableLine = hasFoldableLine || shouldTrackWidth && (i - previousLineBreak - 1 > lineWidth && string[previousLineBreak + 1] !== " ");
     }
-    // Although every style can represent \n without escaping, prefer block styles
-    // for multiline, since they're more readable and they don't add empty lines.
-    // Also prefer folding a super-long line.
     if (!hasLineBreak && !hasFoldableLine) {
-      // Strings interpretable as another type have to be quoted;
-      // e.g. the string 'true' vs. the boolean true.
       if (plain && !forceQuotes && !testAmbiguousType(string)) {
         return STYLE_PLAIN;
       }
       return quotingType === QUOTING_TYPE_DOUBLE ? STYLE_DOUBLE : STYLE_SINGLE;
     }
-    // Edge case: block indentation indicator can only have one digit.
     if (indentPerLevel > 9 && needIndentIndicator(string)) {
       return STYLE_DOUBLE;
     }
-    // At this point we know block styles are valid.
-    // Prefer literal style unless we want to fold.
     if (!forceQuotes) {
       return hasFoldableLine ? STYLE_FOLDED : STYLE_LITERAL;
     }
     return quotingType === QUOTING_TYPE_DOUBLE ? STYLE_DOUBLE : STYLE_SINGLE;
   }
-
-  // Note: line breaking/folding is implemented for only the folded style.
-  // NB. We drop the last trailing newline (if any) of a returned block scalar
-  //  since the dumper adds its own newline. This always works:
-  //    • No ending newline => unaffected; already using strip "-" chomping.
-  //    • Ending newline    => removed then restored.
-  //  Importantly, this keeps the "+" chomp indicator from gaining an extra line.
   function writeScalar(state, string, level, iskey, inblock) {
-    state.dump = function () {
+    state.dump = function() {
       if (string.length === 0) {
         return state.quotingType === QUOTING_TYPE_DOUBLE ? '""' : "''";
       }
@@ -8293,144 +8008,101 @@
           return state.quotingType === QUOTING_TYPE_DOUBLE ? '"' + string + '"' : "'" + string + "'";
         }
       }
-      var indent = state.indent * Math.max(1, level); // no 0-indent scalars
-      // As indentation gets deeper, let the width decrease monotonically
-      // to the lower bound min(state.lineWidth, 40).
-      // Note that this implies
-      //  state.lineWidth ≤ 40 + state.indent: width is fixed at the lower bound.
-      //  state.lineWidth > 40 + state.indent: width decreases until the lower bound.
-      // This behaves better than a constant minimum width which disallows narrower options,
-      // or an indent threshold which causes the width to suddenly increase.
+      var indent = state.indent * Math.max(1, level);
       var lineWidth = state.lineWidth === -1 ? -1 : Math.max(Math.min(state.lineWidth, 40), state.lineWidth - indent);
-
-      // Without knowing if keys are implicit/explicit, assume implicit for safety.
-      var singleLineOnly = iskey
-      // No block styles in flow mode.
-      || state.flowLevel > -1 && level >= state.flowLevel;
-      function testAmbiguity(string) {
-        return testImplicitResolving(state, string);
+      var singleLineOnly = iskey || state.flowLevel > -1 && level >= state.flowLevel;
+      function testAmbiguity(string2) {
+        return testImplicitResolving(state, string2);
       }
-      switch (chooseScalarStyle(string, singleLineOnly, state.indent, lineWidth, testAmbiguity, state.quotingType, state.forceQuotes && !iskey, inblock)) {
+      switch (chooseScalarStyle(
+        string,
+        singleLineOnly,
+        state.indent,
+        lineWidth,
+        testAmbiguity,
+        state.quotingType,
+        state.forceQuotes && !iskey,
+        inblock
+      )) {
         case STYLE_PLAIN:
           return string;
         case STYLE_SINGLE:
           return "'" + string.replace(/'/g, "''") + "'";
         case STYLE_LITERAL:
-          return '|' + blockHeader(string, state.indent) + dropEndingNewline(indentString(string, indent));
+          return "|" + blockHeader(string, state.indent) + dropEndingNewline(indentString(string, indent));
         case STYLE_FOLDED:
-          return '>' + blockHeader(string, state.indent) + dropEndingNewline(indentString(foldString(string, lineWidth), indent));
+          return ">" + blockHeader(string, state.indent) + dropEndingNewline(indentString(foldString(string, lineWidth), indent));
         case STYLE_DOUBLE:
           return '"' + escapeString(string) + '"';
         default:
-          throw new exception('impossible error: invalid scalar style');
+          throw new exception("impossible error: invalid scalar style");
       }
     }();
   }
-
-  // Pre-conditions: string is valid for a block scalar, 1 <= indentPerLevel <= 9.
   function blockHeader(string, indentPerLevel) {
-    var indentIndicator = needIndentIndicator(string) ? String(indentPerLevel) : '';
-
-    // note the special case: the string '\n' counts as a "trailing" empty line.
-    var clip = string[string.length - 1] === '\n';
-    var keep = clip && (string[string.length - 2] === '\n' || string === '\n');
-    var chomp = keep ? '+' : clip ? '' : '-';
-    return indentIndicator + chomp + '\n';
+    var indentIndicator = needIndentIndicator(string) ? String(indentPerLevel) : "";
+    var clip = string[string.length - 1] === "\n";
+    var keep = clip && (string[string.length - 2] === "\n" || string === "\n");
+    var chomp = keep ? "+" : clip ? "" : "-";
+    return indentIndicator + chomp + "\n";
   }
-
-  // (See the note for writeScalar.)
   function dropEndingNewline(string) {
-    return string[string.length - 1] === '\n' ? string.slice(0, -1) : string;
+    return string[string.length - 1] === "\n" ? string.slice(0, -1) : string;
   }
-
-  // Note: a long line without a suitable break point will exceed the width limit.
-  // Pre-conditions: every char in str isPrintable, str.length > 0, width > 0.
   function foldString(string, width) {
-    // In folded style, $k$ consecutive newlines output as $k+1$ newlines—
-    // unless they're before or after a more-indented line, or at the very
-    // beginning or end, in which case $k$ maps to $k$.
-    // Therefore, parse each chunk as newline(s) followed by a content line.
     var lineRe = /(\n+)([^\n]*)/g;
-
-    // first line (possibly an empty line)
-    var result = function () {
-      var nextLF = string.indexOf('\n');
+    var result = function() {
+      var nextLF = string.indexOf("\n");
       nextLF = nextLF !== -1 ? nextLF : string.length;
       lineRe.lastIndex = nextLF;
       return foldLine(string.slice(0, nextLF), width);
     }();
-    // If we haven't reached the first content line yet, don't add an extra \n.
-    var prevMoreIndented = string[0] === '\n' || string[0] === ' ';
+    var prevMoreIndented = string[0] === "\n" || string[0] === " ";
     var moreIndented;
-
-    // rest of the lines
     var match;
     while (match = lineRe.exec(string)) {
-      var prefix = match[1],
-        line = match[2];
-      moreIndented = line[0] === ' ';
-      result += prefix + (!prevMoreIndented && !moreIndented && line !== '' ? '\n' : '') + foldLine(line, width);
+      var prefix = match[1], line = match[2];
+      moreIndented = line[0] === " ";
+      result += prefix + (!prevMoreIndented && !moreIndented && line !== "" ? "\n" : "") + foldLine(line, width);
       prevMoreIndented = moreIndented;
     }
     return result;
   }
-
-  // Greedy line breaking.
-  // Picks the longest line under the limit each time,
-  // otherwise settles for the shortest line over the limit.
-  // NB. More-indented lines *cannot* be folded, as that would add an extra \n.
   function foldLine(line, width) {
-    if (line === '' || line[0] === ' ') return line;
-
-    // Since a more-indented line adds a \n, breaks can't be followed by a space.
-    var breakRe = / [^ ]/g; // note: the match index will always be <= length-2.
+    if (line === "" || line[0] === " ")
+      return line;
+    var breakRe = / [^ ]/g;
     var match;
-    // start is an inclusive index. end, curr, and next are exclusive.
-    var start = 0,
-      end,
-      curr = 0,
-      next = 0;
-    var result = '';
-
-    // Invariants: 0 <= start <= length-1.
-    //   0 <= curr <= next <= max(0, length-2). curr - start <= width.
-    // Inside the loop:
-    //   A match implies length >= 2, so curr and next are <= length-2.
+    var start2 = 0, end, curr = 0, next = 0;
+    var result = "";
     while (match = breakRe.exec(line)) {
       next = match.index;
-      // maintain invariant: curr - start <= width
-      if (next - start > width) {
-        end = curr > start ? curr : next; // derive end <= length-2
-        result += '\n' + line.slice(start, end);
-        // skip the space that was output as \n
-        start = end + 1; // derive start <= length-1
+      if (next - start2 > width) {
+        end = curr > start2 ? curr : next;
+        result += "\n" + line.slice(start2, end);
+        start2 = end + 1;
       }
       curr = next;
     }
-
-    // By the invariants, start <= length-1, so there is something left over.
-    // It is either the whole string or a part starting from non-whitespace.
-    result += '\n';
-    // Insert a break if the remainder is too long and there is a break available.
-    if (line.length - start > width && curr > start) {
-      result += line.slice(start, curr) + '\n' + line.slice(curr + 1);
+    result += "\n";
+    if (line.length - start2 > width && curr > start2) {
+      result += line.slice(start2, curr) + "\n" + line.slice(curr + 1);
     } else {
-      result += line.slice(start);
+      result += line.slice(start2);
     }
-    return result.slice(1); // drop extra \n joiner
+    return result.slice(1);
   }
-
-  // Escapes a double-quoted string.
   function escapeString(string) {
-    var result = '';
+    var result = "";
     var char = 0;
     var escapeSeq;
-    for (var i = 0; i < string.length; char >= 0x10000 ? i += 2 : i++) {
+    for (var i = 0; i < string.length; char >= 65536 ? i += 2 : i++) {
       char = codePointAt(string, i);
       escapeSeq = ESCAPE_SEQUENCES[char];
       if (!escapeSeq && isPrintable(char)) {
         result += string[i];
-        if (char >= 0x10000) result += string[i + 1];
+        if (char >= 65536)
+          result += string[i + 1];
       } else {
         result += escapeSeq || encodeHex(char);
       }
@@ -8438,113 +8110,83 @@
     return result;
   }
   function writeFlowSequence(state, level, object) {
-    var _result = '',
-      _tag = state.tag,
-      index,
-      length,
-      value;
+    var _result = "", _tag = state.tag, index, length, value;
     for (index = 0, length = object.length; index < length; index += 1) {
       value = object[index];
       if (state.replacer) {
         value = state.replacer.call(object, String(index), value);
       }
-
-      // Write only valid elements, put null instead of invalid elements.
-      if (writeNode(state, level, value, false, false) || typeof value === 'undefined' && writeNode(state, level, null, false, false)) {
-        if (_result !== '') _result += ',' + (!state.condenseFlow ? ' ' : '');
+      if (writeNode(state, level, value, false, false) || typeof value === "undefined" && writeNode(state, level, null, false, false)) {
+        if (_result !== "")
+          _result += "," + (!state.condenseFlow ? " " : "");
         _result += state.dump;
       }
     }
     state.tag = _tag;
-    state.dump = '[' + _result + ']';
+    state.dump = "[" + _result + "]";
   }
   function writeBlockSequence(state, level, object, compact) {
-    var _result = '',
-      _tag = state.tag,
-      index,
-      length,
-      value;
+    var _result = "", _tag = state.tag, index, length, value;
     for (index = 0, length = object.length; index < length; index += 1) {
       value = object[index];
       if (state.replacer) {
         value = state.replacer.call(object, String(index), value);
       }
-
-      // Write only valid elements, put null instead of invalid elements.
-      if (writeNode(state, level + 1, value, true, true, false, true) || typeof value === 'undefined' && writeNode(state, level + 1, null, true, true, false, true)) {
-        if (!compact || _result !== '') {
+      if (writeNode(state, level + 1, value, true, true, false, true) || typeof value === "undefined" && writeNode(state, level + 1, null, true, true, false, true)) {
+        if (!compact || _result !== "") {
           _result += generateNextLine(state, level);
         }
         if (state.dump && CHAR_LINE_FEED === state.dump.charCodeAt(0)) {
-          _result += '-';
+          _result += "-";
         } else {
-          _result += '- ';
+          _result += "- ";
         }
         _result += state.dump;
       }
     }
     state.tag = _tag;
-    state.dump = _result || '[]'; // Empty sequence if no valid values.
+    state.dump = _result || "[]";
   }
   function writeFlowMapping(state, level, object) {
-    var _result = '',
-      _tag = state.tag,
-      objectKeyList = Object.keys(object),
-      index,
-      length,
-      objectKey,
-      objectValue,
-      pairBuffer;
+    var _result = "", _tag = state.tag, objectKeyList = Object.keys(object), index, length, objectKey, objectValue, pairBuffer;
     for (index = 0, length = objectKeyList.length; index < length; index += 1) {
-      pairBuffer = '';
-      if (_result !== '') pairBuffer += ', ';
-      if (state.condenseFlow) pairBuffer += '"';
+      pairBuffer = "";
+      if (_result !== "")
+        pairBuffer += ", ";
+      if (state.condenseFlow)
+        pairBuffer += '"';
       objectKey = objectKeyList[index];
       objectValue = object[objectKey];
       if (state.replacer) {
         objectValue = state.replacer.call(object, objectKey, objectValue);
       }
       if (!writeNode(state, level, objectKey, false, false)) {
-        continue; // Skip this pair because of invalid key;
+        continue;
       }
-      if (state.dump.length > 1024) pairBuffer += '? ';
-      pairBuffer += state.dump + (state.condenseFlow ? '"' : '') + ':' + (state.condenseFlow ? '' : ' ');
+      if (state.dump.length > 1024)
+        pairBuffer += "? ";
+      pairBuffer += state.dump + (state.condenseFlow ? '"' : "") + ":" + (state.condenseFlow ? "" : " ");
       if (!writeNode(state, level, objectValue, false, false)) {
-        continue; // Skip this pair because of invalid value.
+        continue;
       }
       pairBuffer += state.dump;
-
-      // Both key and value are valid.
       _result += pairBuffer;
     }
     state.tag = _tag;
-    state.dump = '{' + _result + '}';
+    state.dump = "{" + _result + "}";
   }
   function writeBlockMapping(state, level, object, compact) {
-    var _result = '',
-      _tag = state.tag,
-      objectKeyList = Object.keys(object),
-      index,
-      length,
-      objectKey,
-      objectValue,
-      explicitPair,
-      pairBuffer;
-
-    // Allow sorting keys so that the output file is deterministic
+    var _result = "", _tag = state.tag, objectKeyList = Object.keys(object), index, length, objectKey, objectValue, explicitPair, pairBuffer;
     if (state.sortKeys === true) {
-      // Default sorting
       objectKeyList.sort();
-    } else if (typeof state.sortKeys === 'function') {
-      // Custom sort function
+    } else if (typeof state.sortKeys === "function") {
       objectKeyList.sort(state.sortKeys);
     } else if (state.sortKeys) {
-      // Something is wrong
-      throw new exception('sortKeys must be a boolean or a function');
+      throw new exception("sortKeys must be a boolean or a function");
     }
     for (index = 0, length = objectKeyList.length; index < length; index += 1) {
-      pairBuffer = '';
-      if (!compact || _result !== '') {
+      pairBuffer = "";
+      if (!compact || _result !== "") {
         pairBuffer += generateNextLine(state, level);
       }
       objectKey = objectKeyList[index];
@@ -8553,14 +8195,14 @@
         objectValue = state.replacer.call(object, objectKey, objectValue);
       }
       if (!writeNode(state, level + 1, objectKey, true, true, true)) {
-        continue; // Skip this pair because of invalid key.
+        continue;
       }
-      explicitPair = state.tag !== null && state.tag !== '?' || state.dump && state.dump.length > 1024;
+      explicitPair = state.tag !== null && state.tag !== "?" || state.dump && state.dump.length > 1024;
       if (explicitPair) {
         if (state.dump && CHAR_LINE_FEED === state.dump.charCodeAt(0)) {
-          pairBuffer += '?';
+          pairBuffer += "?";
         } else {
-          pairBuffer += '? ';
+          pairBuffer += "? ";
         }
       }
       pairBuffer += state.dump;
@@ -8568,44 +8210,42 @@
         pairBuffer += generateNextLine(state, level);
       }
       if (!writeNode(state, level + 1, objectValue, true, explicitPair)) {
-        continue; // Skip this pair because of invalid value.
+        continue;
       }
       if (state.dump && CHAR_LINE_FEED === state.dump.charCodeAt(0)) {
-        pairBuffer += ':';
+        pairBuffer += ":";
       } else {
-        pairBuffer += ': ';
+        pairBuffer += ": ";
       }
       pairBuffer += state.dump;
-
-      // Both key and value are valid.
       _result += pairBuffer;
     }
     state.tag = _tag;
-    state.dump = _result || '{}'; // Empty mapping if no valid pairs.
+    state.dump = _result || "{}";
   }
   function detectType(state, object, explicit) {
-    var _result, typeList, index, length, type, style;
+    var _result, typeList, index, length, type2, style;
     typeList = explicit ? state.explicitTypes : state.implicitTypes;
     for (index = 0, length = typeList.length; index < length; index += 1) {
-      type = typeList[index];
-      if ((type.instanceOf || type.predicate) && (!type.instanceOf || typeof object === 'object' && object instanceof type.instanceOf) && (!type.predicate || type.predicate(object))) {
+      type2 = typeList[index];
+      if ((type2.instanceOf || type2.predicate) && (!type2.instanceOf || typeof object === "object" && object instanceof type2.instanceOf) && (!type2.predicate || type2.predicate(object))) {
         if (explicit) {
-          if (type.multi && type.representName) {
-            state.tag = type.representName(object);
+          if (type2.multi && type2.representName) {
+            state.tag = type2.representName(object);
           } else {
-            state.tag = type.tag;
+            state.tag = type2.tag;
           }
         } else {
-          state.tag = '?';
+          state.tag = "?";
         }
-        if (type.represent) {
-          style = state.styleMap[type.tag] || type.defaultStyle;
-          if (_toString.call(type.represent) === '[object Function]') {
-            _result = type.represent(object, style);
-          } else if (_hasOwnProperty.call(type.represent, style)) {
-            _result = type.represent[style](object, style);
+        if (type2.represent) {
+          style = state.styleMap[type2.tag] || type2.defaultStyle;
+          if (_toString.call(type2.represent) === "[object Function]") {
+            _result = type2.represent(object, style);
+          } else if (_hasOwnProperty.call(type2.represent, style)) {
+            _result = type2.represent[style](object, style);
           } else {
-            throw new exception('!<' + type.tag + '> tag resolver accepts not "' + style + '" style');
+            throw new exception("!<" + type2.tag + '> tag resolver accepts not "' + style + '" style');
           }
           state.dump = _result;
         }
@@ -8614,51 +8254,45 @@
     }
     return false;
   }
-
-  // Serializes `object` and writes it to global `result`.
-  // Returns true on success, or false on invalid object.
-  //
   function writeNode(state, level, object, block, compact, iskey, isblockseq) {
     state.tag = null;
     state.dump = object;
     if (!detectType(state, object, false)) {
       detectType(state, object, true);
     }
-    var type = _toString.call(state.dump);
+    var type2 = _toString.call(state.dump);
     var inblock = block;
     var tagStr;
     if (block) {
       block = state.flowLevel < 0 || state.flowLevel > level;
     }
-    var objectOrArray = type === '[object Object]' || type === '[object Array]',
-      duplicateIndex,
-      duplicate;
+    var objectOrArray = type2 === "[object Object]" || type2 === "[object Array]", duplicateIndex, duplicate;
     if (objectOrArray) {
       duplicateIndex = state.duplicates.indexOf(object);
       duplicate = duplicateIndex !== -1;
     }
-    if (state.tag !== null && state.tag !== '?' || duplicate || state.indent !== 2 && level > 0) {
+    if (state.tag !== null && state.tag !== "?" || duplicate || state.indent !== 2 && level > 0) {
       compact = false;
     }
     if (duplicate && state.usedDuplicates[duplicateIndex]) {
-      state.dump = '*ref_' + duplicateIndex;
+      state.dump = "*ref_" + duplicateIndex;
     } else {
       if (objectOrArray && duplicate && !state.usedDuplicates[duplicateIndex]) {
         state.usedDuplicates[duplicateIndex] = true;
       }
-      if (type === '[object Object]') {
+      if (type2 === "[object Object]") {
         if (block && Object.keys(state.dump).length !== 0) {
           writeBlockMapping(state, level, state.dump, compact);
           if (duplicate) {
-            state.dump = '&ref_' + duplicateIndex + state.dump;
+            state.dump = "&ref_" + duplicateIndex + state.dump;
           }
         } else {
           writeFlowMapping(state, level, state.dump);
           if (duplicate) {
-            state.dump = '&ref_' + duplicateIndex + ' ' + state.dump;
+            state.dump = "&ref_" + duplicateIndex + " " + state.dump;
           }
         }
-      } else if (type === '[object Array]') {
+      } else if (type2 === "[object Array]") {
         if (block && state.dump.length !== 0) {
           if (state.noArrayIndent && !isblockseq && level > 0) {
             writeBlockSequence(state, level - 1, state.dump, compact);
@@ -8666,56 +8300,43 @@
             writeBlockSequence(state, level, state.dump, compact);
           }
           if (duplicate) {
-            state.dump = '&ref_' + duplicateIndex + state.dump;
+            state.dump = "&ref_" + duplicateIndex + state.dump;
           }
         } else {
           writeFlowSequence(state, level, state.dump);
           if (duplicate) {
-            state.dump = '&ref_' + duplicateIndex + ' ' + state.dump;
+            state.dump = "&ref_" + duplicateIndex + " " + state.dump;
           }
         }
-      } else if (type === '[object String]') {
-        if (state.tag !== '?') {
+      } else if (type2 === "[object String]") {
+        if (state.tag !== "?") {
           writeScalar(state, state.dump, level, iskey, inblock);
         }
-      } else if (type === '[object Undefined]') {
+      } else if (type2 === "[object Undefined]") {
         return false;
       } else {
-        if (state.skipInvalid) return false;
-        throw new exception('unacceptable kind of an object to dump ' + type);
+        if (state.skipInvalid)
+          return false;
+        throw new exception("unacceptable kind of an object to dump " + type2);
       }
-      if (state.tag !== null && state.tag !== '?') {
-        // Need to encode all characters except those allowed by the spec:
-        //
-        // [35] ns-dec-digit    ::=  [#x30-#x39] /* 0-9 */
-        // [36] ns-hex-digit    ::=  ns-dec-digit
-        //                         | [#x41-#x46] /* A-F */ | [#x61-#x66] /* a-f */
-        // [37] ns-ascii-letter ::=  [#x41-#x5A] /* A-Z */ | [#x61-#x7A] /* a-z */
-        // [38] ns-word-char    ::=  ns-dec-digit | ns-ascii-letter | “-”
-        // [39] ns-uri-char     ::=  “%” ns-hex-digit ns-hex-digit | ns-word-char | “#”
-        //                         | “;” | “/” | “?” | “:” | “@” | “&” | “=” | “+” | “$” | “,”
-        //                         | “_” | “.” | “!” | “~” | “*” | “'” | “(” | “)” | “[” | “]”
-        //
-        // Also need to encode '!' because it has special meaning (end of tag prefix).
-        //
-        tagStr = encodeURI(state.tag[0] === '!' ? state.tag.slice(1) : state.tag).replace(/!/g, '%21');
-        if (state.tag[0] === '!') {
-          tagStr = '!' + tagStr;
-        } else if (tagStr.slice(0, 18) === 'tag:yaml.org,2002:') {
-          tagStr = '!!' + tagStr.slice(18);
+      if (state.tag !== null && state.tag !== "?") {
+        tagStr = encodeURI(
+          state.tag[0] === "!" ? state.tag.slice(1) : state.tag
+        ).replace(/!/g, "%21");
+        if (state.tag[0] === "!") {
+          tagStr = "!" + tagStr;
+        } else if (tagStr.slice(0, 18) === "tag:yaml.org,2002:") {
+          tagStr = "!!" + tagStr.slice(18);
         } else {
-          tagStr = '!<' + tagStr + '>';
+          tagStr = "!<" + tagStr + ">";
         }
-        state.dump = tagStr + ' ' + state.dump;
+        state.dump = tagStr + " " + state.dump;
       }
     }
     return true;
   }
   function getDuplicateReferences(object, state) {
-    var objects = [],
-      duplicatesIndexes = [],
-      index,
-      length;
+    var objects = [], duplicatesIndexes = [], index, length;
     inspectNode(object, objects, duplicatesIndexes);
     for (index = 0, length = duplicatesIndexes.length; index < length; index += 1) {
       state.duplicates.push(objects[duplicatesIndexes[index]]);
@@ -8724,7 +8345,7 @@
   }
   function inspectNode(object, objects, duplicatesIndexes) {
     var objectKeyList, index, length;
-    if (object !== null && typeof object === 'object') {
+    if (object !== null && typeof object === "object") {
       index = objects.indexOf(object);
       if (index !== -1) {
         if (duplicatesIndexes.indexOf(index) === -1) {
@@ -8748,35 +8369,42 @@
   function dump$1(input, options) {
     options = options || {};
     var state = new State(options);
-    if (!state.noRefs) getDuplicateReferences(input, state);
+    if (!state.noRefs)
+      getDuplicateReferences(input, state);
     var value = input;
     if (state.replacer) {
-      value = state.replacer.call({
-        '': value
-      }, '', value);
+      value = state.replacer.call({ "": value }, "", value);
     }
-    if (writeNode(state, 0, value, true, true)) return state.dump + '\n';
-    return '';
+    if (writeNode(state, 0, value, true, true))
+      return state.dump + "\n";
+    return "";
   }
   var dump_1 = dump$1;
   var dumper = {
     dump: dump_1
   };
+  function renamed(from, to) {
+    return function() {
+      throw new Error("Function yaml." + from + " is removed in js-yaml 4. Use yaml." + to + " instead, which is now safe by default.");
+    };
+  }
   var load = loader.load;
+  var loadAll = loader.loadAll;
   var dump = dumper.dump;
-  var __defProp$7 = Object.defineProperty;
-  var __name$7 = (target, value) => __defProp$7(target, "name", {
-    value,
-    configurable: true
-  });
-  var __require = /* @__PURE__ */(x => typeof require !== "undefined" ? require : typeof Proxy !== "undefined" ? new Proxy(x, {
-    get: (a, b) => (typeof require !== "undefined" ? require : a)[b]
-  }) : x)(function (x) {
-    if (typeof require !== "undefined") return require.apply(this, arguments);
+  var safeLoad = renamed("safeLoad", "load");
+  var safeLoadAll = renamed("safeLoadAll", "loadAll");
+  var safeDump = renamed("safeDump", "dump");
+
+  // ../cordis/packages/loader/lib/shared.js
+  var __defProp3 = Object.defineProperty;
+  var __name2 = (target, value) => __defProp3(target, "name", { value, configurable: true });
+  var __require2 = /* @__PURE__ */ ((x) => typeof __require !== "undefined" ? __require : typeof Proxy !== "undefined" ? new Proxy(x, {
+    get: (a, b) => (typeof __require !== "undefined" ? __require : a)[b]
+  }) : x)(function(x) {
+    if (typeof __require !== "undefined")
+      return __require.apply(this, arguments);
     throw Error('Dynamic require of "' + x + '" is not supported');
   });
-
-  // src/utils.ts
   var evaluate = new Function("context", "expr", `
   try {
     with (context) {
@@ -8786,8 +8414,7 @@
 `);
   function interpolate(template, context, pattern = /\{\{([\s\S]+?)\}\}/g) {
     let capture;
-    let result = "",
-      lastIndex = 0;
+    let result = "", lastIndex = 0;
     while (capture = pattern.exec(template)) {
       if (capture[0] === template) {
         return evaluate(context, capture[1]);
@@ -8798,9 +8425,7 @@
     }
     return result + template.slice(lastIndex);
   }
-  __name$7(interpolate, "interpolate");
-
-  // src/shared.ts
+  __name2(interpolate, "interpolate");
   var writable = {
     ".json": "application/json",
     ".yaml": "application/yaml",
@@ -8808,60 +8433,56 @@
   };
   var supported = new Set(Object.keys(writable));
   function swapAssign(target, source) {
-    const result = {
-      ...target
-    };
+    const result = { ...target };
     for (const key in result) {
       delete target[key];
     }
     Object.assign(target, source);
     return result;
   }
-  __name$7(swapAssign, "swapAssign");
+  __name2(swapAssign, "swapAssign");
   function randomID() {
     return Math.random().toString(36).slice(2, 8);
   }
-  __name$7(randomID, "randomID");
-  var Entry = (_Class17 = class Entry {
-    constructor(loader, parent, options) {
-      _defineProperty(this, "fork", null);
-      _defineProperty(this, "isUpdate", false);
-      this.loader = loader;
+  __name2(randomID, "randomID");
+  var _a9;
+  var Entry = (_a9 = class {
+    constructor(loader2, parent, options) {
+      __publicField(this, "fork", null);
+      __publicField(this, "isUpdate", false);
+      this.loader = loader2;
       this.parent = parent;
       this.options = options;
     }
     amend(ctx) {
-      swapAssign(ctx[Context$1.intercept], this.options.intercept);
-      const neoMap = Object.create(Object.getPrototypeOf(ctx[Context$1.isolate]));
+      var _a25, _b5;
+      swapAssign(ctx[Context2.intercept], this.options.intercept);
+      const neoMap = Object.create(Object.getPrototypeOf(ctx[Context2.isolate]));
       for (const [key, label] of Object.entries(this.options.isolate ?? {})) {
         if (typeof label === "string") {
-          neoMap[key] = (this.loader.realms[label] ??= /* @__PURE__ */Object.create(null))[key] ??= Symbol(key);
+          neoMap[key] = (_b5 = (_a25 = this.loader.realms)[label] ?? (_a25[label] = /* @__PURE__ */ Object.create(null)))[key] ?? (_b5[key] = Symbol(key));
         } else if (label) {
           neoMap[key] = Symbol(key);
         }
       }
-      for (const key in {
-        ...ctx[Context$1.isolate],
-        ...neoMap
-      }) {
-        if (neoMap[key] === ctx[Context$1.isolate][key]) continue;
-        const self = /* @__PURE__ */Object.create(null);
-        self[Context$1.filter] = ctx2 => {
-          return ctx[Context$1.isolate][key] === ctx2[Context$1.isolate][key];
+      for (const key in { ...ctx[Context2.isolate], ...neoMap }) {
+        if (neoMap[key] === ctx[Context2.isolate][key])
+          continue;
+        const self2 = /* @__PURE__ */ Object.create(null);
+        self2[Context2.filter] = (ctx2) => {
+          return ctx[Context2.isolate][key] === ctx2[Context2.isolate][key];
         };
-        ctx.emit(self, "internal/before-service", key);
+        ctx.emit(self2, "internal/before-service", key);
       }
-      const oldMap = swapAssign(ctx[Context$1.isolate], neoMap);
-      for (const key in {
-        ...oldMap,
-        ...ctx[Context$1.isolate]
-      }) {
-        if (oldMap[key] === ctx[Context$1.isolate][key]) continue;
-        const self = /* @__PURE__ */Object.create(null);
-        self[Context$1.filter] = ctx2 => {
-          return ctx[Context$1.isolate][key] === ctx2[Context$1.isolate][key];
+      const oldMap = swapAssign(ctx[Context2.isolate], neoMap);
+      for (const key in { ...oldMap, ...ctx[Context2.isolate] }) {
+        if (oldMap[key] === ctx[Context2.isolate][key])
+          continue;
+        const self2 = /* @__PURE__ */ Object.create(null);
+        self2[Context2.filter] = (ctx2) => {
+          return ctx[Context2.isolate][key] === ctx2[Context2.isolate][key];
         };
-        ctx.emit(self, "internal/service", key);
+        ctx.emit(self2, "internal/service", key);
       }
     }
     // TODO: handle parent change
@@ -8881,10 +8502,11 @@
       } else {
         this.parent.emit("loader/entry", "apply", this);
         const plugin = await this.loader.resolve(this.options.name);
-        if (!plugin) return;
+        if (!plugin)
+          return;
         const ctx = this.parent.extend({
-          [Context$1.intercept]: Object.create(this.parent[Context$1.intercept]),
-          [Context$1.isolate]: Object.create(this.parent[Context$1.isolate])
+          [Context2.intercept]: Object.create(this.parent[Context2.intercept]),
+          [Context2.isolate]: Object.create(this.parent[Context2.isolate])
         });
         this.amend(ctx);
         this.fork = ctx.plugin(plugin, this.loader.interpolate(this.options.config));
@@ -8892,69 +8514,66 @@
       }
     }
     stop() {
-      if (!this.fork) return;
+      if (!this.fork)
+        return;
       this.parent.emit("loader/entry", "unload", this);
       this.fork.dispose();
       this.fork = null;
     }
-  }, __name$7(_Class17, "Entry"), _Class17);
+  }, __name2(_a9, "Entry"), _a9);
   function mapEntry(pluginsConf) {
-    if (!pluginsConf) return [];
-    return Object.entries(pluginsConf).map(([name, config]) => {
-      let [realName, id] = name.split(":", 2);
+    if (!pluginsConf)
+      return [];
+    return Object.entries(pluginsConf).map(([name2, config]) => {
+      let [realName, id] = name2.split(":", 2);
       let disabled = false;
       if (realName.startsWith("~")) {
         realName = realName.slice(1);
         disabled = true;
       }
-      return {
-        id: id ?? randomID(),
-        name: realName,
-        config,
-        disabled
-      };
+      return { id: id ?? randomID(), name: realName, config, disabled };
     });
   }
-  __name$7(mapEntry, "mapEntry");
-  var Loader$1 = (_Loader = class Loader extends Service {
+  __name2(mapEntry, "mapEntry");
+  var _a10;
+  var Loader = (_a10 = class extends Service2 {
     constructor(app, options) {
       super(app, "loader", true);
       // process
-      _defineProperty(this, "baseDir", "./");
+      __publicField(this, "baseDir", "./");
       // process.cwd()
-      _defineProperty(this, "envData", {
-        startTime: Date.now()
-      });
+      __publicField(this, "envData", { startTime: Date.now() });
       // public envData = process.env.CORDIS_SHARED
       //   ? JSON.parse(process.env.CORDIS_SHARED)
       //   : { startTime: Date.now() }
-      _defineProperty(this, "params", {
+      __publicField(this, "params", {
         env: {}
         // process.env,
       });
-      _defineProperty(this, "entryFork", void 0);
-      _defineProperty(this, "suspend", false);
-      _defineProperty(this, "writable", false);
-      _defineProperty(this, "mimeType", void 0);
-      _defineProperty(this, "filename", void 0);
-      _defineProperty(this, "entries", /* @__PURE__ */Object.create(null));
-      _defineProperty(this, "realms", /* @__PURE__ */Object.create(null));
-      _defineProperty(this, "tasks", /* @__PURE__ */new Set());
+      __publicField(this, "entryFork");
+      __publicField(this, "suspend", false);
+      __publicField(this, "writable", false);
+      __publicField(this, "mimeType");
+      __publicField(this, "filename");
+      __publicField(this, "entries", /* @__PURE__ */ Object.create(null));
+      __publicField(this, "realms", /* @__PURE__ */ Object.create(null));
+      __publicField(this, "tasks", /* @__PURE__ */ new Set());
       this.app = app;
       this.options = options;
-      if (options.baseDir) this.baseDir = options.baseDir;
-      this.realms.root = app.root[Context$1.isolate];
+      if (options.baseDir)
+        this.baseDir = options.baseDir;
+      this.realms.root = app.root[Context2.isolate];
     }
-    async import(name) {
+    async import(name2) {
       try {
-        return __require(name);
+        return __require2(name2);
       } catch (err) {
         this.app.emit("internal/error", err);
       }
     }
     async init(filename) {
       if (filename) {
-        filename = `${trimSlash(this.baseDir.replaceAll("\\", "/"))}/${filename}`;
+        filename = `${(0, import_cosmokit7.trimSlash)(this.baseDir.replaceAll("\\", "/"))}/${filename}`;
         if (!file.checkIsDir(filename)) {
           this.filename = filename;
           this.baseDir = filename.slice(0, filename.lastIndexOf("/"));
@@ -8973,7 +8592,8 @@
       if (this.mimeType && !this.options.immutable) {
         try {
           this.writable = true;
-        } catch {}
+        } catch {
+        }
       }
       this.app.provide("baseDir", this.baseDir, true);
     }
@@ -8983,7 +8603,7 @@
         const filename = this.options.name + extname;
         if (files.includes(filename)) {
           this.mimeType = writable[extname];
-          this.filename = `${trimSlash(this.baseDir.replaceAll("\\", "/"))}/${filename}`;
+          this.filename = `${(0, import_cosmokit7.trimSlash)(this.baseDir.replaceAll("\\", "/"))}/${filename}`;
           return;
         }
       }
@@ -9007,7 +8627,8 @@
       } else if (this.mimeType === "application/json") {
         file.writeTo(this.filename, JSON.stringify(this.config, null, 2));
       }
-      if (!silent) this.app.emit("config");
+      if (!silent)
+        this.app.emit("config");
     }
     async reload() {
       const config = await this.readConfig();
@@ -9020,42 +8641,47 @@
       } else if (!source || typeof source !== "object") {
         return source;
       } else if (Array.isArray(source)) {
-        return source.map(item => this.interpolate(item));
+        return source.map((item) => this.interpolate(item));
       } else {
-        return mapValues(source, item => this.interpolate(item));
+        return (0, import_cosmokit7.valueMap)(source, (item) => this.interpolate(item));
       }
     }
-    async resolve(name) {
-      const task = this.import(name);
+    async resolve(name2) {
+      const task = this.import(name2);
       this.tasks.add(task);
       task.finally(() => this.tasks.delete(task));
       return this.unwrapExports(await task);
     }
     isTruthyLike(expr) {
-      if (isNullable(expr)) return true;
+      if ((0, import_cosmokit7.isNullable)(expr))
+        return true;
       return !!this.interpolate(`\${{ ${expr} }}`);
     }
     async update(parent, options) {
+      var _a25, _b5;
       if (!options.id) {
         do {
           options.id = randomID();
         } while (this.entries[options.id]);
       }
-      const entry = this.entries[options.id] ??= new Entry(this, parent, options);
+      const entry = (_a25 = this.entries)[_b5 = options.id] ?? (_a25[_b5] = new Entry(this, parent, options));
       entry.update(parent, options);
     }
     remove(parent, options) {
       const entry = this.entries[options.id];
-      if (!entry) return;
+      if (!entry)
+        return;
       entry.stop();
       delete this.entries[options.id];
     }
     paths(scope) {
-      if (scope === scope.parent.scope) return [];
+      if (scope === scope.parent.scope)
+        return [];
       if (scope.runtime === scope) {
-        return [].concat(...scope.runtime.children.map(child => this.paths(child)));
+        return [].concat(...scope.runtime.children.map((child) => this.paths(child)));
       }
-      if (scope.entry) return [scope.entry.options.id];
+      if (scope.entry)
+        return [scope.entry.options.id];
       return this.paths(scope.parent.scope);
     }
     async start() {
@@ -9064,24 +8690,27 @@
       this.app.on("dispose", () => {
         this.exit();
       });
-      this.app.on("internal/update", fork => {
+      this.app.on("internal/update", (fork) => {
         const entry = this.entries[fork.entry?.options.id];
-        if (!entry) return;
+        if (!entry)
+          return;
         fork.parent.emit("loader/entry", "reload", entry);
       });
       this.app.on("internal/before-update", (fork, config) => {
-        if (!fork.entry) return;
-        if (fork.entry.isUpdate) return fork.entry.isUpdate = false;
-        const {
-          schema
-        } = fork.runtime;
-        fork.entry.options.config = schema ? schema.simplify(config) : config;
+        if (!fork.entry)
+          return;
+        if (fork.entry.isUpdate)
+          return fork.entry.isUpdate = false;
+        const { schema: schema2 } = fork.runtime;
+        fork.entry.options.config = schema2 ? schema2.simplify(config) : config;
         this.writeConfig();
       });
-      this.app.on("internal/fork", fork => {
-        if (fork.uid || !fork.entry) return;
+      this.app.on("internal/fork", (fork) => {
+        if (fork.uid || !fork.entry)
+          return;
         fork.parent.emit("loader/entry", "unload", fork.entry);
-        if (!this.app.registry.has(fork.runtime.plugin)) return;
+        if (!this.app.registry.has(fork.runtime.plugin))
+          return;
         fork.entry.options.disabled = true;
         this.writeConfig();
       });
@@ -9092,81 +8721,90 @@
     unwrapExports(module) {
       return module?.default || module;
     }
-    exit() {}
-  }, __name$7(_Loader, "Loader"), _Loader);
+    exit() {
+    }
+  }, __name2(_a10, "Loader"), _a10);
   function group(ctx, config) {
     for (const entry of config) {
       ctx.loader.update(ctx, entry);
     }
-    ctx.accept(neo => {
+    ctx.accept((neo) => {
       const old = ctx.scope.config;
-      const oldMap = Object.fromEntries(old.map(entry => [entry.id, entry]));
-      const neoMap = Object.fromEntries(neo.map(entry => [entry.id, entry]));
-      for (const id in {
-        ...oldMap,
-        ...neoMap
-      }) {
+      const oldMap = Object.fromEntries(old.map((entry) => [entry.id, entry]));
+      const neoMap = Object.fromEntries(neo.map((entry) => [entry.id, entry]));
+      for (const id in { ...oldMap, ...neoMap }) {
         if (!neoMap[id]) {
           ctx.loader.remove(ctx, oldMap[id]);
         } else {
           ctx.loader.update(ctx, neoMap[id]);
         }
       }
-    }, {
-      passive: true
-    });
+    }, { passive: true });
     ctx.on("dispose", () => {
       for (const entry of ctx.scope.config) {
         ctx.loader.remove(ctx, entry);
       }
     });
   }
-  __name$7(group, "group");
-  defineProperty(group, "inject", ["loader"]);
-  defineProperty(group, "reusable", true);
-  var __defProp$6 = Object.defineProperty;
-  var __name$6 = (target, value) => __defProp$6(target, "name", {
-    value,
-    configurable: true
-  });
-  var LoggerService = (_Service$provide = Service.provide, _Service$invoke = Service.invoke, (_LoggerService3 = class _LoggerService extends Service {
+  __name2(group, "group");
+  (0, import_cosmokit7.defineProperty)(group, "inject", ["loader"]);
+  (0, import_cosmokit7.defineProperty)(group, "reusable", true);
+
+  // src/loader.ts
+  var import_cosmokit9 = __toESM(require_lib());
+
+  // ../cordis/packages/cordis/lib/index.mjs
+  var import_schemastery = __toESM(require_lib3(), 1);
+
+  // ../cordis/packages/logger/lib/index.mjs
+  var import_levi_reggol = __toESM(require_lib2(), 1);
+  var __defProp4 = Object.defineProperty;
+  var __name3 = (target, value) => __defProp4(target, "name", { value, configurable: true });
+  var _a11, _b2;
+  var LoggerService = (_b2 = class extends Service2 {
     constructor(ctx) {
       super(ctx, "logger", true);
-      ctx.on("internal/info", function (format, ...args) {
+      ctx.on("internal/info", function(format, ...args) {
         this.logger("app").info(format, ...args);
       });
-      ctx.on("internal/error", function (format, ...args) {
+      ctx.on("internal/error", function(format, ...args) {
         this.logger("app").error(format, ...args);
       });
-      ctx.on("internal/warning", function (format, ...args) {
+      ctx.on("internal/warning", function(format, ...args) {
         this.logger("app").warn(format, ...args);
       });
     }
-    [_Service$invoke](name) {
-      return new Logger$1(name, {
-        [Context$1.origin]: this
-      });
+    [(_a11 = Service2.provide, Service2.invoke)](name2) {
+      return new import_levi_reggol.default(name2, { [Context2.origin]: this });
     }
-  }, __name$6(_LoggerService3, "LoggerService"), _defineProperty(_LoggerService3, _Service$provide, "logger"), (() => {
-    for (const type of ["success", "error", "info", "warn", "debug", "extend"]) {
-      _LoggerService3.prototype[type] = function (...args) {
-        const caller = this[Context$1.origin];
-        return this(caller.name)[type](...args);
+  }, __name3(_b2, "LoggerService"), __publicField(_b2, _a11, "logger"), (() => {
+    for (const type2 of [
+      "success",
+      "error",
+      "info",
+      "warn",
+      "debug",
+      "extend"
+    ]) {
+      _b2.prototype[type2] = function(...args) {
+        const caller = this[Context2.origin];
+        return this(caller.name)[type2](...args);
       };
     }
-  })(), _LoggerService3));
-  var __defProp$5 = Object.defineProperty;
-  var __name$5 = (target, value) => __defProp$5(target, "name", {
-    value,
-    configurable: true
-  });
-  var TimerService = _exports.TimerService = (_Class18 = class TimerService extends Service {
+  })(), _b2);
+
+  // ../cordis/packages/timer/lib/index.mjs
+  var import_cosmokit8 = __toESM(require_lib(), 1);
+  var __defProp5 = Object.defineProperty;
+  var __name4 = (target, value) => __defProp5(target, "name", { value, configurable: true });
+  var _a12;
+  var TimerService2 = (_a12 = class extends Service2 {
     constructor(ctx) {
       super(ctx, "timer", true);
       ctx.mixin("timer", ["setTimeout", "setInterval", "sleep", "throttle", "debounce"]);
     }
     setTimeout(callback, delay) {
-      const dispose = this[Context$1.origin].effect(() => {
+      const dispose = this[Context2.origin].effect(() => {
         const timer = setTimeout(() => {
           dispose();
           callback();
@@ -9176,13 +8814,13 @@
       return dispose;
     }
     setInterval(callback, delay) {
-      return this[Context$1.origin].effect(() => {
+      return this[Context2.origin].effect(() => {
         const timer = setInterval(callback, delay);
         return () => clearInterval(timer);
       });
     }
     sleep(delay) {
-      const caller = this[Context$1.origin];
+      const caller = this[Context2.origin];
       return new Promise((resolve, reject) => {
         const dispose1 = this.setTimeout(() => {
           dispose1();
@@ -9197,15 +8835,15 @@
       });
     }
     createWrapper(callback, isDisposed = false) {
-      const caller = this[Context$1.origin];
+      const caller = this[Context2.origin];
       caller.scope.assertActive();
       let timer;
-      const dispose = /* @__PURE__ */__name$5(() => {
+      const dispose = /* @__PURE__ */ __name4(() => {
         isDisposed = true;
-        remove(caller.scope.disposables, dispose);
+        (0, import_cosmokit8.remove)(caller.scope.disposables, dispose);
         clearTimeout(timer);
       }, "dispose");
-      const wrapper = /* @__PURE__ */__name$5((...args) => {
+      const wrapper = /* @__PURE__ */ __name4((...args) => {
         clearTimeout(timer);
         timer = callback(args, () => !isDisposed && caller.scope.isActive);
       }, "wrapper");
@@ -9215,7 +8853,7 @@
     }
     throttle(callback, delay, noTrailing) {
       let lastCall = -Infinity;
-      const execute = /* @__PURE__ */__name$5((...args) => {
+      const execute = /* @__PURE__ */ __name4((...args) => {
         lastCall = Date.now();
         callback(...args);
       }, "execute");
@@ -9231,130 +8869,180 @@
     }
     debounce(callback, delay) {
       return this.createWrapper((args, isActive) => {
-        if (!isActive()) return;
+        if (!isActive())
+          return;
         return setTimeout(callback, delay, ...args);
       });
     }
-  }, __name$5(_Class18, "TimerService"), _Class18);
-  var __defProp$4 = Object.defineProperty;
-  var __name$4 = (target, value) => __defProp$4(target, "name", {
-    value,
-    configurable: true
-  });
-  var Context2 = (_Class19 = class Context2 extends Context$1 {
+  }, __name4(_a12, "TimerService"), _a12);
+
+  // ../cordis/packages/cordis/lib/index.mjs
+  var __defProp6 = Object.defineProperty;
+  var __name5 = (target, value) => __defProp6(target, "name", { value, configurable: true });
+  var _a13;
+  var Context22 = (_a13 = class extends Context2 {
     constructor(config) {
       super(config);
-      _defineProperty(this, "baseDir", void 0);
+      __publicField(this, "baseDir");
       this.baseDir = globalThis.process?.cwd() || "";
       this.provide("logger", void 0, true);
       this.provide("timer", void 0, true);
       this.plugin(LoggerService);
-      this.plugin(TimerService);
+      this.plugin(TimerService2);
     }
-  }, __name$4(_Class19, "Context"), _Class19);
-  var Service2$1 = (_Service$setup = Service.setup, (_Service4 = class Service2 extends Service {
+  }, __name5(_a13, "Context"), _a13);
+  var _a14;
+  var Service22 = (_a14 = class extends Service2 {
     constructor(...args) {
       super(...args);
       /** @deprecated use `this.ctx.logger` instead */
-      _defineProperty(this, "logger", void 0);
+      __publicField(this, "logger");
       this.logger = this.ctx.logger(this.name);
     }
-    [_Service$setup]() {
-      this.ctx = new Context2();
+    [Service2.setup]() {
+      this.ctx = new Context22();
     }
-  }, __name$4(_Service4, "Service"), _Service4));
+  }, __name5(_a14, "Service"), _a14);
+  function src_default() {
+  }
+  __name5(src_default, "default");
 
-  // src/index.ts
-  function src_default() {}
-  __name$4(src_default, "default");
-  const inject = ["loader"];
+  // src/logger.ts
+  var logger_exports = {};
+  __export(logger_exports, {
+    apply: () => apply,
+    inject: () => inject
+  });
+  var inject = ["loader"];
   function apply(ctx, config = {}) {
-    ctx.on("loader/entry", (type, entry) => {
-      ctx.logger("loader").info("%s plugin %c", type, entry.options.name);
+    ctx.on("loader/entry", (type2, entry) => {
+      ctx.logger("loader").info("%s plugin %c", type2, entry.options.name);
     });
     ctx.loader.prolog = [];
-    Logger$1.targets.push({
+    import_levi_reggol.default.targets.push({
       colors: 3,
-      record: record => {
+      record: (record) => {
         ctx.loader.prolog.push(record);
-        ctx.loader.prolog = ctx.loader.prolog.slice(-1000);
+        ctx.loader.prolog = ctx.loader.prolog.slice(-1e3);
       }
     });
-    const {
-      levels
-    } = config;
+    const { levels } = config;
     if (typeof levels === "object") {
-      Logger$1.levels = levels;
+      import_levi_reggol.default.levels = levels;
     } else if (typeof levels === "number") {
-      Logger$1.levels.base = levels;
+      import_levi_reggol.default.levels.base = levels;
     }
-    let {
-      showTime
-    } = config;
-    if (showTime === true) showTime = "yyyy-MM-dd hh:mm:ss";
-    if (showTime) Logger$1.targets[0].showTime = showTime;
-    Logger$1.targets[0].showDiff = config.showDiff;
+    let { showTime } = config;
+    if (showTime === true)
+      showTime = "yyyy-MM-dd hh:mm:ss";
+    if (showTime)
+      import_levi_reggol.default.targets[0].showTime = showTime;
+    import_levi_reggol.default.targets[0].showDiff = config.showDiff;
     function ensureBaseLevel(conf, base) {
       conf.base ?? (conf.base = base);
-      Object.values(config).forEach(value => {
-        if (typeof value !== "object") return;
+      Object.values(config).forEach((value) => {
+        if (typeof value !== "object")
+          return;
         ensureBaseLevel(value, conf.base);
       });
     }
-    ensureBaseLevel(Logger$1.levels, 2);
-    Logger$1.targets[0].timestamp = Date.now();
+    ensureBaseLevel(import_levi_reggol.default.levels, 2);
+    import_levi_reggol.default.targets[0].timestamp = Date.now();
   }
-  var Logger = /*#__PURE__*/Object.freeze({
-    __proto__: null,
-    apply: apply,
-    inject: inject
-  });
-  class Loader extends Loader$1 {
-    async import(name) {
-      if (this.options.importMapping && name in this.options.importMapping) {
-        name = this.options.importMapping[name];
+
+  // src/loader.ts
+  var Loader2 = class extends Loader {
+    async import(name2) {
+      if (this.options.importMapping && name2 in this.options.importMapping) {
+        return this.options.importMapping[name2];
       }
-      const base = trimSlash(this.options.requireBase ?? this.options.baseDir ?? "");
+      const base = (0, import_cosmokit9.trimSlash)(
+        this.options.requireBase ?? this.options.baseDir ?? ""
+      );
       try {
-        return require(`${base}/${name}`);
+        return __require(`${base}/${name2}`);
       } catch (err) {
         this.app.emit("internal/error", err);
       }
-      return undefined;
+      return void 0;
     }
     async reload() {
       const config = await this.readConfig();
       this.entryFork.update(config);
       this.app.emit("config");
     }
-  }
+  };
   async function start(options) {
-    const ctx = new Context2();
-    ctx.plugin(Loader, options);
+    const ctx = new Context22();
+    ctx.plugin(Loader2, options);
     await ctx.loader.init();
-    if (options.logger) ctx.plugin(Logger, options.logger);
+    if (options.logger)
+      ctx.plugin(logger_exports, options.logger);
     await ctx.start();
   }
-  var __defProp$3 = Object.defineProperty;
-  var __name$3 = (target, value) => __defProp$3(target, "name", {
-    value,
-    configurable: true
+
+  // ../satori/packages/satori/lib/index.mjs
+  var lib_exports4 = {};
+  __export(lib_exports4, {
+    Adapter: () => Adapter,
+    Bot: () => Bot,
+    Context: () => Context3,
+    CordisError: () => CordisError,
+    EffectScope: () => EffectScope,
+    Element: () => lib_default,
+    ForkScope: () => ForkScope,
+    Lifecycle: () => Lifecycle,
+    Logger: () => import_levi_reggol.default,
+    MainScope: () => MainScope,
+    MessageEncoder: () => MessageEncoder,
+    Messenger: () => MessageEncoder,
+    Modulator: () => MessageEncoder,
+    Registry: () => Registry,
+    Schema: () => import_schemastery.default,
+    ScopeStatus: () => ScopeStatus,
+    Service: () => Service23,
+    Session: () => Session,
+    TimerService: () => TimerService2,
+    Universal: () => lib_exports2,
+    applyTraceable: () => applyTraceable,
+    createCallable: () => createCallable,
+    createTraceable: () => createTraceable,
+    defineAccessor: () => defineAccessor,
+    h: () => lib_default,
+    isApplicable: () => isApplicable,
+    isBailed: () => isBailed,
+    isConstructor: () => isConstructor,
+    isUnproxyable: () => isUnproxyable,
+    joinPrototype: () => joinPrototype,
+    resolveConfig: () => resolveConfig,
+    segment: () => lib_default,
+    symbols: () => symbols,
+    z: () => import_schemastery.default
   });
 
-  // src/index.ts
-  function Field(name) {
-    return {
-      name
-    };
+  // ../satori/packages/core/lib/index.mjs
+  var import_cosmokit12 = __toESM(require_lib(), 1);
+  var import_cosmokit13 = __toESM(require_lib(), 1);
+
+  // ../satori/packages/protocol/lib/index.mjs
+  var lib_exports2 = {};
+  __export(lib_exports2, {
+    Channel: () => Channel,
+    Methods: () => Methods,
+    Opcode: () => Opcode,
+    Status: () => Status,
+    WebSocket: () => WebSocket
+  });
+  var __defProp7 = Object.defineProperty;
+  var __name6 = (target, value) => __defProp7(target, "name", { value, configurable: true });
+  function Field(name2) {
+    return { name: name2 };
   }
-  __name$3(Field, "Field");
-  function Method(name, fields) {
-    return {
-      name,
-      fields: fields.map(Field)
-    };
+  __name6(Field, "Field");
+  function Method(name2, fields) {
+    return { name: name2, fields: fields.map(Field) };
   }
-  __name$3(Method, "Method");
+  __name6(Method, "Method");
   var Methods = {
     "channel.get": Method("getChannel", ["channel_id", "guild_id"]),
     "channel.list": Method("getChannelList", ["guild_id", "next"]),
@@ -9393,15 +9081,16 @@
     "guild.member.approve": Method("handleGuildMemberRequest", ["message_id", "approve", "comment"])
   };
   var Channel;
-  (Channel2 => {
-    (Type2 => {
+  ((Channel2) => {
+    let Type;
+    ((Type2) => {
       Type2[Type2["TEXT"] = 0] = "TEXT";
       Type2[Type2["DIRECT"] = 1] = "DIRECT";
       Type2[Type2["VOICE"] = 2] = "VOICE";
       Type2[Type2["CATEGORY"] = 3] = "CATEGORY";
-    })(Channel2.Type || (Channel2.Type = {}));
+    })(Type = Channel2.Type || (Channel2.Type = {}));
   })(Channel || (Channel = {}));
-  var Status = /* @__PURE__ */(Status2 => {
+  var Status = /* @__PURE__ */ ((Status2) => {
     Status2[Status2["OFFLINE"] = 0] = "OFFLINE";
     Status2[Status2["ONLINE"] = 1] = "ONLINE";
     Status2[Status2["CONNECT"] = 2] = "CONNECT";
@@ -9409,7 +9098,7 @@
     Status2[Status2["RECONNECT"] = 4] = "RECONNECT";
     return Status2;
   })(Status || {});
-  var Opcode = /* @__PURE__ */(Opcode2 => {
+  var Opcode = /* @__PURE__ */ ((Opcode2) => {
     Opcode2[Opcode2["EVENT"] = 0] = "EVENT";
     Opcode2[Opcode2["PING"] = 1] = "PING";
     Opcode2[Opcode2["PONG"] = 2] = "PONG";
@@ -9417,41 +9106,27 @@
     Opcode2[Opcode2["READY"] = 4] = "READY";
     return Opcode2;
   })(Opcode || {});
-  var WebSocket$1;
-  (WebSocket2 => {
-    WebSocket2.CONNECTING = 0;
-    WebSocket2.OPEN = 1;
-    WebSocket2.CLOSING = 2;
-    WebSocket2.CLOSED = 3;
-  })(WebSocket$1 || (WebSocket$1 = {}));
-  var index = _exports.Universal = /*#__PURE__*/Object.freeze({
-    __proto__: null,
-    get Channel() {
-      return Channel;
-    },
-    Methods: Methods,
-    Opcode: Opcode,
-    Status: Status,
-    get WebSocket() {
-      return WebSocket$1;
-    }
-  });
-  var __defProp$2 = Object.defineProperty;
-  var __getOwnPropNames = Object.getOwnPropertyNames;
-  var __name$2 = (target, value) => __defProp$2(target, "name", {
-    value,
-    configurable: true
-  });
-  var __commonJS = (cb, mod) => function __require() {
-    return mod || (0, cb[__getOwnPropNames(cb)[0]])((mod = {
-      exports: {}
-    }).exports, mod), mod.exports;
+  var WebSocket;
+  ((WebSocket22) => {
+    WebSocket22.CONNECTING = 0;
+    WebSocket22.OPEN = 1;
+    WebSocket22.CLOSING = 2;
+    WebSocket22.CLOSED = 3;
+  })(WebSocket || (WebSocket = {}));
+
+  // ../satori/packages/element/lib/index.mjs
+  var import_cosmokit10 = __toESM(require_lib(), 1);
+  var __defProp8 = Object.defineProperty;
+  var __getOwnPropNames2 = Object.getOwnPropertyNames;
+  var __name7 = (target, value) => __defProp8(target, "name", { value, configurable: true });
+  var __commonJS2 = (cb, mod) => function __require3() {
+    return mod || (0, cb[__getOwnPropNames2(cb)[0]])((mod = { exports: {} }).exports, mod), mod.exports;
   };
-  var require_src = __commonJS({
+  var require_src = __commonJS2({
     "src/index.ts"(exports, module) {
-      var _Class20;
+      var _a25;
       var kElement = Symbol.for("satori.element");
-      var ElementConstructor = (_Class20 = class ElementConstructor {
+      var ElementConstructor = (_a25 = class {
         get data() {
           return this.attrs;
         }
@@ -9464,151 +9139,149 @@
         }
         toAttrString() {
           return Object.entries(this.attrs).map(([key, value]) => {
-            if (isNullable(value)) return "";
-            key = hyphenate(key);
-            if (value === true) return ` ${key}`;
-            if (value === false) return ` no-${key}`;
-            return ` ${key}="${Element.escape("" + value, true)}"`;
+            if ((0, import_cosmokit10.isNullable)(value))
+              return "";
+            key = (0, import_cosmokit10.hyphenate)(key);
+            if (value === true)
+              return ` ${key}`;
+            if (value === false)
+              return ` no-${key}`;
+            return ` ${key}="${Element2.escape("" + value, true)}"`;
           }).join("");
         }
         toString(strip = false) {
           if (this.type === "text" && "content" in this.attrs) {
-            return strip ? this.attrs.content : Element.escape(this.attrs.content);
+            return strip ? this.attrs.content : Element2.escape(this.attrs.content);
           }
-          const inner = this.children.map(child => child.toString(strip)).join("");
-          if (strip) return inner;
+          const inner = this.children.map((child) => child.toString(strip)).join("");
+          if (strip)
+            return inner;
           const attrs = this.toAttrString();
           const tag = this.getTagName();
-          if (!this.children.length) return `<${tag}${attrs}/>`;
+          if (!this.children.length)
+            return `<${tag}${attrs}/>`;
           return `<${tag}${attrs}>${inner}</${tag}>`;
         }
-      }, __name$2(_Class20, "ElementConstructor"), _Class20);
-      defineProperty(ElementConstructor, "name", "Element");
-      defineProperty(ElementConstructor.prototype, kElement, true);
-      function Element(type, ...args) {
+      }, __name7(_a25, "ElementConstructor"), _a25);
+      (0, import_cosmokit10.defineProperty)(ElementConstructor, "name", "Element");
+      (0, import_cosmokit10.defineProperty)(ElementConstructor.prototype, kElement, true);
+      function Element2(type2, ...args) {
         const el = Object.create(ElementConstructor.prototype);
-        const attrs = {},
-          children = [];
-        if (args[0] && typeof args[0] === "object" && !Element.isElement(args[0]) && !Array.isArray(args[0])) {
+        const attrs = {}, children = [];
+        if (args[0] && typeof args[0] === "object" && !Element2.isElement(args[0]) && !Array.isArray(args[0])) {
           const props = args.shift();
           for (const [key, value] of Object.entries(props)) {
-            if (isNullable(value)) continue;
+            if ((0, import_cosmokit10.isNullable)(value))
+              continue;
             if (key === "children") {
-              args.push(...makeArray(value));
+              args.push(...(0, import_cosmokit10.makeArray)(value));
             } else {
-              attrs[camelize(key)] = value;
+              attrs[(0, import_cosmokit10.camelize)(key)] = value;
             }
           }
         }
         for (const child of args) {
-          children.push(...Element.toElementArray(child));
+          children.push(...Element2.toElementArray(child));
         }
-        if (typeof type === "function") {
-          attrs.is = type;
-          type = "component";
+        if (typeof type2 === "function") {
+          attrs.is = type2;
+          type2 = "component";
         }
-        return Object.assign(el, {
-          type,
-          attrs,
-          children
-        });
+        return Object.assign(el, { type: type2, attrs, children });
       }
-      __name$2(Element, "Element");
-      var evaluate = new Function("expr", "context", `
+      __name7(Element2, "Element");
+      var evaluate2 = new Function("expr", "context", `
   try {
     with (context) {
       return eval(expr)
     }
   } catch {}
 `);
-      (Element2 => {
-        Element2.jsx = Element2;
-        Element2.jsxs = Element2;
-        Element2.jsxDEV = Element2;
-        Element2.Fragment = "template";
+      ((Element22) => {
+        Element22.jsx = Element22;
+        Element22.jsxs = Element22;
+        Element22.jsxDEV = Element22;
+        Element22.Fragment = "template";
         function isElement(source) {
           return source && typeof source === "object" && source[kElement];
         }
-        Element2.isElement = isElement;
-        __name$2(isElement, "isElement");
+        Element22.isElement = isElement;
+        __name7(isElement, "isElement");
         function toElement(content) {
           if (typeof content === "string" || typeof content === "number" || typeof content === "boolean") {
             content = "" + content;
-            if (content) return Element2("text", {
-              content
-            });
+            if (content)
+              return Element22("text", { content });
           } else if (isElement(content)) {
             return content;
-          } else if (!isNullable(content)) {
+          } else if (!(0, import_cosmokit10.isNullable)(content)) {
             throw new TypeError(`Invalid content: ${content}`);
           }
         }
-        Element2.toElement = toElement;
-        __name$2(toElement, "toElement");
+        Element22.toElement = toElement;
+        __name7(toElement, "toElement");
         function toElementArray(content) {
           if (Array.isArray(content)) {
-            return content.map(toElement).filter(x => x);
+            return content.map(toElement).filter((x) => x);
           } else {
-            return [toElement(content)].filter(x => x);
+            return [toElement(content)].filter((x) => x);
           }
         }
-        Element2.toElementArray = toElementArray;
-        __name$2(toElementArray, "toElementArray");
+        Element22.toElementArray = toElementArray;
+        __name7(toElementArray, "toElementArray");
         function normalize(source, context) {
           return typeof source === "string" ? parse(source, context) : toElementArray(source);
         }
-        Element2.normalize = normalize;
-        __name$2(normalize, "normalize");
+        Element22.normalize = normalize;
+        __name7(normalize, "normalize");
         function escape(source, inline = false) {
           const result = source.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
           return inline ? result.replace(/"/g, "&quot;") : result;
         }
-        Element2.escape = escape;
-        __name$2(escape, "escape");
+        Element22.escape = escape;
+        __name7(escape, "escape");
         function unescape(source) {
           return source.replace(/&lt;/g, "<").replace(/&gt;/g, ">").replace(/&quot;/g, '"').replace(/&#(\d+);/g, (_, code) => code === "38" ? _ : String.fromCharCode(+code)).replace(/&#x([0-9a-f]+);/gi, (_, code) => code === "26" ? _ : String.fromCharCode(parseInt(code, 16))).replace(/&(amp|#38|#x26);/g, "&");
         }
-        Element2.unescape = unescape;
-        __name$2(unescape, "unescape");
+        Element22.unescape = unescape;
+        __name7(unescape, "unescape");
         function from(source, options = {}) {
           const elements = parse(source);
           if (options.caret) {
-            if (options.type && elements[0]?.type !== options.type) return;
+            if (options.type && elements[0]?.type !== options.type)
+              return;
             return elements[0];
           }
           return select(elements, options.type || "*")[0];
         }
-        Element2.from = from;
-        __name$2(from, "from");
+        Element22.from = from;
+        __name7(from, "from");
         const combRegExp = / *([ >+~]) */g;
         function parseSelector(input) {
-          return input.split(",").map(query => {
+          return input.split(",").map((query) => {
             const selectors = [];
             query = query.trim();
-            let combCap,
-              combinator = " ";
+            let combCap, combinator = " ";
             while (combCap = combRegExp.exec(query)) {
-              selectors.push({
-                type: query.slice(0, combCap.index),
-                combinator
-              });
+              selectors.push({ type: query.slice(0, combCap.index), combinator });
               combinator = combCap[1];
               query = query.slice(combCap.index + combCap[0].length);
             }
-            selectors.push({
-              type: query,
-              combinator
-            });
+            selectors.push({ type: query, combinator });
             return selectors;
           });
         }
-        Element2.parseSelector = parseSelector;
-        __name$2(parseSelector, "parseSelector");
+        Element22.parseSelector = parseSelector;
+        __name7(parseSelector, "parseSelector");
         function select(source, query) {
-          if (!source || !query) return [];
-          if (typeof source === "string") source = parse(source);
-          if (typeof query === "string") query = parseSelector(query);
-          if (!query.length) return [];
+          if (!source || !query)
+            return [];
+          if (typeof source === "string")
+            source = parse(source);
+          if (typeof query === "string")
+            query = parseSelector(query);
+          if (!query.length)
+            return [];
           let adjacent = [];
           const results = [];
           for (const [index, element] of source.entries()) {
@@ -9616,53 +9289,52 @@
             const local = [...query, ...adjacent];
             adjacent = [];
             let matched = false;
-            for (const group of local) {
-              const {
-                type,
-                combinator
-              } = group[0];
-              if (type === element.type || type === "*") {
-                if (group.length === 1) {
+            for (const group2 of local) {
+              const { type: type2, combinator } = group2[0];
+              if (type2 === element.type || type2 === "*") {
+                if (group2.length === 1) {
                   matched = true;
-                } else if ([" ", ">"].includes(group[1].combinator)) {
-                  inner.push(group.slice(1));
-                } else if (group[1].combinator === "+") {
-                  adjacent.push(group.slice(1));
+                } else if ([" ", ">"].includes(group2[1].combinator)) {
+                  inner.push(group2.slice(1));
+                } else if (group2[1].combinator === "+") {
+                  adjacent.push(group2.slice(1));
                 } else {
-                  query.push(group.slice(1));
+                  query.push(group2.slice(1));
                 }
               }
               if (combinator === " ") {
-                inner.push(group);
+                inner.push(group2);
               }
             }
-            if (matched) results.push(source[index]);
+            if (matched)
+              results.push(source[index]);
             results.push(...select(element.children, inner));
           }
           return results;
         }
-        Element2.select = select;
-        __name$2(select, "select");
-        function interpolate(expr, context) {
+        Element22.select = select;
+        __name7(select, "select");
+        function interpolate2(expr, context) {
           expr = expr.trim();
           if (!/^[\w.]+$/.test(expr)) {
-            return evaluate(expr, context) ?? "";
+            return evaluate2(expr, context) ?? "";
           }
           let value = context;
           for (const part of expr.split(".")) {
             value = value[part];
-            if (isNullable(value)) return "";
+            if ((0, import_cosmokit10.isNullable)(value))
+              return "";
           }
           return value ?? "";
         }
-        Element2.interpolate = interpolate;
-        __name$2(interpolate, "interpolate");
+        Element22.interpolate = interpolate2;
+        __name7(interpolate2, "interpolate");
         const tagRegExp1 = /(?<comment><!--[\s\S]*?-->)|(?<tag><(\/?)([^!\s>/]*)([^>]*?)\s*(\/?)>)/;
         const tagRegExp2 = /(?<comment><!--[\s\S]*?-->)|(?<tag><(\/?)([^!\s>/]*)([^>]*?)\s*(\/?)>)|(?<curly>\{(?<derivative>[@:/#][^\s}]*)?[\s\S]*?\})/;
         const attrRegExp1 = /([^\s=]+)(?:="(?<value1>[^"]*)"|='(?<value2>[^']*)')?/g;
         const attrRegExp2 = /([^\s=]+)(?:="(?<value1>[^"]*)"|='(?<value2>[^']*)'|=(?<curly>\{([^}]+)\}))?/g;
         let Position;
-        (Position2 => {
+        ((Position2) => {
           Position2[Position2["OPEN"] = 0] = "OPEN";
           Position2[Position2["CLOSE"] = 1] = "CLOSE";
           Position2[Position2["EMPTY"] = 2] = "EMPTY";
@@ -9671,9 +9343,10 @@
         function parse(source, context) {
           const tokens = [];
           function pushText(content) {
-            if (content) tokens.push(content);
+            if (content)
+              tokens.push(content);
           }
-          __name$2(pushText, "pushText");
+          __name7(pushText, "pushText");
           const tagRegExp = context ? tagRegExp2 : tagRegExp1;
           let tagCap;
           let trimStart = true;
@@ -9682,23 +9355,24 @@
             parseContent(source.slice(0, tagCap.index), trimStart, trimEnd);
             trimStart = trimEnd;
             source = source.slice(tagCap.index + tagCap[0].length);
-            const [_,,, close, type, extra, empty] = tagCap;
-            if (tagCap.groups.comment) continue;
+            const [_, , , close, type2, extra, empty] = tagCap;
+            if (tagCap.groups.comment)
+              continue;
             if (tagCap.groups.curly) {
-              let name = "",
-                position = 2 /* EMPTY */;
+              let name2 = "", position = 2;
               if (tagCap.groups.derivative) {
-                name = tagCap.groups.derivative.slice(1);
+                name2 = tagCap.groups.derivative.slice(1);
                 position = {
-                  "@": 2 /* EMPTY */,
-                  "#": 0 /* OPEN */,
-                  "/": 1 /* CLOSE */,
-                  ":": 3 /* CONTINUE */
+                  "@": 2,
+                  "#": 0,
+                  "/": 1,
+                  ":": 3
+                  /* CONTINUE */
                 }[tagCap.groups.derivative[0]];
               }
               tokens.push({
                 type: "curly",
-                name,
+                name: name2,
                 position,
                 source: tagCap.groups.curly,
                 extra: tagCap.groups.curly.slice(1 + (tagCap.groups.derivative ?? "").length, -1)
@@ -9708,60 +9382,55 @@
             tokens.push({
               type: "angle",
               source: _,
-              name: type || Element2.Fragment,
-              position: close ? 1 /* CLOSE */ : empty ? 2 /* EMPTY */ : 0 /* OPEN */,
+              name: type2 || Element22.Fragment,
+              position: close ? 1 : empty ? 2 : 0,
               extra
             });
           }
           parseContent(source, trimStart, true);
           function parseContent(source2, trimStart2, trimEnd) {
             source2 = unescape(source2);
-            if (trimStart2) source2 = source2.replace(/^\s*\n\s*/, "");
-            if (trimEnd) source2 = source2.replace(/\s*\n\s*$/, "");
+            if (trimStart2)
+              source2 = source2.replace(/^\s*\n\s*/, "");
+            if (trimEnd)
+              source2 = source2.replace(/\s*\n\s*$/, "");
             pushText(source2);
           }
-          __name$2(parseContent, "parseContent");
+          __name7(parseContent, "parseContent");
           return parseTokens(foldTokens(tokens), context);
         }
-        Element2.parse = parse;
-        __name$2(parse, "parse");
+        Element22.parse = parse;
+        __name7(parse, "parse");
         function foldTokens(tokens) {
           const stack = [[{
             type: "angle",
-            name: Element2.Fragment,
-            position: 0 /* OPEN */,
+            name: Element22.Fragment,
+            position: 0,
             source: "",
             extra: "",
-            children: {
-              default: []
-            }
+            children: { default: [] }
           }, "default"]];
           function pushToken(...tokens2) {
             const [token, slot] = stack[0];
             token.children[slot].push(...tokens2);
           }
-          __name$2(pushToken, "pushToken");
+          __name7(pushToken, "pushToken");
           for (const token of tokens) {
             if (typeof token === "string") {
               pushToken(token);
               continue;
             }
-            const {
-              name,
-              position
-            } = token;
-            if (position === 1 /* CLOSE */) {
-              if (stack[0][0].name === name) {
+            const { name: name2, position } = token;
+            if (position === 1) {
+              if (stack[0][0].name === name2) {
                 stack.shift();
               }
-            } else if (position === 3 /* CONTINUE */) {
-              stack[0][0].children[name] = [];
-              stack[0][1] = name;
-            } else if (position === 0 /* OPEN */) {
+            } else if (position === 3) {
+              stack[0][0].children[name2] = [];
+              stack[0][1] = name2;
+            } else if (position === 0) {
               pushToken(token);
-              token.children = {
-                default: []
-              };
+              token.children = { default: [] };
               stack.unshift([token, "default"]);
             } else {
               pushToken(token);
@@ -9769,14 +9438,12 @@
           }
           return stack[stack.length - 1][0].children.default;
         }
-        __name$2(foldTokens, "foldTokens");
+        __name7(foldTokens, "foldTokens");
         function parseTokens(tokens, context) {
           const result = [];
           for (const token of tokens) {
             if (typeof token === "string") {
-              result.push(Element2("text", {
-                content: token
-              }));
+              result.push(Element22("text", { content: token }));
             } else if (token.type === "angle") {
               const attrs = {};
               const attrRegExp = context ? attrRegExp2 : attrRegExp1;
@@ -9784,8 +9451,8 @@
               while (attrCap = attrRegExp.exec(token.extra)) {
                 const [, key, v1, v2 = v1, v3] = attrCap;
                 if (v3) {
-                  attrs[key] = interpolate(v3, context);
-                } else if (!isNullable(v2)) {
+                  attrs[key] = interpolate2(v3, context);
+                } else if (!(0, import_cosmokit10.isNullable)(v2)) {
                   attrs[key] = unescape(v2);
                 } else if (key.startsWith("no-")) {
                   attrs[key.slice(3)] = false;
@@ -9793,78 +9460,64 @@
                   attrs[key] = true;
                 }
               }
-              result.push(Element2(token.name, attrs, token.children && parseTokens(token.children.default, context)));
+              result.push(Element22(token.name, attrs, token.children && parseTokens(token.children.default, context)));
             } else if (!token.name) {
-              result.push(...toElementArray(interpolate(token.extra, context)));
+              result.push(...toElementArray(interpolate2(token.extra, context)));
             } else if (token.name === "if") {
-              if (evaluate(token.extra, context)) {
+              if (evaluate2(token.extra, context)) {
                 result.push(...parseTokens(token.children.default, context));
               } else {
                 result.push(...parseTokens(token.children.else || [], context));
               }
             } else if (token.name === "each") {
               const [expr, ident] = token.extra.split(/\s+as\s+/);
-              const items = interpolate(expr, context);
-              if (!items || !items[Symbol.iterator]) continue;
+              const items = interpolate2(expr, context);
+              if (!items || !items[Symbol.iterator])
+                continue;
               for (const item of items) {
-                result.push(...parseTokens(token.children.default, {
-                  ...context,
-                  [ident]: item
-                }));
+                result.push(...parseTokens(token.children.default, { ...context, [ident]: item }));
               }
             }
           }
           return result;
         }
-        __name$2(parseTokens, "parseTokens");
+        __name7(parseTokens, "parseTokens");
         function visit(element, rules, session) {
-          const {
-            type,
-            attrs,
-            children
-          } = element;
+          const { type: type2, attrs, children } = element;
           if (typeof rules === "function") {
             return rules(element, session);
           } else {
-            let result = rules[typeof type === "string" ? type : ""] ?? rules.default ?? true;
+            let result = rules[typeof type2 === "string" ? type2 : ""] ?? rules.default ?? true;
             if (typeof result === "function") {
               result = result(attrs, children, session);
             }
             return result;
           }
         }
-        __name$2(visit, "visit");
+        __name7(visit, "visit");
         function transform(source, rules, session) {
           const elements = typeof source === "string" ? parse(source) : source;
           const output = [];
-          elements.forEach(element => {
-            const {
-              type,
-              attrs,
-              children
-            } = element;
+          elements.forEach((element) => {
+            const { type: type2, attrs, children } = element;
             const result = visit(element, rules, session);
             if (result === true) {
-              output.push(Element2(type, attrs, transform(children, rules, session)));
+              output.push(Element22(type2, attrs, transform(children, rules, session)));
             } else if (result !== false) {
               output.push(...toElementArray(result));
             }
           });
           return typeof source === "string" ? output.join("") : output;
         }
-        Element2.transform = transform;
-        __name$2(transform, "transform");
+        Element22.transform = transform;
+        __name7(transform, "transform");
         async function transformAsync(source, rules, session) {
           const elements = typeof source === "string" ? parse(source) : source;
-          const children = (await Promise.all(elements.map(async element => {
-            const {
-              type,
-              attrs,
-              children: children2
-            } = element;
+          const children = (await Promise.all(elements.map(async (element) => {
+            const { type: type2, attrs, children: children2 } = element;
             const result = await visit(element, rules, session);
             if (result === true) {
-              return [Element2(type, attrs, await transformAsync(children2, rules, session))];
+              return [Element22(type2, attrs, await transformAsync(children2, rules, session))];
             } else if (result !== false) {
               return toElementArray(result);
             } else {
@@ -9873,13 +9526,13 @@
           }))).flat(1);
           return typeof source === "string" ? children.join("") : children;
         }
-        Element2.transformAsync = transformAsync;
-        __name$2(transformAsync, "transformAsync");
-        function createFactory(type, ...keys) {
+        Element22.transformAsync = transformAsync;
+        __name7(transformAsync, "transformAsync");
+        function createFactory(type2, ...keys) {
           return (...args) => {
-            const element = Element2(type);
+            const element = Element22(type2);
             keys.forEach((key, index) => {
-              if (!isNullable(args[index])) {
+              if (!(0, import_cosmokit10.isNullable)(args[index])) {
                 element.attrs[key] = args[index];
               }
             });
@@ -9889,68 +9542,63 @@
             return element;
           };
         }
-        __name$2(createFactory, "createFactory");
-        Element2.warn = /* @__PURE__ */__name$2(() => {}, "warn");
-        function createAssetFactory(type) {
+        __name7(createFactory, "createFactory");
+        Element22.warn = /* @__PURE__ */ __name7(() => {
+        }, "warn");
+        function createAssetFactory(type2) {
           return (src, ...args) => {
             let prefix = "base64://";
             if (typeof args[0] === "string") {
               prefix = `data:${args.shift()};base64,`;
             }
-            if (is("ArrayBuffer", src)) {
-              src = prefix + arrayBufferToBase64(src);
+            if ((0, import_cosmokit10.is)("ArrayBuffer", src)) {
+              src = prefix + (0, import_cosmokit10.arrayBufferToBase64)(src);
             } else if (ArrayBuffer.isView(src)) {
-              src = prefix + arrayBufferToBase64(src.buffer);
+              src = prefix + (0, import_cosmokit10.arrayBufferToBase64)(src.buffer);
             }
             if (src.startsWith("base64://")) {
-              (0, Element2.warn)(`protocol "base64:" is deprecated and will be removed in the future, please use "data:" instead`);
+              (0, Element22.warn)(`protocol "base64:" is deprecated and will be removed in the future, please use "data:" instead`);
             }
-            return Element2(type, {
-              ...args[0],
-              src
-            });
+            return Element22(type2, { ...args[0], src });
           };
         }
-        __name$2(createAssetFactory, "createAssetFactory");
-        Element2.text = createFactory("text", "content");
-        Element2.at = createFactory("at", "id");
-        Element2.sharp = createFactory("sharp", "id");
-        Element2.quote = createFactory("quote", "id");
-        Element2.image = createAssetFactory("img");
-        Element2.img = createAssetFactory("img");
-        Element2.video = createAssetFactory("video");
-        Element2.audio = createAssetFactory("audio");
-        Element2.file = createAssetFactory("file");
+        __name7(createAssetFactory, "createAssetFactory");
+        Element22.text = createFactory("text", "content");
+        Element22.at = createFactory("at", "id");
+        Element22.sharp = createFactory("sharp", "id");
+        Element22.quote = createFactory("quote", "id");
+        Element22.image = createAssetFactory("img");
+        Element22.img = createAssetFactory("img");
+        Element22.video = createAssetFactory("video");
+        Element22.audio = createAssetFactory("audio");
+        Element22.file = createAssetFactory("file");
         function i18n(path, children) {
-          return Element2("i18n", typeof path === "string" ? {
-            path
-          } : path, children);
+          return Element22("i18n", typeof path === "string" ? { path } : path, children);
         }
-        Element2.i18n = i18n;
-        __name$2(i18n, "i18n");
-      })(Element || (Element = {}));
-      module.exports = Element;
+        Element22.i18n = i18n;
+        __name7(i18n, "i18n");
+      })(Element2 || (Element2 = {}));
+      module.exports = Element2;
     }
   });
-  var h3 = _exports.segment = _exports.h = _exports.Element = require_src();
-  var __defProp$1 = Object.defineProperty;
-  var __name$1 = (target, value) => __defProp$1(target, "name", {
-    value,
-    configurable: true
-  });
+  var lib_default = require_src();
 
-  // src/ws.ts
+  // ../undios/packages/core/lib/index.js
+  var import_cosmokit11 = __toESM(require_lib(), 1);
+  var __defProp9 = Object.defineProperty;
+  var __name8 = (target, value) => __defProp9(target, "name", { value, configurable: true });
   function sleep(ms) {
-    return new Promise(resolve => setTimeout(resolve, ms));
+    return new Promise((resolve) => setTimeout(resolve, ms));
   }
-  __name$1(sleep, "sleep");
-  var WebSocket = (_Class21 = class WebSocket extends EventTarget {
+  __name8(sleep, "sleep");
+  var _a15;
+  var WebSocket2 = (_a15 = class extends EventTarget {
     constructor(url, config) {
       super();
-      _defineProperty(this, "ws", void 0);
-      _defineProperty(this, "_connected", false);
-      _defineProperty(this, "_closed", true);
-      _defineProperty(this, "timeout", void 0);
+      __publicField(this, "ws");
+      __publicField(this, "_connected", false);
+      __publicField(this, "_closed", true);
+      __publicField(this, "timeout");
       this.url = url;
       this.timeout = config?.timeout ?? 3e3;
     }
@@ -9958,19 +9606,20 @@
       return this.url.split("://")[0];
     }
     get readyState() {
-      if (this._closed) return this._connected ? 2 /* CLOSING */ : 3 /* CLOSED */;
-      return this._connected ? 1 /* OPEN */ : 0 /* CONNECTING */;
+      if (this._closed)
+        return this._connected ? 2 : 3;
+      return this._connected ? 1 : 0;
     }
     dispatchEvent(event) {
       return super.dispatchEvent(event);
     }
     // @ts-ignore
-    addEventListener(type, listener) {
-      super.addEventListener(type, listener);
+    addEventListener(type2, listener) {
+      super.addEventListener(type2, listener);
     }
     // @ts-ignore
-    removeEventListener(type, listener) {
-      super.removeEventListener(type, listener);
+    removeEventListener(type2, listener) {
+      super.removeEventListener(type2, listener);
     }
     async connect() {
       if (this.ws) {
@@ -9981,18 +9630,22 @@
       this.ws = new WSClient();
       try {
         await new Promise((resolve, reject) => {
-          const fail = /* @__PURE__ */__name$1(() => reject(new Error("Failed to connect")), "fail");
-          const okPre = this.ws.connectAsync(this.url, ok => {
-            if (ok) resolve(ok);else fail();
+          const fail = /* @__PURE__ */ __name8(() => reject(new Error("Failed to connect")), "fail");
+          const okPre = this.ws.connectAsync(this.url, (ok) => {
+            if (ok)
+              resolve(ok);
+            else
+              fail();
           });
-          if (!okPre) fail();
+          if (!okPre)
+            fail();
         });
       } finally {
         this._closed = true;
       }
       this._connected = true;
       this.dispatchEvent(new Event("open"));
-      this.ws.listen("onTextReceived", data => {
+      this.ws.listen("onTextReceived", (data) => {
         const ev = new Event("message");
         ev.data = data;
         this.dispatchEvent(ev);
@@ -10002,12 +9655,12 @@
         ev.message = `Unexpected binary data received from ${this.url}`;
         this.dispatchEvent(ev);
       });
-      this.ws.listen("onError", msg => {
+      this.ws.listen("onError", (msg) => {
         const ev = new Event("error");
         ev.message = msg;
         this.dispatchEvent(ev);
       });
-      this.ws.listen("onLostConnection", code => {
+      this.ws.listen("onLostConnection", (code) => {
         this.ws = void 0;
         this._closed = true;
         this._connected = false;
@@ -10017,14 +9670,14 @@
         this.dispatchEvent(ev);
       });
       (async () => {
-        for (;;) {
-          if (this._closed) break;
+        for (; ; ) {
+          if (this._closed)
+            break;
           await sleep(1);
         }
-        const {
-          ws
-        } = this;
-        if (!ws) return;
+        const { ws } = this;
+        if (!ws)
+          return;
         this.ws = void 0;
         this._connected = false;
         ws?.shutdown();
@@ -10035,18 +9688,18 @@
       this._closed = true;
     }
     send(data) {
-      if (!this.ws) throw new Error("Connection Closed");
+      if (!this.ws)
+        throw new Error("Connection Closed");
       this.ws.send(data);
     }
-  }, __name$1(_Class21, "WebSocket"), _Class21);
-
-  // src/index.ts
+  }, __name8(_a15, "WebSocket"), _a15);
   var kHTTPError = Symbol.for("undios.error");
-  var HTTPError = (_Class22 = class HTTPError extends Error {
-    constructor(...args) {
-      super(...args);
-      _defineProperty(this, kHTTPError, true);
-      _defineProperty(this, "response", void 0);
+  var _a16, _b3;
+  var HTTPError = (_b3 = class extends Error {
+    constructor() {
+      super(...arguments);
+      __publicField(this, _a16, true);
+      __publicField(this, "response");
     }
     static fromResp(response) {
       const error = new this(`Request failed with status code ${response.status}`);
@@ -10056,59 +9709,59 @@
     static is(error) {
       return !!error?.[kHTTPError];
     }
-  }, __name$1(_Class22, "HTTPError"), _Class22);
-  var HTTP = (_Service2$1$provide = Service2$1.provide, _Service2$1$immediate = Service2$1.immediate, _Service2$1$invoke = Service2$1.invoke, (_HTTP3 = class _HTTP extends Service2$1 {
+  }, _a16 = kHTTPError, __name8(_b3, "HTTPError"), _b3);
+  var _a17, _b4, _c;
+  var HTTP = (_a17 = class extends Service22 {
     constructor(...args) {
       super(args[0], args[1]);
-      _defineProperty(this, "_decoders", /* @__PURE__ */Object.create(null));
-      this.decoder("json", raw => JSON.parse(raw));
-      this.decoder("text", raw => raw);
+      __publicField(this, "_decoders", /* @__PURE__ */ Object.create(null));
+      this.decoder("json", (raw) => JSON.parse(raw));
+      this.decoder("text", (raw) => raw);
     }
-    decoder(type, decoder) {
-      return this[Context2.current].effect(() => {
-        this._decoders[type] = decoder;
-        return () => delete this._decoders[type];
+    decoder(type2, decoder) {
+      return this[Context22.current].effect(() => {
+        this._decoders[type2] = decoder;
+        return () => delete this._decoders[type2];
       });
     }
     extend(config = {}) {
-      return this[Service2$1.extend]({
-        config: _HTTP.mergeConfig(this.config, config)
+      return this[Service22.extend]({
+        config: _a17.mergeConfig(this.config, config)
       });
     }
     resolveConfig(init) {
-      const caller = this[Context2.current];
-      let result = {
-        headers: {},
-        ...this.config
-      };
+      const caller = this[Context22.current];
+      let result = { headers: {}, ...this.config };
       caller.emit("http/config", result);
-      let intercept = caller[Context2.intercept];
+      let intercept = caller[Context22.intercept];
       while (intercept) {
-        result = _HTTP.mergeConfig(result, intercept.http);
+        result = _a17.mergeConfig(result, intercept.http);
         intercept = Object.getPrototypeOf(intercept);
       }
-      result = _HTTP.mergeConfig(result, init);
+      result = _a17.mergeConfig(result, init);
       return result;
     }
     resolveURL(url, config) {
       if (config.baseURL) {
-        url = `${trimSlash(config.baseURL)}/${url}`;
+        url = `${(0, import_cosmokit11.trimSlash)(config.baseURL)}/${url}`;
       }
       if (config.params) {
-        const params = Object.entries(config.params).map(([key, value]) => `${encodeURIComponent(key)}=${encodeURIComponent(value)}`).join("&");
+        const params = Object.entries(config.params).map(
+          ([key, value]) => `${encodeURIComponent(key)}=${encodeURIComponent(value)}`
+        ).join("&");
         url = `${url}${url.includes("?") ? "&" : "?"}${params}`;
       }
       return url;
     }
-    async [_Service2$1$invoke](...args) {
-      const caller = this[Context2.current];
+    async [(_b4 = Service22.provide, _c = Service22.immediate, Service22.invoke)](...args) {
+      const caller = this[Context22.current];
       let method;
       if (typeof args[1] === "string") {
         method = args.shift();
       }
       const config = this.resolveConfig(args[1]);
       const url = this.resolveURL(args[0], config);
-      method ??= config.method ?? "GET";
+      method ?? (method = config.method ?? "GET");
       const controller = new AbortController();
       let timer;
       const dispose = caller.on("dispose", () => {
@@ -10133,9 +9786,9 @@
         }
         caller.emit("http/fetch-init", init.url, init, config);
         const rawResp = await this.fetch(init);
-        const validateStatus = config.validateStatus ?? (status => Math.floor(status / 100) === 2);
+        const validateStatus = config.validateStatus ?? ((status) => Math.floor(status / 100) === 2);
         if (!validateStatus(rawResp.status)) {
-          const error = _HTTP.Error.fromResp(rawResp);
+          const error = _a17.Error.fromResp(rawResp);
           throw error;
         }
         if (config.responseType) {
@@ -10158,43 +9811,40 @@
     fetch(init) {
       switch (init.method) {
         case "get":
-        case "GET":
-          {
-            return new Promise(resolve => {
-              network.httpGet(init.url, init.headers, (status, result) => {
-                resolve({
-                  url: init.url,
-                  status,
-                  data: result
-                });
-              });
+        case "GET": {
+          return new Promise((resolve) => {
+            network.httpGet(init.url, init.headers, (status, result) => {
+              resolve({ url: init.url, status, data: result });
             });
-          }
+          });
+        }
         case "post":
-        case "POST":
-          {
-            return new Promise(resolve => {
-              network.httpPost(init.url, init.headers, init.data, init.headers["Content-Type"] ?? "text/plain", (status, result) => {
-                resolve({
-                  url: init.url,
-                  status,
-                  data: result
-                });
-              });
-            });
-          }
+        case "POST": {
+          return new Promise((resolve) => {
+            network.httpPost(
+              init.url,
+              init.headers,
+              init.data,
+              init.headers["Content-Type"] ?? "text/plain",
+              (status, result) => {
+                resolve({ url: init.url, status, data: result });
+              }
+            );
+          });
+        }
       }
     }
     ws(url, init) {
-      if (init?.headers) this.ctx.logger.warn("headers is not supported in ws");
-      const caller = this[Context2.current];
+      if (init?.headers)
+        this.ctx.logger.warn("headers is not supported in ws");
+      const caller = this[Context22.current];
       const config = this.resolveConfig(init);
       url = this.resolveURL(url, config);
       init = {
         timeout: config.timeout
       };
       caller.emit("http/websocket-init", url, init, config);
-      const socket = new WebSocket(url, init);
+      const socket = new WebSocket2(url, init);
       const dispose = caller.on("dispose", () => {
         socket.close(1001, "context disposed");
       });
@@ -10203,55 +9853,58 @@
       });
       return socket;
     }
-  }, __name$1(_HTTP3, "HTTP"), _defineProperty(_HTTP3, "Error", HTTPError), _defineProperty(_HTTP3, _Service2$1$provide, "http"), _defineProperty(_HTTP3, _Service2$1$immediate, true), (() => {
+  }, __name8(_a17, "HTTP"), __publicField(_a17, "Error", HTTPError), __publicField(_a17, _b4, "http"), __publicField(_a17, _c, true), (() => {
     for (const method of ["get"]) {
-      defineProperty(_HTTP3.prototype, method, async function (url, config) {
-        const response = await this(url, {
-          method,
-          ...config
-        });
-        return response.data;
-      });
+      (0, import_cosmokit11.defineProperty)(
+        _a17.prototype,
+        method,
+        async function(url, config) {
+          const response = await this(url, { method, ...config });
+          return response.data;
+        }
+      );
     }
     for (const method of ["post"]) {
-      defineProperty(_HTTP3.prototype, method, async function (url, data, config) {
-        const response = await this(url, {
-          method,
-          data,
-          ...config
-        });
-        return response.data;
-      });
+      (0, import_cosmokit11.defineProperty)(
+        _a17.prototype,
+        method,
+        async function(url, data, config) {
+          const response = await this(url, { method, data, ...config });
+          return response.data;
+        }
+      );
     }
-  })(), _defineProperty(_HTTP3, "mergeConfig", (target, source) => ({
+  })(), __publicField(_a17, "mergeConfig", (target, source) => ({
     ...target,
     ...source,
     headers: {
       ...target?.headers,
       ...source?.headers
     }
-  })), _HTTP3));
-  var __defProp = Object.defineProperty;
-  var __name = (target, value) => __defProp(target, "name", {
-    value,
-    configurable: true
-  });
-  var Session = _exports.Session = (_Session3 = class _Session {
+  })), _a17);
+
+  // ../satori/packages/core/lib/index.mjs
+  var import_cosmokit14 = __toESM(require_lib(), 1);
+  var import_cosmokit15 = __toESM(require_lib(), 1);
+  var __defProp10 = Object.defineProperty;
+  var __name9 = (target, value) => __defProp10(target, "name", { value, configurable: true });
+  var _a18;
+  var Session = (_a18 = class {
     constructor(bot, event) {
-      _defineProperty(this, "id", void 0);
-      _defineProperty(this, "bot", void 0);
-      _defineProperty(this, "app", void 0);
-      _defineProperty(this, "event", void 0);
-      _defineProperty(this, "locales", []);
-      event.selfId ??= bot.selfId;
-      event.platform ??= bot.platform;
-      event.timestamp ??= Date.now();
+      __publicField(this, "id");
+      __publicField(this, "bot");
+      __publicField(this, "app");
+      __publicField(this, "event");
+      __publicField(this, "locales", []);
+      event.selfId ?? (event.selfId = bot.selfId);
+      event.platform ?? (event.platform = bot.platform);
+      event.timestamp ?? (event.timestamp = Date.now());
       this.event = event;
-      this.id = ++_Session.counter;
-      defineProperty(this, "bot", bot);
-      defineProperty(this, "app", bot.ctx.root);
-      defineProperty(this, Context.current, bot.ctx);
-      return Context.associate(this, "session");
+      this.id = ++_a18.counter;
+      (0, import_cosmokit13.defineProperty)(this, "bot", bot);
+      (0, import_cosmokit13.defineProperty)(this, "app", bot.ctx.root);
+      (0, import_cosmokit13.defineProperty)(this, Context3.current, bot.ctx);
+      return Context3.associate(this, "session");
     }
     /** @deprecated */
     get data() {
@@ -10261,7 +9914,8 @@
       return this.event.channel.type === Channel.Type.DIRECT;
     }
     set isDirect(value) {
-      (this.event.channel ??= {}).type = value ? Channel.Type.DIRECT : Channel.Type.TEXT;
+      var _a25;
+      ((_a25 = this.event).channel ?? (_a25.channel = {})).type = value ? Channel.Type.DIRECT : Channel.Type.TEXT;
     }
     get author() {
       return {
@@ -10291,53 +9945,49 @@
       return this.event.message?.elements;
     }
     set elements(value) {
-      this.event.message ??= {};
+      var _a25;
+      (_a25 = this.event).message ?? (_a25.message = {});
       this.event.message.elements = value;
     }
     get content() {
       return this.event.message?.elements?.join("");
     }
     set content(value) {
-      (this.event.message ??= {}).elements = isNullable(value) ? value : h3.parse(value);
+      var _a25;
+      ((_a25 = this.event).message ?? (_a25.message = {})).elements = (0, import_cosmokit13.isNullable)(value) ? value : lib_default.parse(value);
     }
-    setInternal(type, data) {
-      this.event._type = type;
+    setInternal(type2, data) {
+      this.event._type = type2;
       this.event._data = data;
       const internal = Object.create(this.bot.internal);
-      defineProperty(this, type, Object.assign(internal, data));
+      (0, import_cosmokit13.defineProperty)(this, type2, Object.assign(internal, data));
     }
     async transform(elements) {
-      return await h3.transformAsync(elements, ({
-        type,
-        attrs,
-        children
-      }, session) => {
-        const render = type === "component" ? attrs.is : this.app.get("component:" + type);
+      return await lib_default.transformAsync(elements, ({ type: type2, attrs, children }, session) => {
+        const render = type2 === "component" ? attrs.is : this.app.get("component:" + type2);
         return render?.(attrs, children, session) ?? true;
       }, this);
     }
     toJSON() {
-      return {
-        ...this.event,
-        id: this.id
-      };
+      return { ...this.event, id: this.id };
     }
-  }, __name(_Session3, "Session"), _defineProperty(_Session3, "counter", 0), _Session3);
-  function defineAccessor(prototype, name, keys) {
-    Object.defineProperty(prototype, name, {
+  }, __name9(_a18, "Session"), __publicField(_a18, "counter", 0), _a18);
+  function defineAccessor(prototype, name2, keys) {
+    Object.defineProperty(prototype, name2, {
       get() {
         return keys.reduce((data, key) => data?.[key], this);
       },
       set(value) {
-        if (value === void 0) return;
+        if (value === void 0)
+          return;
         const _keys = keys.slice();
         const last = _keys.pop();
-        const data = _keys.reduce((data2, key) => data2[key] ??= {}, this);
+        const data = _keys.reduce((data2, key) => data2[key] ?? (data2[key] = {}), this);
         data[last] = value;
       }
     });
   }
-  __name(defineAccessor, "defineAccessor");
+  __name9(defineAccessor, "defineAccessor");
   defineAccessor(Session.prototype, "type", ["event", "type"]);
   defineAccessor(Session.prototype, "subtype", ["event", "subtype"]);
   defineAccessor(Session.prototype, "subsubtype", ["event", "subsubtype"]);
@@ -10353,20 +10003,23 @@
   defineAccessor(Session.prototype, "operatorId", ["event", "operator", "id"]);
   defineAccessor(Session.prototype, "roleId", ["event", "role", "id"]);
   defineAccessor(Session.prototype, "quote", ["event", "message", "quote"]);
-  var eventAliases = [["message-created", "message"]];
-  var Bot = _exports.Bot = (_Class23 = class Bot {
+  var eventAliases = [
+    ["message-created", "message"]
+  ];
+  var _a19;
+  var Bot = (_a19 = class {
     constructor(ctx, config, platform) {
-      _defineProperty(this, "user", {});
-      _defineProperty(this, "isBot", true);
-      _defineProperty(this, "hidden", false);
-      _defineProperty(this, "platform", void 0);
-      _defineProperty(this, "adapter", void 0);
-      _defineProperty(this, "error", void 0);
-      _defineProperty(this, "callbacks", {});
-      _defineProperty(this, "logger", void 0);
+      __publicField(this, "user", {});
+      __publicField(this, "isBot", true);
+      __publicField(this, "hidden", false);
+      __publicField(this, "platform");
+      __publicField(this, "adapter");
+      __publicField(this, "error");
+      __publicField(this, "callbacks", {});
+      __publicField(this, "logger");
       // Same as `this.ctx`, but with a more specific type.
-      _defineProperty(this, "context", void 0);
-      _defineProperty(this, "_status", Status.OFFLINE);
+      __publicField(this, "context");
+      __publicField(this, "_status", Status.OFFLINE);
       this.ctx = ctx;
       this.config = config;
       this.internal = null;
@@ -10383,28 +10036,26 @@
         return this.start();
       });
       ctx.on("dispose", () => this.dispose());
-      ctx.on("interaction/button", session => {
+      ctx.on("interaction/button", (session) => {
         const cb = this.callbacks[session.event.button.id];
-        if (cb) cb(session);
+        if (cb)
+          cb(session);
       });
     }
     update(login) {
-      const {
-        status,
-        ...rest
-      } = login;
+      const { status, ...rest } = login;
       Object.assign(this, rest);
       this.status = status;
     }
     dispose() {
-      remove(this.ctx.bots, this);
+      (0, import_cosmokit14.remove)(this.ctx.bots, this);
       this.context.emit("bot-removed", this);
       this.dispatchLoginEvent("login-removed");
       return this.stop();
     }
-    dispatchLoginEvent(type) {
+    dispatchLoginEvent(type2) {
       const session = this.session();
-      session.type = type;
+      session.type = type2;
       session.event.login = this.toJSON();
       this.dispatch(session);
     }
@@ -10412,7 +10063,8 @@
       return this._status;
     }
     set status(value) {
-      if (value === this._status) return;
+      if (value === this._status)
+        return;
       this._status = value;
       if (this.ctx.bots.includes(this)) {
         this.context.emit("bot-status-updated", this);
@@ -10431,7 +10083,8 @@
       this.error = error;
     }
     async start() {
-      if (this.isActive) return;
+      if (this.isActive)
+        return;
       this.status = Status.CONNECT;
       try {
         await this.context.parallel("bot-connect", this);
@@ -10441,7 +10094,8 @@
       }
     }
     async stop() {
-      if (!this.isActive) return;
+      if (!this.isActive)
+        return;
       this.status = Status.DISCONNECT;
       try {
         await this.context.parallel("bot-disconnect", this);
@@ -10456,13 +10110,12 @@
       return `${this.platform}:${this.selfId}`;
     }
     session(event = {}) {
-      const {
-        Session: Session2
-      } = this.ctx.constructor;
+      const { Session: Session2 } = this.ctx.constructor;
       return new Session2(this, event);
     }
     dispatch(session) {
-      if (!this.ctx.lifecycle.isActive) return;
+      if (!this.ctx.lifecycle.isActive)
+        return;
       let events = [session.type];
       for (const aliases of eventAliases) {
         if (aliases.includes(session.type)) {
@@ -10481,61 +10134,60 @@
       }
     }
     async createMessage(channelId, content, guildId, options) {
-      const {
-        MessageEncoder: MessageEncoder2
-      } = this.constructor;
+      const { MessageEncoder: MessageEncoder2 } = this.constructor;
       return new MessageEncoder2(this, channelId, guildId, options).send(content);
     }
     async sendMessage(channelId, content, guildId, options) {
       const messages = await this.createMessage(channelId, content, guildId, options);
-      return messages.map(message => message.id);
+      return messages.map((message) => message.id);
     }
     async sendPrivateMessage(userId, content, guildId, options) {
-      const {
-        id
-      } = await this.createDirectChannel(userId, guildId ?? options?.session?.guildId);
+      const { id } = await this.createDirectChannel(userId, guildId ?? options?.session?.guildId);
       return this.sendMessage(id, content, null, options);
     }
-    async supports(name, session = {}) {
-      return !!this[Methods[name]?.name];
+    async supports(name2, session = {}) {
+      return !!this[Methods[name2]?.name];
     }
-    async checkPermission(name, session) {
-      if (name.startsWith("bot.")) {
-        return this.supports(name.slice(4), session);
+    async checkPermission(name2, session) {
+      if (name2.startsWith("bot.")) {
+        return this.supports(name2.slice(4), session);
       }
     }
     toJSON() {
-      return clone(pick(this, ["platform", "selfId", "status", "user", "hidden"]));
+      return (0, import_cosmokit14.clone)((0, import_cosmokit14.pick)(this, ["platform", "selfId", "status", "user", "hidden"]));
     }
     async getLogin() {
       return this.toJSON();
     }
     /** @deprecated use `bot.getLogin()` instead */
     async getSelf() {
-      const {
-        user
-      } = await this.getLogin();
+      const { user } = await this.getLogin();
       return user;
     }
-  }, __name(_Class23, "Bot"), _defineProperty(_Class23, "reusable", true), _defineProperty(_Class23, "MessageEncoder", void 0), _Class23);
-  var iterableMethods = ["getMessage", "getReaction", "getFriend", "getGuild", "getGuildMember", "getGuildRole", "getChannel"];
-  for (const name of iterableMethods) {
-    Bot.prototype[name + "Iter"] = function (...args) {
+  }, __name9(_a19, "Bot"), __publicField(_a19, "reusable", true), __publicField(_a19, "MessageEncoder"), _a19);
+  var iterableMethods = [
+    "getMessage",
+    "getReaction",
+    "getFriend",
+    "getGuild",
+    "getGuildMember",
+    "getGuildRole",
+    "getChannel"
+  ];
+  for (const name2 of iterableMethods) {
+    Bot.prototype[name2 + "Iter"] = function(...args) {
       let list;
-      if (!this[name + "List"]) throw new Error(`not implemented: ${name}List`);
-      const getList = /* @__PURE__ */__name(async () => {
-        list = await this[name + "List"](...args, list?.next);
+      if (!this[name2 + "List"])
+        throw new Error(`not implemented: ${name2}List`);
+      const getList = /* @__PURE__ */ __name9(async () => {
+        list = await this[name2 + "List"](...args, list?.next);
       }, "getList");
       return {
         async next() {
-          if (list?.data.length) return {
-            done: false,
-            value: list.data.shift()
-          };
-          if (list && !list?.next) return {
-            done: true,
-            value: void 0
-          };
+          if (list?.data.length)
+            return { done: false, value: list.data.shift() };
+          if (list && !list?.next)
+            return { done: true, value: void 0 };
           await getList();
           return this.next();
         },
@@ -10547,55 +10199,53 @@
   }
   defineAccessor(Bot.prototype, "selfId", ["user", "id"]);
   defineAccessor(Bot.prototype, "userId", ["user", "id"]);
-  var Adapter = _exports.Adapter = (_Class24 = class Adapter {
+  var _a20;
+  var Adapter = (_a20 = class {
     constructor(ctx) {
-      _defineProperty(this, "bots", []);
+      __publicField(this, "bots", []);
       this.ctx = ctx;
     }
-    async connect(bot) {}
-    async disconnect(bot) {}
+    async connect(bot) {
+    }
+    async disconnect(bot) {
+    }
     fork(ctx, bot) {
       bot.adapter = this;
       this.bots.push(bot);
       ctx.on("dispose", () => {
-        remove(this.bots, bot);
+        (0, import_cosmokit15.remove)(this.bots, bot);
       });
     }
-  }, __name(_Class24, "Adapter"), _defineProperty(_Class24, "schema", false), _Class24);
-  ((Adapter2, _WsClientBase2, _WsClient2) => {
-    Adapter2.WsClientConfig = z2.object({
-      retryTimes: z2.natural().description("初次连接时的最大重试次数。").default(6),
-      retryInterval: z2.natural().role("ms").description("初次连接时的重试时间间隔。").default(5 * Time.second),
-      retryLazy: z2.natural().role("ms").description("连接关闭后的重试时间间隔。").default(Time.minute)
-    }).description("连接设置");
-    class WsClientBase extends Adapter2 {
+  }, __name9(_a20, "Adapter"), __publicField(_a20, "schema", false), _a20);
+  ((Adapter2) => {
+    Adapter2.WsClientConfig = import_schemastery.default.object({
+      retryTimes: import_schemastery.default.natural().description("\u521D\u6B21\u8FDE\u63A5\u65F6\u7684\u6700\u5927\u91CD\u8BD5\u6B21\u6570\u3002").default(6),
+      retryInterval: import_schemastery.default.natural().role("ms").description("\u521D\u6B21\u8FDE\u63A5\u65F6\u7684\u91CD\u8BD5\u65F6\u95F4\u95F4\u9694\u3002").default(5 * import_cosmokit15.Time.second),
+      retryLazy: import_schemastery.default.natural().role("ms").description("\u8FDE\u63A5\u5173\u95ED\u540E\u7684\u91CD\u8BD5\u65F6\u95F4\u95F4\u9694\u3002").default(import_cosmokit15.Time.minute)
+    }).description("\u8FDE\u63A5\u8BBE\u7F6E");
+    const _WsClientBase = class _WsClientBase extends Adapter2 {
       constructor(ctx, config) {
         super(ctx);
-        _defineProperty(this, "socket", void 0);
+        __publicField(this, "socket");
         this.config = config;
       }
       async start() {
         let _retryCount = 0;
-        const logger = this.ctx.logger("adapter");
-        const {
-          retryTimes,
-          retryInterval,
-          retryLazy
-        } = this.config;
-        const reconnect = /* @__PURE__ */__name(async (initial = false) => {
-          logger.debug("websocket client opening");
+        const logger2 = this.ctx.logger("adapter");
+        const { retryTimes, retryInterval, retryLazy } = this.config;
+        const reconnect = /* @__PURE__ */ __name9(async (initial = false) => {
+          logger2.debug("websocket client opening");
           const socket = await this.prepare();
           const url = socket.url.replace(/\?.+/, "");
-          socket.addEventListener("error", event => {
-            if (event.message) logger.warn(event.message);
+          socket.addEventListener("error", (event) => {
+            if (event.message)
+              logger2.warn(event.message);
           });
-          socket.addEventListener("close", ({
-            code,
-            reason
-          }) => {
+          socket.addEventListener("close", ({ code, reason }) => {
             this.socket = null;
-            logger.debug(`websocket closed with ${code}`);
-            if (!this.getActive()) return;
+            logger2.debug(`websocket closed with ${code}`);
+            if (!this.getActive())
+              return;
             const message = reason.toString() || `failed to connect to ${url}, code: ${code}`;
             let timeout = retryInterval;
             if (_retryCount >= retryTimes) {
@@ -10607,15 +10257,16 @@
             }
             _retryCount++;
             this.setStatus(Status.RECONNECT);
-            logger.warn(`${message}, will retry in ${Time.format(timeout)}...`);
+            logger2.warn(`${message}, will retry in ${import_cosmokit15.Time.format(timeout)}...`);
             setTimeout(() => {
-              if (this.getActive()) reconnect();
+              if (this.getActive())
+                reconnect();
             }, timeout);
           });
           socket.addEventListener("open", () => {
             _retryCount = 0;
             this.socket = socket;
-            logger.info("connect to server: %c", url);
+            logger2.info("connect to server: %c", url);
             this.accept(socket);
           });
         }, "reconnect");
@@ -10624,11 +10275,11 @@
       async stop() {
         this.socket?.close();
       }
-    }
-    _WsClientBase2 = WsClientBase;
-    __name(_WsClientBase2, "WsClientBase");
+    };
+    __name9(_WsClientBase, "WsClientBase");
+    let WsClientBase = _WsClientBase;
     Adapter2.WsClientBase = WsClientBase;
-    class WsClient extends WsClientBase {
+    const _WsClient = class _WsClient extends WsClientBase {
       constructor(ctx, bot) {
         super(ctx, bot.config);
         this.bot = bot;
@@ -10647,29 +10298,32 @@
       async disconnect(bot) {
         this.stop();
       }
-    }
-    _WsClient2 = WsClient;
-    __name(_WsClient2, "WsClient");
-    _defineProperty(WsClient, "reusable", true);
+    };
+    __name9(_WsClient, "WsClient");
+    __publicField(_WsClient, "reusable", true);
+    let WsClient = _WsClient;
     Adapter2.WsClient = WsClient;
-  })(Adapter || (_exports.Adapter = Adapter = {}));
-  var AggregateError = (_Class25 = class AggregateError extends Error {
+  })(Adapter || (Adapter = {}));
+  var _a21;
+  var AggregateError = (_a21 = class extends Error {
     constructor(errors, message = "") {
       super(message);
       this.errors = errors;
     }
-  }, __name(_Class25, "AggregateError"), _Class25);
-  var MessageEncoder = _exports.Modulator = _exports.Messenger = _exports.MessageEncoder = (_Class26 = class MessageEncoder {
+  }, __name9(_a21, "AggregateError"), _a21);
+  var _a22;
+  var MessageEncoder = (_a22 = class {
     constructor(bot, channelId, guildId, options = {}) {
-      _defineProperty(this, "errors", []);
-      _defineProperty(this, "results", []);
-      _defineProperty(this, "session", void 0);
+      __publicField(this, "errors", []);
+      __publicField(this, "results", []);
+      __publicField(this, "session");
       this.bot = bot;
       this.channelId = channelId;
       this.guildId = guildId;
       this.options = options;
     }
-    async prepare() {}
+    async prepare() {
+    }
     async render(elements, flush) {
       for (const element of elements) {
         await this.visit(element);
@@ -10679,28 +10333,29 @@
       }
     }
     async send(content) {
+      var _a25;
       this.session = this.bot.session({
         type: "send",
-        channel: {
-          id: this.channelId,
-          ...this.options.session?.event.channel
-        },
+        channel: { id: this.channelId, ...this.options.session?.event.channel },
         guild: this.options.session?.event.guild
       });
       for (const key in this.options.session || {}) {
-        if (key === "id" || key === "event") continue;
+        if (key === "id" || key === "event")
+          continue;
         this.session[key] = this.options.session[key];
       }
       await this.prepare();
       const session = this.options.session ?? this.session;
-      this.session.elements = await session.transform(h3.normalize(content));
-      const btns = h3.select(this.session.elements, "button").filter(v => v.attrs.type !== "link" && !v.attrs.id);
+      this.session.elements = await session.transform(lib_default.normalize(content));
+      const btns = lib_default.select(this.session.elements, "button").filter((v) => v.attrs.type !== "link" && !v.attrs.id);
       for (const btn of btns) {
         const r = Math.random().toString(36).slice(2);
-        btn.attrs.id ||= r;
-        if (typeof btn.attrs.action === "function") this.bot.callbacks[btn.attrs.id] = btn.attrs.action;
+        (_a25 = btn.attrs).id || (_a25.id = r);
+        if (typeof btn.attrs.action === "function")
+          this.bot.callbacks[btn.attrs.id] = btn.attrs.action;
       }
-      if (await this.session.app.serial(this.session, "before-send", this.session, this.options)) return;
+      if (await this.session.app.serial(this.session, "before-send", this.session, this.options))
+        return;
       await this.render(this.session.elements);
       await this.flush();
       if (this.errors.length) {
@@ -10709,36 +10364,36 @@
         return this.results;
       }
     }
-  }, __name(_Class26, "MessageEncoder"), _Class26);
-
-  // src/index.ts
-  h3.warn = new Logger$1("element").warn;
-  defineProperty(HTTP, "Config", z2.object({
-    timeout: z2.natural().role("ms").description("等待连接建立的最长时间。")
-  }).description("请求设置"));
-  HTTP.createConfig = /* @__PURE__ */__name(function createConfig(endpoint) {
-    return z2.object({
-      baseURL: z2.string().role("link").description("要连接的服务器地址。").default(typeof endpoint === "string" ? endpoint : null).required(typeof endpoint === "boolean" ? endpoint : false),
-      headers: z2.dict(String).role("table").description("要附加的额外请求头。"),
+  }, __name9(_a22, "MessageEncoder"), _a22);
+  lib_default.warn = new import_levi_reggol.default("element").warn;
+  (0, import_cosmokit12.defineProperty)(HTTP, "Config", import_schemastery.default.object({
+    timeout: import_schemastery.default.natural().role("ms").description("\u7B49\u5F85\u8FDE\u63A5\u5EFA\u7ACB\u7684\u6700\u957F\u65F6\u95F4\u3002")
+  }).description("\u8BF7\u6C42\u8BBE\u7F6E"));
+  HTTP.createConfig = /* @__PURE__ */ __name9(function createConfig(endpoint) {
+    return import_schemastery.default.object({
+      baseURL: import_schemastery.default.string().role("link").description("\u8981\u8FDE\u63A5\u7684\u670D\u52A1\u5668\u5730\u5740\u3002").default(typeof endpoint === "string" ? endpoint : null).required(typeof endpoint === "boolean" ? endpoint : false),
+      headers: import_schemastery.default.dict(String).role("table").description("\u8981\u9644\u52A0\u7684\u989D\u5916\u8BF7\u6C42\u5934\u3002"),
       ...this.Config.dict
-    }).description("请求设置");
+    }).description("\u8BF7\u6C42\u8BBE\u7F6E");
   }, "createConfig");
-  var Context = _exports.Context = (_Class27 = class Context extends Context2 {
+  var _a23;
+  var Context3 = (_a23 = class extends Context22 {
     constructor(config = {}) {
       super(config);
-      _defineProperty(this, "bots", new Proxy([], {
+      __publicField(this, "bots", new Proxy([], {
         get(target, prop) {
           if (prop in target || typeof prop === "symbol") {
             return Reflect.get(target, prop);
           }
-          return target.find(bot => bot.sid === prop);
+          return target.find((bot) => bot.sid === prop);
         },
         deleteProperty(target, prop) {
           if (prop in target || typeof prop === "symbol") {
             return Reflect.deleteProperty(target, prop);
           }
-          const bot = target.findIndex(bot2 => bot2.sid === prop);
-          if (bot < 0) return true;
+          const bot = target.findIndex((bot2) => bot2.sid === prop);
+          if (bot < 0)
+            return true;
           target.splice(bot, 1);
           return true;
         }
@@ -10746,35 +10401,47 @@
       this.provide("http", void 0, true);
       this.plugin(HTTP, config.request);
     }
-    component(name, component, options = {}) {
-      const render = /* @__PURE__ */__name(async (attrs, children, session) => {
+    component(name2, component, options = {}) {
+      const render = /* @__PURE__ */ __name9(async (attrs, children, session) => {
         if (options.session && session.type === "send") {
           throw new Error("interactive components is not available outside sessions");
         }
         const result = await component(attrs, children, session);
-        return session.transform(h3.normalize(result));
+        return session.transform(lib_default.normalize(result));
       }, "render");
-      const service = "component:" + name;
+      const service = "component:" + name2;
       this.provide(service);
       return this.effect(() => {
         this[service] = render;
         return () => this[service] = null;
       });
     }
-  }, __name(_Class27, "Context"), _defineProperty(_Class27, "session", Symbol("session")), _defineProperty(_Class27, "Session", Session), _Class27);
-  (Context3 => {
-    Context3.Config = z2.intersect([z2.object({})]);
-  })(Context || (_exports.Context = Context = {}));
-  var Service2 = _exports.Service = (_Service2$1$setup = Service2$1.setup, (_Class28 = class Service2 extends Service2$1 {
-    [_Service2$1$setup]() {
-      this.ctx = new Context();
+  }, __name9(_a23, "Context"), __publicField(_a23, "session", Symbol("session")), // remove generic type to loosen the constraint
+  __publicField(_a23, "Session", Session), _a23);
+  ((Context32) => {
+    Context32.Config = import_schemastery.default.intersect([
+      import_schemastery.default.object({})
+    ]);
+  })(Context3 || (Context3 = {}));
+  var _a24;
+  var Service23 = (_a24 = class extends Service22 {
+    [Service22.setup]() {
+      this.ctx = new Context3();
     }
-  }, __name(_Class28, "Service"), _Class28));
-  const name = "LeviSatori";
-  const baseDir = `./plugins/${name}`;
-  const pluginBaseDir = `./plugins/${name}/plugins`;
-  const requireBase = `./${name}/plugins`;
-  const configPath = `${baseDir}/${name}.yml`;
+  }, __name9(_a24, "Service"), _a24);
+
+  // ../satori/packages/satori/lib/index.mjs
+  __reExport(lib_exports4, __toESM(require_lib(), 1));
+
+  // src/index.ts
+  __reExport(src_exports, lib_exports4);
+  __reExport(src_exports, __toESM(require_lib13()));
+  __reExport(src_exports, __toESM(require_lib()));
+  var name = "LeviSatori";
+  var baseDir = `./plugins/${name}`;
+  var pluginBaseDir = `./plugins/${name}/plugins`;
+  var requireBase = `./${name}/plugins`;
+  var configPath = `${baseDir}/${name}.yml`;
   mc.listen("onServerStarted", () => {
     if (!file.exists(configPath)) {
       file.writeTo(configPath, "plugins: []");
@@ -10786,12 +10453,14 @@
       name,
       baseDir,
       requireBase,
-      logger: {
-        levels: 2
-      },
-      importMapping: {
-        "adapter-satori": lib.SatoriAdapter
-      }
-    }).catch(e => logger.error(`${e}`));
+      logger: { levels: 2 },
+      importMapping: { "adapter-satori": import_adapter_satori.SatoriAdapter }
+    }).catch((e) => logger.error(`${e}`));
   });
-});
+  return __toCommonJS(src_exports);
+})();
+/*! Bundled license information:
+
+js-yaml/dist/js-yaml.mjs:
+  (*! js-yaml 4.1.0 https://github.com/nodeca/js-yaml @license MIT *)
+*/

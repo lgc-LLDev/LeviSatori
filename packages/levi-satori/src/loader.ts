@@ -15,7 +15,7 @@ export class Loader<
 > extends BaseLoader<T> {
   public override async import(name: string) {
     if (this.options.importMapping && name in this.options.importMapping) {
-      name = this.options.importMapping[name];
+      return this.options.importMapping[name];
     }
     const base = trimSlash(
       this.options.requireBase ?? this.options.baseDir ?? ""
