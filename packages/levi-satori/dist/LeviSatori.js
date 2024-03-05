@@ -4488,7 +4488,6 @@ ${args[0].stack}`;
       }
       var _a26;
       var SatoriAdapter = (_a26 = class extends import_satori2.Adapter.WsClientBase {
-        // NodeJS.Timeout
         constructor(ctx, config) {
           super(ctx, config);
           __publicField(this, "http");
@@ -4555,10 +4554,10 @@ ${args[0].stack}`;
             await new Promise((resolve) => {
               const timeout = setTimeout(() => {
                 cleanup();
-                this.logger.warn("waiting for pong timeout: %c", this.socket?.url);
+                this.logger.warn("timeout waiting for server pong: %c", this.socket?.url);
                 this.socket.close();
                 resolve();
-              }, import_satori2.Time.second * 10);
+              }, import_satori2.Time.second * 3);
               const pongCallback = /* @__PURE__ */ __name10(() => {
                 cleanup();
                 resolve();

@@ -26,7 +26,10 @@ var __publicField = (obj, key, value) => {
 var src_exports = {};
 __export(src_exports, {
   Config: () => Config,
-  apply: () => apply
+  apply: () => apply,
+  chatInfoListSchema: () => chatInfoListSchema,
+  chatInfoSchema: () => chatInfoSchema,
+  toChatInfo: () => toChatInfo
 });
 module.exports = __toCommonJS(src_exports);
 
@@ -217,12 +220,28 @@ var ansiStyles = assembleStyles();
 var ansi_styles_default = ansiStyles;
 
 // src/logiri.ts
+var s = globalThis.LeviSatori;
 var OSC = "\x1B]";
 var BEL = "\x07";
 var SEP = ";";
 var link = (text, url) => url ? [OSC, "8", SEP, SEP, url, BEL, text, OSC, "8", SEP, SEP, BEL].join("") : text;
+var mcHighlight = (text) => `\xA7b${text}\xA7r`;
+var formatName = (name, id, unknown) => {
+  if (name)
+    return `${name}(${id})`;
+  if (id)
+    return id;
+  return unknown;
+};
+var platformCommonNameMap = {
+  onebot: "OneBot"
+};
+function getPlatformCommonName(platform) {
+  return platformCommonNameMap[platform] ?? [platform[0].toUpperCase(), platform.slice(1)].join("");
+}
 var LogiriMessager = class {
-  constructor() {
+  constructor(mcFormat = false) {
+    this.mcFormat = mcFormat;
     __publicField(this, "children", []);
     __publicField(this, "results", []);
     // eslint-disable-next-line class-methods-use-this
@@ -234,10 +253,11 @@ var LogiriMessager = class {
       if (flush)
         await this.flush();
     });
-    __publicField(this, "send", async (elements) => {
-      if (!elements.length)
+    __publicField(this, "send", async (content) => {
+      if (!content)
         return [];
       await this.prepare();
+      const elements = s.Element.normalize(content);
       await this.render(elements);
       await this.flush();
       return this.results.filter(Boolean);
@@ -258,44 +278,52 @@ var LogiriMessager = class {
           return;
         }
         case "img": {
-          this.children.push(link("[\u56FE\u7247]", attrs.src));
+          const x = "[\u56FE\u7247]";
+          this.children.push(
+            this.mcFormat ? mcHighlight(x) : link(x, attrs.src)
+          );
           return;
         }
         case "audio": {
-          this.children.push(link("[\u8BED\u97F3]", attrs.src));
+          const x = "[\u8BED\u97F3]";
+          this.children.push(
+            this.mcFormat ? mcHighlight(x) : link(x, attrs.src)
+          );
           return;
         }
         case "file": {
-          this.children.push(link("[\u6587\u4EF6]", attrs.src));
+          const x = `[\u6587\u4EF6]`;
+          this.children.push(
+            this.mcFormat ? mcHighlight(x) : link(x, attrs.src)
+          );
           return;
         }
         case "at": {
-          if (attrs.type === "all")
-            this.children.push("@\u5168\u4F53\u6210\u5458 ");
-          else
-            this.children.push(
-              `@${attrs.name}(${attrs.id}) `
-            );
+          const target = attrs.type === "all" ? "\u5168\u4F53\u6210\u5458" : formatName(attrs.name, attrs.id, "\u672A\u77E5\u7528\u6237");
+          const x = `@${target} `;
+          this.children.push(this.mcFormat ? mcHighlight(x) : x);
           return;
         }
         case "quote": {
-          const author = children.find((x) => x.type === "author");
+          const author = children.find((x2) => x2.type === "author");
           const id = author?.attrs["user-id"];
+          const x = id ? `[\u56DE\u590D${id}] ` : `[\u56DE\u590D] `;
           this.children.push(
-            `${ansi_styles_default.grey.open}${id ? `[\u56DE\u590D${id}] ` : `[\u56DE\u590D] `}${ansi_styles_default.grey.close}`
+            this.mcFormat ? mcHighlight(x) : `${ansi_styles_default.grey.open}${x}${ansi_styles_default.grey.close}`
           );
           return;
         }
         case "message": {
           await this.flush();
           if ("forward" in attrs) {
-            if ("id" in attrs) {
-              this.children.push("[\u5355\u6761\u8F6C\u53D1\u6D88\u606F]");
-            } else if (children.every((x) => "id" in x)) {
-              this.children.push("[\u666E\u901A\u5408\u5E76\u8F6C\u53D1\u6D88\u606F]");
-            } else {
-              this.children.push("[\u4F2A\u9020\u5408\u5E76\u8F6C\u53D1\u6D88\u606F]");
-            }
+            const x = (() => {
+              if ("id" in attrs)
+                return "[\u5355\u6761\u8F6C\u53D1\u6D88\u606F]";
+              if (children.every((y) => "id" in y))
+                return "[\u666E\u901A\u5408\u5E76\u8F6C\u53D1\u6D88\u606F]";
+              return "[\u4F2A\u9020\u5408\u5E76\u8F6C\u53D1\u6D88\u606F]";
+            })();
+            this.results.push(this.mcFormat ? mcHighlight(x) : x);
           } else {
             await this.render(children, true);
           }
@@ -308,26 +336,88 @@ var LogiriMessager = class {
     });
   }
 };
-async function formatMessageCreated(sess) {
-  const d = sess.event;
-  const messages = await new LogiriMessager().send(sess.elements);
-  return messages.map(
-    (x) => `${ansi_styles_default.blue.open}${link(
-      d.channel?.id === d.guild?.id ? `${d.channel?.name ?? d.guild?.name}(${d.channel?.id})` : `${d.guild?.name}(${d.guild?.id})/${d.channel?.name}(${d.channel?.id})`,
-      d.guild?.avatar
-    )}${ansi_styles_default.blue.close}${ansi_styles_default.grey.open}-${ansi_styles_default.grey.close}${ansi_styles_default.cyan.open}${link(
-      `${d.user?.name || d.member?.name}(${d.user?.id})`,
-      d.user?.avatar
-    )}${ansi_styles_default.cyan.close}${ansi_styles_default.grey.open}:${ansi_styles_default.grey.close} ${x}`
+async function formatMessageCreated(ss, mcFormat = false) {
+  const d = ss.event;
+  const messages = await new LogiriMessager(mcFormat).send(d.message?.content);
+  const bOpen = mcFormat ? "\xA79" : ansi_styles_default.blue.open;
+  const bClose = mcFormat ? "\xA7r" : ansi_styles_default.blue.close;
+  const gOpen = mcFormat ? "\xA77" : ansi_styles_default.grey.open;
+  const gClose = mcFormat ? "\xA7r" : ansi_styles_default.grey.close;
+  const cOpen = mcFormat ? "\xA73" : ansi_styles_default.cyan.open;
+  const cClose = mcFormat ? "\xA7r" : ansi_styles_default.cyan.close;
+  const hasGuild = !ss.isDirect && d.guild?.id && d.channel?.id && d.guild?.id !== d.channel?.id;
+  const platformName = getPlatformCommonName(ss.platform);
+  const fromOri = (() => {
+    if (ss.isDirect)
+      return "";
+    if (hasGuild)
+      return `${formatName(d.guild?.name, d.guild?.id, "\u672A\u77E5\u7FA4\u7EC4")}/${formatName(d.channel?.name, d.channel?.id, "\u672A\u77E5\u9891\u9053")}`;
+    return formatName(
+      d.guild?.name ?? d.channel?.name,
+      d.guild?.id ?? d.channel?.id,
+      "\u672A\u77E5\u7FA4\u804A"
+    );
+  })();
+  const platform = fromOri ? `${platformName} ${fromOri}` : platformName;
+  const group = mcFormat ? platform : link(platform, d.guild?.avatar);
+  const userOri = formatName(
+    d.user?.name ?? d.member?.name,
+    d.user?.id,
+    "\u672A\u77E5\u7528\u6237"
   );
+  const user = mcFormat ? userOri : link(userOri, d.user?.avatar);
+  const chat = `${group ? `${bOpen}${group}${bClose}${gOpen}-${gClose}` : ""}${cOpen}${user}${cClose}`;
+  const pfx = mcFormat ? (
+    // eslint-disable-next-line no-nested-ternary
+    `\xA7e[${ss.isDirect ? "\u79C1\u804A" : hasGuild ? "\u9891\u9053" : "\u7FA4\u804A"}]\xA7r `
+  ) : "";
+  return messages.map((x) => `${pfx}${chat}${gOpen}:${gClose} ${x}`);
 }
 
 // src/index.ts
-var s = globalThis.LeviSatori;
-var Config = s.Schema.object({});
-function apply(ctx) {
+var s2 = globalThis.LeviSatori;
+function toChatInfo(str) {
+  if (!str.includes(":"))
+    return { platform: void 0, id: str };
+  const [platform, ...id] = str.split(":");
+  return { platform: platform ?? void 0, id: id.join(":") };
+}
+var chatInfoSchema = s2.Schema.object({
+  platform: s2.Schema.string(),
+  id: s2.Schema.string()
+});
+var chatInfoListSchema = s2.Schema.union([
+  s2.Schema.array(chatInfoSchema),
+  s2.Schema.transform(
+    s2.Schema.array(s2.Schema.string()),
+    (arr) => arr.map(toChatInfo)
+  )
+]);
+var Config = s2.Schema.object({
+  enableInConsole: s2.Schema.boolean().default(true),
+  enableInGame: s2.Schema.boolean().default(true),
+  gameEnabledChannels: chatInfoListSchema.default([]),
+  gameEnabledGuilds: chatInfoListSchema.default([])
+});
+function apply(ctx, config) {
   const logger = ctx.logger("logiri");
+  const checkToGame = (ss) => {
+    const channelList = config.gameEnabledChannels;
+    const guildList = config.gameEnabledGuilds;
+    const rightChannel = !channelList.length || channelList.some(
+      (x) => (!x.platform || x.platform === ss.platform) && x.id === ss.channelId
+    );
+    const rightGuild = !guildList.length || guildList.some(
+      (x) => (!x.platform || x.platform === ss.platform) && x.id === ss.guildId
+    );
+    return rightChannel && rightGuild;
+  };
   ctx.on("message-created", (session) => {
-    formatMessageCreated(session).then((arr) => arr.forEach((x) => logger.info(x))).catch((e) => logger.error(e));
+    if (config.enableInConsole) {
+      formatMessageCreated(session).then((arr) => arr.forEach((x) => logger.info(x))).catch((e) => logger.error(e));
+    }
+    if (config.enableInGame && checkToGame(session)) {
+      formatMessageCreated(session, true).then((arr) => arr.forEach((x) => mc.broadcast(x))).catch((e) => logger.error(e));
+    }
   });
 }

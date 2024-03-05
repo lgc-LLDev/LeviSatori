@@ -12,7 +12,6 @@
     "clean": "rimraf ./dist"
   },
   "devDependencies": {
-    "@types/js-yaml": "^4.0.9",
     "esbuild": "^0.18.20",
     "levi-satori": "workspace:^",
     "rimraf": "^5.0.5",
