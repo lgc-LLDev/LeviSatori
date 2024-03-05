@@ -21,7 +21,6 @@ export class Loader<
       this.options.requireBase ?? this.options.baseDir ?? ""
     );
     try {
-      // @ts-expect-error - require in baseLib
       // eslint-disable-next-line import/no-dynamic-require
       return require(`${base}/${name}`);
     } catch (err: any) {

@@ -5,7 +5,7 @@
   "main": "dist/LeviSatori.js",
   "types": "dist/LeviSatori.d.ts",
   "scripts": {
-    "build": "esbuild src/index.ts --bundle --outfile=dist/LeviSatori.js --target=es2020 --format=iife --global-name=LeviSatori && tsc && node scripts/after-build.js",
+    "build": "esbuild src/index.ts --bundle --outfile=dist/LeviSatori.js --target=es2020 --format=iife --global-name=LeviSatori && dtsc && node scripts/after-build.js",
     "clean": "rimraf ./dist"
   },
   "keywords": [],
@@ -15,6 +15,7 @@
   "funding": "https://afdian.net/a/lgc2333",
   "devDependencies": {
     "@types/js-yaml": "^4.0.9",
+    "dtsc": "^3.0.4",
     "esbuild": "^0.18.20",
     "rimraf": "^5.0.5",
     "typescript": "^5.3.2"

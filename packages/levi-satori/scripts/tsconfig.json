@@ -1,11 +1,9 @@
 {
-  "extends": "../../tsconfig.base.json",
-  "include": ["./src/**/*"],
+  "extends": "../../../tsconfig.base.json",
   "compilerOptions": {
-    "module": "UMD",
+    "module": "CommonJS",
     "moduleResolution": "Node",
-    "rootDir": "./src",
-    "outFile": "./dist/LeviSatori.js",
+    "rootDir": ".",
     "declaration": true,
     "emitDeclarationOnly": true,
     "composite": false,

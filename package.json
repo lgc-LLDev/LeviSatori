@@ -9,9 +9,12 @@
     "external/*"
   ],
   "scripts": {
-    "build": "yarn workspace levi-reggol build && yarn workspace @root/cordis build && yarn workspace @root/undios build && yarn workspace @root/satori build && yarn workspace levi-satori build"
+    "build:base": "yarn workspace levi-reggol build && yarn workspace @root/cordis build && yarn workspace @root/undios build && yarn workspace @root/satori build && yarn workspace levi-satori build",
+    "build:plugins": "yarn workspaces foreach --from \"external/**\" -Wp run build",
+    "build": "yarn build:base && yarn build:plugins"
   },
   "devDependencies": {
+    "@types/node": "^20.11.24",
     "@typescript-eslint/eslint-plugin": "^7.1.0",
     "@typescript-eslint/parser": "^7.1.0",
     "eslint": "^8.57.0",

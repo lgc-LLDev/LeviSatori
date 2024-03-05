@@ -2,10 +2,10 @@
   "extends": "../../tsconfig.base.json",
   "include": ["./src/**/*"],
   "compilerOptions": {
-    "module": "UMD",
+    "module": "ESNext",
     "moduleResolution": "Node",
     "rootDir": "./src",
-    "outFile": "./dist/LeviSatori.js",
+    "outDir": "./dist",
     "declaration": true,
     "emitDeclarationOnly": true,
     "composite": false,

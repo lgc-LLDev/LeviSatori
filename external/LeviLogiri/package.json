@@ -1,0 +1,24 @@
+{
+  "name": "levi-logiri",
+  "version": "0.1.0",
+  "main": "dist/LeviLogiri.js",
+  "packageManager": "yarn@4.1.0",
+  "author": "student_2333 <lgc2333@126.com> (https://lgc2333.top)",
+  "license": "MIT",
+  "repository": "github:lgc-LLDev/LeviSatori",
+  "funding": "https://afdian.net/a/lgc2333",
+  "scripts": {
+    "build": "esbuild src/index.ts --bundle --outfile=dist/LeviLogiri.js --target=es2020 --format=cjs",
+    "clean": "rimraf ./dist"
+  },
+  "devDependencies": {
+    "@types/js-yaml": "^4.0.9",
+    "esbuild": "^0.18.20",
+    "levi-satori": "workspace:^",
+    "rimraf": "^5.0.5",
+    "typescript": "^5.3.2"
+  },
+  "dependencies": {
+    "ansi-styles": "^6.2.1"
+  }
+}
