@@ -5,7 +5,7 @@
   "main": "dist/LeviSatori.js",
   "types": "dist/LeviSatori.d.ts",
   "scripts": {
-    "build": "esbuild src/index.ts --bundle --outfile=dist/LeviSatori.js --target=es2020 --format=iife --global-name=LeviSatori && tsc && node -e \"require('fs').copyFileSync('src/bundle.d.ts','dist/LeviSatori.d.ts')\"",
+    "build": "esbuild src/index.ts --bundle --outfile=dist/LeviSatori.js --target=es2020 --format=iife --global-name=LeviSatori && tsc && node scripts/after-build.js",
     "clean": "rimraf ./dist"
   },
   "keywords": [],

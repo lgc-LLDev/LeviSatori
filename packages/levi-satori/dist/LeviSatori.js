@@ -3466,10 +3466,6 @@ ${args[0].stack}`;
       module.exports = __toCommonJS2(src_exports2);
       var import_levi_cordis4 = require_lib7();
       var import_cosmokit16 = require_lib();
-      function sleep2(ms) {
-        return new Promise((resolve) => setTimeout(resolve, ms));
-      }
-      __name10(sleep2, "sleep");
       var _a25;
       var WebSocket3 = (_a25 = class extends EventTarget {
         constructor(url, config) {
@@ -3477,9 +3473,14 @@ ${args[0].stack}`;
           __publicField(this, "ws");
           __publicField(this, "_connected", false);
           __publicField(this, "_closed", true);
+          __publicField(this, "closeFunction");
           __publicField(this, "timeout");
           this.url = url;
           this.timeout = config?.timeout ?? 3e3;
+          this.connect().catch((e) => {
+            this.closeAndReset();
+            this.dispatchClose(1006, e.message);
+          });
         }
         get protocol() {
           return this.url.split("://")[0];
@@ -3491,6 +3492,25 @@ ${args[0].stack}`;
         }
         dispatchEvent(event) {
           return super.dispatchEvent(event);
+        }
+        dispatchOpen() {
+          this.dispatchEvent(new Event("open"));
+        }
+        dispatchError(message) {
+          const ev = new Event("error");
+          ev.message = message;
+          this.dispatchEvent(ev);
+        }
+        dispatchClose(code, reason) {
+          const ev = new Event("close");
+          ev.code = code;
+          ev.reason = reason;
+          this.dispatchEvent(ev);
+        }
+        dispatchMessage(data) {
+          const ev = new Event("message");
+          ev.data = data;
+          this.dispatchEvent(ev);
         }
         // @ts-ignore
         addEventListener(type2, listener) {
@@ -3507,69 +3527,56 @@ ${args[0].stack}`;
           }
           this._closed = false;
           this.ws = new WSClient();
-          try {
-            await new Promise((resolve, reject) => {
-              const fail = /* @__PURE__ */ __name10(() => reject(new Error("Failed to connect")), "fail");
-              const okPre = this.ws.connectAsync(this.url, (ok) => {
-                if (ok)
-                  resolve(ok);
-                else
-                  fail();
-              });
-              if (!okPre)
+          await new Promise((resolve, reject) => {
+            const timeoutFunc = /* @__PURE__ */ __name10(() => reject(new Error("Connection timeout")), "timeoutFunc");
+            const timer = setTimeout(timeoutFunc, this.timeout);
+            const connected = /* @__PURE__ */ __name10(() => {
+              if (timer)
+                clearInterval(timer);
+              resolve(true);
+            }, "connected");
+            const fail = /* @__PURE__ */ __name10(() => {
+              if (timer)
+                clearInterval(timer);
+              reject(new Error("Failed to connect"));
+            }, "fail");
+            const okPre = this.ws.connectAsync(this.url, (ok) => {
+              if (ok)
+                connected();
+              else
                 fail();
             });
-          } finally {
-            this._closed = true;
-          }
+            if (!okPre)
+              fail();
+          });
           this._connected = true;
-          this.dispatchEvent(new Event("open"));
-          this.ws.listen("onTextReceived", (data) => {
-            const ev = new Event("message");
-            ev.data = data;
-            this.dispatchEvent(ev);
-          });
-          this.ws.listen("onBinaryReceived", () => {
-            const ev = new Event("error");
-            ev.message = `Unexpected binary data received from ${this.url}`;
-            this.dispatchEvent(ev);
-          });
-          this.ws.listen("onError", (msg) => {
-            const ev = new Event("error");
-            ev.message = msg;
-            this.dispatchEvent(ev);
-          });
+          this.dispatchOpen();
+          this.ws.listen("onTextReceived", (data) => this.dispatchMessage(data));
+          this.ws.listen(
+            "onBinaryReceived",
+            () => this.dispatchError(`Unexpected binary data received from ${this.url}`)
+          );
+          this.ws.listen("onError", (msg) => this.dispatchError(msg));
           this.ws.listen("onLostConnection", (code) => {
-            this.ws = void 0;
-            this._closed = true;
-            this._connected = false;
-            const ev = new Event("close");
-            ev.code = code;
-            ev.reason = "";
-            this.dispatchEvent(ev);
+            this.closeAndReset();
+            this.dispatchClose(code, "Lost connection");
           });
-          (async () => {
-            for (; ; ) {
-              if (this._closed)
-                break;
-              await sleep2(1);
-            }
-            const { ws } = this;
-            if (!ws)
-              return;
-            this.ws = void 0;
-            this._connected = false;
-            ws?.shutdown();
-            ws?.close();
-          })();
         }
-        close(code, reason) {
+        closeAndReset() {
+          if (this.ws) {
+            this.ws.close();
+            this.ws.shutdown();
+            this.ws = void 0;
+          }
+          this._connected = false;
           this._closed = true;
         }
+        close(code, reason) {
+          this.closeAndReset();
+          this.dispatchClose(code ?? 1e3, reason ?? "Connection closed");
+        }
         send(data) {
-          if (!this.ws)
-            throw new Error("Connection Closed");
-          this.ws.send(data);
+          this.ws?.send(data);
         }
       }, __name10(_a25, "WebSocket"), _a25);
       var kHTTPError2 = Symbol.for("undios.error");
@@ -3622,7 +3629,7 @@ ${args[0].stack}`;
         }
         resolveURL(url, config) {
           if (config.baseURL) {
-            url = `${(0, import_cosmokit16.trimSlash)(config.baseURL)}/${url}`;
+            url = `${(0, import_cosmokit16.trimSlash)(config.baseURL)}/${url.replace(/^\/+/g, "")}`;
           }
           if (config.params) {
             const params = Object.entries(config.params).map(
@@ -4486,6 +4493,7 @@ ${args[0].stack}`;
           super(ctx, config);
           __publicField(this, "http");
           __publicField(this, "logger");
+          __publicField(this, "pongListener", new EventTarget());
           __publicField(this, "_status", import_satori2.Universal.Status.OFFLINE);
           __publicField(this, "sequence");
           __publicField(this, "timeout");
@@ -4498,7 +4506,6 @@ ${args[0].stack}`;
               "Authorization": `Bearer ${config.token}`
             }
           });
-          this.logger.info("apply");
           ctx.on("ready", () => this.start());
           ctx.on("dispose", () => this.stop());
         }
@@ -4540,11 +4547,28 @@ ${args[0].stack}`;
               sequence: this.sequence
             }
           }));
-          this.timeout = setInterval(() => {
+          this.timeout = setInterval(async () => {
             this.socket.send(JSON.stringify({
               op: import_satori2.Universal.Opcode.PING,
               body: {}
             }));
+            await new Promise((resolve) => {
+              const timeout = setTimeout(() => {
+                cleanup();
+                this.logger.warn("waiting for pong timeout: %c", this.socket?.url);
+                this.socket.close();
+                resolve();
+              }, import_satori2.Time.second * 10);
+              const pongCallback = /* @__PURE__ */ __name10(() => {
+                cleanup();
+                resolve();
+              }, "pongCallback");
+              const cleanup = /* @__PURE__ */ __name10(() => {
+                clearInterval(timeout);
+                this.pongListener.removeEventListener("pong", pongCallback);
+              }, "cleanup");
+              this.pongListener.addEventListener("pong", pongCallback);
+            });
           }, import_satori2.Time.second * 10);
           this.socket.addEventListener("message", async ({ data }) => {
             let parsed;
@@ -4554,11 +4578,16 @@ ${args[0].stack}`;
             } catch (error) {
               return this.logger.warn("cannot parse message", data);
             }
+            if (parsed.op === import_satori2.Universal.Opcode.PONG) {
+              this.pongListener.dispatchEvent(new Event("pong"));
+              return;
+            }
             if (parsed.op === import_satori2.Universal.Opcode.READY) {
               this.logger.debug("ready");
               for (const login of parsed.body.logins) {
                 this.getBot(login.platform, login.selfId, login);
               }
+              return;
             }
             if (parsed.op === import_satori2.Universal.Opcode.EVENT) {
               const { id, type: type2, selfId, platform, login } = parsed.body;
@@ -4586,7 +4615,6 @@ ${args[0].stack}`;
           });
         }
         async start() {
-          this.logger.info("start");
           this.setStatus(import_satori2.Universal.Status.CONNECT);
           await super.start();
         }
@@ -9513,10 +9541,6 @@ ${args[0].stack}`;
   var import_cosmokit10 = __toESM(require_lib(), 1);
   var __defProp9 = Object.defineProperty;
   var __name8 = (target, value) => __defProp9(target, "name", { value, configurable: true });
-  function sleep(ms) {
-    return new Promise((resolve) => setTimeout(resolve, ms));
-  }
-  __name8(sleep, "sleep");
   var _a15;
   var WebSocket2 = (_a15 = class extends EventTarget {
     constructor(url, config) {
@@ -9524,9 +9548,14 @@ ${args[0].stack}`;
       __publicField(this, "ws");
       __publicField(this, "_connected", false);
       __publicField(this, "_closed", true);
+      __publicField(this, "closeFunction");
       __publicField(this, "timeout");
       this.url = url;
       this.timeout = config?.timeout ?? 3e3;
+      this.connect().catch((e) => {
+        this.closeAndReset();
+        this.dispatchClose(1006, e.message);
+      });
     }
     get protocol() {
       return this.url.split("://")[0];
@@ -9538,6 +9567,25 @@ ${args[0].stack}`;
     }
     dispatchEvent(event) {
       return super.dispatchEvent(event);
+    }
+    dispatchOpen() {
+      this.dispatchEvent(new Event("open"));
+    }
+    dispatchError(message) {
+      const ev = new Event("error");
+      ev.message = message;
+      this.dispatchEvent(ev);
+    }
+    dispatchClose(code, reason) {
+      const ev = new Event("close");
+      ev.code = code;
+      ev.reason = reason;
+      this.dispatchEvent(ev);
+    }
+    dispatchMessage(data) {
+      const ev = new Event("message");
+      ev.data = data;
+      this.dispatchEvent(ev);
     }
     // @ts-ignore
     addEventListener(type2, listener) {
@@ -9554,69 +9602,56 @@ ${args[0].stack}`;
       }
       this._closed = false;
       this.ws = new WSClient();
-      try {
-        await new Promise((resolve, reject) => {
-          const fail = /* @__PURE__ */ __name8(() => reject(new Error("Failed to connect")), "fail");
-          const okPre = this.ws.connectAsync(this.url, (ok) => {
-            if (ok)
-              resolve(ok);
-            else
-              fail();
-          });
-          if (!okPre)
+      await new Promise((resolve, reject) => {
+        const timeoutFunc = /* @__PURE__ */ __name8(() => reject(new Error("Connection timeout")), "timeoutFunc");
+        const timer = setTimeout(timeoutFunc, this.timeout);
+        const connected = /* @__PURE__ */ __name8(() => {
+          if (timer)
+            clearInterval(timer);
+          resolve(true);
+        }, "connected");
+        const fail = /* @__PURE__ */ __name8(() => {
+          if (timer)
+            clearInterval(timer);
+          reject(new Error("Failed to connect"));
+        }, "fail");
+        const okPre = this.ws.connectAsync(this.url, (ok) => {
+          if (ok)
+            connected();
+          else
             fail();
         });
-      } finally {
-        this._closed = true;
-      }
+        if (!okPre)
+          fail();
+      });
       this._connected = true;
-      this.dispatchEvent(new Event("open"));
-      this.ws.listen("onTextReceived", (data) => {
-        const ev = new Event("message");
-        ev.data = data;
-        this.dispatchEvent(ev);
-      });
-      this.ws.listen("onBinaryReceived", () => {
-        const ev = new Event("error");
-        ev.message = `Unexpected binary data received from ${this.url}`;
-        this.dispatchEvent(ev);
-      });
-      this.ws.listen("onError", (msg) => {
-        const ev = new Event("error");
-        ev.message = msg;
-        this.dispatchEvent(ev);
-      });
+      this.dispatchOpen();
+      this.ws.listen("onTextReceived", (data) => this.dispatchMessage(data));
+      this.ws.listen(
+        "onBinaryReceived",
+        () => this.dispatchError(`Unexpected binary data received from ${this.url}`)
+      );
+      this.ws.listen("onError", (msg) => this.dispatchError(msg));
       this.ws.listen("onLostConnection", (code) => {
-        this.ws = void 0;
-        this._closed = true;
-        this._connected = false;
-        const ev = new Event("close");
-        ev.code = code;
-        ev.reason = "";
-        this.dispatchEvent(ev);
+        this.closeAndReset();
+        this.dispatchClose(code, "Lost connection");
       });
-      (async () => {
-        for (; ; ) {
-          if (this._closed)
-            break;
-          await sleep(1);
-        }
-        const { ws } = this;
-        if (!ws)
-          return;
-        this.ws = void 0;
-        this._connected = false;
-        ws?.shutdown();
-        ws?.close();
-      })();
     }
-    close(code, reason) {
+    closeAndReset() {
+      if (this.ws) {
+        this.ws.close();
+        this.ws.shutdown();
+        this.ws = void 0;
+      }
+      this._connected = false;
       this._closed = true;
     }
+    close(code, reason) {
+      this.closeAndReset();
+      this.dispatchClose(code ?? 1e3, reason ?? "Connection closed");
+    }
     send(data) {
-      if (!this.ws)
-        throw new Error("Connection Closed");
-      this.ws.send(data);
+      this.ws?.send(data);
     }
   }, __name8(_a15, "WebSocket"), _a15);
   var kHTTPError = Symbol.for("undios.error");
@@ -9669,7 +9704,7 @@ ${args[0].stack}`;
     }
     resolveURL(url, config) {
       if (config.baseURL) {
-        url = `${(0, import_cosmokit10.trimSlash)(config.baseURL)}/${url}`;
+        url = `${(0, import_cosmokit10.trimSlash)(config.baseURL)}/${url.replace(/^\/+/g, "")}`;
       }
       if (config.params) {
         const params = Object.entries(config.params).map(
@@ -10461,3 +10496,4 @@ ${args[0].stack}`;
 js-yaml/dist/js-yaml.mjs:
   (*! js-yaml 4.1.0 https://github.com/nodeca/js-yaml @license MIT *)
 */
+;globalThis.LeviSatori = LeviSatori;
