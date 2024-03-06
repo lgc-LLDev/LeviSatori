@@ -1,0 +1,33 @@
+{
+  "$schema": "https://raw.githubusercontent.com/lippkg/lip/main/schemas/tooth.v2.schema.json",
+  "format_version": 2,
+  "tooth": "github.com/lgc-LLDev/LeviSatori",
+  "version": "0.1.0",
+  "info": {
+    "name": "LeviSatori",
+    "description": "Use Satori protocol to communicate with IM platforms!",
+    "author": "student_2333",
+    "tags": [
+      "plugin",
+      "lse",
+      "quickjs",
+      "cordis",
+      "satori",
+      "koishi",
+      "chat",
+      "bot"
+    ]
+  },
+  "files": {
+    "place": [
+      {
+        "src": "packages/levi-satori/dist/LeviSatori.js",
+        "dest": "plugins/LeviSatori/LeviSatori.js"
+      },
+      {
+        "src": "packages/levi-satori/manifest.json",
+        "dest": "plugins/LeviSatori/manifest.json"
+      }
+    ]
+  }
+}
