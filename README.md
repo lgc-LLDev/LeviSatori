@@ -99,6 +99,12 @@ QQ：3076823485
 吹水群：[1105946125](https://jq.qq.com/?_wv=1027&k=Z3n1MpEp)  
 邮箱：<lgc2333@126.com>
 
+## 鸣谢
+
+## [Koishi](https://koishi.chat/zh-CN/)，以及 Koishi 的依赖库 [Cordis](https://github.com/cordiverse/cordis) 与 [Satori](https://github.com/satorijs/satori)
+
+没有它们，LeviSatori 就不会出现！
+
 ## 赞助
 
 感谢大家的赞助！你们的赞助将是我继续创作的动力！
