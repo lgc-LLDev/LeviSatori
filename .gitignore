@@ -12,3 +12,6 @@
 #!.yarn/cache
 .pnp.*
 node_modules
+
+external/*
+!external/.gitkeep
