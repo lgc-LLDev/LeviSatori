@@ -18,7 +18,7 @@ export class Loader<
       return this.options.importMapping[name];
     }
     const base = trimSlash(
-      this.options.requireBase ?? this.options.baseDir ?? '',
+      this.options.requireBase ?? this.options.baseDir ?? ''
     );
     try {
       // eslint-disable-next-line import/no-dynamic-require
