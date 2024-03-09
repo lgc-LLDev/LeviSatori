@@ -5,8 +5,6 @@
     "moduleResolution": "Node",
     "rootDir": ".",
     "declaration": true,
-    "emitDeclarationOnly": true,
-    "composite": false,
-    "incremental": false
+    "emitDeclarationOnly": true
   }
 }
