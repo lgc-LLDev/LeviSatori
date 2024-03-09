@@ -1,7 +1,7 @@
-import { Loader as BaseLoader } from "@levi-cordisjs/loader";
-import { Context } from "@levi-satorijs/satori";
-import { Dict, trimSlash } from "cosmokit";
-import * as Logger from "./logger";
+import { Loader as BaseLoader } from '@levi-cordisjs/loader';
+import { Context } from '@levi-satorijs/satori';
+import { Dict, trimSlash } from 'cosmokit';
+import * as Logger from './logger';
 
 export namespace Loader {
   export interface Options extends BaseLoader.Options {
@@ -11,20 +11,20 @@ export namespace Loader {
 }
 
 export class Loader<
-  T extends Loader.Options = Loader.Options
+  T extends Loader.Options = Loader.Options,
 > extends BaseLoader<T> {
   public override async import(name: string) {
     if (this.options.importMapping && name in this.options.importMapping) {
       return this.options.importMapping[name];
     }
     const base = trimSlash(
-      this.options.requireBase ?? this.options.baseDir ?? ""
+      this.options.requireBase ?? this.options.baseDir ?? '',
     );
     try {
       // eslint-disable-next-line import/no-dynamic-require
       return require(`${base}/${name}`);
     } catch (err: any) {
-      this.app.emit("internal/error", err);
+      this.app.emit('internal/error', err);
     }
     return undefined;
   }
@@ -32,7 +32,7 @@ export class Loader<
 
 export interface Options extends Loader.Options {}
 
-declare module "@levi-cordisjs/loader" {
+declare module '@levi-cordisjs/loader' {
   // eslint-disable-next-line @typescript-eslint/no-shadow
   namespace Loader {
     interface Config {

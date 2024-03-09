@@ -26,7 +26,7 @@ plugins:
   # 这里的 adapter-satori 是 LeviSatori 中的内置插件，下文会介绍
   adapter-satori:
     # 内容是插件的配置项，这部分配置取决于插件
-    endpoint: "ws://127.0.0.1:5140/satori"
+    endpoint: 'ws://127.0.0.1:5140/satori'
   # 同上
   LeviLogiri: {}
 ```

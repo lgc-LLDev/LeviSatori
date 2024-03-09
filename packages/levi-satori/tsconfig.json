@@ -7,8 +7,6 @@
     "rootDir": "./src",
     "outFile": "./dist/LeviSatori.js",
     "declaration": true,
-    "emitDeclarationOnly": true,
-    "composite": false,
-    "incremental": false
+    "emitDeclarationOnly": true
   }
 }

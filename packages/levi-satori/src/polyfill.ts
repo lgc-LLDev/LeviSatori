@@ -1,1 +1,1 @@
-import "event-target-polyfill";
+import 'event-target-polyfill';

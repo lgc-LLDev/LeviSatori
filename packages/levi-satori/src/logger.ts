@@ -1,7 +1,7 @@
-import { Logger } from "@levi-cordisjs/logger";
-import { Context } from "levi-cordis";
+import { Logger } from '@levi-cordisjs/logger';
+import { Context } from 'levi-cordis';
 
-declare module "@levi-cordisjs/loader" {
+declare module '@levi-cordisjs/loader' {
   interface Loader {
     prolog: Logger.Record[];
   }
@@ -20,7 +20,7 @@ export interface Config {
   showTime?: string | boolean;
 }
 
-export const inject = ["loader"];
+export const inject = ['loader'];
 
 export function apply(ctx: Context, config: Config = {}) {
   // function handleException(error: any) {
@@ -34,8 +34,8 @@ export function apply(ctx: Context, config: Config = {}) {
   //   new Logger('app').warn(error)
   // })
 
-  ctx.on("loader/entry", (type, entry) => {
-    ctx.logger("loader").info("%s plugin %c", type, entry.options.name);
+  ctx.on('loader/entry', (type, entry) => {
+    ctx.logger('loader').info('%s plugin %c', type, entry.options.name);
   });
 
   ctx.loader.prolog = [];
@@ -50,21 +50,21 @@ export function apply(ctx: Context, config: Config = {}) {
 
   const { levels } = config;
   // configurate logger levels
-  if (typeof levels === "object") {
+  if (typeof levels === 'object') {
     Logger.levels = levels as any;
-  } else if (typeof levels === "number") {
+  } else if (typeof levels === 'number') {
     Logger.levels.base = levels;
   }
 
   let { showTime } = config;
-  if (showTime === true) showTime = "yyyy-MM-dd hh:mm:ss";
+  if (showTime === true) showTime = 'yyyy-MM-dd hh:mm:ss';
   if (showTime) Logger.targets[0].showTime = showTime;
   Logger.targets[0].showDiff = config.showDiff;
 
   function ensureBaseLevel(conf: Logger.LevelConfig, base: number) {
     conf.base ??= base;
     Object.values(config).forEach((value) => {
-      if (typeof value !== "object") return;
+      if (typeof value !== 'object') return;
       ensureBaseLevel(value, conf.base);
     });
   }

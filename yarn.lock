@@ -4868,6 +4868,29 @@ __metadata:
   languageName: node
   linkType: hard
 
+"satori-su@workspace:external/SatoriSu":
+  version: 0.0.0-use.local
+  resolution: "satori-su@workspace:external/SatoriSu"
+  dependencies:
+    dtsc: "npm:^3.0.4"
+    esbuild: "npm:^0.18.20"
+    levi-satori: "workspace:^"
+    rimraf: "npm:^5.0.5"
+    typescript: "npm:^5.3.2"
+  languageName: unknown
+  linkType: soft
+
+"satori-sync@workspace:external/SatoriSync":
+  version: 0.0.0-use.local
+  resolution: "satori-sync@workspace:external/SatoriSync"
+  dependencies:
+    esbuild: "npm:^0.18.20"
+    levi-satori: "workspace:^"
+    rimraf: "npm:^5.0.5"
+    typescript: "npm:^5.3.2"
+  languageName: unknown
+  linkType: soft
+
 "schemastery@npm:^3.14.3":
   version: 3.14.3
   resolution: "schemastery@npm:3.14.3"
